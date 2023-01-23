@@ -1,0 +1,13 @@
+{
+  "description": "An abstract web game using only geometric shapes.",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/assets/micro_favicon.png",
+      "sizes": "any"
+    }
+  ],
+  "name": "Micro",
+  "scope": "/projects/micro/app",
+  "start_url": "/projects/micro/app"
+}
