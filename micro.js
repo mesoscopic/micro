@@ -1,28 +1,9 @@
 import World from './modules/world.mjs'
 import render from './modules/render.mjs'
 import music from './modules/music.mjs'
-import menu from './modules/menu.mjs'
 import openCheatMenu from './modules/cheats.mjs'
 
-navigator.serviceWorker.register('./app.js', {
-  scope: "."
-});
-
 $(function(){
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    /*
-    Now that I have a phone,
-    I felt compelled to do this,
-    So before it's too late (I'm looking at you, Minecraft Bedrock Edition),
-    I've started development...
-    Micro Mobile coming soon...
-    */
-    window.location.replace('/projects/micro/mobile');
-  }
-  menu().then((save)=>{
-    window.world = new World(save);
-    if(!window.trailer) music.init();
-  });
   var keys = [];
 	$(document).keydown(function(e){
 		if(e.altKey||e.ctrlKey||e.metaKey||e.shiftKey) return; //Stops app from preventing keyboard shortcuts

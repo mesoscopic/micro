@@ -3,11 +3,11 @@
   "display": "standalone",
   "icons": [
     {
-      "src": "/assets/micro_favicon.png",
+      "src": "/assets/micro_beta_favicon.png",
       "sizes": "any"
     }
   ],
-  "name": "Micro",
-  "scope": "/projects/micro/app",
-  "start_url": "/projects/micro/app"
+  "name": "Micro BETA",
+  "scope": "/micro/beta",
+  "start_url": "/micro/beta"
 }
