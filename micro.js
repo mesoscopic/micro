@@ -4,21 +4,11 @@ import music from './modules/music.mjs'
 import menu from './modules/menu.mjs'
 import openCheatMenu from './modules/cheats.mjs'
 
-navigator.serviceWorker.register('./app.js', {
+navigator.serviceWorker.register('/micro/app.js', {
   scope: "."
 });
 
 $(function(){
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    /*
-    Now that I have a phone,
-    I felt compelled to do this,
-    So before it's too late (I'm looking at you, Minecraft Bedrock Edition),
-    I've started development...
-    Micro Mobile coming soon...
-    */
-    window.location.replace('/projects/micro/mobile');
-  }
   menu().then((save)=>{
     window.world = new World(save);
     if(!window.trailer) music.init();

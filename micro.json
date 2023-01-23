@@ -8,6 +8,6 @@
     }
   ],
   "name": "Micro",
-  "scope": "/projects/micro/app",
-  "start_url": "/projects/micro/app"
+  "scope": "/micro",
+  "start_url": "/micro"
 }
