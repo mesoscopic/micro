@@ -5,7 +5,7 @@ import menu from './modules/menu.mjs'
 import openCheatMenu from './modules/cheats.mjs'
 
 navigator.serviceWorker.register('/micro/app.js', {
-  scope: "."
+  scope: "/micro"
 });
 
 $(function(){
