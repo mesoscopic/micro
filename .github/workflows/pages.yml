@@ -29,6 +29,7 @@ jobs:
         with:
           source: ./
           destination: ./_site
+      - run: rm -rf ./_site/beta/.git
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
   deploy:
