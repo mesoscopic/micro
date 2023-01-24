@@ -1,0 +1,44 @@
+name: Deploy multiple branches
+
+on:
+  push:
+    branches: ["main", "beta"]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v3
+        with:
+          ref: main
+      - name: Checkout beta
+        uses: actions/checkout@v3
+        with:
+          ref: beta
+          path: ./beta
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+      - run: tree .
+      - run: rm -rf ./beta/.git
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with: 
+          path: '.'
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
