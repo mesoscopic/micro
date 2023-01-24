@@ -4,8 +4,8 @@ import music from './modules/music.mjs'
 import menu from './modules/menu.mjs'
 import openCheatMenu from './modules/cheats.mjs'
 
-navigator.serviceWorker.register('/micro/app.js', {
-  scope: "/micro/"
+navigator.serviceWorker.register('/offline.js', {
+  scope: "."
 });
 
 $(function(){
