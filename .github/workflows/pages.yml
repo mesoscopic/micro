@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout main
         uses: actions/checkout@v3
+        with:
+          ref: main
       - name: Checkout beta
         uses: actions/checkout@v3
         with:
@@ -24,13 +26,12 @@ jobs:
           path: ./beta
       - name: Setup Pages
         uses: actions/configure-pages@v2
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./
-          destination: ./_site
+      - run: tree .
+      - run: rm -rf ./beta/.git
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
+        with: 
+          path: '.'
   deploy:
     environment:
       name: github-pages
