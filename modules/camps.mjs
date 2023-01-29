@@ -8,7 +8,7 @@ export default class EnemyCamp {
   spawn(w){
     let x = Math.floor(Math.random()*48) + 80
     let y = Math.floor(Math.random()*22)
-    let tile = w.gameworld[y][x]
+    let tile = w.map[y][x]
     if(tile != '□') return this.spawn(w)
     this.pos = [x, y]
     w.camps.push(this)
