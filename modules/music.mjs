@@ -57,27 +57,27 @@ class Soundtrack {
   }
 }
 
-window.music.soundtracks.start = new Soundtrack(new Howl({src: ['../assets/ost/what%20are%20you%20doing%20here.mp3']}))
+window.music.soundtracks.start = new Soundtrack(new Howl({src: ['assets/ost/what%20are%20you%20doing%20here.mp3']}))
 
 window.music.soundtracks.safe = new Soundtrack ([
   new Howl({
-    src: ['../assets/ost/the%20safe%20zone.mp3']
+    src: ['assets/ost/the%20safe%20zone.mp3']
   }),
   new Howl({
-    src: ['../assets/ost/economy.mp3']
+    src: ['assets/ost/economy.mp3']
   })
 ])
 
-window.music.soundtracks.world = new Soundtrack(new Howl({src: ['../assets/ost/March%20of%20the%20Foreigners.wav']}));
+window.music.soundtracks.world = new Soundtrack(new Howl({src: ['assets/ost/March%20of%20the%20Foreigners.wav']}));
 
-window.music.soundtracks.fight = new Soundtrack(new Howl({src: ['../assets/ost/good%20yet%20terrible%20advice.mp3']}));
+window.music.soundtracks.fight = new Soundtrack(new Howl({src: ['assets/ost/good%20yet%20terrible%20advice.mp3']}));
 
-window.music.soundtracks.boss = new Soundtrack(new Howl({src: ['../assets/ost/The%20Wager%20With%20Death.wav']}));
+window.music.soundtracks.boss = new Soundtrack(new Howl({src: ['assets/ost/The%20Wager%20With%20Death.wav']}));
 
-window.music.soundtracks.death = new Soundtrack(new Howl({src: ['../assets/ost/now%20you%20are%20dead.mp3']}));
+window.music.soundtracks.death = new Soundtrack(new Howl({src: ['assets/ost/now%20you%20are%20dead.mp3']}));
 
-window.music.soundtracks.quest = new Soundtrack(new Howl({src: ['../assets/ost/on%20a%20quest.mp3']}));
+window.music.soundtracks.quest = new Soundtrack(new Howl({src: ['assets/ost/on%20a%20quest.mp3']}));
 
-window.music.soundtracks.expansion = new Soundtrack(new Howl({src: ['../assets/ost/The%20Paradigm%20Widens.wav']}));
+window.music.soundtracks.expansion = new Soundtrack(new Howl({src: ['assets/ost/The%20Paradigm%20Widens.wav']}));
 
 export default window.music;
