@@ -3,7 +3,7 @@
   "display": "standalone",
   "icons": [
     {
-      "src": "/assets/micro_beta_favicon.png",
+      "src": "assets/beta_favicon.png",
       "sizes": "any"
     }
   ],

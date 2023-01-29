@@ -1,7 +1,7 @@
 @font-face{
 	/*Credit to http://www.gnu.org/software/freefont/ for their FreeMono font.*/
 	font-family: 'unicode-mono';
-	src: url("/assets/GNUFreeMono.woff");
+	src: url("assets/GNUFreeMono.woff");
 }
 :root {
   --bg: #ffffff;
@@ -101,7 +101,7 @@ button:hover {
 }
 
 #init {
-  background: no-repeat center/150% url("/assets/micro_favicon.svg");
+  background: no-repeat center/150% url("assets/favicon.svg");
   color: white;
 }
 #init button {
