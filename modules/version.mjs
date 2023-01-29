@@ -1,7 +1,7 @@
 import util from './commonfunctions.mjs'
 import music from './music.mjs'
 
-export const version = '0.1.0.5';
+export const version = '0.1.0.6';
 
 export function checkVersion(ver, world){
   $('title').text('Micro v'+version);
