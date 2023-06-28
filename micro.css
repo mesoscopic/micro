@@ -57,9 +57,10 @@ img.centered{
 }
 #mainmenu h1 {
     font-size: 10vh;
+    margin: 0;
 }
 #menubuttons {
-    display: none;
+    opacity: 0;
 }
 
 @media (prefers-color-scheme:dark){
