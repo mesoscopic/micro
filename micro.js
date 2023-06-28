@@ -1,7 +1,6 @@
 import * as Micro from './engine/main.mjs'
 globalThis.Micro = Micro;
 
-document.fonts.add(new FontFace('unicodemono', 'url("assets/fonts/unicodemono/GNUFreeMono.woff")'));
 window.onload = async ()=>{
     await Micro.screens.switch('intro', 500);
     await Micro.utils.wait(1000);
