@@ -1,0 +1,27 @@
+@font-face{
+    font-family: 'unicodemono';
+    src: url('assets/fonts/unicodemono/GNUFreeMono.woff');
+}
+@font-face{
+    font-family: 'sharetechmono';
+    src: url('assets/fonts/sharetechmono/regular.ttf');
+}
+
+@media (prefers-color-scheme:light){
+    :root{
+        --bg:white;
+        --fg:black;
+    }
+}
+@media (prefers-color-scheme:dark){
+    :root{
+        --bg:black;
+        --fg:white;
+    }
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: 'sharetechmono' 'unicodemono' monospace;
+}
