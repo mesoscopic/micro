@@ -2,7 +2,7 @@ export default {
     awaitCallback(thing, fun){
         return new Promise((res, rej)=>{
             try{
-                fun.call(thing, ...(Array.from(arguments).slice(1)), res);
+                fun.call(thing, ...(Array.from(arguments).slice(2)), res);
             } catch (e) {
                 rej(e);
             }
