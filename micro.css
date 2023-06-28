@@ -23,5 +23,5 @@
 body {
     background-color: var(--bg);
     color: var(--fg);
-    font-family: 'sharetechmono' 'unicodemono' monospace;
+    font-family: 'sharetechmono', 'unicodemono', monospace;
 }
