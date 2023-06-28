@@ -1,11 +1,16 @@
 export default {
-    awaitCallback(fun){
+    awaitCallback(thing, fun){
         return new Promise((res, rej)=>{
             try{
-                fun(...(Array.from(arguments).slice(1)), res);
+                fun.call(thing, ...(Array.from(arguments).slice(1)), res);
             } catch (e) {
                 rej(e);
             }
         })
+    },
+    wait(ms){
+        return new Promise((res)=>{
+            setTimeout(res, ms);
+        });
     }
 }
