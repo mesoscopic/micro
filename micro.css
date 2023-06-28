@@ -50,7 +50,6 @@ img.centered{
     height: 0vh;
     overflow:hidden;
     background-color: black;
-    padding: 10vh;
     clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 }
 
