@@ -13,6 +13,9 @@ body {
     font-family: 'sharetechmono', 'unicodemono', monospace;
     margin: 0;
     user-select: none;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
 *::-webkit-scrollbar {
     display: none;
