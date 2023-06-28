@@ -7,21 +7,13 @@
     src: url('assets/fonts/sharetechmono/regular.ttf');
 }
 
-@media (prefers-color-scheme:dark){
-    body{
-        filter: invert(100%);
-    }
-}
-
 body {
     background-color: white;
     color: black;
     font-family: 'sharetechmono', 'unicodemono', monospace;
     margin: 0;
 }
-.nofilter {
-    filter: none;
-}
+
 section {
     position: fixed;
     top: 0;
@@ -36,4 +28,14 @@ section {
     transform: translate(-50%, -50%);
     text-align: center;
     width: 100%;
+}
+
+@media (prefers-color-scheme:dark){
+    body{
+        filter: invert(100%);
+        background-color: black;
+    }
+}
+.nofilter {
+    filter: none;
 }
