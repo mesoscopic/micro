@@ -43,6 +43,12 @@ img.centered{
     text-align: center;
     width: auto;
 }
+.hidden {
+    display: none;
+}
+#enterlogo {
+    height: 200vh; overflow:hidden; background-color: black; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
 
 @media (prefers-color-scheme:dark){
     body{
