@@ -2,7 +2,7 @@ name: Deploy multiple branches
 
 on:
   push:
-    branches: ["main", "beta"]
+    branches: ["main", "beta", "legacy"]
   workflow_dispatch:
 permissions:
   contents: read
@@ -24,10 +24,16 @@ jobs:
         with:
           ref: beta
           path: ./beta
+      - name: Checkout legacy
+        uses: actions/checkout@v3
+        with:
+          ref: legacy
+          path: ./legacy
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - run: tree .
       - run: rm -rf ./beta/.git
+      - run: rm -rf ./legacy/.git
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with: 
