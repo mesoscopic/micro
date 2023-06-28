@@ -47,7 +47,7 @@ img.centered{
     display: none;
 }
 #enterlogo {
-    height: 200vh;
+    height: 0vh;
     overflow:hidden;
     background-color: black;
     padding: 10vh;
