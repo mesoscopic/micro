@@ -7,30 +7,20 @@
     src: url('assets/fonts/sharetechmono/regular.ttf');
 }
 
-@media (prefers-color-scheme:light){
-    :root{
-        --bg:white;
-        --fg:black;
-    }
-    .darkonly{
-        display: none;
-    }
-}
 @media (prefers-color-scheme:dark){
-    :root{
-        --bg:black;
-        --fg:white;
-    }
-    .lightonly{
-        display: none;
+    body{
+        filter: invert(100%);
     }
 }
 
 body {
-    background-color: var(--bg);
-    color: var(--fg);
+    background-color: white;
+    color: black;
     font-family: 'sharetechmono', 'unicodemono', monospace;
     margin: 0;
+}
+.nofilter {
+    filter: none;
 }
 section {
     position: fixed;
