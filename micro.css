@@ -56,7 +56,10 @@ img.centered{
     clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 }
 #mainmenu h1 {
-    font-size: 20vh;
+    font-size: 10vh;
+}
+#menubuttons {
+    display: none;
 }
 
 @media (prefers-color-scheme:dark){
