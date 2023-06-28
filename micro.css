@@ -12,11 +12,17 @@
         --bg:white;
         --fg:black;
     }
+    .darkonly{
+        display: none;
+    }
 }
 @media (prefers-color-scheme:dark){
     :root{
         --bg:black;
         --fg:white;
+    }
+    .lightonly{
+        display: none;
     }
 }
 
