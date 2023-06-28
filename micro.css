@@ -12,6 +12,10 @@ body {
     color: black;
     font-family: 'sharetechmono', 'unicodemono', monospace;
     margin: 0;
+    user-select: none;
+}
+*::-webkit-scrollbar {
+    display: none;
 }
 
 section {
@@ -20,6 +24,8 @@ section {
     left: 0;
     width: 100vw;
     height: 100vh;
+    display: none;
+    overflow: hidden;
 }
 .centered{
     position: absolute;
@@ -28,6 +34,14 @@ section {
     transform: translate(-50%, -50%);
     text-align: center;
     width: 100%;
+}
+img.centered{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: auto;
 }
 
 @media (prefers-color-scheme:dark){

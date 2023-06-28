@@ -11,19 +11,21 @@
     <link rel="icon" href="assets/icons/micro_light.svg" type="image/svg+xml" media="(prefers-color-scheme: light)">
     <link rel="icon" href="assets/icons/micro_light.png" type="image/png" media="(prefers-color-scheme: light)">
     <link rel="icon" href="assets/icons/micro_dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)">
-    <link rel="icon" href="assets/icons/micro_dark.svg" type="image/png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="assets/icons/micro_dark.png" type="image/png" media="(prefers-color-scheme: dark)">
 
     <link rel="stylesheet" href="micro.css">
+    <script src="./micro.js" type="module"></script>
 	</head>
 	<body>
-    <section>
+    <section id="empty"></section>
+    <section id="intro">
       <div class="centered">
         <img src="assets/icons/pegasus.svg" style="height: 40vh; width: auto;">
         <br>
         <h1 style="font-size: calc(40vh / 7); margin: 0;">PEGASUS</h1>
         <h2 style="font-size: calc(40vh / 15); margin: 0;">Web Development</h2>
       </div>
-      
+      <img class="centered" src="assets/icons/micro_dark.svg" id="enterlogo" style="height: 0vh; overflow:hidden; background-color: black; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);">
     </section>
 	</body>
 </html>
