@@ -55,6 +55,9 @@ img.centered{
     background-color: black;
     clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 }
+#mainmenu h1 {
+    font-size: 20vh;
+}
 
 @media (prefers-color-scheme:dark){
     body{
