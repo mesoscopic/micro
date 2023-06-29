@@ -3,7 +3,7 @@ class MicroModule {
         Micro.modules.installed.push(this);
         this.module = module;
         this.loaded = false;
-        this.path = path;
+        this.source = source;
     }
     async send(event, ...args){
         await this.module?.events[event]?.(...args);
@@ -20,24 +20,32 @@ export default {
             this.loaded[i].send(...arguments);
         }
     },
-    install: async function(path){
-        let module = await import(path);
-        if(this.queryInstall(path)>-1) this.update(path, module)
-        else new MicroModule(module, path);
+    resolveSource: function(source){
+        if(typeof source == 'string'){
+            return new URL(source, location);
+        } else if (source instanceof File){
+            return URL.createObjectURL(source);
+        }
     },
-    load: async function(path){
-        let index = this.queryInstall(path);
+    install: async function(source){
+        let resolved = this.resolveSource(source);
+        let module = await import(resolved);
+        if(this.queryInstall(source)>-1) this.update(source, module)
+        else new MicroModule(module, source);
+    },
+    load: async function(source){
+        let index = this.queryInstall(source);
         this.installed[index].loaded = true;
         await this.installed[index].send('load');
     },
-    queryInstall: function(path){
+    queryInstall: function(source){
         for(let i in this.installed){
-            if(this.installed[i].path===path) return i;
+            if(this.installed[i].source===source) return i;
         }
         return -1;
     },
-    update: function(path, module){
-        let index = this.queryInstall(path);
+    update: function(source, module){
+        let index = this.queryInstall(source);
         this.installed[index].module = module;
     }
 }
