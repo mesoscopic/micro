@@ -80,6 +80,7 @@ button {
     transition: border 150ms linear, margin 150ms linear;
     -webkit-appearance: none;
     -moz-appearance: none;
+    appearance: none;
     margin: 4px;
   }
   button.major {

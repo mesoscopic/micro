@@ -9,5 +9,8 @@ export default {
             $('main').hide();
             $('#'+to).show();
         });
-	}
+	},
+    build: function(screen){
+        Micro.modules.sendEvent('buildscreen', screen);
+    }
 }
