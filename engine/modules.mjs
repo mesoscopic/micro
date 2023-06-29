@@ -36,7 +36,7 @@ export default {
     load: async function(source){
         let index = this.queryInstall(source);
         this.installed[index].loaded = true;
-        await this.installed[index].send('load');
+        await this.installed[index].send('load', this.installed[index]);
     },
     queryInstall: function(source){
         for(let i in this.installed){

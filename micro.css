@@ -82,15 +82,23 @@ button {
     -moz-appearance: none;
     appearance: none;
     margin: 4px;
-  }
-  button.major {
+}
+button.major {
     background: black;
     color: white;
-  }
-  button:hover {
+}
+button:hover {
     border: 4px solid black;
     margin: 0;
-  }
+}
+button.topleft {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+}
+section h1 {
+    text-align: center;
+}
 
 @media (prefers-color-scheme:dark){
     body{

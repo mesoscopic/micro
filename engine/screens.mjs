@@ -1,5 +1,7 @@
 export default {
+    active: null,
     switch: function(to, time){
+        Micro.screens.active = to;
         return new Promise((res, rej)=>{
             if(time){
                 $('section').fadeOut(time);
