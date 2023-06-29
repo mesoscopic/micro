@@ -1,5 +1,5 @@
 class MicroModule {
-    constructor(module, path){
+    constructor(module, source){
         Micro.modules.installed.push(this);
         this.module = module;
         this.loaded = false;
