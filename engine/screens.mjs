@@ -8,7 +8,7 @@ export default {
                 $('#'+to).fadeIn(time, res);
                 return;
             }
-            $('main').hide();
+            $('section').hide();
             $('#'+to).show();
         });
 	},
