@@ -1,4 +1,5 @@
 export default {
+    active: true,
     init: function(){
         $('#mainmenu-play').click(()=>{
             Micro.screens.switch('worldselect');
