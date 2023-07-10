@@ -6,7 +6,7 @@ class Setting {
         this.value = settings.default;
         this.category = settings.category;
         Micro.settings.data[id] = this;
-        Micro.settings.category(this.category).contents.splice(settings.order??Micro.settings.category(this.category).contents.length-1, 0, this);
+        Micro.settings.category(this.category).contents.splice(settings.order??Micro.settings.category(this.category).contents.length, 0, this);
     }
     render(){}
     get value(){
@@ -72,7 +72,7 @@ class SettingsCategory {
         this.id = id;
         this.name = name;
         this.contents = [];
-        Micro.settings.categories.splice(order??Micro.settings.categories.length-1, 0, this);
+        Micro.settings.categories.splice(order??Micro.settings.categories.length, 0, this);
     }
 }
 
