@@ -6,6 +6,14 @@ const events = {
             default: 1,
             category: 'debug'
         });
+        new Micro.settings.TextSetting('nothing', 'This definitely does something', {
+            default: 'default',
+            category: 'debug'
+        });
+        new Micro.settings.ToggleSetting('settings', 'Cooler settings', {
+            default: false,
+            category: 'debug'
+        });
     },
     buildscreen: (name)=>{
         if(name=="globalsettings"){

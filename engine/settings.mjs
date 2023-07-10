@@ -20,7 +20,12 @@ class TextSetting extends Setting {
     constructor(id, name, settings){
         super(id, name, settings);
     }
-    render(){}
+    render(){
+        let self = this;
+        let input = $(`<input type="text" value="${self.value}">`);
+        $(input).change(()=>{self.value = $(input).val()});
+        return input;
+    }
     get value(){
         return this._value;
     }
@@ -49,7 +54,12 @@ class ToggleSetting extends Setting {
     constructor(id, name, settings){
         super(id, name, settings);
     }
-    render(){}
+    render(){
+        let self = this;
+        let input = $(`<input type="checkbox" value="${self.value?'on':'off'}">`);
+        $(input).change(()=>{self.value = $(input).val()=="on"});
+        return input;
+    }
     get value(){
         return this._value;
     }
