@@ -21,6 +21,9 @@ class TextSetting extends Setting {
         super(id, name, settings);
     }
     render(){}
+    get value(){
+        return this._value;
+    }
     set value(val){
         this._value = val;
     }
@@ -31,8 +34,11 @@ class NumberSetting extends Setting {
     }
     render(){
         let self = this;
-        let input = $(`<input type="number" value="${this.value}">`);
+        let input = $(`<input type="number" value="${self.value}">`);
         $(input).change(()=>{self.value = $(this).val()});
+    }
+    get value(){
+        return this._value;
     }
     set value(val){
         this._value = Number(val)??0;
@@ -43,6 +49,9 @@ class ToggleSetting extends Setting {
         super(id, name, settings);
     }
     render(){}
+    get value(){
+        return this._value;
+    }
     set value(val){
         this._value = !!val;
     }
