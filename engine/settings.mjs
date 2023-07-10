@@ -48,7 +48,7 @@ class SettingsCategory {
         this.id = id;
         this.name = name;
         this.contents = [];
-        Micro.settings.categories.splice(order??Micro.settings.categories.length-1, 0, [this]);
+        Micro.settings.categories.splice(order??Micro.settings.categories.length-1, 0, this);
     }
 }
 
