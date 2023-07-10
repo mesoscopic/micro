@@ -1,9 +1,12 @@
 class Setting {
     _value;
-    constructor(name, defaultval){
+    constructor(id, name, settings){
         this.name = name;
-        this.default = defaultval;
-        this.value = defaultval;
+        this.default = settings.default;
+        this.value = settings.default;
+        this.category = settings.category;
+        Micro.settings.data[id] = this;
+        Micro.settings.category(this.category).contents.splice(settings.order??Micro.settings.category(this.category).contents.length-1, 0, [this]);
     }
     render(){}
     get value(){
@@ -40,15 +43,24 @@ class ToggleSetting extends Setting {
         this._value = !!val;
     }
 }
+class SettingsCategory {
+    constructor(id, name, order){
+        this.id = id;
+        this.name = name;
+        this.contents = [];
+        Micro.settings.categories.splice(order??Micro.settings.categories.length-1, 0, [this]);
+    }
+}
 
 export default {
     data: {},
-    register: function(id, setting){
-        if(!(setting instanceof Setting)) throw 'This is not a setting.';
-        this.data[id] = setting;
+    categories: [],
+    category: function(id){
+        return this.categories.filter((e)=>e.id==id)[0];
     },
     Setting,
     TextSetting,
     NumberSetting,
-    ToggleSetting
+    ToggleSetting,
+    SettingsCategory
 }
