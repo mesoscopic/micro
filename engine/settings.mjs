@@ -36,6 +36,7 @@ class NumberSetting extends Setting {
         let self = this;
         let input = $(`<input type="number" value="${self.value}">`);
         $(input).change(()=>{self.value = $(this).val()});
+        return input;
     }
     get value(){
         return this._value;
