@@ -10,6 +10,14 @@ const events = {
     buildscreen: (name)=>{
         if(name=="globalsettings"){
             console.dir(Micro.settings.categories);
+            $('#globalsettings .settings').empty();
+            for(let i in Micro.settings.categories){
+                $('#globalsettings .settings').append("<h2>"+Micro.settings.categories[i].name+"</h2>");
+                for(let j in Micro.settings.categories[i].contents){
+                    let setting = Micro.settings.categories[i].contents[j];
+                    $('#globalsettings .settings').append('<p>'+setting.name+'<p>');
+                }
+            }
         }
     }
 }
