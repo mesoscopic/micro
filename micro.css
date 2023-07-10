@@ -99,6 +99,9 @@ button.topleft {
 section h1 {
     text-align: center;
 }
+.settings {
+    margin-left: 1em;
+}
 
 @media (prefers-color-scheme:dark){
     body{
