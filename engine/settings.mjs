@@ -17,8 +17,8 @@ class Setting {
     }
 }
 class TextSetting extends Setting {
-    constructor(name, defaultval){
-        super(name, defaultval);
+    constructor(id, name, settings){
+        super(id, name, settings);
     }
     render(){}
     set value(val){
@@ -26,8 +26,8 @@ class TextSetting extends Setting {
     }
 }
 class NumberSetting extends Setting {
-    constructor(name, defaultval){
-        super(name, defaultval);
+    constructor(id, name, settings){
+        super(id, name, settings);
     }
     render(){}
     set value(val){
@@ -35,8 +35,8 @@ class NumberSetting extends Setting {
     }
 }
 class ToggleSetting extends Setting {
-    constructor(name, defaultval){
-        super(name, defaultval);
+    constructor(id, name, settings){
+        super(id, name, settings);
     }
     render(){}
     set value(val){
