@@ -112,3 +112,34 @@ section h1 {
 .nofilter {
     filter: none;
 }
+
+input[type="text"] {
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-bottom: 2px solid black;
+    text-decoration: none;
+    background: white;
+    color: black;
+    font-family: 'sharetechmono', 'unicodemono', monospace;
+    font-weight: bold;
+    font-size: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+input[type="number"] {
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-bottom: 2px solid black;
+    text-decoration: none;
+    background: white;
+    color: black;
+    font-family: 'sharetechmono', 'unicodemono', monospace;
+    font-weight: bold;
+    font-size: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}

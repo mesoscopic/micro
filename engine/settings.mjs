@@ -23,7 +23,10 @@ class TextSetting extends Setting {
     render(){
         let self = this;
         let input = $(`<input type="text" value="${self.value}">`);
-        $(input).change(()=>{self.value = $(input).val()});
+        $(input).change(()=>{
+            self.value = $(input).val();
+            $(input).attr('size', ($(input).val().length - 1)<1?1:($(input).val().length - 1));
+        });
         return input;
     }
     get value(){
@@ -40,7 +43,10 @@ class NumberSetting extends Setting {
     render(){
         let self = this;
         let input = $(`<input type="number" value="${self.value}">`);
-        $(input).change(()=>{self.value = $(input).val()});
+        $(input).change(()=>{
+            self.value = $(input).val();
+            $(input).attr('size', ($(input).val().length - 1)<1?1:($(input).val().length - 1));
+        });
         return input;
     }
     get value(){
@@ -57,7 +63,9 @@ class ToggleSetting extends Setting {
     render(){
         let self = this;
         let input = $(`<input type="checkbox" value="${self.value?'on':'off'}">`);
-        $(input).change(()=>{self.value = $(input).val()=="on"});
+        $(input).change(()=>{
+            self.value = $(input).val()=="on";  
+        });
         return input;
     }
     get value(){
