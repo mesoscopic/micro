@@ -1,12 +1,16 @@
 class Setting {
+    _value;
     constructor(name, defaultval){
         this.name = name;
         this.default = defaultval;
         this.value = defaultval;
     }
     render(){}
+    get value(){
+        return this._value;
+    }
     set value(val){
-        this.value = val;
+        this._value = val;
     }
 }
 class TextSetting extends Setting {
@@ -15,7 +19,7 @@ class TextSetting extends Setting {
     }
     render(){}
     set value(val){
-        this.value = val;
+        this._value = val;
     }
 }
 class NumberSetting extends Setting {
@@ -24,7 +28,7 @@ class NumberSetting extends Setting {
     }
     render(){}
     set value(val){
-        this.value = Number(val)??0;
+        this._value = Number(val)??0;
     }
 }
 class ToggleSetting extends Setting {
@@ -33,7 +37,7 @@ class ToggleSetting extends Setting {
     }
     render(){}
     set value(val){
-        this.value = !!val;
+        this._value = !!val;
     }
 }
 
