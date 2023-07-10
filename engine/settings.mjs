@@ -29,7 +29,11 @@ class NumberSetting extends Setting {
     constructor(id, name, settings){
         super(id, name, settings);
     }
-    render(){}
+    render(){
+        let self = this;
+        let input = $(`<input type="number" value="${this.value}">`);
+        $(input).change(()=>{self.value = $(this).val()});
+    }
     set value(val){
         this._value = Number(val)??0;
     }

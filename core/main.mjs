@@ -15,7 +15,7 @@ const events = {
                 $('#globalsettings .settings').append("<h2>"+Micro.settings.categories[i].name+"</h2>");
                 for(let j in Micro.settings.categories[i].contents){
                     let setting = Micro.settings.categories[i].contents[j];
-                    $('#globalsettings .settings').append('<p>'+setting.name+'<p>');
+                    $('#globalsettings .settings').append($('<p>'+setting.name+'&nbsp;&nbsp;<p>').append(setting.render()));
                 }
             }
         }
