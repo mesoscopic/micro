@@ -44,10 +44,10 @@ class NumberSetting extends Setting {
     render(){
         let self = this;
         let input = $(`<input type="number" class="setting" value="${self.value}">`);
-        $(input).css('width', ($(input).val().length)+2+'em');
+        $(input).css('width', ($(input).val().length)+1+'em');
         $(input).on('input', ()=>{
             self.value = $(input).val();
-            $(input).css('width', ($(input).val().length)+2+'em');
+            $(input).css('width', ($(input).val().length)+1+'em');
         });
         return input;
     }

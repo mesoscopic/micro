@@ -21,9 +21,10 @@ const events = {
             $('#globalsettings .settings').empty();
             for(let i in Micro.settings.categories){
                 $('#globalsettings .settings').append("<h2>"+Micro.settings.categories[i].name+"</h2>");
+                let t = $('<table></table>');
                 for(let j in Micro.settings.categories[i].contents){
                     let setting = Micro.settings.categories[i].contents[j];
-                    $('#globalsettings .settings').append($('<p>'+setting.name+'&nbsp;&nbsp;</p>').append(setting.render()));
+                    $(t).append($('<tr><td>'+setting.name+'&nbsp;&nbsp;</td></tr>').append($('<td></td>').append(setting.render())));
                 }
             }
         }
