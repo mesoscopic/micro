@@ -159,12 +159,15 @@ input[type=checkbox]{
 input[type=checkbox]:checked{
     background-color: black;
 }
+.toggleslider{
+    height: 0;
+}
 .toggleslider::before {
     display: block;
     position: relative;
     background-color: black;
     content: "";
-    top: 0.85em;
+    top: 0.15em;
     height: 0.7em;
     left: 0.25em;
     transition: .4s;
