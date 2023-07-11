@@ -26,6 +26,7 @@ const events = {
                     let setting = Micro.settings.categories[i].contents[j];
                     $(t).append($('<tr><td>'+setting.name+'&nbsp;&nbsp;</td></tr>').append($('<td></td>').append(setting.render())));
                 }
+                $('#globalsettings .settings').append(t);
             }
         }
     }
