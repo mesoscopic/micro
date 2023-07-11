@@ -103,9 +103,6 @@ section h1 {
     margin-left: 1em;
     width: fit-content;
 }
-.settings .setting {
-    float: right;
-}
 
 @media (prefers-color-scheme:dark){
     body{
