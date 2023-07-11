@@ -29,7 +29,7 @@ export default {
     },
     install: async function(source){
         let resolved = this.resolveSource(source);
-        let module = await import(resolved);
+        let module = await import(resolved+'?'+Date.now());
         if(this.queryInstall(source)>-1) this.update(source, module)
         else new MicroModule(module, source);
     },
