@@ -101,6 +101,7 @@ section h1 {
 }
 .settings {
     margin-left: 1em;
+    width: fit-content;
 }
 .settings .setting {
     float: right;
@@ -146,6 +147,6 @@ input[type="number"] {
     -moz-appearance: none;
     text-align: right;
 }
-input:focus {
+input:focus-within {
     border: none;
 }
