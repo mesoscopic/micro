@@ -175,7 +175,7 @@ input[type=checkbox]:checked{
     border-radius: 50%;
   }
   
-  input:checked + .toggleslider::before {
+  input:checked ~ .toggleslider::before {
     transform: translateX(1.25em);
     background-color: white;
   }
