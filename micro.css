@@ -102,6 +102,9 @@ section h1 {
 .settings {
     margin-left: 1em;
 }
+.settings .setting {
+    float: right;
+}
 
 @media (prefers-color-scheme:dark){
     body{
@@ -141,4 +144,8 @@ input[type="number"] {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+    text-align: right;
+}
+input:focus {
+    border: none;
 }

@@ -23,6 +23,7 @@ class TextSetting extends Setting {
     render(){
         let self = this;
         let input = $(`<input type="text" value="${self.value}">`);
+        $(input).attr('size', ($(input).val().length - 1)<1?1:($(input).val().length - 1));
         $(input).on('input', ()=>{
             self.value = $(input).val();
             $(input).attr('size', ($(input).val().length - 1)<1?1:($(input).val().length - 1));
