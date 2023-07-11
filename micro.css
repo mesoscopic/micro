@@ -132,7 +132,6 @@ input[type="number"] {
     margin: 0;
     padding: 0;
     border: none;
-    border-bottom: 2px solid black;
     text-decoration: none;
     background: white;
     color: black;

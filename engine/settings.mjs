@@ -23,7 +23,7 @@ class TextSetting extends Setting {
     render(){
         let self = this;
         let input = $(`<input type="text" value="${self.value}">`);
-        $(input).change(()=>{
+        $(input).on('input', ()=>{
             self.value = $(input).val();
             $(input).attr('size', ($(input).val().length - 1)<1?1:($(input).val().length - 1));
         });
@@ -43,10 +43,6 @@ class NumberSetting extends Setting {
     render(){
         let self = this;
         let input = $(`<input type="number" value="${self.value}">`);
-        $(input).change(()=>{
-            self.value = $(input).val();
-            $(input).attr('size', ($(input).val().length - 1)<1?1:($(input).val().length - 1));
-        });
         return input;
     }
     get value(){
