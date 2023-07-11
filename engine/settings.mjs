@@ -64,9 +64,9 @@ class ToggleSetting extends Setting {
     }
     render(){
         let self = this;
-        let input = $(`<input type="checkbox" class="setting" value="${self.value?'on':'off'}">`);
+        let input = $(`<input type="checkbox" class="setting" ${self.value?'checked':''}>`);
         $(input).change(()=>{
-            self.value = $(input).val()=="on";  
+            self.value = input.get(0).checked;  
         });
         return input;
     }

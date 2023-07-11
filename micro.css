@@ -148,3 +148,14 @@ input[type="number"] {
 input[type=number]::-webkit-inner-spin-button {
     opacity: 1
 }
+input[type=checkbox]{
+    appearance: none;
+    width: 3em;
+    height: 1.2em;
+    border: 2px solid black;
+    margin: 0;
+    border-radius: 0.6em;
+}
+input[type=checkbox]:checked{
+    background-color: black;
+}
