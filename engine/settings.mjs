@@ -77,6 +77,27 @@ class ToggleSetting extends Setting {
         this._value = !!val;
     }
 }
+class EnumSetting extends Setting {
+    constructor(id, name, settings){
+        super(id, name, settings);
+        this.options = settings.options;
+    }
+    render(){
+        let self = this;
+        let input = $(`<input type="button" value="${self.value}">`);
+        $(input).click(()=>{
+            self.value = self.options[self.options.indexOf(self.value)+1]??self.options[0];
+        });
+        return input;
+    }
+    get value(){
+        return this._value;
+    }
+    set value(val){
+        if(this.options.includes(val)) this._value = val;
+        else throw `"${val}" is not a valid value for this enum`;
+    }
+}
 class SettingsCategory {
     constructor(id, name, order){
         this.id = id;
@@ -96,5 +117,6 @@ export default {
     TextSetting,
     NumberSetting,
     ToggleSetting,
+    EnumSetting,
     SettingsCategory
 }

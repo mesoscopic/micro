@@ -14,6 +14,11 @@ const events = {
             default: false,
             category: 'debug'
         });
+        new Micro.settings.EnumSetting('wip', 'WIP setting', {
+            default: 'One',
+            category: 'debug',
+            options: ['One', 'Two', 'Three']
+        })
     },
     buildscreen: (name)=>{
         if(name=="globalsettings"){
