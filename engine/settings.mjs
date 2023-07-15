@@ -87,6 +87,7 @@ class EnumSetting extends Setting {
         let input = $(`<input type="button" value="${self.value}">`);
         $(input).click(()=>{
             self.value = self.options[self.options.indexOf(self.value)+1]??self.options[0];
+            $(input).attr('value', self.value);
         });
         return input;
     }
