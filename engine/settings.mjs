@@ -3,7 +3,7 @@ class Setting {
     constructor(id, name, settings){
         this.name = name;
         this.default = settings.default;
-        this.value = settings.default;
+        this._value = settings.default;
         this.category = settings.category;
         Micro.settings.data[id] = this;
         Micro.settings.category(this.category).contents.splice(settings.order??Micro.settings.category(this.category).contents.length, 0, this);
