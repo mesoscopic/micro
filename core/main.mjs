@@ -3,12 +3,28 @@ const events = {
         console.log('Vanilla Micro got loaded');
         new Micro.settings.SettingsCategory('visuals', 'Visual Settings');
         new Micro.settings.EnumSetting('theme', 'Theme', {
-            default: 'Auto',
+            default: 'Light',
             category: 'visuals',
             options: ['Light', 'Dark', 'Auto']
-        })
+        });
+        switch(Micro.settings.data.theme.value){
+            case 'Light':
+                $('body').addClass('light');
+                break;
+            case 'Dark':
+                $('body').addClass('dark');
+                break;
+        }
     },
     buildscreen: (name)=>{
+        switch(Micro.settings.data.theme.value){
+            case 'Light':
+                $('body').addClass('light');
+                break;
+            case 'Dark':
+                $('body').addClass('dark');
+                break;
+        }
         if(name=="globalsettings"){
             console.dir(Micro.settings.categories);
             $('#globalsettings .settings').empty();
