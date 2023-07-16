@@ -176,6 +176,7 @@ input[type=checkbox]:checked{
     transition: .4s;
     width: 0.7em;
     border-radius: 50%;
+    cursor: pointer;
   }
   
   .toggleslider:has(+ input:checked)::before {

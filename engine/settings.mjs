@@ -65,8 +65,10 @@ class ToggleSetting extends Setting {
     render(){
         let self = this;
         let input = $(`<div class="toggleslider"></div><input type="checkbox" class="setting" ${self.value?'checked':''}>`);
-        $(input).click(()=>{
-            self.value = input.get(1).checked;  
+        $(input).click((e)=>{
+            e.preventDefault();
+            input.get(1).checked = !input.get(1).checked;
+            self.value = input.get(1).checked;
         });
         return input;
     }
