@@ -3,7 +3,7 @@ const events = {
         console.log('Vanilla Micro got loaded');
         new Micro.settings.SettingsCategory('visuals', 'Visual Settings');
         new Micro.settings.EnumSetting('theme', 'Theme', {
-            default: 'Light',
+            default: 'Auto',
             category: 'visuals',
             options: ['Light', 'Dark', 'Auto']
         });

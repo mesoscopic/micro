@@ -11,9 +11,11 @@ export default {
         })
         $('#worldselect .escape').click(()=>{
             Micro.screens.switch('mainmenu');
+            Micro.screens.build('mainmenu');
         })
         $('#globalsettings .escape').click(()=>{
             Micro.screens.switch('mainmenu');
+            Micro.screens.build('mainmenu');
         })
     }
 }
