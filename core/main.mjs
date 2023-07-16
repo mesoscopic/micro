@@ -1,3 +1,16 @@
+function updateTheme(){
+    switch(Micro.settings.data.theme.value){
+        case 'Light':
+            $('body').addClass('light');
+            break;
+        case 'Dark':
+            $('body').addClass('dark');
+            break;
+        default:
+            $('body').attr('class', '');
+    }
+}
+
 const events = {
     load: (self)=>{
         console.log('Vanilla Micro got loaded');
@@ -7,26 +20,10 @@ const events = {
             category: 'visuals',
             options: ['Light', 'Dark', 'Auto']
         });
-        switch(Micro.settings.data.theme.value){
-            case 'Light':
-                $('body').addClass('light');
-                break;
-            case 'Dark':
-                $('body').addClass('dark');
-                break;
-            default:
-                $('body').attr('class', '');
-        }
+        updateTheme();
     },
     buildscreen: (name)=>{
-        switch(Micro.settings.data.theme.value){
-            case 'Light':
-                $('body').addClass('light');
-                break;
-            case 'Dark':
-                $('body').addClass('dark');
-                break;
-        }
+        updateTheme();
         if(name=="globalsettings"){
             console.dir(Micro.settings.categories);
             $('#globalsettings .settings').empty();
