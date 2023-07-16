@@ -14,6 +14,8 @@ const events = {
             case 'Dark':
                 $('body').addClass('dark');
                 break;
+            default:
+                $('body').attr('class', '');
         }
     },
     buildscreen: (name)=>{
