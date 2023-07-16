@@ -179,3 +179,11 @@ input[type=checkbox]:checked{
     transform: translateX(1.25em);
     background-color: white;
   }
+  input[type=button]{
+    appearance: none;
+    font-family: 'sharetechmono', 'unicodemono', monospace;
+    font-weight: bold;
+    font-size: inherit;
+    border: 1px solid black;
+    background-color: white;
+  }
