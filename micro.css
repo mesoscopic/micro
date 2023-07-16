@@ -17,6 +17,10 @@ body {
     height: 100vh;
     overflow: hidden;
 }
+body.dark {
+    filter: invert(100%);
+    background-color: black;
+}
 *::-webkit-scrollbar {
     display: none;
 }
@@ -105,7 +109,7 @@ section h1 {
 }
 
 @media (prefers-color-scheme:dark){
-    body{
+    body:not(.light) {
         filter: invert(100%);
         background-color: black;
     }

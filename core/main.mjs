@@ -1,23 +1,11 @@
 const events = {
     load: (self)=>{
         console.log('Vanilla Micro got loaded');
-        new Micro.settings.SettingsCategory('debug', 'Debug Settings');
-        new Micro.settings.NumberSetting('imaginary', 'Imagine a setting here', {
-            default: 1,
-            category: 'debug'
-        });
-        new Micro.settings.TextSetting('nothing', 'This definitely does something', {
-            default: 'default',
-            category: 'debug'
-        });
-        new Micro.settings.ToggleSetting('settings', 'Cooler settings', {
-            default: false,
-            category: 'debug'
-        });
-        new Micro.settings.EnumSetting('wip', 'WIP setting', {
-            default: 'One',
-            category: 'debug',
-            options: ['One', 'Two', 'Three']
+        new Micro.settings.SettingsCategory('visuals', 'Visual Settings');
+        new Micro.settings.EnumSetting('theme', 'Theme', {
+            default: 'Auto',
+            category: 'visuals',
+            options: ['Light', 'Dark', 'Auto']
         })
     },
     buildscreen: (name)=>{
