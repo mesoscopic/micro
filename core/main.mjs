@@ -37,6 +37,10 @@ const events = {
                 $('#globalsettings .settings').append(t);
             }
         }
+        if(name=="worldselect"){
+            alert('I am too lazy to add this i\'m getting right into gameplay :)');
+            Micro.screens.switch('game');
+        }
     }
 }
 export {events}
