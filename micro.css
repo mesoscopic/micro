@@ -128,6 +128,7 @@ input[type="text"] {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+    cursor: text;
 }
 input[type="number"] {
     margin: 0;
@@ -144,6 +145,7 @@ input[type="number"] {
     -webkit-appearance: none;
     -moz-appearance: none;
     text-align: right;
+    cursor: text;
 }
 input[type=number]::-webkit-inner-spin-button {
     opacity: 1
@@ -155,6 +157,7 @@ input[type=checkbox]{
     border: 2px solid black;
     margin: 0;
     border-radius: 0.6em;
+    cursor: pointer;
 }
 input[type=checkbox]:checked{
     background-color: black;
@@ -186,4 +189,5 @@ input[type=checkbox]:checked{
     font-size: inherit;
     border: 1px solid black;
     background-color: white;
+    cursor: pointer;
   }
