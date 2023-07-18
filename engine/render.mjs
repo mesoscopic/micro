@@ -1,4 +1,4 @@
-export default {
+const render = {
     active: false,
     init: function(){
         this.active = true;
@@ -9,9 +9,10 @@ export default {
         this.active = false;
     },
     frame: function(time){
-        if(this.lastFrame) this.fps = 1000/(time - this.lastFrame)
-        this.lastFrame = time;
+        if(render.lastFrame) render.fps = 1000/(time - render.lastFrame)
+        render.lastFrame = time;
         $('#render').attr("height", window.innerHeight).attr("width", window.innerWidth);
-        if(this.active) requestAnimationFrame(this.frame);
+        if(render.active) requestAnimationFrame(render.frame);
     }
 }
+export default render;
