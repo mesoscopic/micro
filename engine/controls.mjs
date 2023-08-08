@@ -12,7 +12,8 @@ export default {
         })
     },
     registerControl: function(key, callback){
-        (this.controls[key]??[]).push(callback);
+        this.controls[key] = this.controls[key]??[];
+        this.controls[key].push(callback);
         let s = Symbol();
         callback.id = s;
         return s;
