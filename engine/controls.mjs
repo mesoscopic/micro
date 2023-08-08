@@ -12,12 +12,13 @@ export default {
         })
     },
     registerControl: function(key, callback){
-        this.controls[key].push(callback);
+        (this.controls[key]??[]).push(callback);
         let s = Symbol();
         callback.id = s;
         return s;
     },
     relinquishKey: function(key, s){
+        if(!this.controls[key]) return;
         this.controls[key]=this.controls[key].filter((e)=>{e.id!=s});
     }
 }
