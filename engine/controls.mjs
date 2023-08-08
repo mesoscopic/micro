@@ -5,7 +5,7 @@ export default {
     init: function(){
         $(document).keydown((e)=>{
             for(let i in this.controls){
-                if(e.key==this.controls[i]){
+                if(e.key==i){
                     this.controls[i].forEach((e)=>e());
                 }
             }
