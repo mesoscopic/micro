@@ -41,7 +41,7 @@ const events = {
             alert('I am too lazy to add this i\'m getting right into gameplay :)');
             Micro.screens.switch('game');
             Micro.render.init();
-            new Micro.render.Character('◈', [0, 0]);
+            let player = new Micro.render.Character('◈', [0, 0]);
         }
     }
 }
