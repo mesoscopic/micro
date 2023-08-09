@@ -14,7 +14,7 @@ class Character {
         let millisecondsPassed = (1000/render.fps);
         for(let i in this.animations){
             this[i] += this.animations[i][1]*millisecondsPassed;
-            if(this[i]==this.animations[i][0]) delete this.animations[i];
+            if((this.animations[i][0]<0)?(this[i]<=this.animations[i][0]):(this[i]<=this.animations[i][0])) delete this.animations[i];
         }
         renderChar(this.char, this.pos, this.size, 1);
     }
