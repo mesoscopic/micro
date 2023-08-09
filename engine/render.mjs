@@ -39,7 +39,7 @@ const render = {
             render.canvas.textAlign = "center";
             render.canvas.textBaseline = "middle";
             render.canvas.fillStyle = "#000000"+Math.floor((opacity*255).toString(16));
-            render.canvas.fillText(char, render.width/2 + pos[0] + render.offset[0], render.height/2 + pos[1] + render.offset[1]);
+            render.canvas.fillText(char, render.width/2 + (pos[0] + render.offset[0])*render.scale, render.height/2 + (pos[1] + render.offset[1])*render.scale);
         }
         for(let i in render.characters){
             render.characters[i].render(renderChar);

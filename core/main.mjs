@@ -40,9 +40,18 @@ const events = {
         if(name=="worldselect"){
             alert('I am too lazy to add this i\'m getting right into gameplay :)');
             Micro.screens.switch('game');
-            Micro.render.init();
-            let player = new Micro.render.Character('◈', [0, 0]);
+            Micro.modules.sendEvent('play');
         }
+    },
+    play: ()=>{
+        Micro.render.init();
+        let player = new Micro.render.Character('◈', [0, 0]);
+        let controls = [
+            Micro.controls.registerControl('ArrowLeft', ()=>{player.pos[0] -= 1;}),
+            Micro.controls.registerControl('ArrowRight', ()=>{player.pos[0] += 1;}),
+            Micro.controls.registerControl('ArrowUp', ()=>{player.pos[0] -= 1;}),
+            Micro.controls.registerControl('ArrowDown', ()=>{player.pos[0] += 1;})
+        ]
     }
 }
 export {events}
