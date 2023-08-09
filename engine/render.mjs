@@ -44,6 +44,11 @@ const render = {
         for(let i in render.characters){
             render.characters[i].render(renderChar);
         }
+        render.canvas.font = `10px 'sharetechmono', 'unicodemono', monospace`;
+        render.canvas.textAlign = "left";
+        render.canvas.textBaseline = "bottom";
+        render.canvas.fillStyle = '#000000';
+        render.canvas.fillText(render.fps + ' FPS', 0, render.height);
 
         if(render.active) requestAnimationFrame(render.frame);
     }
