@@ -1,15 +1,37 @@
 class Character {
+    animations = {}
     constructor(char, pos, size){
         this.char = char;
         this.pos = pos;
         this.size = size??1;
         render.characters.push(this);
     }
+    animate(prop, target, time){
+        if(this.animations[prop]) this.animations[prop] = [this.animations[prop][0]+target, (target-this[prop])/time];
+        this.animations[prop] = [target, (target-this[prop])/time];
+    }
     render(renderChar){
+        let millisecondsPassed = (1000/render.fps);
+        for(let i in this.animations){
+            this[i] += this.animations[i][1]*millisecondsPassed;
+            if(this[i]==this.animations[i][0]) delete this.animations[i];
+        }
         renderChar(this.char, this.pos, this.size, 1);
     }
     remove(){
         render.characters.splice(render.characters.indexOf(this), 1);
+    }
+    get x(){
+        return this.pos[0];
+    }
+    set x(val){
+        this.pos[0] = val;
+    }
+    get y(){
+        return this.pos[1];
+    }
+    set y(val){
+        this.pos[1] = val;
     }
 }
 const render = {
@@ -44,11 +66,11 @@ const render = {
         for(let i in render.characters){
             render.characters[i].render(renderChar);
         }
-        render.canvas.font = `10px 'sharetechmono', 'unicodemono', monospace`;
+        render.canvas.font = `20px 'sharetechmono', 'unicodemono', monospace`;
         render.canvas.textAlign = "left";
         render.canvas.textBaseline = "bottom";
         render.canvas.fillStyle = '#000000';
-        render.canvas.fillText(render.fps + ' FPS', 0, render.height);
+        render.canvas.fillText(Math.floor(render.fps) + ' FPS', 0, render.height);
 
         if(render.active) requestAnimationFrame(render.frame);
     }

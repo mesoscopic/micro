@@ -47,10 +47,10 @@ const events = {
         Micro.render.init();
         let player = new Micro.render.Character('◈', [0, 0]);
         let controls = [
-            Micro.controls.registerControl('ArrowLeft', ()=>{player.pos[0] -= .1;}),
-            Micro.controls.registerControl('ArrowRight', ()=>{player.pos[0] += .1;}),
-            Micro.controls.registerControl('ArrowUp', ()=>{player.pos[1] -= .1;}),
-            Micro.controls.registerControl('ArrowDown', ()=>{player.pos[1] += .1;})
+            Micro.controls.registerControl('ArrowLeft', ()=>{player.animate('x', player.x-0.1, 100)}),
+            Micro.controls.registerControl('ArrowRight', ()=>{player.animate('x', player.x+0.1, 100)}),
+            Micro.controls.registerControl('ArrowUp', ()=>{player.animate('y', player.y-0.1, 100)}),
+            Micro.controls.registerControl('ArrowDown', ()=>{player.animate('y', player.y+0.1, 100)})
         ]
     }
 }
