@@ -47,10 +47,30 @@ const events = {
         Micro.render.init();
         let player = new Micro.render.Character('◈', [0, 0]);
         let controls = [
-            Micro.controls.registerControl('ArrowLeft', ()=>{player.animate('x', player.x-0.1, 100)}),
-            Micro.controls.registerControl('ArrowRight', ()=>{player.animate('x', player.x+0.1, 100)}),
-            Micro.controls.registerControl('ArrowUp', ()=>{player.animate('y', player.y-0.1, 100)}),
-            Micro.controls.registerControl('ArrowDown', ()=>{player.animate('y', player.y+0.1, 100)})
+            Micro.controls.registerControl('ArrowLeft', (p)=>{
+                let held = setInterval(()=>{
+                    player.animate('x', player.x-0.1, 100);
+                }, 100);
+                p.then(()=>{clearInterval(held)});
+            }),
+            Micro.controls.registerControl('ArrowRight', (p)=>{
+                let held = setInterval(()=>{
+                    player.animate('x', player.x+0.1, 100);
+                }, 100);
+                p.then(()=>{clearInterval(held)});
+            }),
+            Micro.controls.registerControl('ArrowUp', (p)=>{
+                let held = setInterval(()=>{
+                    player.animate('y', player.y-0.1, 100);
+                }, 100);
+                p.then(()=>{clearInterval(held)});
+            }),
+            Micro.controls.registerControl('ArrowDown', (p)=>{
+                let held = setInterval(()=>{
+                    player.animate('y', player.y+0.1, 100);
+                }, 100);
+                p.then(()=>{clearInterval(held)});
+            })
         ]
     }
 }

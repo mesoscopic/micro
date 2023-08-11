@@ -6,9 +6,15 @@ export default {
         $(document).keydown((e)=>{
             for(let i in this.controls){
                 if(e.key==i){
-                    this.controls[i].forEach((e)=>e());
+                    this.controls[i].forEach((e)=>e(new Promise((res, rej)=>{
+                        while(e.key!=this._up){}
+                        res();
+                    })));
                 }
             }
+        })
+        $(document).keyup((e)=>{
+            this._up = e.key;
         })
     },
     registerControl: function(key, callback){
