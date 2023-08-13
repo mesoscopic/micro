@@ -2,19 +2,25 @@ export default {
     controls: {
         'Escape': [()=>{$('section#'+Micro.screens.active+' .escape').click();}]
     },
+    _up: {},
     init: function(){
         $(document).keydown((e)=>{
             for(let i in this.controls){
                 if(e.key==i){
                     this.controls[i].forEach((e)=>e(new Promise((res, rej)=>{
-                        while(e.key!=this._up){}
-                        res();
+                        this._up[i] = this._up[i]??[];
+                        this._up[i].push(res);
                     })));
                 }
             }
         })
         $(document).keyup((e)=>{
-            this._up = e.key;
+            for(let i in this._up){
+                if(e.key==i){
+                    this._up[i].forEach((e)=>e());
+                    delete this._up[i];
+                }
+            }
         })
     },
     registerControl: function(key, callback){
