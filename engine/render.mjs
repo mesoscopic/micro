@@ -7,6 +7,8 @@ class Character {
         render.characters.push(this);
     }
     animate(prop, target, time){
+        //*angry floating point math noises*
+        target = target.toFixed(3);
         if(this.animations[prop]) this.animations[prop] = [this.animations[prop][0]+target, (target-this[prop])/time];
         this.animations[prop] = [target, (target-this[prop])/time];
     }
