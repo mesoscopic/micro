@@ -21,8 +21,8 @@ class Player extends Micro.render.Character {
         this.moveVector[1]+=vector[1];
     }
     subtractMovement(vector){
-        this.moveVector[0]+=vector[0];
-        this.moveVector[1]+=vector[1];
+        this.moveVector[0]-=vector[0];
+        this.moveVector[1]-=vector[1];
     }
     render(renderChar){
         let millisecondsPassed = (1000/Micro.render.fps);
