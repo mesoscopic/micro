@@ -30,8 +30,8 @@ class Player extends Micro.render.Character {
             this[i] += this.animations[i][1]*millisecondsPassed;
             if((this.animations[i][0]<0)?(this[i]<=this.animations[i][0]):(this[i]<=this.animations[i][0])) delete this.animations[i];
         }
-        this.x += (this.moveVector[0]*1000/millisecondsPassed);
-        this.y += (this.moveVector[1]*1000/millisecondsPassed);
+        this.x += (this.moveVector[0]*millisecondsPassed/1000);
+        this.y += (this.moveVector[1]*millisecondsPassed/1000);
         renderChar(this.char, this.pos, this.size, this.opacity??1);
     }
 }
