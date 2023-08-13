@@ -10,7 +10,7 @@ export default {
                     this.controls[i].forEach((e)=>e(new Promise((res, rej)=>{
                         this._up[i] = this._up[i]??[];
                         this._up[i].push(res);
-                    })));
+                    }), e.repeat));
                 }
             }
         })
