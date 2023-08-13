@@ -11,6 +11,31 @@ function updateTheme(){
     }
 }
 
+class Player extends Micro.render.Character {
+    moveVector = [0, 0];
+    constructor(char, pos, size){
+        super(char, pos, size);
+    }
+    addMovement(vector){
+        this.moveVector[0]+=vector[0];
+        this.moveVector[1]+=vector[1];
+    }
+    subtractMovement(vector){
+        this.moveVector[0]+=vector[0];
+        this.moveVector[1]+=vector[1];
+    }
+    render(renderChar){
+        let millisecondsPassed = (1000/Micro.render.fps);
+        for(let i in this.animations){
+            this[i] += this.animations[i][1]*millisecondsPassed;
+            if((this.animations[i][0]<0)?(this[i]<=this.animations[i][0]):(this[i]<=this.animations[i][0])) delete this.animations[i];
+        }
+        this.x += (moveVector[0]*1000/millisecondsPassed);
+        this.y += (moveVector[1]*1000/millisecondsPassed);
+        renderChar(this.char, this.pos, this.size, this.opacity??1);
+    }
+}
+
 const events = {
     load: (self)=>{
         console.log('Vanilla Micro got loaded');
@@ -45,31 +70,23 @@ const events = {
     },
     play: ()=>{
         Micro.render.init();
-        let player = new Micro.render.Character('◈', [0, 0]);
+        let player = new Player('◈', [0, 0]);
         let controls = [
             Micro.controls.registerControl('ArrowLeft', (p)=>{
-                let held = setInterval(()=>{
-                    player.animate('x', player.x-0.1, 100);
-                }, 100);
-                p.then(()=>{clearInterval(held)});
+                player.addMovement([-3, 0]);
+                p.then(()=>{player.subtractMovement([-3, 0])});
             }),
             Micro.controls.registerControl('ArrowRight', (p)=>{
-                let held = setInterval(()=>{
-                    player.animate('x', player.x+0.1, 100);
-                }, 100);
-                p.then(()=>{clearInterval(held)});
+                player.addMovement([3, 0]);
+                p.then(()=>{player.subtractMovement([3, 0])});
             }),
             Micro.controls.registerControl('ArrowUp', (p)=>{
-                let held = setInterval(()=>{
-                    player.animate('y', player.y-0.1, 100);
-                }, 100);
-                p.then(()=>{clearInterval(held)});
+                player.addMovement([0, -3]);
+                p.then(()=>{player.subtractMovement([0, -3])});
             }),
             Micro.controls.registerControl('ArrowDown', (p)=>{
-                let held = setInterval(()=>{
-                    player.animate('y', player.y+0.1, 100);
-                }, 100);
-                p.then(()=>{clearInterval(held)});
+                player.addMovement([0, 3]);
+                p.then(()=>{player.subtractMovement([0, 3])});
             })
         ]
     }

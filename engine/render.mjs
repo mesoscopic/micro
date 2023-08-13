@@ -18,7 +18,7 @@ class Character {
             this[i] += this.animations[i][1]*millisecondsPassed;
             if((this.animations[i][0]<0)?(this[i]<=this.animations[i][0]):(this[i]<=this.animations[i][0])) delete this.animations[i];
         }
-        renderChar(this.char, this.pos, this.size, 1);
+        renderChar(this.char, this.pos, this.size, this.opacity??1);
     }
     remove(){
         render.characters.splice(render.characters.indexOf(this), 1);
