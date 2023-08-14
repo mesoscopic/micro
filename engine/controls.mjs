@@ -7,7 +7,7 @@ export default {
         $(document).keydown((e)=>{
             for(let i in this.controls){
                 if(e.key==i){
-                    this.controls[i].forEach((e)=>e(new Promise((res, rej)=>{
+                    this.controls[i].forEach((f)=>f(new Promise((res, rej)=>{
                         this._up[i] = this._up[i]??[];
                         this._up[i].push(res);
                     }), e.originalEvent.repeat));
