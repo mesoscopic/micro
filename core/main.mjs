@@ -25,7 +25,7 @@ class Player extends Micro.render.Character {
         this.moveVector[1]-=vector[1];
     }
     render(renderChar){
-        let millisecondsPassed = (1000/Micro.render.fps);
+        let millisecondsPassed = isFinite(1000/Micro.render.fps)?1000/Micro.render.fps:0;
         for(let i in this.animations){
             this[i] += this.animations[i][1]*millisecondsPassed;
             if((this.animations[i][0]<0)?(this[i]<=this.animations[i][0]):(this[i]<=this.animations[i][0])) delete this.animations[i];
