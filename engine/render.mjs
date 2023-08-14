@@ -52,6 +52,7 @@ const render = {
     },
     frame: function(time){
         if(render.lastFrame) render.fps = 1000/(time - render.lastFrame)
+        else render.fps = 0;
         render.lastFrame = time;
         render.width = window.innerWidth;
         render.height = window.innerHeight;
