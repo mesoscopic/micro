@@ -7,10 +7,14 @@ export default {
         $(document).keydown((e)=>{
             for(let i in this.controls){
                 if(e.key==i){
-                    this.controls[i].forEach((f)=>f(new Promise((res, rej)=>{
-                        this._up[i] = this._up[i]??[];
-                        this._up[i].push(res);
-                    }), e.originalEvent.repeat));
+                    this.controls[i].forEach((f)=>{
+                        if(f.disabled) return;
+                        if(!f.allowRepeat) f.disabled = true;
+                        f(new Promise((res, rej)=>{
+                            this._up[i] = this._up[i]??[];
+                            this._up[i].push(()=>{res();f.disabled = false;});
+                        }))
+                    });
                 }
             }
         })
@@ -23,11 +27,12 @@ export default {
             }
         })
     },
-    registerControl: function(key, callback){
+    registerControl: function(key, callback, allowRepeat){
         this.controls[key] = this.controls[key]??[];
         this.controls[key].push(callback);
         let s = Symbol();
         callback.id = s;
+        callback.allowRepeat = allowRepeat ?? true;
         return s;
     },
     relinquishKey: function(key, s){

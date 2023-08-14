@@ -78,26 +78,22 @@ const events = {
         let player = new Player('◈', [0, 0]);
         if(Micro.settings.data.globals) window.player = player;
         let controls = [
-            Micro.controls.registerControl('ArrowLeft', (p, r)=>{
-                if(r) return;
+            Micro.controls.registerControl('ArrowLeft', (p)=>{
                 player.addMovement([-1, 0]);
                 p.then(()=>{player.subtractMovement([-1, 0])});
-            }),
-            Micro.controls.registerControl('ArrowRight', (p, r)=>{
-                if(r) return;
+            }, false),
+            Micro.controls.registerControl('ArrowRight', (p)=>{
                 player.addMovement([1, 0]);
                 p.then(()=>{player.subtractMovement([1, 0])});
-            }),
-            Micro.controls.registerControl('ArrowUp', (p, r)=>{
-                if(r) return;
+            }, false),
+            Micro.controls.registerControl('ArrowUp', (p)=>{
                 player.addMovement([0, -1]);
                 p.then(()=>{player.subtractMovement([0, -1])});
-            }),
-            Micro.controls.registerControl('ArrowDown', (p, r)=>{
-                if(r) return;
+            }, false),
+            Micro.controls.registerControl('ArrowDown', (p)=>{
                 player.addMovement([0, 1]);
                 p.then(()=>{player.subtractMovement([0, 1])});
-            })
+            }, false)
         ]
     }
 }
