@@ -45,6 +45,11 @@ const events = {
             category: 'visuals',
             options: ['Light', 'Dark', 'Auto']
         });
+        new Micro.settings.SettingsCategory('debug', 'Debug Settings');
+        new Micro.settings.ToggleSetting('globals', 'Expose global variables', {
+            default: false,
+            category: 'debug'
+        });
         updateTheme();
     },
     buildscreen: (name)=>{
@@ -71,6 +76,7 @@ const events = {
     play: ()=>{
         Micro.render.init();
         let player = new Player('◈', [0, 0]);
+        if(Micro.settings.data.globals) window.player = player;
         let controls = [
             Micro.controls.registerControl('ArrowLeft', (p, r)=>{
                 if(r) return;
