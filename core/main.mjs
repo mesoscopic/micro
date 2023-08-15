@@ -97,4 +97,4 @@ const events = {
         ]
     }
 }
-export {events}
+export {events, Player, updateTheme};
