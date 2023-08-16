@@ -1,3 +1,5 @@
+import Player from './player.mjs'
+
 function updateTheme(){
     switch(Micro.settings.data.theme.value){
         case 'Light':
@@ -11,30 +13,7 @@ function updateTheme(){
     }
 }
 
-class Player extends Micro.render.Character {
-    moveVector = [0, 0];
-    constructor(char, pos, size){
-        super(char, pos, size);
-    }
-    addMovement(vector){
-        this.moveVector[0]+=vector[0];
-        this.moveVector[1]+=vector[1];
-    }
-    subtractMovement(vector){
-        this.moveVector[0]-=vector[0];
-        this.moveVector[1]-=vector[1];
-    }
-    render(renderChar){
-        let millisecondsPassed = isFinite(1000/Micro.render.fps)?1000/Micro.render.fps:0;
-        for(let i in this.animations){
-            this[i] += this.animations[i][1]*millisecondsPassed;
-            if((this.animations[i][0]<0)?(this[i]<=this.animations[i][0]):(this[i]<=this.animations[i][0])) delete this.animations[i];
-        }
-        this.x += (this.moveVector[0]*millisecondsPassed/1000);
-        this.y += (this.moveVector[1]*millisecondsPassed/1000);
-        renderChar(this.char, this.pos, this.size, this.opacity??1);
-    }
-}
+$.extend(Micro.game, {updateTheme});
 
 const events = {
     load: (self)=>{
@@ -77,24 +56,6 @@ const events = {
         Micro.render.init();
         let player = new Player('◈', [0, 0]);
         if(Micro.settings.data.globals) window.player = player;
-        let controls = [
-            Micro.controls.registerControl('ArrowLeft', (p)=>{
-                player.addMovement([-1, 0]);
-                p.then(()=>{player.subtractMovement([-1, 0])});
-            }, false),
-            Micro.controls.registerControl('ArrowRight', (p)=>{
-                player.addMovement([1, 0]);
-                p.then(()=>{player.subtractMovement([1, 0])});
-            }, false),
-            Micro.controls.registerControl('ArrowUp', (p)=>{
-                player.addMovement([0, -1]);
-                p.then(()=>{player.subtractMovement([0, -1])});
-            }, false),
-            Micro.controls.registerControl('ArrowDown', (p)=>{
-                player.addMovement([0, 1]);
-                p.then(()=>{player.subtractMovement([0, 1])});
-            }, false)
-        ]
     }
 }
-export {events, Player, updateTheme};
+export {events};
