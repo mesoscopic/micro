@@ -4,9 +4,7 @@ globalThis.Micro = Micro;
 window.onload = async ()=>{
     await Micro.screens.switch('intro', 500);
     await Micro.modules.install('core/main.mjs');
-    await Micro.modules.install('testmod/main.mjs');
     await Micro.modules.load('core/main.mjs');
-    await Micro.modules.load('testmod/main.mjs');
     await Micro.utils.wait(1000);
     await document.fonts.ready;
     await Micro.utils.awaitCallback($('#enterlogo'), $.fn.animate, {height: "200vh", padding: "20vh"}, 1500);
