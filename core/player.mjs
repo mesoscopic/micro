@@ -7,20 +7,20 @@ class Player extends Micro.render.Character {
     enableControls(){
         this.controls = [
             Micro.controls.registerControl('ArrowLeft', (p)=>{
-                player.addMovement([-1, 0]);
-                p.then(()=>{player.subtractMovement([-1, 0])});
+                this.addMovement([-1, 0]);
+                p.then(()=>{this.subtractMovement([-1, 0])});
             }, false),
             Micro.controls.registerControl('ArrowRight', (p)=>{
-                player.addMovement([1, 0]);
-                p.then(()=>{player.subtractMovement([1, 0])});
+                this.addMovement([1, 0]);
+                p.then(()=>{this.subtractMovement([1, 0])});
             }, false),
             Micro.controls.registerControl('ArrowUp', (p)=>{
-                player.addMovement([0, -1]);
-                p.then(()=>{player.subtractMovement([0, -1])});
+                this.addMovement([0, -1]);
+                p.then(()=>{this.subtractMovement([0, -1])});
             }, false),
             Micro.controls.registerControl('ArrowDown', (p)=>{
-                player.addMovement([0, 1]);
-                p.then(()=>{player.subtractMovement([0, 1])});
+                this.addMovement([0, 1]);
+                p.then(()=>{this.subtractMovement([0, 1])});
             }, false)
         ]
     }
