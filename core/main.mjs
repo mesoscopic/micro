@@ -1,4 +1,5 @@
 import Player from './player.mjs'
+import DebugLayer from './debuglayer.mjs'
 
 function updateTheme(){
     switch(Micro.settings.data.theme.value){
@@ -24,10 +25,9 @@ const events = {
             category: 'visuals',
             options: ['Light', 'Dark', 'Auto']
         });
-        new Micro.settings.SettingsCategory('debug', 'Debug Settings');
-        new Micro.settings.ToggleSetting('globals', 'Expose global variables', {
+        new Micro.settings.ToggleSetting('debug', 'Show debug overlay', {
             default: false,
-            category: 'debug'
+            category: 'visuals'
         });
         updateTheme();
     },
@@ -55,7 +55,8 @@ const events = {
     play: ()=>{
         Micro.render.init();
         let player = new Player('◈', [0, 0]);
-        if(Micro.settings.data.globals) window.player = player;
+        Micro.game.player = player;
+        if(Micro.settings.data.debug.value) new DebugLayer();
     }
 }
 export {events};
