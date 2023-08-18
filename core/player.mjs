@@ -46,8 +46,8 @@ class Player extends Micro.render.Character {
             if((this.animations[i][0]<0)?(this[i]<=this.animations[i][0]):(this[i]<=this.animations[i][0])) delete this.animations[i];
         }
         this.x = parseFloat((this.x+(this.moveVector[0]*millisecondsPassed/1000)).toFixed(2));
-        this.y = parseFloat((this.x+(this.moveVector[1]*millisecondsPassed/1000)).toFixed(2));
-        Micro.render.offset = this.pos;
+        this.y = parseFloat((this.y+(this.moveVector[1]*millisecondsPassed/1000)).toFixed(2));
+        Micro.render.offset = [-this.x, -this.y];
         renderChar(this.char, this.pos, this.size, this.opacity??1);
     }
 }
