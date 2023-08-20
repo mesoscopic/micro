@@ -1,7 +1,7 @@
 class Player extends Micro.render.Character {
     moveVector = [0, 0];
-    constructor(char, pos, size){
-        super(char, pos, size);
+    constructor(pos, size){
+        super('◇', pos, size);
         this.enableControls();
     }
     enableControls(){
@@ -49,6 +49,7 @@ class Player extends Micro.render.Character {
         this.y = parseFloat((this.y+(this.moveVector[1]*millisecondsPassed/1000)).toFixed(2));
         Micro.render.offset = [-this.x, -this.y];
         renderChar(this.char, this.pos, this.size, this.opacity??1);
+        renderChar('◆', [this.x - this.moveVector[0]/5, this.y - this.moveVector[1]/5], this.size*0.8, this.opacity??1);
     }
 }
 
