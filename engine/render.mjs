@@ -21,7 +21,7 @@ class Character {
             if((this.animations[i][0]<0)?(this[i]<=this.animations[i][0]):(this[i]<=this.animations[i][0])) delete this.animations[i];
         }
         let t = this, o = 1;
-        render.characters.filter((v)=>v.layer>t.layer).forEach((c)=>{
+        Micro.render.characters.filter((v)=>v.layer>t.layer).forEach((c)=>{
             if(Math.abs(c.pos[0]-t.pos[0])<=1&&Math.abs(c.pos[0]-t.pos[0])<=1){
                 o = 0.1;
             }

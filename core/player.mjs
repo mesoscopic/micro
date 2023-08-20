@@ -61,7 +61,7 @@ class Player extends Micro.render.Character {
         this.y = parseFloat((this.y+(this.moveVector[1]*millisecondsPassed/1000)).toFixed(2));
         Micro.render.offset = [-this.x, -this.y];
         let t = this, o = 1;
-        render.characters.filter((v)=>v.layer>t.layer).forEach((c)=>{
+        Micro.render.characters.filter((v)=>v.layer>t.layer).forEach((c)=>{
             if(Math.abs(c.pos[0]-t.pos[0])<=1&&Math.abs(c.pos[0]-t.pos[0])<=1){
                 o = 0.1;
             }
