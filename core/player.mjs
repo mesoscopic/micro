@@ -34,22 +34,22 @@ class Player extends Micro.render.Character {
         delete this.controls;
     }
     addMovement(vector){
-        let p = this, ax = vector[0]/(this.accelerationTime/100), ay = vector[1]/(this.accelerationTime/100), n = 0;
+        let p = this, ax = vector[0]/(this.accelerationTime/50), ay = vector[1]/(this.accelerationTime/50), n = 0;
         let i = setInterval(()=>{
             n++;
             p.moveVector[0]+=ax;
             p.moveVector[1]+=ay;
-            if(n == p.accelerationTime/100) clearInterval(i);
-        }, 100);
+            if(n == p.accelerationTime/50) clearInterval(i);
+        }, 50);
     }
     subtractMovement(vector){
-        let p = this, ax = this.accelerationTime/100*vector[0], ay = this.accelerationTime/100*vector[1], n = 0;
+        let p = this, ax = vector[0]/(this.accelerationTime/50), ay = vector[1]/(this.accelerationTime/50), n = 0;
         let i = setInterval(()=>{
             n++;
             p.moveVector[0]-=ax;
             p.moveVector[1]-=ay;
             if(n == p.accelerationTime/100) clearInterval(i);
-        }, 100);
+        }, 50);
     }
     render(renderChar){
         let millisecondsPassed = isFinite(1000/Micro.render.fps)?1000/Micro.render.fps:0;
