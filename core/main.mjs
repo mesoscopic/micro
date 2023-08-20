@@ -54,7 +54,7 @@ const events = {
     },
     play: ()=>{
         Micro.render.init();
-        let player = new Player('◈', [0, 0]);
+        let player = new Player([0, 0]);
         Micro.game.player = player;
         let debug;
         if(Micro.settings.data.debug.value) debug = new DebugLayer();
