@@ -48,7 +48,7 @@ class Player extends Micro.render.Character {
             n++;
             p.moveVector[0]-=ax;
             p.moveVector[1]-=ay;
-            if(n == p.accelerationTime/100) clearInterval(i);
+            if(n == p.accelerationTime/50) clearInterval(i);
         }, 50);
     }
     render(renderChar){
