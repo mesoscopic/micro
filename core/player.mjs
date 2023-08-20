@@ -3,6 +3,8 @@ class Player extends Micro.render.Character {
     constructor(pos, size){
         super('◇', pos, size);
         this.enableControls();
+        this.maxSpeed = 1;
+        this.accelerationTime = 500;
     }
     enableControls(){
         this.controls = [
@@ -32,12 +34,22 @@ class Player extends Micro.render.Character {
         delete this.controls;
     }
     addMovement(vector){
-        this.moveVector[0]+=vector[0];
-        this.moveVector[1]+=vector[1];
+        let p = this, ax = this.accelerationTime/100*vector[0], ay = this.accelerationTime/100*vector[1], n = 0;
+        let i = setInterval(()=>{
+            n++;
+            p.moveVector[0]+=ax;
+            p.moveVector[1]+=ay;
+            if(n == p.accelerationTime/100) clearInterval(i);
+        }, 100);
     }
     subtractMovement(vector){
-        this.moveVector[0]-=vector[0];
-        this.moveVector[1]-=vector[1];
+        let p = this, ax = this.accelerationTime/100*vector[0], ay = this.accelerationTime/100*vector[1], n = 0;
+        let i = setInterval(()=>{
+            n++;
+            p.moveVector[0]-=ax;
+            p.moveVector[1]-=ay;
+            if(n == p.accelerationTime/100) clearInterval(i);
+        }, 100);
     }
     render(renderChar){
         let millisecondsPassed = isFinite(1000/Micro.render.fps)?1000/Micro.render.fps:0;
@@ -49,7 +61,7 @@ class Player extends Micro.render.Character {
         this.y = parseFloat((this.y+(this.moveVector[1]*millisecondsPassed/1000)).toFixed(2));
         Micro.render.offset = [-this.x, -this.y];
         renderChar(this.char, this.pos, this.size, this.opacity??1);
-        renderChar('◆', [this.x - this.moveVector[0]/5, this.y - this.moveVector[1]/5], this.size*0.8, this.opacity??1);
+        renderChar('◆', [this.x - (this.moveVector[0]/this.maxSpeed)/15, this.y - (this.moveVector[1]/this.maxSpeed)/15], this.size*0.5, this.opacity??1);
     }
 }
 
