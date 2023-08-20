@@ -1,10 +1,12 @@
 class Character {
     animations = {}
-    constructor(char, pos, size){
+    constructor(char, pos, size, layer){
         this.char = char;
         this.pos = pos;
         this.size = size??1;
+        this.layer = layer??0;
         render.characters.push(this);
+        render.characters.sort((a, b)=>a.layer-b.layer);
     }
     animate(prop, target, time){
         //*angry floating point math noises*
@@ -18,7 +20,13 @@ class Character {
             this[i] += this.animations[i][1]*millisecondsPassed;
             if((this.animations[i][0]<0)?(this[i]<=this.animations[i][0]):(this[i]<=this.animations[i][0])) delete this.animations[i];
         }
-        renderChar(this.char, this.pos, this.size, this.opacity??1);
+        let t = this, o = 1;
+        render.characters.filter((v)=>v.layer>t.layer).forEach((c)=>{
+            if(Math.abs(c.pos[0]-t.pos[0])<=1&&Math.abs(c.pos[0]-t.pos[0])<=1){
+                o = 0.1;
+            }
+        });
+        renderChar(this.char, this.pos, this.size, o*(this.opacity??1));
     }
     remove(){
         render.characters.splice(render.characters.indexOf(this), 1);
@@ -60,7 +68,7 @@ const render = {
 
         render.canvas.clearRect(0, 0, render.width, render.height);
         function renderChar(char, pos, size, opacity){
-            render.canvas.font = `${size*render.scale}px 'sharetechmono', 'unicodemono', monospace`;
+            render.canvas.font = `${2*size*render.scale}px 'sharetechmono', 'unicodemono', monospace`;
             render.canvas.textAlign = "center";
             render.canvas.textBaseline = "middle";
             render.canvas.fillStyle = "#000000"+Math.floor((opacity*255).toString(16));
