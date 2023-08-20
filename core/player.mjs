@@ -60,8 +60,14 @@ class Player extends Micro.render.Character {
         this.x = parseFloat((this.x+(this.moveVector[0]*millisecondsPassed/1000)).toFixed(2));
         this.y = parseFloat((this.y+(this.moveVector[1]*millisecondsPassed/1000)).toFixed(2));
         Micro.render.offset = [-this.x, -this.y];
-        renderChar(this.char, this.pos, this.size, this.opacity??1);
-        renderChar('◆', [this.x - (this.moveVector[0]/this.maxSpeed)/15, this.y - (this.moveVector[1]/this.maxSpeed)/15], this.size*0.5, this.opacity??1);
+        let t = this, o = 1;
+        render.characters.filter((v)=>v.layer>t.layer).forEach((c)=>{
+            if(Math.abs(c.pos[0]-t.pos[0])<=1&&Math.abs(c.pos[0]-t.pos[0])<=1){
+                o = 0.1;
+            }
+        });
+        renderChar(this.char, this.pos, this.size, o*this.opacity??1);
+        renderChar('◆', [this.x - (this.moveVector[0]/this.maxSpeed)/15, this.y - (this.moveVector[1]/this.maxSpeed)/15], this.size*0.5, o*this.opacity??1);
     }
 }
 

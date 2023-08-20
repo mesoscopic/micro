@@ -1,6 +1,6 @@
 export default class DebugLayer extends Micro.render.Character {
     constructor(){
-        super('', [0, 0], 1);
+        super('', [0, 0], 1, -99);
     }
     render(){
         Micro.render.canvas.font = `20px 'sharetechmono', 'unicodemono', monospace`;
