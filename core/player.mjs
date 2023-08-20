@@ -34,7 +34,7 @@ class Player extends Micro.render.Character {
         delete this.controls;
     }
     addMovement(vector){
-        let p = this, ax = this.accelerationTime/100*vector[0], ay = this.accelerationTime/100*vector[1], n = 0;
+        let p = this, ax = vector[0]/(this.accelerationTime/100), ay = vector[1]/(this.accelerationTime/100), n = 0;
         let i = setInterval(()=>{
             n++;
             p.moveVector[0]+=ax;
