@@ -5,6 +5,7 @@ class Player extends Micro.render.Character {
         this.enableControls();
         this.maxSpeed = 1;
         this.accelerationTime = 500;
+        this.decelerationTime = 200;
     }
     enableControls(){
         this.controls = [
@@ -34,12 +35,12 @@ class Player extends Micro.render.Character {
         delete this.controls;
     }
     addMovement(vector){
-        let p = this, ax = vector[0]/(this.accelerationTime/50), ay = vector[1]/(this.accelerationTime/50), n = 0;
+        let p = this, ax = vector[0]/(this.decelerationTime/50), ay = vector[1]/(this.decelerationTime/50), n = 0;
         let i = setInterval(()=>{
             n++;
             p.moveVector[0]+=ax;
             p.moveVector[1]+=ay;
-            if(n == p.accelerationTime/50) clearInterval(i);
+            if(n == p.decelerationTime/50) clearInterval(i);
         }, 50);
     }
     subtractMovement(vector){
