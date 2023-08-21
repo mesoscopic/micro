@@ -63,8 +63,9 @@ class Player extends Micro.render.Character {
         Micro.render.offset = [-this.x, -this.y];
         let t = this, o = 1;
         Micro.render.characters.filter((v)=>v.layer>t.layer).forEach((c)=>{
-            if(Math.abs(c.pos[0]-t.pos[0])<=1&&Math.abs(c.pos[0]-t.pos[0])<=1){
-                o = 0.1;
+            if(Math.abs(c.pos[0]-t.pos[0])<=1&&Math.abs(c.pos[1]-t.pos[1])<=1){
+                let distance = Math.sqrt(Math.abs(c.pos[0]-t.pos[0])**2 + Math.abs(c.pos[1]-t.pos[1])**2);
+                o = 0.4*distance;
             }
         });
         renderChar(this.char, this.pos, this.size, o*this.opacity??1);
