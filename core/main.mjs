@@ -5,6 +5,7 @@
 
 import Player from './player.mjs'
 import DebugLayer from './debuglayer.mjs'
+import Tile from './tile.mjs'
 
 //Updates the theme according to the setting defined in the load event.
 function updateTheme(){
@@ -64,6 +65,13 @@ const events = {
         Micro.game.player = player;
         let debug;
         if(Micro.settings.data.debug.value) debug = new DebugLayer();
+        Tile.fromMap(0, 0, [
+            "□□□□□□□",
+            "□□□□□□□",
+            "□□□□□□□",
+            "□□□□□□□",
+            "□□□□□□□"
+        ], -2)
     }
 }
 export {events};
