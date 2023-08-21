@@ -3,7 +3,7 @@ class Player extends Micro.render.Character {
     constructor(pos, size){
         super('◇', pos, size);
         this.enableControls();
-        this.maxSpeed = 1;
+        this.maxSpeed = 3;
         this.accelerationTime = 500;
         this.decelerationTime = 200;
     }
@@ -68,7 +68,7 @@ class Player extends Micro.render.Character {
                 o = 0.4*distance;
             }
         });
-        renderChar(this.char, this.pos, this.size, o*this.opacity??1);
+        renderChar(this.char, this.pos, this.size, o*(this.opacity??1));
         renderChar('◆', [this.x - (this.moveVector[0]/this.maxSpeed)/15, this.y - (this.moveVector[1]/this.maxSpeed)/15], this.size*0.5, o*this.opacity??1);
     }
 }
