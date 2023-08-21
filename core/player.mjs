@@ -1,3 +1,7 @@
+/* This module defines the player and its movement.
+ * It exposes the Player class to Micro.game.
+ */
+
 class Player extends Micro.render.Character {
     moveVector = [0, 0];
     constructor(pos, size){

@@ -1,3 +1,4 @@
+//Defines a setting. Do not use this class.
 class Setting {
     _value;
     constructor(id, name, settings){
@@ -16,6 +17,7 @@ class Setting {
         this._value = val;
     }
 }
+//Defines a string setting. Options are {string default, string category}
 class TextSetting extends Setting {
     constructor(id, name, settings){
         super(id, name, settings);
@@ -37,6 +39,7 @@ class TextSetting extends Setting {
         this._value = val;
     }
 }
+//Defines a number setting. Options are {number default, string category}
 class NumberSetting extends Setting {
     constructor(id, name, settings){
         super(id, name, settings);
@@ -58,6 +61,7 @@ class NumberSetting extends Setting {
         this._value = Number(val)??0;
     }
 }
+//Defines a boolean setting. Options are {bool default, string category}
 class ToggleSetting extends Setting {
     constructor(id, name, settings){
         super(id, name, settings);
@@ -78,6 +82,7 @@ class ToggleSetting extends Setting {
         this._value = !!val;
     }
 }
+//Defines an enumerable setting (one of several options). Options are {any default, string category, any[] options}
 class EnumSetting extends Setting {
     constructor(id, name, settings){
         super(id, name, settings);
@@ -100,6 +105,7 @@ class EnumSetting extends Setting {
         else throw `"${val}" is not a valid value for this enum`;
     }
 }
+//A category that settings fall under.
 class SettingsCategory {
     constructor(id, name, order){
         this.id = id;
@@ -110,7 +116,9 @@ class SettingsCategory {
 }
 
 export default {
+    //Where settings are accessed directly by ID.
     data: {},
+    //Where settings are organized by category.
     categories: [],
     category: function(id){
         return this.categories.filter((e)=>e.id==id)[0];

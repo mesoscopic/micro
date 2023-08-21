@@ -1,6 +1,12 @@
+/*
+ * This module is the core of the vanilla Micro package.
+ * It exposes updateTheme and player in Micro.game.
+ */
+
 import Player from './player.mjs'
 import DebugLayer from './debuglayer.mjs'
 
+//Updates the theme according to the setting defined in the load event.
 function updateTheme(){
     switch(Micro.settings.data.theme.value){
         case 'Light':

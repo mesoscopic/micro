@@ -1,5 +1,6 @@
 export default {
     active: null,
+    //Switches the active screen. All <section>s are faded out, and a section with the 'to' id is faded in.
     switch: function(to, time){
         Micro.screens.active = to;
         return new Promise((res, rej)=>{
@@ -12,6 +13,7 @@ export default {
             $('#'+to).show();
         });
 	},
+    //Sends a buildscreen event with the screen id passed.
     build: function(screen){
         Micro.modules.sendEvent('buildscreen', screen);
     }

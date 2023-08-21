@@ -1,3 +1,6 @@
+/* This module defines the DebugLayer Character, which does not render a character and instead draws the debug overlay. */
+
+
 export default class DebugLayer extends Micro.render.Character {
     constructor(){
         super('', [0, 0], 1, -99);
