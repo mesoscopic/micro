@@ -8,26 +8,24 @@ class Player extends Micro.render.Character {
         super('◇', pos, size);
         this.enableControls();
         this.maxSpeed = 3;
-        this.accelerationTime = 500;
-        this.decelerationTime = 200;
     }
     enableControls(){
         this.controls = [
             Micro.controls.registerControl('ArrowLeft', (p)=>{
-                this.addMovement([-1, 0]);
-                p.then(()=>{this.subtractMovement([-1, 0])});
+                this.addMovement([-3, 0]);
+                p.then(()=>{this.subtractMovement([-3, 0])});
             }, false),
             Micro.controls.registerControl('ArrowRight', (p)=>{
-                this.addMovement([1, 0]);
-                p.then(()=>{this.subtractMovement([1, 0])});
+                this.addMovement([3, 0]);
+                p.then(()=>{this.subtractMovement([3, 0])});
             }, false),
             Micro.controls.registerControl('ArrowUp', (p)=>{
-                this.addMovement([0, -1]);
-                p.then(()=>{this.subtractMovement([0, -1])});
+                this.addMovement([0, -3]);
+                p.then(()=>{this.subtractMovement([0, -3])});
             }, false),
             Micro.controls.registerControl('ArrowDown', (p)=>{
-                this.addMovement([0, 1]);
-                p.then(()=>{this.subtractMovement([0, 1])});
+                this.addMovement([0, 3]);
+                p.then(()=>{this.subtractMovement([0, 3])});
             }, false)
         ]
     }
@@ -39,22 +37,12 @@ class Player extends Micro.render.Character {
         delete this.controls;
     }
     addMovement(vector){
-        let p = this, ax = vector[0]/(this.decelerationTime/50), ay = vector[1]/(this.decelerationTime/50), n = 0;
-        let i = setInterval(()=>{
-            n++;
-            p.moveVector[0]+=ax;
-            p.moveVector[1]+=ay;
-            if(n == p.decelerationTime/50) clearInterval(i);
-        }, 50);
+        this.moveVector[0] += vector[0];
+        this.moveVector[1] += vector[1];
     }
     subtractMovement(vector){
-        let p = this, ax = vector[0]/(this.accelerationTime/50), ay = vector[1]/(this.accelerationTime/50), n = 0;
-        let i = setInterval(()=>{
-            n++;
-            p.moveVector[0]-=ax;
-            p.moveVector[1]-=ay;
-            if(n == p.accelerationTime/50) clearInterval(i);
-        }, 50);
+        this.moveVector[0] -= vector[0];
+        this.moveVector[1] -= vector[1];
     }
     render(renderChar){
         let millisecondsPassed = isFinite(1000/Micro.render.fps)?1000/Micro.render.fps:0;
