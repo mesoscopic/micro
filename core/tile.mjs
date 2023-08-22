@@ -28,7 +28,7 @@ class Tile extends Micro.render.Character {
         }
     }
     static tileDictionary = {
-        '▩': Wall
+        '▩': WallTile
     }
     static topAtPos(x, y){
         return Micro.render.characters.filter((e)=>e instanceof Tile && e.x == x && e.y == y).sort((a, b) => b.layer - a.layer)[0];
