@@ -31,6 +31,7 @@ class Tile extends Micro.render.Character {
         '▩': class WallTile extends Tile {
             constructor(char, pos, size){
                 super(char, pos, size, -1);
+                this.blocksMovement = true;
             }
         }
     };
