@@ -1,4 +1,5 @@
 /* This module will define Tiles, both foreground and background characters that make up Micro's world. */
+import tileDictionary from './tiletypes.mjs'
 
 class Tile extends Micro.render.Character {
     constructor(char, pos, size, layer){
@@ -27,19 +28,11 @@ class Tile extends Micro.render.Character {
             return new Tile(char, [x, y], size, -2);
         }
     }
-    static tileDictionary = {
-        '▩': WallTile
-    }
+    static tileDictionary = tileDictionary;
     static topAtPos(x, y){
         return Micro.render.characters.filter((e)=>e instanceof Tile && e.x == x && e.y == y).sort((a, b) => b.layer - a.layer)[0];
     }
 }
-class WallTile extends Tile {
-    constructor(char, pos, size){
-        super(char, pos, size, -1);
-    }
-}
 
 Micro.game.Tile = Tile;
-Micro.game.WallTile = WallTile;
 export default Tile;
