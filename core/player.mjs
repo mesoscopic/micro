@@ -46,13 +46,14 @@ class Player extends Micro.render.Character {
     }
     render(renderChar){
         let millisecondsPassed = isFinite(1000/Micro.render.fps)?1000/Micro.render.fps:0;
-        let newX = parseFloat((this.x+(this.moveVector[0]*millisecondsPassed/1000)).toFixed(2));
-        let newY = parseFloat((this.y+(this.moveVector[1]*millisecondsPassed/1000)).toFixed(2));
-        let canMove = true;
+        let oldPos = [this.x, this.y];
+        this.x = parseFloat((this.x+(this.moveVector[0]*millisecondsPassed/1000)).toFixed(2));
+        this.y = parseFloat((this.y+(this.moveVector[1]*millisecondsPassed/1000)).toFixed(2));
+        let blocked = false;
         Micro.render.characters.filter((e)=>e.blocksMovement).forEach((e)=>{
-            if(Micro.utils.collide(e, Micro.game.player)) canMove = false;
+            if(Micro.utils.collide(e, Micro.game.player)) blocked = true;
         });
-        if(canMove) this.pos = [newX, newY]
+        if(blocked) this.pos = oldPos
         Micro.render.offset = [-this.x, -this.y];
         super.render(renderChar);
         renderChar('◆', [this.x - (this.moveVector[0]/this.maxSpeed)/15*this.size, this.y - (this.moveVector[1]/this.maxSpeed)/15*this.size], this.size*0.5, this.opacity??1);
