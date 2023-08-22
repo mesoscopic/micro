@@ -52,6 +52,11 @@ class Player extends Micro.render.Character {
         super.render(renderChar);
         renderChar('◆', [this.x - (this.moveVector[0]/this.maxSpeed)/15*this.size, this.y - (this.moveVector[1]/this.maxSpeed)/15*this.size], this.size*0.5, this.opacity??1);
     }
+    //Creates a taxicab circle hitbox.
+    doesPointIntersect(x, y){
+        if(Math.abs(this.x - x)+Math.abs(this.y - y) < this.size/2) return true
+        else return false
+    }
 }
 
 Micro.game.Player = Player;

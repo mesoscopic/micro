@@ -37,6 +37,12 @@ class Character {
         });
         renderChar(this.char, this.pos, this.size, o*(this.opacity??1));
     }
+    //Performs collision detection for this character, assuming a rectangular hitbox. This can be customized mathematically if necessary.
+    doesPointIntersect(x, y){
+        let edge = this.size/2;
+        if(Math.abs(this.x - x)<edge || Math.abs(this.y - y)<edge) return true
+        else return false
+    }
     //Deletes the character.
     remove(){
         render.characters.splice(render.characters.indexOf(this), 1);
