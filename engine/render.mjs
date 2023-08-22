@@ -30,9 +30,8 @@ class Character {
         }
         let t = this, o = 1;
         Micro.render.characters.filter((v)=>v.layer>t.layer).forEach((c)=>{
-            if(Math.abs(c.pos[0]-t.pos[0])<=1&&Math.abs(c.pos[1]-t.pos[1])<=1){
-                let distance = Math.sqrt(Math.abs(c.pos[0]-t.pos[0])**2 + Math.abs(c.pos[1]-t.pos[1])**2);
-                o = 0.4*distance;
+            if(Math.abs(c.pos[0]-t.pos[0])<c.size&&Math.abs(c.pos[1]-t.pos[1])<c.size){
+                o = Math.sqrt(Math.abs(c.pos[0]-t.pos[0])**2 + Math.abs(c.pos[1]-t.pos[1])**2);
             }
         });
         renderChar(this.char, this.pos, this.size, o*(this.opacity??1));
@@ -82,7 +81,7 @@ const render = {
 
         render.canvas.clearRect(0, 0, render.width, render.height);
         function renderChar(char, pos, size, opacity){
-            render.canvas.font = `${2*size*render.scale}px 'sharetechmono', 'unicodemono', monospace`;
+            render.canvas.font = `${2*size*render.scale}px 'unicodemono', monospace`;
             render.canvas.textAlign = "center";
             render.canvas.textBaseline = "middle";
             render.canvas.fillStyle = "rgba(0, 0, 0, "+opacity+')';

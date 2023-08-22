@@ -15,7 +15,7 @@ class Tile extends Micro.render.Character {
         let startX = x - Math.floor(Math.max(...strings.map((l)=>l.length))/2), startY = y - Math.floor(strings.length/2);
         for(let i in strings){
             for(let j in strings[i]){
-                list.push(new Tile(strings[i][j], [startX+parseInt(j), startY+parseInt(i)], 1, layer));
+                list.push(new Tile(strings[i][j], [startX+parseInt(j), startY+parseInt(i)], 0.9, layer));
             }
         }
         return list;
