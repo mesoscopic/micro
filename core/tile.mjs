@@ -33,6 +33,12 @@ class Tile extends Micro.render.Character {
                 super(char, pos, size, -1);
                 this.blocksMovement = true;
             }
+        },
+        ' ': class VoidTile extends Tile {
+            constructor(char, pos, size){
+                super(' ', pos, 1, -2);
+                this.blocksMovement = true;
+            }
         }
     };
     static topAtPos(x, y){
