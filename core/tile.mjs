@@ -35,4 +35,5 @@ class Tile extends Micro.render.Character {
 }
 
 Micro.game.Tile = Tile;
+Micro.game.Tile.tileDictionary = tileDictionary;
 export default Tile;
