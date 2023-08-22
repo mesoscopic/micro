@@ -28,12 +28,17 @@ class Tile extends Micro.render.Character {
             return new Tile(char, [x, y], size, -2);
         }
     }
-    static tileDictionary = tileDictionary;
+    static tileDictionary = {
+        '▩': class WallTile extends Tile {
+            constructor(char, pos, size){
+                super(char, pos, size, -1);
+            }
+        }
+    };
     static topAtPos(x, y){
         return Micro.render.characters.filter((e)=>e instanceof Tile && e.x == x && e.y == y).sort((a, b) => b.layer - a.layer)[0];
     }
 }
 
 Micro.game.Tile = Tile;
-Micro.game.Tile.tileDictionary = tileDictionary;
 export default Tile;
