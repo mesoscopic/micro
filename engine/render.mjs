@@ -31,7 +31,8 @@ class Character {
         let t = this, o = 1;
         Micro.render.characters.filter((v)=>v.layer>t.layer).forEach((c)=>{
             if(Math.abs(c.pos[0]-t.pos[0])<c.size&&Math.abs(c.pos[1]-t.pos[1])<c.size){
-                o = Math.sqrt(Math.abs(c.pos[0]-t.pos[0])**2 + Math.abs(c.pos[1]-t.pos[1])**2);
+                let n = Math.sqrt(Math.abs(c.pos[0]-t.pos[0])**2 + Math.abs(c.pos[1]-t.pos[1])**2)/c.size;
+                if(n<o) o = n;
             }
         });
         renderChar(this.char, this.pos, this.size, o*(this.opacity??1));
