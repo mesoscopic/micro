@@ -40,7 +40,7 @@ class Character {
     //Performs collision detection for this character, assuming a rectangular hitbox. This can be customized mathematically if necessary.
     doesPointIntersect(x, y){
         let edge = this.size/2;
-        if(Math.abs(this.x - x)<edge || Math.abs(this.y - y)<edge) return true
+        if(Math.abs(this.x - x)<edge && Math.abs(this.y - y)<edge) return true
         else return false
     }
     //Deletes the character.
@@ -92,7 +92,7 @@ const render = {
             render.canvas.textAlign = "center";
             render.canvas.textBaseline = "middle";
             render.canvas.fillStyle = "rgba(0, 0, 0, "+opacity+')';
-            render.canvas.fillText(char, render.width/2 + (pos[0] + render.offset[0])*render.scale, render.height/2 + (pos[1] + render.offset[1] - 0.05*size)*render.scale);
+            render.canvas.fillText(char, render.width/2 + (pos[0] + render.offset[0])*render.scale, render.height/2 + (pos[1] + render.offset[1] - 0.075*size)*render.scale);
         }
         for(let i in render.characters){
             render.characters[i].render(renderChar);

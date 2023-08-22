@@ -5,7 +5,7 @@
 class Player extends Micro.render.Character {
     moveVector = [0, 0];
     constructor(pos, size){
-        super('◇', pos, size);
+        super('◇', pos, size, 2);
         this.enableControls();
         this.maxSpeed = 3;
     }
