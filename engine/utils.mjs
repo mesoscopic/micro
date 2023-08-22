@@ -14,5 +14,15 @@ export default {
         return new Promise((res)=>{
             setTimeout(res, ms);
         });
+    },
+    //Tests for intersection between two Micro.render.Characters
+    collide(c1, c2){
+        let intersecting = false;
+        c1.vertices.forEach((v)=>{
+            intersecting = intersecting || c2.doesPointIntersect(...v);
+        })
+        c2.vertices.forEach((v)=>{
+            intersecting = intersecting || c1.doesPointIntersect(...v);
+        })
     }
 }

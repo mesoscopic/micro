@@ -57,6 +57,15 @@ class Player extends Micro.render.Character {
         if(Math.abs(this.x - x)+Math.abs(this.y - y) < this.size/2) return true
         else return false
     }
+    //Returns a list of vertices for the polygonal collision detection.
+    vertices(){
+        return [
+            [this.x + this.size/2, this.y],
+            [this.x - this.size/2, this.y],
+            [this.x, this.y + this.size/2],
+            [this.x, this.y - this.size/2]
+        ]
+    }
 }
 
 Micro.game.Player = Player;

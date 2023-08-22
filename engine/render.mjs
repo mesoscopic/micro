@@ -43,6 +43,15 @@ class Character {
         if(Math.abs(this.x - x)<edge && Math.abs(this.y - y)<edge) return true
         else return false
     }
+    //Returns a list of vertices for collision detection.
+    vertices(){
+        return [
+            [this.x + this.size/2, this.y + this.size/2],
+            [this.x - this.size/2, this.y + this.size/2],
+            [this.x + this.size/2, this.y - this.size/2],
+            [this.x - this.size/2, this.y - this.size/2]
+        ]
+    }
     //Deletes the character.
     remove(){
         render.characters.splice(render.characters.indexOf(this), 1);
