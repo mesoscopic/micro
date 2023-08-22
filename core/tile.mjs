@@ -10,15 +10,36 @@ class Tile extends Micro.render.Character {
     //   "■□■",
     //   "□■□"
     // ]
-    static fromMap(x, y, strings, layer){
+    static fromMap(x, y, strings){
         let list = [];
         let startX = x - Math.floor(Math.max(...strings.map((l)=>l.length))/2), startY = y - Math.floor(strings.length/2);
         for(let i in strings){
             for(let j in strings[i]){
-                list.push(new Tile(strings[i][j], [startX+parseInt(j), startY+parseInt(i)], 0.9, layer));
+                list.push(Tile.fromChar(strings[i][j], startX+parseInt(j), startY+parseInt(i), 0.9));
             }
         }
         return list;
     }
+    static fromChar(char, x, y, size) {
+        if(Tile.tileDictionary[char]){
+            return new Tile.tileDictionary[char](char, [x, y], size);
+        } else {
+            return new Tile(char, [x, y], size, -2);
+        }
+    }
+    static tileDictionary = {
+        '▩': Wall
+    }
+    static topAtPos(x, y){
+        return Micro.render.characters.filter((e)=>e instanceof Tile && e.x == x && e.y == y).sort((a, b) => b.layer - a.layer)[0];
+    }
 }
+class WallTile extends Tile {
+    constructor(char, pos, size){
+        super(char, pos, size, -1);
+    }
+}
+
+Micro.game.Tile = Tile;
+Micro.game.WallTile = WallTile;
 export default Tile;
