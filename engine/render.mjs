@@ -9,8 +9,8 @@ class Character {
         //-2: Background tiles
         //-1: Foreground tiles
         //0: Moving entities
-        //1: The Player
-        //2: Particles
+        //1: Particles
+        //2: The Player
         render.characters.push(this);
         render.characters.sort((a, b)=>a.layer-b.layer);
     }
