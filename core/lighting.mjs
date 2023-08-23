@@ -4,7 +4,7 @@
  */
 
 let lightMap;
-
+/*
 function blocksLight(x, y){
     return Micro.game.Tile.topAtPos(x, y).blocksLight ?? false;
 }
@@ -130,13 +130,19 @@ class Slope {
     lessOrEqual(y, x){
         return this.Y*x <= this.X*y;
     }
-}
+}*/
 
 Micro.game.lightWorld = function(){
-    lightMap = {};
-    Micro.render.characters.filter((e)=>e.light>0).forEach((e)=>{
-        compute([Math.round(e.x), Math.round(e.y)], e.light);
-    });
+    lightMap = {
+        '0,0': 1,
+        '1,0': 1,
+        '0,1': 1,
+        '0,-1': 1,
+        '-1, 0': 1
+    };
+    //Micro.render.characters.filter((e)=>e.light>0).forEach((e)=>{
+    //    compute([Math.round(e.x), Math.round(e.y)], e.light);
+    //});
     return lightMap;
 }
 
