@@ -94,19 +94,19 @@ const render = {
         render.width = window.innerWidth;
         render.height = window.innerHeight;
         $('#render').attr("height", render.width).attr("width", render.width);
-
+        let lightMap = Micro.game?.lightWorld();
         render.canvas.clearRect(0, 0, render.width, render.height);
         function renderChar(char, pos, size, opacity){
+            let lightX = Math.round(pos[0]), lightY = Math.round(pos[0]), light = lightMap[`${lightX},${lightY}`] ?? 0;
             render.canvas.font = `${2*size*render.scale}px 'unicodemono', monospace`;
             render.canvas.textAlign = "center";
             render.canvas.textBaseline = "middle";
-            render.canvas.fillStyle = "rgba(0, 0, 0, "+opacity+')';
+            render.canvas.fillStyle = "rgba(0, 0, 0, "+opacity*light+')';
             render.canvas.fillText(char, render.width/2 + (pos[0] + render.offset[0])*render.scale, render.height/2 + (pos[1] + render.offset[1] - 0.075*size)*render.scale);
         }
         for(let i in render.characters){
             render.characters[i].render(renderChar);
         }
-        
         if(render.active) requestAnimationFrame(render.frame);
     }
 }

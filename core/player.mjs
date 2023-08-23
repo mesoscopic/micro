@@ -8,6 +8,7 @@ class Player extends Micro.render.Character {
         super('◇', pos, size, 2);
         this.enableControls();
         this.maxSpeed = 3;
+        this.light = 5;
     }
     enableControls(){
         this.controls = [

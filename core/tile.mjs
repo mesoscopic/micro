@@ -32,6 +32,7 @@ class Tile extends Micro.render.Character {
             constructor(char, pos, size){
                 super(char, pos, size, -1);
                 this.blocksMovement = true;
+                this.blocksLight = true;
             }
         },
         ' ': class VoidTile extends Tile {
