@@ -97,7 +97,7 @@ const render = {
         let lightMap = Micro.game?.lightWorld();
         render.canvas.clearRect(0, 0, render.width, render.height);
         function renderChar(char, pos, size, opacity){
-            let lightX = Math.round(pos[0]), lightY = Math.round(pos[0]), light = lightMap[`${lightX},${lightY}`] ?? 0;
+            let lightX = Math.round(pos[0]), lightY = Math.round(pos[1]), light = lightMap?(lightMap[`${lightX},${lightY}`] ?? 0):1;
             render.canvas.font = `${2*size*render.scale}px 'unicodemono', monospace`;
             render.canvas.textAlign = "center";
             render.canvas.textBaseline = "middle";

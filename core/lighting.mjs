@@ -132,17 +132,18 @@ class Slope {
     }
 }*/
 
+function compute(x, y, light){
+    Micro.render.characters.filter((e)=>e instanceof Micro.game.Tile && (Math.abs(x-e.x)+Math.abs(y-e.y))<=light).forEach((e)=>{
+        let distance = Math.abs(x-e.x)+Math.abs(y-e.y)
+        lightMap[`${e.x},${e.y}`] = Math.min(1, lightMap[`${e.x},${e.y}`]+(light-distance/light));
+    })
+}
+
 Micro.game.lightWorld = function(){
-    lightMap = {
-        '0,0': 1,
-        '1,0': 1,
-        '0,1': 1,
-        '0,-1': 1,
-        '-1, 0': 1
-    };
-    //Micro.render.characters.filter((e)=>e.light>0).forEach((e)=>{
-    //    compute([Math.round(e.x), Math.round(e.y)], e.light);
-    //});
+    lightMap = {};
+    Micro.render.characters.filter((e)=>e.light>0).forEach((e)=>{
+        compute([Math.round(e.x), Math.round(e.y)], e.light);
+    });
     return lightMap;
 }
 
