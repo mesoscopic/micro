@@ -3,6 +3,8 @@
  * I don't have a clue how this works
  */
 
+let lightMap;
+
 function blocksLight(x, y){
     return Micro.game.Tile.topAtPos(x, y).blocksLight ?? false;
 }
@@ -131,7 +133,7 @@ class Slope {
 }
 
 Micro.game.lightWorld = function(){
-    let lightMap = {};
+    lightMap = {};
     Micro.render.characters.filter((e)=>e.light>0).forEach((e)=>{
         compute([Math.round(e.x), Math.round(e.y)], e.light);
     });
