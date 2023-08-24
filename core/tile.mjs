@@ -4,6 +4,10 @@ class Tile extends Micro.render.Character {
     constructor(char, pos, size, layer){
         super(char, pos, size, layer);
     }
+    replace(char){
+        Tile.fromChar(char, this.x, this.y, 0.9);
+        this.remove();
+    }
     //Creates a set of Tiles from a string map of this format:
     // [
     //   "□■□",

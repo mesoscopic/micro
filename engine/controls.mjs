@@ -8,7 +8,7 @@ export default {
     init: function(){
         $(document).keydown((e)=>{
             for(let i in this.controls){
-                if(e.key==i){
+                if(e.code==i){
                     this.controls[i].forEach((f)=>{
                         if(f.disabled) return;
                         if(!f.allowRepeat) f.disabled = true;

@@ -7,6 +7,7 @@ import Player from './player.mjs'
 import DebugLayer from './debuglayer.mjs'
 import Tile from './tile.mjs'
 import lightWorld from './lighting.mjs'
+import * as setPieces from './setpieces.mjs'
 
 //Updates the theme according to the setting defined in the load event.
 function updateTheme(){
@@ -80,7 +81,11 @@ const events = {
             '    ▩□□□▩    ',
             '     ▩□▩     ',
             '      ▩      '
-        ], -2)
+        ], -2);
+        new setPieces.Opener([0, 0]);
+        Micro.controls.registerControl('Space', ()=>{
+            Tile.topAtPos(Math.round(player.x), Math.round(player.y))?.activate?.();
+        });
     }
 }
 export {events};

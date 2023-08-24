@@ -57,7 +57,8 @@ class Player extends Micro.render.Character {
         if(blocked) this.pos = oldPos
         Micro.render.offset = [-this.x, -this.y];
         super.render(renderChar);
-        renderChar('◆', [this.x - (this.moveVector[0]/this.maxSpeed)/15*this.size, this.y - (this.moveVector[1]/this.maxSpeed)/15*this.size], this.size*0.5, this.opacity??1);
+        renderChar('◆', [this.x - (this.moveVector[0]/this.maxSpeed)/15*this.size, this.y - (this.moveVector[1]/this.maxSpeed)/15*this.size], this.size*0.5, this.opacity??1, this.light);
+        Micro.game.Tile.topAtPos(Math.round(this.x), Math.round(this.y))?.hover?.();
     }
     //Creates a taxicab circle hitbox.
     doesPointIntersect(x, y){

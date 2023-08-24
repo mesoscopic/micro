@@ -142,7 +142,7 @@ function compute(x, y, light){
 Micro.game.lightWorld = function(){
     lightMap = {};
     Micro.render.characters.filter((e)=>e.light>0).forEach((e)=>{
-        compute(Math.round(e.x), Math.round(e.y), e.light);
+        compute(e.x, e.y, e.light);
     });
     return lightMap;
 }

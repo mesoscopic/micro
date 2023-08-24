@@ -35,7 +35,7 @@ class Character {
                 if(n<o) o = n;
             }
         });
-        renderChar(this.char, this.pos, this.size, o*(this.opacity??1));
+        renderChar(this.char, this.pos, this.size, o*(this.opacity??1), this.light);
     }
     //Performs collision detection for this character, assuming a rectangular hitbox. This can be customized mathematically if necessary.
     doesPointIntersect(x, y){
@@ -96,12 +96,12 @@ const render = {
         $('#render').attr("height", render.width).attr("width", render.width);
         let lightMap = Micro.game?.lightWorld();
         render.canvas.clearRect(0, 0, render.width, render.height);
-        function renderChar(char, pos, size, opacity){
+        function renderChar(char, pos, size, opacity, fullbright){
             let lightX = Math.round(pos[0]), lightY = Math.round(pos[1]), light = lightMap?(lightMap[`${lightX},${lightY}`] ?? 0):1;
             render.canvas.font = `${2*size*render.scale}px 'unicodemono', monospace`;
             render.canvas.textAlign = "center";
             render.canvas.textBaseline = "middle";
-            render.canvas.fillStyle = "rgba(0, 0, 0, "+opacity*light+')';
+            render.canvas.fillStyle = "rgba(0, 0, 0, "+opacity*(fullbright?1:light)+')';
             render.canvas.fillText(char, render.width/2 + (pos[0] + render.offset[0])*render.scale, render.height/2 + (pos[1] + render.offset[1] - 0.075*size)*render.scale);
         }
         for(let i in render.characters){
