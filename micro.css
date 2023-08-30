@@ -34,6 +34,20 @@ section {
     display: none;
     overflow: hidden;
 }
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+#pausemenu h1 {
+    font-size: 5vh;
+    text-decoration: underline;
+}
 .centered{
     position: absolute;
     top: 50%;

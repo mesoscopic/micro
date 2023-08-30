@@ -6,8 +6,8 @@ class Player extends Micro.render.Character {
     moveVector = [0, 0];
     constructor(pos, size){
         super('◇', pos, size, 2);
-        this.enableControls();
         this.maxSpeed = 3;
+        this.enableControls();
         this.light = 5;
     }
     enableControls(){
@@ -27,7 +27,10 @@ class Player extends Micro.render.Character {
             Micro.controls.registerControl('ArrowDown', (p)=>{
                 this.addMovement([0, 3]);
                 p.then(()=>{this.subtractMovement([0, 3])});
-            }, false)
+            }, false),
+            Micro.controls.registerControl('Space', ()=>{
+                Micro.game.Tile.topAtPos(Math.round(this.x), Math.round(this.y))?.activate?.();
+            })
         ]
     }
     disableControls(){
@@ -35,6 +38,7 @@ class Player extends Micro.render.Character {
         Micro.controls.relinquishKey('ArrowRight', this.controls[1]);
         Micro.controls.relinquishKey('ArrowUp', this.controls[2]);
         Micro.controls.relinquishKey('ArrowDown', this.controls[3]);
+        Micro.controls.relinquishKey('Space', this.controls[4]);
         delete this.controls;
     }
     addMovement(vector){
@@ -46,6 +50,7 @@ class Player extends Micro.render.Character {
         this.moveVector[1] -= vector[1];
     }
     render(renderChar){
+        Micro.game.world.generateTerrain();
         let millisecondsPassed = isFinite(1000/Micro.render.fps)?1000/Micro.render.fps:0;
         let oldPos = [this.x, this.y];
         this.x = parseFloat((this.x+(this.moveVector[0]*millisecondsPassed/1000)).toFixed(2));

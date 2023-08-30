@@ -8,6 +8,7 @@ import DebugLayer from './debuglayer.mjs'
 import Tile from './tile.mjs'
 import lightWorld from './lighting.mjs'
 import * as setPieces from './setpieces.mjs'
+import world from './world.mjs'
 
 //Updates the theme according to the setting defined in the load event.
 function updateTheme(){
@@ -22,8 +23,22 @@ function updateTheme(){
             $('body').attr('class', '');
     }
 }
+Micro.game.updateTheme = updateTheme;
 
-$.extend(Micro.game, {updateTheme});
+function togglePause(){
+    if(Micro.render.active) {
+        Micro.render.stop();
+        $('#pausemenu').show();
+        Micro.game.player.disableControls();
+    }
+    else {
+        Micro.render.init();
+        $('.overlay').hide();
+        Micro.screens.build('game');
+        Micro.game.player.enableControls();
+    }
+}
+Micro.game.togglePause = togglePause;
 
 const events = {
     load: (self)=>{
@@ -55,6 +70,19 @@ const events = {
                 $('#globalsettings .settings').append(t);
             }
         }
+        if(name=="gamesettings"){
+            console.dir(Micro.settings.categories);
+            $('#gamesettings .settings').empty();
+            for(let i in Micro.settings.categories){
+                $('#gamesettings .settings').append("<h2>"+Micro.settings.categories[i].name+"</h2>");
+                let t = $('<table></table>');
+                for(let j in Micro.settings.categories[i].contents){
+                    let setting = Micro.settings.categories[i].contents[j];
+                    $(t).append($('<tr><td>'+setting.name+'&nbsp;&nbsp;</td></tr>').append($('<td></td>').append(setting.render())));
+                }
+                $('#gamesettings .settings').append(t);
+            }
+        }
         if(name=="worldselect"){
             alert('I am too lazy to add this i\'m getting right into gameplay :)');
             Micro.screens.switch('game');
@@ -63,29 +91,46 @@ const events = {
     },
     play: ()=>{
         Micro.render.init();
+        let pauseSymbol = Micro.controls.registerControl('Escape', togglePause);
+
+        if(Micro.game.player) {
+            Micro.game.player.enableControls();
+            return;
+        }
         let player = new Player([0, 0]);
         Micro.game.player = player;
-        let debug;
-        if(Micro.settings.data.debug.value) debug = new DebugLayer();
+        let debug = new DebugLayer();
         Tile.fromMap(0, 0, [
-            '      ▩      ',
-            '     ▩□▩     ',
-            '    ▩□□□▩    ',
-            '   ▩□□□□□▩   ',
-            '  ▩□□□□□□□▩  ',
-            ' ▩□□□□□□□□□▩ ',
+            '▪▪▪▪▪▪▩▪▪▪▪▪▪',
+            '▪▪▪▪▪▩□▩▪▪▪▪▪',
+            '▪▪▪▪▩□□□▩▪▪▪▪',
+            '▪▪▪▩□□□□□▩▪▪▪',
+            '▪▪▩□□□□□□□▩▪▪',
+            '▪▩□□□□□□□□□▩▪',
             '▩□□□□□□□□□□□▩',
-            ' ▩□□□□□□□□□▩ ',
-            '  ▩□□□□□□□▩  ',
-            '   ▩□□□□□▩   ',
-            '    ▩□□□▩    ',
-            '     ▩□▩     ',
-            '      ▩      '
+            '▪▩□□□□□□□□□▩▪',
+            '▪▪▩□□□□□□□▩▪▪',
+            '▪▪▪▩□□□□□▩▪▪▪',
+            '▪▪▪▪▩□□□▩▪▪▪▪',
+            '▪▪▪▪▪▩□▩▪▪▪▪▪',
+            '▪▪▪▪▪▪▩▪▪▪▪▪▪'
         ], -2);
         new setPieces.Opener([0, 0]);
-        Micro.controls.registerControl('Space', ()=>{
-            Tile.topAtPos(Math.round(player.x), Math.round(player.y))?.activate?.();
+        $('#resumegame').click(togglePause);
+        $('#pausesettings').click(()=>{
+            $('#pausemenu').hide();
+            Micro.screens.build('gamesettings');
+            $('#gamesettings').show();
+        })
+        $('#backtopause').click(()=>{
+            $('#gamesettings').hide();
+            $('#pausemenu').show();
         });
+        $('#quitgame').click(()=>{
+            $('#pausemenu').hide();
+            Micro.screens.switch('mainmenu');
+            Micro.controls.relinquishKey('Escape', pauseSymbol);
+        })
     }
 }
 export {events};

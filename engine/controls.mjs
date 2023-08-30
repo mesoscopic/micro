@@ -10,11 +10,11 @@ export default {
             for(let i in this.controls){
                 if(e.code==i){
                     this.controls[i].forEach((f)=>{
-                        if(f.disabled) return;
-                        if(!f.allowRepeat) f.disabled = true;
+                        if(f.prevent || f.disabled) return;
+                        if(!f.allowRepeat) f.prevent = true;
                         f(new Promise((res, rej)=>{
                             this._up[i] = this._up[i]??[];
-                            this._up[i].push(()=>{res();f.disabled = false;});
+                            this._up[i].push(()=>{res();f.prevent = false;});
                         }))
                     });
                 }
@@ -43,6 +43,14 @@ export default {
     //Stops handling a key press using the Symbol returned by registerControl.
     relinquishKey: function(key, s){
         if(!this.controls[key]) return;
-        this.controls[key]=this.controls[key].filter((e)=>{e.id!=s});
+        this.controls[key]=this.controls[key].filter((e)=>e.id!=s);
+    },
+    //Temporarily disables a handler.
+    disable: function(key, s){
+        this.controls[key].filter((e)=>e.id==s)[0].disabled = true;
+    },
+    //Re-enables a handler.
+    enable: function(key, s){
+        this.controls[key].filter((e)=>e.id==s)[0].disabled = false;
     }
 }

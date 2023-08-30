@@ -7,10 +7,11 @@ export default {
             if(time){
                 $('section').fadeOut(time);
                 $('#'+to).fadeIn(time, res);
-                return;
+            } else {
+                $('section').hide();
+                $('#'+to).show();
             }
-            $('section').hide();
-            $('#'+to).show();
+            Micro.screens.build(to);
         });
 	},
     //Sends a buildscreen event with the screen id passed.

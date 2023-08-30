@@ -9,15 +9,16 @@ export class Opener extends Micro.game.Tile {
         Micro.render.canvas.fillStyle = '#000000';
         Micro.render.canvas.fillText(this.char+' :', Micro.render.width/2, 0);
         Micro.render.canvas.font = `normal 20px 'sharetechmono', 'unicodemono', monospace`;
-        Micro.render.canvas.fillText(this.char=='△'?'[Space] = ▲':'▩ -> □', Micro.render.width/2, 33);
+        Micro.render.canvas.fillText(this.char=='△'?'[Space] = ▲':'▩ -> ▪', Micro.render.width/2, 33);
     }
     activate(){
         this.char = '▲';
         let tile = Micro.game.Tile.topAtPos;
-        tile(0, -6).replace('□'),tile(1, -6).replace('□'),tile(-1, -6).replace('□'),tile(1, -5).replace('□'),tile(-1, -5).replace('□'),
-        tile(0, 6).replace('□'),tile(1, 6).replace('□'),tile(-1, 6).replace('□'),tile(1, 5).replace('□'),tile(-1, 5).replace('□'),
-        tile(-6, 0).replace('□'),tile(-6, 1).replace('□'),tile(-6, -1).replace('□'),tile(-5, 1).replace('□'),tile(-5, -1).replace('□'),
-        tile(6, 0).replace('□'),tile(6, 1).replace('□'),tile(6, -1).replace('□'),tile(5, 1).replace('□'),tile(5, -1).replace('□')
+        tile(0, -6).replace('□'),tile(1, -6).replace('▪'),tile(-1, -6).replace('▪'),tile(1, -5).replace('□'),tile(-1, -5).replace('□'),
+        tile(0, 6).replace('□'),tile(1, 6).replace('▪'),tile(-1, 6).replace('▪'),tile(1, 5).replace('□'),tile(-1, 5).replace('□'),
+        tile(-6, 0).replace('□'),tile(-6, 1).replace('▪'),tile(-6, -1).replace('▪'),tile(-5, 1).replace('□'),tile(-5, -1).replace('□'),
+        tile(6, 0).replace('□'),tile(6, 1).replace('▪'),tile(6, -1).replace('▪'),tile(5, 1).replace('□'),tile(5, -1).replace('□')
         this.activate = null;
+        this.light = 7;
     }
 }

@@ -50,7 +50,21 @@
       </div>
     </section>
     <section id="game">
-      <canvas id="render">
+      <canvas id="render"></canvas>
+      <div class="overlay" id="pausemenu">
+        <div class="centered">
+          <h1>Paused</h1>
+          <p><button id="resumegame">Resume</button></p>
+          <p><button id="pausesettings">Settings</button></p>
+          <p><button id="quitgame">Quit</button></p>
+        </div>
+      </div>
+      <div class="overlay" id="gamesettings">
+        <h1>Settings</h1>
+        <br>
+        <div class="settings"></div>
+        <button id="backtopause" class="topleft">Back</button>
+      </div>
     </section>
 	</body>
 </html>
