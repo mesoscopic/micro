@@ -12,7 +12,7 @@ export default class DebugLayer extends Micro.render.Character {
         Micro.render.canvas.textBaseline = "bottom";
         Micro.render.canvas.fillStyle = '#000000';
         Micro.render.canvas.fillText(Math.floor(Micro.render.fps) + ' FPS', 0, Micro.render.height);
-        Micro.render.canvas.fillText('Pos: ('+Micro.game.player.x+', '+Micro.game.player.y+')', 0, Micro.render.height - 22);
+        Micro.render.canvas.fillText('Pos: ('+Micro.game.player.x.toFixed(2)+', '+Micro.game.player.y.toFixed(2)+')', 0, Micro.render.height - 22);
         Micro.render.canvas.fillText('Characters: '+Micro.render.characters.length, 0, Micro.render.height - 44);
     }
 }

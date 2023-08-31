@@ -3,10 +3,15 @@
 class Tile extends Micro.render.Character {
     constructor(char, pos, size, layer){
         super(char, pos, size, layer);
+        (Tile.positions?.[pos.join(',')]?.push?.(this))??(Tile.positions[pos.join(',')] = [this]);
     }
     replace(char){
         Tile.fromChar(char, this.x, this.y, 0.9);
         this.remove();
+    }
+    remove(){
+        super.remove();
+        Tile.positions[this.pos.join(',')].splice(Tile.positions[this.pos.join(',')].indexOf(this), 1);
     }
     //Creates a set of Tiles from a string map of this format:
     // [
@@ -60,8 +65,9 @@ class Tile extends Micro.render.Character {
             }
         }
     };
+    static positions = {};
     static topAtPos(x, y){
-        return Micro.render.characters.filter((e)=>e instanceof Tile && e.x == x && e.y == y).sort((a, b) => b.layer - a.layer)[0];
+        return Tile.positions[[x, y].join(',')]?.sort((a, b) => b.layer - a.layer)?.[0];
     }
 }
 

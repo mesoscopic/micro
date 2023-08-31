@@ -14,10 +14,10 @@ export class Opener extends Micro.game.Tile {
     activate(){
         this.char = '▲';
         let tile = Micro.game.Tile.topAtPos;
-        tile(0, -6).replace('□'),tile(1, -6).replace('▪'),tile(-1, -6).replace('▪'),tile(1, -5).replace('□'),tile(-1, -5).replace('□'),
-        tile(0, 6).replace('□'),tile(1, 6).replace('▪'),tile(-1, 6).replace('▪'),tile(1, 5).replace('□'),tile(-1, 5).replace('□'),
-        tile(-6, 0).replace('□'),tile(-6, 1).replace('▪'),tile(-6, -1).replace('▪'),tile(-5, 1).replace('□'),tile(-5, -1).replace('□'),
-        tile(6, 0).replace('□'),tile(6, 1).replace('▪'),tile(6, -1).replace('▪'),tile(5, 1).replace('□'),tile(5, -1).replace('□')
+        tile(0, -6)?.replace?.('□'),tile(1, -6)?.replace?.('▪'),tile(-1, -6)?.replace?.('▪'),tile(1, -5)?.replace?.('□'),tile(-1, -5)?.replace?.('□'),
+        tile(0, 6)?.replace?.('□'),tile(1, 6)?.replace?.('▪'),tile(-1, 6)?.replace?.('▪'),tile(1, 5)?.replace?.('□'),tile(-1, 5)?.replace?.('□'),
+        tile(-6, 0)?.replace?.('□'),tile(-6, 1)?.replace?.('▪'),tile(-6, -1)?.replace?.('▪'),tile(-5, 1)?.replace?.('□'),tile(-5, -1)?.replace?.('□'),
+        tile(6, 0)?.replace?.('□'),tile(6, 1)?.replace?.('▪'),tile(6, -1)?.replace?.('▪'),tile(5, 1)?.replace?.('□'),tile(5, -1)?.replace?.('□')
         this.activate = null;
         this.light = 7;
     }

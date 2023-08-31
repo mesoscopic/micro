@@ -94,10 +94,12 @@ const render = {
         render.width = window.innerWidth;
         render.height = window.innerHeight;
         $('#render').attr("height", render.width).attr("width", render.width);
-        let lightMap = Micro.game?.lightWorld();
+        let lightMap = Micro.game?.lightWorld?.();
         render.canvas.clearRect(0, 0, render.width, render.height);
         function renderChar(char, pos, size, opacity, fullbright){
+            if(!render.isOnscreen(pos, size)) return;
             let lightX = Math.round(pos[0]), lightY = Math.round(pos[1]), light = lightMap?(lightMap[`${lightX},${lightY}`] ?? 0):1;
+            if(opacity*(fullbright?1:light) == 0) return;
             render.canvas.font = `${2*size*render.scale}px 'unicodemono', monospace`;
             render.canvas.textAlign = "center";
             render.canvas.textBaseline = "middle";
@@ -108,6 +110,11 @@ const render = {
             render.characters[i].render(renderChar);
         }
         if(render.active) requestAnimationFrame(render.frame);
+    },
+    isOnscreen(pos, size){
+        let leftBoundary = -(render.width/2)/render.scale - render.offset[0], rightBoundary = render.width/2/render.scale - render.offset[0];
+        let topBoundary = -(render.height/2)/render.scale - render.offset[1], bottomBoundary = render.height/2/render.scale - render.offset[1];
+        return ((pos[0] + size/2) >= leftBoundary && (pos[0] - size/2) <= rightBoundary && (pos[1] + size/2) >= topBoundary && (pos[1] - size/2) <= bottomBoundary)
     }
 }
 export default render;

@@ -53,6 +53,10 @@ const events = {
             default: false,
             category: 'visuals'
         });
+        new Micro.settings.ToggleSetting('fill', 'Generate filler tiles', {
+            default: true,
+            category: 'visuals'
+        })
         updateTheme();
     },
     buildscreen: (name)=>{
