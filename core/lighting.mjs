@@ -133,7 +133,7 @@ class Slope {
 }*/
 
 function compute(x, y, light){
-    Micro.render.characters.filter((e)=>e instanceof Micro.game.Tile && (Math.abs(x-e.x)+Math.abs(y-e.y))<=light).forEach((e)=>{
+    Micro.render.characters.filter((e)=>e instanceof Micro.game.Tile && e.exists && (Math.abs(x-e.x)+Math.abs(y-e.y))<=light).forEach((e)=>{
         let distance = Math.abs(x-e.x)+Math.abs(y-e.y)
         lightMap[`${e.x},${e.y}`] = Math.min(1, (lightMap[`${e.x},${e.y}`]??0)+(light-distance)/light);
     })

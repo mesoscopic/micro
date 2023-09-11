@@ -13,6 +13,7 @@ class Character {
         //2: The Player
         render.characters.push(this);
         render.characters.sort((a, b)=>a.layer-b.layer);
+        this.exists = true;
     }
     //Changes a numerical property over an ms time.
     animate(prop, target, time){
@@ -23,13 +24,14 @@ class Character {
     }
     //Does processing every frame. renderChar draws the character with respect for game offset and scale.
     render(renderChar){
+        if(!this.exists) return;
         let millisecondsPassed = (1000/render.fps);
         for(let i in this.animations){
             this[i] += this.animations[i][1]*millisecondsPassed;
             if((this.animations[i][0]<0)?(this[i]<=this.animations[i][0]):(this[i]<=this.animations[i][0])) delete this.animations[i];
         }
         let t = this, o = 1;
-        Micro.render.characters.filter((v)=>v.layer>t.layer).forEach((c)=>{
+        Micro.render.characters.filter((v)=>v.layer>t.layer&&v.exists).forEach((c)=>{
             if(Math.abs(c.pos[0]-t.pos[0])<c.size&&Math.abs(c.pos[1]-t.pos[1])<c.size){
                 let n = Math.sqrt(Math.abs(c.pos[0]-t.pos[0])**2 + Math.abs(c.pos[1]-t.pos[1])**2)/c.size;
                 if(n<o) o = n;

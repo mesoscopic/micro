@@ -37,11 +37,26 @@ class Tile extends Micro.render.Character {
         }
     }
     static tileDictionary = {
+        '□': class UpgradableTile extends Tile {
+            constructor(char, pos, size){
+                super(char, pos, size, -2);
+            }
+            activate(){
+                Micro.game.player.carrying.pos = this.pos;
+                Micro.game.player.carrying.enable();
+                Micro.game.player.carrying = null;
+            }
+        },
         '▩': class WallTile extends Tile {
             constructor(char, pos, size){
                 super(char, pos, size, -1);
                 this.blocksMovement = true;
                 this.blocksLight = true;
+            }
+        },
+        '▩o': class OpenWall extends Tile {
+            constructor(char, pos, size){
+                super('□', pos, size*0.8);
             }
         },
         '▪': class VoidTile extends Tile {
