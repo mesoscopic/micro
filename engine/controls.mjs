@@ -43,6 +43,7 @@ export default {
     //Stops handling a key press using the Symbol returned by registerControl.
     relinquishKey: function(key, s){
         if(!this.controls[key]) return;
+        this._up[key]?.forEach?.((e)=>e());
         this.controls[key]=this.controls[key].filter((e)=>e.id!=s);
     },
     //Temporarily disables a handler.

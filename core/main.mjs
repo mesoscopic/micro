@@ -88,7 +88,6 @@ const events = {
             }
         }
         if(name=="worldselect"){
-            alert('I am too lazy to add this i\'m getting right into gameplay :)');
             Micro.screens.switch('game');
             Micro.modules.sendEvent('play');
         }
@@ -121,6 +120,9 @@ const events = {
         ], -2);
         new setPieces.Opener([0, 0]);
         $('#resumegame').click(togglePause);
+        $(window).blur(()=>{
+            if(Micro.render.active) togglePause();
+        })
         $('#pausesettings').click(()=>{
             $('#pausemenu').hide();
             Micro.screens.build('gamesettings');

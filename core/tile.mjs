@@ -42,6 +42,7 @@ class Tile extends Micro.render.Character {
                 super(char, pos, size, -2);
             }
             activate(){
+                if(!Micro.game.player.carrying) return;
                 Micro.game.player.carrying.pos = this.pos;
                 Micro.game.player.carrying.enable();
                 Micro.game.player.carrying = null;
