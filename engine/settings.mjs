@@ -2,6 +2,7 @@
 class Setting {
     _value;
     constructor(id, name, settings){
+        this.id = id;
         this.name = name;
         this.default = settings.default;
         this._value = settings.default;

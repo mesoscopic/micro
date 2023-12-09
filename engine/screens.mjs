@@ -11,7 +11,7 @@ export default {
                 $('section').hide();
                 $('#'+to).show();
             }
-            Micro.screens.build(to);
+            if(to != 'intro') Micro.screens.build(to);
         });
 	},
     //Sends a buildscreen event with the screen id passed.

@@ -10,8 +10,14 @@ export default {
         $('#worldselect .escape').click(()=>{
             Micro.screens.switch('mainmenu');
         })
+        $('#createworld .escape').click(()=>{
+            Micro.screens.switch('worldselect');
+        })
         $('#globalsettings .escape').click(()=>{
             Micro.screens.switch('mainmenu');
+        })
+        $('#editworld .escape').click(()=>{
+            Micro.screens.switch('worldselect');
         })
     }
 }

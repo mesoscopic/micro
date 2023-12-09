@@ -1,5 +1,6 @@
 class Character {
     animations = {}
+    kind = "core:Character"
     constructor(char, pos, size, layer){
         this.char = char; //The Unicode character a Character renders as
         this.pos = pos; //A 2D vector for position
@@ -11,9 +12,10 @@ class Character {
         //0: Moving entities
         //1: Particles
         //2: The Player
-        render.characters.push(this);
-        render.characters.sort((a, b)=>a.layer-b.layer);
+        Micro.game.characters.push(this);
+        Micro.game.characters.sort((a, b)=>a.layer-b.layer);
         this.exists = true;
+        this.id = crypto.randomUUID();
     }
     //Changes a numerical property over an ms time.
     animate(prop, target, time){
@@ -31,7 +33,7 @@ class Character {
             if((this.animations[i][0]<0)?(this[i]<=this.animations[i][0]):(this[i]<=this.animations[i][0])) delete this.animations[i];
         }
         let t = this, o = 1;
-        Micro.render.characters.filter((v)=>v.layer>t.layer&&v.exists).forEach((c)=>{
+        Micro.game.characters.filter((v)=>v.layer>t.layer&&v.exists).forEach((c)=>{
             if(Math.abs(c.pos[0]-t.pos[0])<c.size&&Math.abs(c.pos[1]-t.pos[1])<c.size){
                 let n = Math.sqrt(Math.abs(c.pos[0]-t.pos[0])**2 + Math.abs(c.pos[1]-t.pos[1])**2)/c.size;
                 if(n<o) o = n;
@@ -56,7 +58,7 @@ class Character {
     }
     //Deletes the character.
     remove(){
-        render.characters.splice(render.characters.indexOf(this), 1);
+        Micro.game.characters.splice(Micro.game.characters.indexOf(this), 1);
     }
     get x(){
         return this.pos[0];
@@ -69,6 +71,26 @@ class Character {
     }
     set y(val){
         this.pos[1] = val;
+    }
+
+    serialize(){
+        let self = {};
+        self.kind = this.kind;
+        self.pos = this.pos;
+        self.size = this.size;
+        self.opacity = this.opacity;
+        self.char = this.char;
+        self.exists = this.exists;
+        self.id = this.id;
+        self.layer = this.layer;
+        return self;
+    }
+    static deserialize(s){
+        let self = new this(s.char, s.pos, s.size, s.layer);
+        self.id = s.id;
+        self.kind = s.kind;
+        self.opacity = s.opacity;
+        self.exists = s.exists;
     }
 }
 const render = {
@@ -96,7 +118,7 @@ const render = {
         render.width = window.innerWidth;
         render.height = window.innerHeight;
         $('#render').attr("height", render.width).attr("width", render.width);
-        let lightMap = Micro.game?.lightWorld?.();
+        let lightMap = Micro.common?.lightWorld?.();
         render.canvas.clearRect(0, 0, render.width, render.height);
         function renderChar(char, pos, size, opacity, fullbright){
             if(!render.isOnscreen(pos, size)) return;
@@ -108,8 +130,8 @@ const render = {
             render.canvas.fillStyle = "rgba(0, 0, 0, "+opacity*(fullbright?1:light)+')';
             render.canvas.fillText(char, render.width/2 + (pos[0] + render.offset[0])*render.scale, render.height/2 + (pos[1] + render.offset[1] - 0.075*size)*render.scale);
         }
-        for(let i in render.characters){
-            render.characters[i].render(renderChar);
+        for(let i in Micro.game.characters){
+            Micro.game.characters[i].render(renderChar);
         }
         if(render.active) requestAnimationFrame(render.frame);
     },

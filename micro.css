@@ -84,18 +84,19 @@ img.centered{
 
 button {
     display: inline-block;
-    border: 1px solid black;
+    outline: 1px solid black;
     border-radius: 5px;
     padding: 1rem 2rem;
     text-decoration: none;
     background: white;
     color: black;
+    border:none;
     font-family: 'unicode-mono', monospace;
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
     text-align: center;
-    transition: border 150ms linear, margin 150ms linear;
+    transition: outline 150ms linear;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -106,20 +107,38 @@ button.major {
     color: white;
 }
 button:hover {
-    border: 4px solid black;
-    margin: 0;
+    outline: 4px solid black;
 }
 button.topleft {
-    position: absolute;
+    position: fixed;
     top: 1em;
     left: 1em;
 }
-section h1 {
+section h1, section p {
     text-align: center;
 }
 .settings {
     margin-left: 1em;
     width: fit-content;
+}
+#worldselect {
+    text-align: center;
+    overflow-y: scroll;
+}
+.save {
+    display: inline-block;
+    border: 1px solid black;
+    text-align: left;
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.save button {
+    float: right;
+    margin-right: 3px;
+}
+.save h3 {
+    margin: 5px;
 }
 
 @media (prefers-color-scheme:dark){

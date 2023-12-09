@@ -1,7 +1,8 @@
 export class Upgrade extends Micro.render.Character {
-    constructor(char, pos, description){
+    kind = "micro:Upgrade"
+    constructor(char, pos, description, enabled){
         super(char, pos, 1, -1);
-        this.enable();
+        if(enabled ?? true) this.enable();
         this.description = description;
     }
     hover(){
@@ -23,15 +24,30 @@ export class Upgrade extends Micro.render.Character {
     //The upgrade comes into effect
     enable(){
         this.exists = true;
-        (Micro.game.Tile.positions?.[this.pos.join(',')]?.push?.(this))??(Micro.game.Tile.positions[this.pos.join(',')] = [this]);
+        (Micro.game.tiles?.[this.pos.join(',')]?.push?.(this))??(Micro.game.tiles[this.pos.join(',')] = [this]);
     }
     //The upgrade's effects are undone
     disable(){
         this.exists = false;
-        (Micro.game.Tile.positions[this.pos.join(',')].splice(Micro.game.Tile.positions[this.pos.join(',')].indexOf(this), 1));
+        (Micro.game.tiles[this.pos.join(',')].splice(Micro.game.tiles[this.pos.join(',')].indexOf(this), 1));
+    }
+    serialize(){
+        let self = super.serialize();
+        self.description = this.description;
+        return self;
+    }
+    static deserialize(s){
+        let self = new this(s.char, s.pos, s.description, false); //We don't want to be applying effects twice, now do we?
+        self.id = s.id;
+        self.kind = s.kind;
+        self.opacity = s.opacity;
+        self.exists = s.exists;
+        self.size = s.size;
+        self.layer = s.layer;
     }
 }
-export class Opener extends Micro.game.Tile {
+export class Opener extends Micro.common.Tile {
+    kind = "micro:Opener"
     constructor(pos){
         super('△', pos, 1, -1);
     }
@@ -48,14 +64,25 @@ export class Opener extends Micro.game.Tile {
         new OpenerUpgrade('▲', this.pos, '▩ -> ▪');
         this.remove();
     }
+    static deserialize(s){
+        let self = new this(s.pos);
+        self.id = s.id;
+        self.kind = s.kind;
+        self.opacity = s.opacity;
+        self.exists = s.exists;
+        self.char = s.char;
+        self.size = s.size;
+        self.layer = s.layer;
+    }
 }
 export class OpenerUpgrade extends Upgrade {
+    kind = "micro:OpenerUpgrade"
     constructor(char, pos, description){
         super(char, pos, description);
     }
     enable(){
         super.enable();
-        let tile = Micro.game.Tile.topAtPos;
+        let tile = Micro.common.Tile.topAtPos;
         tile(0, -6)?.replace?.('▩o'),tile(1, -5)?.replace?.('▩o'),tile(-1, -5)?.replace?.('▩o'),
         tile(0, 6)?.replace?.('▩o'),tile(1, 5)?.replace?.('▩o'),tile(-1, 5)?.replace?.('▩o'),
         tile(-6, 0)?.replace?.('▩o'),tile(-5, 1)?.replace?.('▩o'),tile(-5, -1)?.replace?.('▩o'),
@@ -64,12 +91,15 @@ export class OpenerUpgrade extends Upgrade {
     }
     disable(){
         super.disable();
-        let tile = Micro.game.Tile.topAtPos;
+        let tile = Micro.common.Tile.topAtPos;
         tile(0, -6)?.replace?.('▩'),tile(1, -5)?.replace?.('▩'),tile(-1, -5)?.replace?.('▩'),
         tile(0, 6)?.replace?.('▩'),tile(1, 5)?.replace?.('▩'),tile(-1, 5)?.replace?.('▩'),
         tile(-6, 0)?.replace?.('▩'),tile(-5, 1)?.replace?.('▩'),tile(-5, -1)?.replace?.('▩'),
         tile(6, 0)?.replace?.('▩'),tile(5, 1)?.replace?.('▩'),tile(5, -1)?.replace?.('▩')
         this.light = 0;
     }
-
 }
+
+Micro.common.classes["micro:Upgrade"] = Upgrade;
+Micro.common.classes["micro:Opener"] = Opener;
+Micro.common.classes["micro:OpenerUpgrade"] = OpenerUpgrade;
