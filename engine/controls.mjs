@@ -4,6 +4,8 @@ export default {
         'Escape': [()=>{$('section#'+Micro.screens.active+' .escape').click();}]
     },
     _up: {},
+    mouseX: 0, 
+    mouseY: 0,
     //Initiates key capturing.
     init: function(){
         $(document).keydown((e)=>{
@@ -22,11 +24,37 @@ export default {
         })
         $(document).keyup((e)=>{
             for(let i in this._up){
-                if(e.key==i){
+                if(e.code==i){
                     this._up[i].forEach((e)=>e());
                     delete this._up[i];
                 }
             }
+        })
+        // The special codes LMB, RMB, and MMB correspond to the Left, Right, and Middle mouse buttons instead of keys
+        $(document).mousedown((e)=>{
+            for(let i in this.controls){
+                if(e.button == 0 && i == "LMB" || e.button == 1 && i == "MMB" || e.button == 2 && i == "RMB"){
+                    this.controls[i].forEach((f)=>{
+                        if(f.disabled) return;
+                        f(new Promise((res, rej)=>{
+                            this._up[i] = this._up[i]??[];
+                            this._up[i].push(res);
+                        }))
+                    });
+                }
+            }
+        });
+        $(document).mouseup((e)=>{
+            for(let i in this._up){
+                if(e.button == 0 && i == "LMB" || e.button == 1 && i == "MMB" || e.button == 2 && i == "RMB"){
+                    this._up[i].forEach((e)=>e());
+                    delete this._up[i];
+                }
+            }
+        })
+        $(document).mousemove((e)=>{
+            Micro.controls.mouseX = e.clientX;
+            Micro.controls.mouseY = e.clientY;
         })
     },
     //Attaches a callback to a keydown event. There can be more than one callback per key.

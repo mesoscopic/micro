@@ -58,7 +58,8 @@ class Character {
     }
     //Deletes the character.
     remove(){
-        Micro.game.characters.splice(Micro.game.characters.indexOf(this), 1);
+        let index = Micro.game.characters.indexOf(this);
+        if(index != -1) Micro.game.characters.splice(index, 1);
     }
     get x(){
         return this.pos[0];
@@ -120,15 +121,20 @@ const render = {
         $('#render').attr("height", render.width).attr("width", render.width);
         let lightMap = Micro.common?.lightWorld?.();
         render.canvas.clearRect(0, 0, render.width, render.height);
-        function renderChar(char, pos, size, opacity, fullbright){
+        function renderChar(char, pos, size, opacity, fullbright, rotation){
             if(!render.isOnscreen(pos, size)) return;
             let lightX = Math.round(pos[0]), lightY = Math.round(pos[1]), light = lightMap?(lightMap[`${lightX},${lightY}`] ?? 0):1;
             if(opacity*(fullbright?1:light) == 0) return;
+            render.canvas.save();
             render.canvas.font = `${2*size*render.scale}px 'unicodemono', monospace`;
             render.canvas.textAlign = "center";
             render.canvas.textBaseline = "middle";
             render.canvas.fillStyle = "rgba(0, 0, 0, "+opacity*(fullbright?1:light)+')';
+            render.canvas.translate(render.width/2 + (pos[0] + render.offset[0])*render.scale, render.height/2 + (pos[1] + render.offset[1] - 0.075*size)*render.scale);
+            render.canvas.rotate(rotation??0);
+            render.canvas.translate(-(render.width/2 + (pos[0] + render.offset[0])*render.scale), -(render.height/2 + (pos[1] + render.offset[1] - 0.075*size)*render.scale));
             render.canvas.fillText(char, render.width/2 + (pos[0] + render.offset[0])*render.scale, render.height/2 + (pos[1] + render.offset[1] - 0.075*size)*render.scale);
+            render.canvas.restore();
         }
         for(let i in Micro.game.characters){
             Micro.game.characters[i].render(renderChar);

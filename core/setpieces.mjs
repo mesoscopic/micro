@@ -61,7 +61,7 @@ export class Opener extends Micro.common.Tile {
         Micro.render.canvas.fillText('[Space] = ▲', Micro.render.width/2, 33);
     }
     activate(){
-        new OpenerUpgrade('▲', this.pos, '▩ -> ▪');
+        new OpenerUpgrade('▲', this.pos, '▩ -> □');
         this.remove();
     }
     static deserialize(s){
@@ -83,10 +83,10 @@ export class OpenerUpgrade extends Upgrade {
     enable(){
         super.enable();
         let tile = Micro.common.Tile.topAtPos;
-        tile(0, -6)?.replace?.('▩o'),tile(1, -5)?.replace?.('▩o'),tile(-1, -5)?.replace?.('▩o'),
-        tile(0, 6)?.replace?.('▩o'),tile(1, 5)?.replace?.('▩o'),tile(-1, 5)?.replace?.('▩o'),
-        tile(-6, 0)?.replace?.('▩o'),tile(-5, 1)?.replace?.('▩o'),tile(-5, -1)?.replace?.('▩o'),
-        tile(6, 0)?.replace?.('▩o'),tile(5, 1)?.replace?.('▩o'),tile(5, -1)?.replace?.('▩o')
+        tile(0, -6)?.replace?.('o'),tile(1, -5)?.replace?.('o'),tile(-1, -5)?.replace?.('o'),
+        tile(0, 6)?.replace?.('o'),tile(1, 5)?.replace?.('o'),tile(-1, 5)?.replace?.('o'),
+        tile(-6, 0)?.replace?.('o'),tile(-5, 1)?.replace?.('o'),tile(-5, -1)?.replace?.('o'),
+        tile(6, 0)?.replace?.('o'),tile(5, 1)?.replace?.('o'),tile(5, -1)?.replace?.('o')
         this.light = 7;
     }
     disable(){

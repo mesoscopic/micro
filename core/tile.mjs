@@ -102,7 +102,7 @@ Micro.common.Tile = Tile;
 Micro.common.Tile.tileDictionary = {
     '□': UpgradableTile,
     '▩': WallTile,
-    '▩o': OpenWall,
+    'o': OpenWall,
     '▪': VoidTile
 };
 
