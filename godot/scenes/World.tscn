@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://qujhsvriffxk"]
+
+[ext_resource type="PackedScene" uid="uid://cas1ebkgs1kfw" path="res://scenes/structures/SpawnNest.tscn" id="1_kopsk"]
+[ext_resource type="PackedScene" uid="uid://b14dvx67drebc" path="res://scenes/characters/Player.tscn" id="1_yrunw"]
+
+[node name="World" type="Node2D"]
+
+[node name="SpawnNest" parent="." instance=ExtResource("1_kopsk")]
+
+[node name="Player" parent="." instance=ExtResource("1_yrunw")]

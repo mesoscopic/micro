@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c07ta8clsxq23"]
+
+[ext_resource type="Script" path="res://scenes/shapes/DiagonalLattice.gd" id="1_pd5cr"]
+
+[node name="DiagonalLattice" type="Node2D"]
+script = ExtResource("1_pd5cr")
+color = Color(1, 1, 1, 1)

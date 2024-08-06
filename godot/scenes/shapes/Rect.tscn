@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkl7gvrqjyefp"]
+
+[ext_resource type="Script" path="res://scenes/shapes/Rect.gd" id="1_47bxt"]
+
+[node name="Rect" type="Node2D"]
+script = ExtResource("1_47bxt")
+color = Color(1, 1, 1, 1)
+height = 10.0
+width = 10.0
+thickness = 1.0

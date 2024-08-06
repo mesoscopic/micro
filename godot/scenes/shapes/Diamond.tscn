@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dopi38qw7h67h"]
+
+[ext_resource type="Script" path="res://scenes/shapes/Diamond.gd" id="1_wogib"]
+
+[node name="Diamond" type="Node2D"]
+script = ExtResource("1_wogib")
+color = Color(1, 1, 1, 1)
+radius = 100
+fill = 1.0

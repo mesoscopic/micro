@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn2fkb8pmv86o"]
+
+[ext_resource type="Texture2D" uid="uid://u3xu4xviapr" path="res://assets/keys/Action_Button.png" id="1_aoffk"]
+
+[node name="ActionButton" type="TextureRect"]
+clip_contents = true
+custom_minimum_size = Vector2(80, 40)
+anchors_preset = -1
+anchor_right = 0.069
+anchor_bottom = 0.062
+offset_right = -79.488
+offset_bottom = -40.176
+texture = ExtResource("1_aoffk")
+expand_mode = 3

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnwffnhs6gnwh"]
+
+[ext_resource type="Script" path="res://scripts/characters/generic.gd" id="1_mj12y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hvjck"]
+
+[node name="Character" type="Node2D"]
+script = ExtResource("1_mj12y")
+
+[node name="Occlusion" type="Area2D" parent="."]
+
+[node name="Area" type="CollisionShape2D" parent="Occlusion"]
+shape = SubResource("CircleShape2D_hvjck")
+
+[node name="Light" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="Area" type="CollisionPolygon2D" parent="Light"]
+polygon = PackedVector2Array(0, -1, 1, 0, 0, 1, -1, 0)
+disabled = true

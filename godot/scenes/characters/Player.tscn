@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://b14dvx67drebc"]
+
+[ext_resource type="Script" path="res://scripts/characters/player.gd" id="1_1im8n"]
+[ext_resource type="PackedScene" uid="uid://dopi38qw7h67h" path="res://scenes/shapes/Diamond.tscn" id="1_o0blo"]
+[ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="2_8klxi"]
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_1im8n")
+
+[node name="Character" parent="." instance=ExtResource("2_8klxi")]
+layer = 4
+light = 100
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)
+
+[node name="Body" parent="." instance=ExtResource("1_o0blo")]
+radius = 10.0
+fill = 0.25
+
+[node name="Core" parent="." instance=ExtResource("1_o0blo")]
+radius = 5.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)

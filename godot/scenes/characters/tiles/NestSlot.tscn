@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cshcf4y2ntrp5"]
+
+[ext_resource type="PackedScene" uid="uid://dp0iejn27kid1" path="res://scenes/characters/Tile.tscn" id="1_tiq8w"]
+[ext_resource type="PackedScene" uid="uid://bkl7gvrqjyefp" path="res://scenes/shapes/Rect.tscn" id="1_x5040"]
+
+[node name="NestSlot" type="Node2D"]
+
+[node name="Tile" parent="." instance=ExtResource("1_tiq8w")]
+
+[node name="Rect" parent="." instance=ExtResource("1_x5040")]
+height = 17.0
+width = 17.0

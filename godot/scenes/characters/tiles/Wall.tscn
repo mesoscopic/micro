@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cr4fsl380sykj"]
+
+[ext_resource type="PackedScene" uid="uid://dp0iejn27kid1" path="res://scenes/characters/Tile.tscn" id="1_16fyw"]
+[ext_resource type="PackedScene" uid="uid://bkl7gvrqjyefp" path="res://scenes/shapes/Rect.tscn" id="1_m56w8"]
+[ext_resource type="PackedScene" uid="uid://c07ta8clsxq23" path="res://scenes/shapes/DiagonalLattice.tscn" id="2_hxluq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qdbpo"]
+
+[node name="Wall" type="StaticBody2D"]
+
+[node name="Tile" parent="." instance=ExtResource("1_16fyw")]
+layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qdbpo")
+
+[node name="Rect" parent="." instance=ExtResource("1_m56w8")]
+height = 19.0
+width = 19.0
+
+[node name="DiagonalLattice" parent="." instance=ExtResource("2_hxluq")]
+width = 19.0
+height = 19.0
+thickness = 1.0
+lines = 5
