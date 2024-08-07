@@ -27,11 +27,7 @@ jobs:
           sparse-checkout: |
             build/browser
           sparse-checkout-cone-mode: false
-      - run: cd ./beta/build/browser
-      - run: mv * ../../
-      - run: cd ../../
-      - run: cd ..
-      - run: tree .
+      - run: mv beta/build/browser/* ../../
       - name: Checkout legacy
         uses: actions/checkout@v3
         with:
