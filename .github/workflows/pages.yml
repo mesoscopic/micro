@@ -30,7 +30,6 @@ jobs:
       - run: cd ./beta/build/browser
       - run: mv * ../../
       - run: cd ../../
-      - run: rm -rf build
       - run: cd ..
       - run: tree .
       - name: Checkout legacy
