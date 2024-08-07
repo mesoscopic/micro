@@ -24,6 +24,9 @@ jobs:
         with:
           ref: beta
           path: ./beta
+          sparse-checkout: |
+            build/browser
+          sparse-checkout-cone-mode: false
       - name: Checkout legacy
         uses: actions/checkout@v3
         with:
