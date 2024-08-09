@@ -4,12 +4,17 @@ class_name Character
 @export_enum("Background tile", "Foreground tile", "Moving entity", "Particle", "Player") var layer: int
 @export var size: int = 20
 @export var light: int = 0
+@export var render: ShaderMaterial
 
 var alpha_base: float = 1.0
 var light_multiplier: float = 0.0
 
 # add any logic common to all characters here
 func _ready():
+	if render: 
+		$Render.material = render.duplicate();
+		$Render.size = Vector2(size, size);
+		$Render.position = Vector2(-size/2.0, -size/2.0)
 	process_priority = layer
 	$Occlusion/Area.shape.radius = float(size)/2.0
 	if light == 0:
@@ -35,4 +40,4 @@ func _physics_process(_delta):
 			c.light_multiplier = min(1.0, c.light_multiplier+1.0-((abs(global_position[0]-c.global_position[0])+abs(global_position[1]-c.global_position[1]))/float(light)))
 
 func _process(_delta):
-	get_parent().modulate.a = alpha_base * light_multiplier
+	if $Render.material: $Render.material.set("shader_parameter/opacity", alpha_base * light_multiplier)
