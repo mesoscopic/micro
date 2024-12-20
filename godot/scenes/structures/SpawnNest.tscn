@@ -92,3 +92,39 @@ position = Vector2(20, 0)
 
 [node name="NestSlot13" parent="." instance=ExtResource("2_baksq")]
 position = Vector2(20, -20)
+
+[node name="NestSlot14" parent="." instance=ExtResource("2_baksq")]
+position = Vector2(0, -60)
+
+[node name="NestSlot15" parent="." instance=ExtResource("2_baksq")]
+position = Vector2(-20, -40)
+
+[node name="NestSlot16" parent="." instance=ExtResource("2_baksq")]
+position = Vector2(-40, -20)
+
+[node name="NestSlot17" parent="." instance=ExtResource("2_baksq")]
+position = Vector2(-60, 0)
+
+[node name="NestSlot18" parent="." instance=ExtResource("2_baksq")]
+position = Vector2(-40, 20)
+
+[node name="NestSlot19" parent="." instance=ExtResource("2_baksq")]
+position = Vector2(-20, 40)
+
+[node name="NestSlot20" parent="." instance=ExtResource("2_baksq")]
+position = Vector2(0, 60)
+
+[node name="NestSlot21" parent="." instance=ExtResource("2_baksq")]
+position = Vector2(20, 40)
+
+[node name="NestSlot22" parent="." instance=ExtResource("2_baksq")]
+position = Vector2(40, 20)
+
+[node name="NestSlot23" parent="." instance=ExtResource("2_baksq")]
+position = Vector2(60, 0)
+
+[node name="NestSlot24" parent="." instance=ExtResource("2_baksq")]
+position = Vector2(40, -20)
+
+[node name="NestSlot25" parent="." instance=ExtResource("2_baksq")]
+position = Vector2(20, -40)

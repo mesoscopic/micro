@@ -13,8 +13,7 @@ var light_multiplier: float = 0.0
 func _ready():
 	if render: 
 		$Render.material = render.duplicate();
-		$Render.size = Vector2(size, size);
-		$Render.position = Vector2(-size/2.0, -size/2.0)
+		$Render.scale = Vector2(size, size);
 	process_priority = layer
 	$Occlusion/Area.shape.radius = float(size)/2.0
 	if light == 0:

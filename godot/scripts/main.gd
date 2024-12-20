@@ -1,10 +1,12 @@
 extends Control
 
 const START_MENU = preload("res://scenes/ui/StartRun.tscn")
+const SETTINGS = preload("res://scenes/ui/Settings.tscn")
 const WORLD = preload("res://scenes/World.tscn")
 
 func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	# Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	pass
 
 func _process(_delta):
 	pass
@@ -21,4 +23,12 @@ func _on_start_run():
 	$UI.remove_child($UI.get_node("StartRun"))
 	$Game.add_child(WORLD.instantiate())
 	await Micro.screen_wipe_in()
-	pass
+
+func options():
+	var settings = SETTINGS.instantiate()
+	$UI.add_child(settings)
+	await Micro.screen_wipe_in()
+	await settings.done
+	await Micro.screen_wipe_out()
+	$UI.remove_child(settings)
+	await Micro.screen_wipe_in()

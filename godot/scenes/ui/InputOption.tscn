@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://dj5eo6iim3npq"]
+
+[ext_resource type="FontFile" uid="uid://cfcgixnpb2wbw" path="res://assets/fonts/Krypton.ttf" id="1_2gh0i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e1qiu"]
+content_margin_left = 30.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ihtp6"]
+content_margin_left = 50.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+color = Color(1, 1, 1, 1)
+thickness = 2
+vertical = true
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m5nt7"]
+content_margin_left = 40.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0dtps"]
+content_margin_top = 5.0
+content_margin_right = 30.0
+content_margin_bottom = 5.0
+
+[node name="InputOption" type="Button"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -598.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.585062, 0.585062, 0.585062, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_2gh0i")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_e1qiu")
+theme_override_styles/hover = SubResource("StyleBoxLine_ihtp6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_m5nt7")
+theme_override_styles/focus = SubResource("StyleBoxLine_ihtp6")
+text = "Awa"
+alignment = 0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_2gh0i")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0dtps")
+text = "awa"
+horizontal_alignment = 2
+vertical_alignment = 1

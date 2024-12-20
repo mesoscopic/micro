@@ -1,28 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnwffnhs6gnwh"]
+[gd_scene load_steps=5 format=3 uid="uid://dnwffnhs6gnwh"]
 
 [ext_resource type="Script" path="res://scripts/characters/generic.gd" id="1_mj12y"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fm3xv"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_64ryf"]
+width = 1
+height = 1
+noise = SubResource("FastNoiseLite_fm3xv")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hvjck"]
 
 [node name="Character" type="Node2D"]
 script = ExtResource("1_mj12y")
 
-[node name="Render" type="ColorRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Render" type="Sprite2D" parent="."]
+texture = SubResource("NoiseTexture2D_64ryf")
 
 [node name="Occlusion" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 256
 
 [node name="Area" type="CollisionShape2D" parent="Occlusion"]
 shape = SubResource("CircleShape2D_hvjck")
 
 [node name="Light" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 512
+collision_mask = 256
 
 [node name="Area" type="CollisionPolygon2D" parent="Light"]
 polygon = PackedVector2Array(0, -1, 1, 0, 0, 1, -1, 0)
