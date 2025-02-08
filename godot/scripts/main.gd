@@ -1,7 +1,13 @@
 extends Control
 
+
+const PAUSE_MENU = preload("res://scenes/ui/PauseMenu.tscn")
+
+var in_menu: bool = false
+var in_game: bool = false
+
 const START_MENU = preload("res://scenes/ui/StartRun.tscn")
-const SETTINGS = preload("res://scenes/ui/Settings.tscn")
+
 const WORLD = preload("res://scenes/World.tscn")
 
 func _ready():
@@ -23,12 +29,15 @@ func _on_start_run():
 	$UI.remove_child($UI.get_node("StartRun"))
 	$Game.add_child(WORLD.instantiate())
 	await Micro.screen_wipe_in()
+	in_game = true
 
-func options():
-	var settings = SETTINGS.instantiate()
-	$UI.add_child(settings)
-	await Micro.screen_wipe_in()
-	await settings.done
-	await Micro.screen_wipe_out()
-	$UI.remove_child(settings)
-	await Micro.screen_wipe_in()
+func _input(_event):
+	if Input.is_action_just_pressed("open_menu") and in_game and not get_tree().paused:
+		var pause_menu = PAUSE_MENU.instantiate()
+		$UI.add_child(pause_menu)
+		get_tree().paused = true
+		await pause_menu.finished
+		await Micro.wait(0.1)
+		get_tree().paused = false
+	if Input.is_action_just_pressed("quick_settings") and in_game and !$UI.has_node("Settings"):
+		Micro.settings(false)

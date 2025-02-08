@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://qujhsvriffxk"]
+[gd_scene load_steps=7 format=3 uid="uid://qujhsvriffxk"]
 
 [ext_resource type="Shader" path="res://shaders/bg.gdshader" id="1_gia2e"]
 [ext_resource type="PackedScene" uid="uid://cas1ebkgs1kfw" path="res://scenes/structures/SpawnNest.tscn" id="1_kopsk"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_ndgmm"]
 [ext_resource type="PackedScene" uid="uid://b14dvx67drebc" path="res://scenes/characters/Player.tscn" id="1_yrunw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0ir6e"]
@@ -11,6 +12,7 @@ shader = ExtResource("1_gia2e")
 size = Vector2(4, 4)
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_ndgmm")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

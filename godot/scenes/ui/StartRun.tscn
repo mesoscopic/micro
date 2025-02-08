@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1if5acbehiib"]
+[gd_scene load_steps=17 format=3 uid="uid://b1if5acbehiib"]
 
 [ext_resource type="Script" path="res://scripts/startrunmenu.gd" id="1_bwlxp"]
 [ext_resource type="PackedScene" uid="uid://dopi38qw7h67h" path="res://scenes/shapes/Diamond.tscn" id="2_m7h72"]
@@ -89,19 +89,25 @@ _data = {
 "menu_show": SubResource("Animation_hyfwm")
 }
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ubjcs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_arrat"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_duupb"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jd2c5"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ryuoa"]
-bg_color = Color(1, 1, 1, 1)
-draw_center = false
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jhjnr"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6amhn"]
-content_margin_bottom = 0.0
-draw_center = false
-border_width_bottom = 4
-border_color = Color(1, 1, 1, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4fiux"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2buer"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v1pwt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yfo8u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cdw87"]
 
 [node name="StartRun" type="Control"]
 layout_mode = 3
@@ -155,50 +161,53 @@ text = "Micro"
 
 [node name="Play" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 2
-theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
 theme_override_fonts/font = ExtResource("3_jfphj")
 theme_override_font_sizes/font_size = 35
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ubjcs")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_arrat")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_duupb")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jd2c5")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ryuoa")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_6amhn")
 action_mode = 0
 text = "Start Run"
 
 [node name="Options" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 2
-theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
 theme_override_fonts/font = ExtResource("3_jfphj")
 theme_override_font_sizes/font_size = 35
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jhjnr")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4fiux")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2buer")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jd2c5")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ryuoa")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_6amhn")
 action_mode = 0
 text = "Options"
 
 [node name="Quit" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 2
-theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
 theme_override_fonts/font = ExtResource("3_jfphj")
 theme_override_font_sizes/font_size = 35
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v1pwt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_yfo8u")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_cdw87")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jd2c5")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ryuoa")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_6amhn")
 action_mode = 0
 text = "Quit"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_finished"]
+[connection signal="mouse_entered" from="Menu/VBoxContainer/Play" to="." method="_on_button_hover" binds= [&"Play"]]
 [connection signal="pressed" from="Menu/VBoxContainer/Play" to="." method="_on_play"]
+[connection signal="mouse_entered" from="Menu/VBoxContainer/Options" to="." method="_on_button_hover" binds= [&"Options"]]
 [connection signal="pressed" from="Menu/VBoxContainer/Options" to="." method="_on_options"]
+[connection signal="mouse_entered" from="Menu/VBoxContainer/Quit" to="." method="_on_button_hover" binds= [&"Quit"]]
 [connection signal="pressed" from="Menu/VBoxContainer/Quit" to="." method="_on_quit"]

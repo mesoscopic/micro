@@ -5,6 +5,7 @@ class_name Character
 @export var size: int = 20
 @export var light: int = 0
 @export var render: ShaderMaterial
+@export var always_visible: bool = false
 
 var alpha_base: float = 1.0
 var light_multiplier: float = 0.0
@@ -39,4 +40,4 @@ func _physics_process(_delta):
 			c.light_multiplier = min(1.0, c.light_multiplier+1.0-((abs(global_position[0]-c.global_position[0])+abs(global_position[1]-c.global_position[1]))/float(light)))
 
 func _process(_delta):
-	if $Render.material: $Render.material.set("shader_parameter/opacity", alpha_base * light_multiplier)
+	if $Render.material: $Render.material.set("shader_parameter/opacity", alpha_base * max(light_multiplier, 0.1 if always_visible else 0.))

@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/Krypton.ttf-9334260da3bea3a27e4f41f8acc80d94.
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

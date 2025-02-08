@@ -83,6 +83,7 @@ _data = {
 }
 
 [node name="Main" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -96,6 +97,7 @@ layout_mode = 1
 size_flags_stretch_ratio = 0.0
 
 [node name="Game" type="Node2D" parent="."]
+process_mode = 1
 
 [node name="Blur" type="Node2D" parent="."]
 script = ExtResource("2_8q41b")

@@ -14,6 +14,7 @@ shader_parameter/opacity = 1.0
 [node name="Character" parent="." instance=ExtResource("1_7ufqt")]
 layer = 1
 render = SubResource("ShaderMaterial_qpdhe")
+always_visible = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qdbpo")

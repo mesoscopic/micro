@@ -1,0 +1,35 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://do1iun3hb3o4e"]
+
+[ext_resource type="FontFile" uid="uid://cfcgixnpb2wbw" path="res://assets/fonts/Krypton.ttf" id="1_spk4a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nvord"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6tfw0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fbllm"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iuhv6"]
+content_margin_left = 10.0
+content_margin_top = 3.0
+content_margin_right = 10.0
+bg_color = Color(0, 0, 0, 1)
+border_width_bottom = 3
+corner_detail = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ftbf7"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6rjs"]
+bg_color = Color(0, 0, 0, 0.392157)
+
+[resource]
+default_font = ExtResource("1_spk4a")
+TabContainer/styles/panel = SubResource("StyleBoxEmpty_nvord")
+TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_6tfw0")
+TabContainer/styles/tab_hovered = SubResource("StyleBoxEmpty_fbllm")
+TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_iuhv6")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxEmpty_ftbf7")
+TabContainer/styles/tabbar_background = SubResource("StyleBoxFlat_v6rjs")

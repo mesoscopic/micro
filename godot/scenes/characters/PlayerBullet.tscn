@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dlrmfmoyt553n"]
+[gd_scene load_steps=12 format=3 uid="uid://dnrcdtyawedjb"]
 
 [ext_resource type="Script" path="res://scripts/characters/bullet.gd" id="1_6f5oh"]
 [ext_resource type="Shader" path="res://shaders/player_bullet.gdshader" id="1_slg20"]
@@ -16,6 +16,45 @@ resource_local_to_scene = true
 width = 40
 height = 40
 noise = SubResource("FastNoiseLite_uw2n2")
+
+[sub_resource type="Animation" id="Animation_r3uyc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/explode_anim")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture:width")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [40]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture:height")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [40]
+}
 
 [sub_resource type="Animation" id="Animation_rnuid"]
 resource_name = "explode"
@@ -57,45 +96,6 @@ tracks/2/keys = {
 "values": [40, 60, 1]
 }
 
-[sub_resource type="Animation" id="Animation_r3uyc"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/explode_anim")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture:width")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [40]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:texture:height")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [40]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7ldk5"]
 _data = {
 "RESET": SubResource("Animation_r3uyc"),
@@ -120,7 +120,7 @@ initial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
 damping_min = 100.0
 damping_max = 100.0
-scale_max = 2.0
+scale_min = 0.5
 alpha_curve = SubResource("CurveTexture_8us7s")
 
 [node name="Area2D" type="Area2D"]

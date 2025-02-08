@@ -1,13 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://ba8r52rcgnydu"]
+[gd_scene load_steps=8 format=3 uid="uid://ba8r52rcgnydu"]
 
 [ext_resource type="Script" path="res://scripts/splash.gd" id="1_2b6ft"]
+[ext_resource type="Texture2D" uid="uid://cbi67e7tu5s8i" path="res://assets/icons/mesoscopic.svg" id="2_7brp2"]
+[ext_resource type="FontFile" uid="uid://cfcgixnpb2wbw" path="res://assets/fonts/Krypton.ttf" id="2_730k0"]
+[ext_resource type="Texture2D" uid="uid://d3ef885lehcwr" path="res://assets/icons/godot_engine.svg" id="4_g6ldx"]
 
 [sub_resource type="Animation" id="Animation_8sdh2"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Outer:self_modulate")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -15,191 +18,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Inner:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Inner/LeftLine:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Inner/UpLine:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Inner/RightLine:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Inner/DownLine:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Inner/InnerDiamond:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Inner/OuterDiamond:scale")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_2xvoc"]
 resource_name = "fade_in"
-length = 3.0
+length = 5.0
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Outer:self_modulate")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 1.75),
-"transitions": PackedFloat32Array(1, 6, 1),
+"times": PackedFloat32Array(0, 2, 3.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Inner:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Inner/LeftLine:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(1.5, 2.25),
-"transitions": PackedFloat32Array(2.5, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1e-05, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Inner/UpLine:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(1.5, 2.25),
-"transitions": PackedFloat32Array(2.5, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 1e-05)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Inner/RightLine:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(1.5, 2.25),
-"transitions": PackedFloat32Array(2.5, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1e-05, 1)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Inner/DownLine:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(1.5, 2.25),
-"transitions": PackedFloat32Array(2.5, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 1e-05)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Inner/InnerDiamond:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(1.75, 2.25),
-"transitions": PackedFloat32Array(2.5, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Inner/OuterDiamond:scale")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(2.25, 3),
-"transitions": PackedFloat32Array(2.5, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2oe5b"]
@@ -209,6 +44,7 @@ _data = {
 }
 
 [node name="Splash" type="Control"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -223,79 +59,81 @@ libraries = {
 }
 autoplay = "fade_in"
 
-[node name="Outer" type="CanvasGroup" parent="."]
-self_modulate = Color(1, 1, 1, 0)
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 50
 
-[node name="Square1" type="Line2D" parent="Outer"]
-points = PackedVector2Array(460, 125, 776, 209, 743.678, 328.78, 691, 524, 377, 440)
-closed = true
-width = 12.0
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+[node name="VersionInformation" type="RichTextLabel" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/normal_font = ExtResource("2_730k0")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]Micro <version>
+[font_size=40]<version_description>[/font_size][/center]"
+fit_content = true
 
-[node name="Square2" type="Line2D" parent="Outer"]
-points = PackedVector2Array(377, 210, 690, 125, 774, 439, 459, 523)
-closed = true
-width = 12.0
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+[node name="BuildInfo" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("2_730k0")
+theme_override_font_sizes/font_size = 20
+text = "<status> - <os>"
+horizontal_alignment = 1
 
-[node name="Corner1" type="Polygon2D" parent="Outer"]
-polygon = PackedVector2Array(414, 165, 470, 163, 457, 209, 413, 218)
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="Corner2" type="Polygon2D" parent="Outer"]
-polygon = PackedVector2Array(687, 162, 737, 164, 739, 216, 695, 204)
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
 
-[node name="Corner3" type="Polygon2D" parent="Outer"]
-polygon = PackedVector2Array(694, 439, 738, 430, 737, 483, 682, 485)
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
 
-[node name="Corner4" type="Polygon2D" parent="Outer"]
-polygon = PackedVector2Array(414, 425, 463, 440, 471, 485, 415, 484)
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("2_7brp2")
+expand_mode = 4
 
-[node name="Inner" type="CanvasGroup" parent="."]
-self_modulate = Color(1, 1, 1, 0)
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_730k0")
+theme_override_font_sizes/font_size = 40
+text = "mesoscopic
+gamedev"
 
-[node name="LeftLine" type="Line2D" parent="Inner"]
-position = Vector2(516, 324)
-points = PackedVector2Array(-140, 0, 0, 0)
-width = 12.0
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
 
-[node name="UpLine" type="Line2D" parent="Inner"]
-position = Vector2(576, 264)
-points = PackedVector2Array(0, -140, 0, 0)
-width = 12.0
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
 
-[node name="RightLine" type="Line2D" parent="Inner"]
-position = Vector2(636, 324)
-points = PackedVector2Array(0, 0, 140, 0)
-width = 12.0
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="DownLine" type="Line2D" parent="Inner"]
-position = Vector2(576, 384)
-points = PackedVector2Array(0, 0, 0, 140)
-width = 12.0
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="OuterDiamond" type="Polygon2D" parent="Inner"]
-position = Vector2(576, 324)
-polygon = PackedVector2Array(0, -95, 95, 0, 0, 95, -95, 0)
-
-[node name="InnerDiamond" type="Polygon2D" parent="Inner"]
-position = Vector2(576, 324)
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(0, -45, 45, 0, 0, 45, -45, 0)
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+texture = ExtResource("4_g6ldx")
+expand_mode = 2
+stretch_mode = 5
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_finished"]
