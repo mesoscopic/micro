@@ -8,14 +8,14 @@ resource_local_to_scene = true
 shader = ExtResource("1_slg20")
 shader_parameter/explode_anim = 0.0
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_uw2n2"]
-noise_type = 0
+[sub_resource type="Gradient" id="Gradient_lpqw0"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o32iv"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hw8tv"]
 resource_local_to_scene = true
+gradient = SubResource("Gradient_lpqw0")
 width = 40
 height = 40
-noise = SubResource("FastNoiseLite_uw2n2")
 
 [sub_resource type="Animation" id="Animation_r3uyc"]
 length = 0.001
@@ -125,12 +125,13 @@ alpha_curve = SubResource("CurveTexture_8us7s")
 
 [node name="Area2D" type="Area2D"]
 collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_6f5oh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_epu1g")
 scale = Vector2(0.25, 0.25)
-texture = SubResource("NoiseTexture2D_o32iv")
+texture = SubResource("GradientTexture2D_hw8tv")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(0, -4, -2, 0, 0, 4, 2, 0)

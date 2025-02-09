@@ -4,6 +4,7 @@ class_name Bullet
 
 @export var velocity: Vector2
 @export var lifetime: float
+@export var damage: int
 
 func _ready():
 	rotation = velocity.angle() - PI/2
@@ -20,10 +21,13 @@ func _on_expire():
 	$Particles.emitting = true
 	set_physics_process(false)
 
-func _on_collide(_body):
+func _on_collide(body):
 	$AnimationPlayer.play("explode")
 	$Particles.emitting = true
 	set_physics_process(false)
+	
+	if body is Damageable:
+		body.damage(damage)
 
 func _on_animation_finished(anim_name):
 	if anim_name == "explode":

@@ -108,7 +108,7 @@ scale_max = 1.25
 alpha_curve = SubResource("CurveTexture_t7qaw")
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 0
+collision_layer = 16
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_1im8n")
@@ -159,5 +159,22 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 
+[node name="DashArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 8
+monitoring = false
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DashArea"]
+position = Vector2(9.53674e-07, 9.53674e-07)
+scale = Vector2(1.46875, 1.46875)
+polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)
+
+[node name="RegenTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
 [connection signal="timeout" from="DashDuration" to="." method="end_dash"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="body_entered" from="DashArea" to="." method="_on_dash_area_body_entered"]
+[connection signal="timeout" from="RegenTimer" to="." method="regen_tick"]

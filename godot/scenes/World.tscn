@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://qujhsvriffxk"]
+[gd_scene load_steps=8 format=3 uid="uid://qujhsvriffxk"]
 
 [ext_resource type="Shader" path="res://shaders/bg.gdshader" id="1_gia2e"]
 [ext_resource type="PackedScene" uid="uid://cas1ebkgs1kfw" path="res://scenes/structures/SpawnNest.tscn" id="1_kopsk"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_ndgmm"]
 [ext_resource type="PackedScene" uid="uid://b14dvx67drebc" path="res://scenes/characters/Player.tscn" id="1_yrunw"]
+[ext_resource type="PackedScene" uid="uid://dyl2gjyhyce57" path="res://scenes/characters/enemies/TestEnemy.tscn" id="5_gw0vu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0ir6e"]
 shader = ExtResource("1_gia2e")
@@ -35,5 +36,8 @@ scale = Vector2(400, 400)
 texture = SubResource("PlaceholderTexture2D_2bd5p")
 
 [node name="SpawnNest" parent="." instance=ExtResource("1_kopsk")]
+
+[node name="TestEnemy" parent="." instance=ExtResource("5_gw0vu")]
+position = Vector2(-85, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_yrunw")]

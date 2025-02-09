@@ -4,6 +4,7 @@ extends Node
 
 const SETTINGS = preload("res://scenes/ui/Settings.tscn")
 var menu: Node
+var player: Player
 
 func screen_wipe_out():
 	var SCREEN_WIPE_ANIMATOR = get_tree().current_scene.get_node("ScreenWipe/Layer/ScreenWipeAnimation")

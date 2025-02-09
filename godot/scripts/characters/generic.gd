@@ -37,7 +37,8 @@ func _physics_process(_delta):
 	if light > 0:
 		for area in $Light.get_overlapping_areas():
 			var c = area.get_parent()
-			c.light_multiplier = min(1.0, c.light_multiplier+1.0-((abs(global_position[0]-c.global_position[0])+abs(global_position[1]-c.global_position[1]))/float(light)))
+			var strength = 1.0-((abs(global_position[0]-c.global_position[0])+abs(global_position[1]-c.global_position[1]))/float(light))
+			if strength > 0: c.light_multiplier = min(1.0, c.light_multiplier+strength)
 
 func _process(_delta):
 	if $Render.material: $Render.material.set("shader_parameter/opacity", alpha_base * max(light_multiplier, 0.1 if always_visible else 0.))

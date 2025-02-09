@@ -1,4 +1,6 @@
-extends CharacterBody2D
+extends Damageable
+
+class_name Player
 
 const BULLET = preload("res://scenes/characters/PlayerBullet.tscn")
 
@@ -9,7 +11,11 @@ const shoot_cooldown = 0.5;
 
 var dash_direction := Vector2.ZERO;
 
+func _ready():
+	Micro.player = self
+
 func _physics_process(delta):
+	tick()
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	$AimMarker.global_position = get_aim_position()
 	$AimMarker.emitting = $ShootCooldown.is_stopped()
@@ -33,6 +39,7 @@ func _physics_process(delta):
 			bullet.global_position = get_aim_position()
 			bullet.velocity = Vector2.from_angle(aim) * 80. + velocity/2.
 			bullet.lifetime = 3.
+			bullet.damage = 10
 			get_tree().current_scene.get_node("Game/World").add_child(bullet)
 		$ShootCooldown.start(shoot_cooldown)
 	
@@ -52,6 +59,8 @@ func get_aim_position() -> Vector2:
 		return direction
 
 func start_dash():
+	invincible = true
+	$DashArea.monitoring = true
 	$DashDuration.start()
 	$DashCooldown.start()
 	$Afterimage.emitting = true
@@ -60,6 +69,8 @@ func start_dash():
 	$Dashline.emitting = true
 
 func end_dash():
+	invincible = false
+	$DashArea.monitoring = false
 	$Afterimage.emitting = false
 	$Dashline.emitting = false
 	velocity = dash_direction * max_speed
@@ -67,3 +78,11 @@ func end_dash():
 
 func _on_dash_cooldown_timeout() -> void:
 	$Restore.emitting = true
+
+
+func _on_dash_area_body_entered(body: Node2D) -> void:
+	if body is Damageable:
+		body.damage(20)
+
+func regen_tick():
+	heal(1)
