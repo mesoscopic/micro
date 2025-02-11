@@ -6,13 +6,13 @@ on:
 jobs:
   post:
     if: >-
-      github.event.discussion.discussion.category.slug == 'betas'
+      github.event.discussion.category.slug == 'betas'
     runs-on: ubuntu-latest
     steps:
       - name: Post message to Discord server
         env:
-          DISCUSSION_NAME: ${{ github.event.discussion.discussion.title }}
-          DISCUSSION_URL: ${{ github.event.discussion.discussion.timeline_url }}
+          DISCUSSION_NAME: ${{ github.event.discussion.title }}
+          DISCUSSION_URL: ${{ github.event.discussion.timeline_url }}
           WEBHOOK_URL: ${{ secrets.DISCORD_BETA_WEBHOOK_URL }}
         run: |
           curl --header "Content-Type: application/json" --request POST --data '{"content":"Micro '"$DISCUSSION_NAME"' is out!\nView full patch notes at '"$DISCUSSION_URL"'\nPlay the beta at https://mesoscopic.github.io/micro/beta\nOr download a windows/linux build at https://github.com/mesoscopic/micro/tree/beta/build"}' $WEBHOOK_URL
