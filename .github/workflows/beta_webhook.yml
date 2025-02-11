@@ -1,4 +1,4 @@
-name: Deploy multiple branches
+name: Post beta announcement
 
 on:
   discussion:
@@ -6,7 +6,7 @@ on:
 jobs:
   post:
     if: >-
-      github.event.discussion.discussion.category.slug == "betas"
+      github.event.discussion.discussion.category.slug == 'betas'
     runs-on: ubuntu-latest
     steps:
       - name: Post message to Discord server
