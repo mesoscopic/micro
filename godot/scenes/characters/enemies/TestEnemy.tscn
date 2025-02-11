@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dyl2gjyhyce57"]
+[gd_scene load_steps=13 format=3 uid="uid://dyl2gjyhyce57"]
 
 [ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="1_j0iy0"]
 [ext_resource type="Script" path="res://scripts/characters/enemies/test_enemy.gd" id="1_mj6mb"]
 [ext_resource type="Shader" path="res://shaders/enemy.gdshader" id="2_3uu62"]
+[ext_resource type="PackedScene" uid="uid://b2erii1hcv0u0" path="res://scenes/characters/RangeAggro.tscn" id="4_bwbvg"]
 [ext_resource type="Shader" path="res://shaders/sphere_particle.gdshader" id="4_thfgp"]
+[ext_resource type="PackedScene" uid="uid://diissjbt0i6uj" path="res://scenes/characters/HurtAggro.tscn" id="5_7p6f5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_10i4l"]
 shader = ExtResource("2_3uu62")
@@ -30,8 +32,8 @@ emission_sphere_radius = 10.0
 radial_velocity_min = 40.0
 radial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
-scale_min = 2.0
-scale_max = 3.0
+scale_min = 3.0
+scale_max = 6.0
 scale_curve = SubResource("CurveTexture_n2nc4")
 
 [node name="TestEnemy" type="CharacterBody2D"]
@@ -45,6 +47,13 @@ light = 75
 render = SubResource("ShaderMaterial_10i4l")
 always_visible = true
 
+[node name="RangeAggro" parent="." instance=ExtResource("4_bwbvg")]
+scale = Vector2(0.998148, 1)
+aggro_range = 60
+deaggro_range = 175
+
+[node name="HurtAggro" parent="." instance=ExtResource("5_7p6f5")]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lf7y5")
 
@@ -57,10 +66,5 @@ one_shot = true
 explosiveness = 1.0
 
 [node name="FiringCooldown" type="Timer" parent="."]
-autostart = true
-
-[node name="WaveCooldown" type="Timer" parent="."]
-wait_time = 6.0
-autostart = true
 
 [connection signal="timeout" from="FiringCooldown" to="." method="_on_firing_cooldown_timeout"]

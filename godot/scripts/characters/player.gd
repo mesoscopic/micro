@@ -12,6 +12,8 @@ const shoot_cooldown = 0.5;
 var dash_direction := Vector2.ZERO;
 
 func _ready():
+	hurt.connect(_hurt)
+	die.connect(_die)
 	Micro.player = self
 
 func _physics_process(delta):
@@ -86,3 +88,10 @@ func _on_dash_area_body_entered(body: Node2D) -> void:
 
 func regen_tick():
 	heal(1)
+
+func _hurt():
+	$HurtEffect.restart()
+
+func _die():
+	# todo
+	pass

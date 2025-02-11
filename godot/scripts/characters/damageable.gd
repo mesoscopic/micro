@@ -7,6 +7,9 @@ var hp := max_hp
 @export var invincible: bool = false
 var ticks_since_damage = 0
 
+signal hurt
+signal die
+
 func tick():
 	ticks_since_damage += 1
 	if ticks_since_damage == 3:
@@ -21,16 +24,10 @@ func damage(amount: int):
 	ticks_since_damage = 0
 	if hp <= 0:
 		invincible = true
-		_die()
+		die.emit()
 	else:
-		_hurt()
+		hurt.emit()
 
 func heal(amount: int):
 	hp = min(max_hp, hp + amount)
 	$Character/Render.material.set("shader_parameter/health", float(hp)/float(max_hp))
-
-func _die():
-	pass
-
-func _hurt():
-	pass

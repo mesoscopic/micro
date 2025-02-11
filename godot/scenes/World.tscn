@@ -38,6 +38,6 @@ texture = SubResource("PlaceholderTexture2D_2bd5p")
 [node name="SpawnNest" parent="." instance=ExtResource("1_kopsk")]
 
 [node name="TestEnemy" parent="." instance=ExtResource("5_gw0vu")]
-position = Vector2(-85, 0)
+position = Vector2(-100, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_yrunw")]

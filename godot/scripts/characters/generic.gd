@@ -1,7 +1,7 @@
 extends Node2D
 class_name Character
 
-@export_enum("Background tile", "Foreground tile", "Moving entity", "Particle", "Player") var layer: int
+@export_enum("Background tile", "Foreground tile", "Moving entity", "Item", "Player") var layer: int
 @export var size: int = 20
 @export var light: int = 0
 @export var render: ShaderMaterial

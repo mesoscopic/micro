@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5ngw4dqrx3xm"]
+
+[ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="1_d7ebu"]
+[ext_resource type="Shader" path="res://shaders/upgrades/simple_poly.gdshader" id="2_3oa7w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pdlq5"]
+shader = ExtResource("2_3oa7w")
+shader_parameter/shape = 0
+shader_parameter/poly_count = 1.0
+
+[node name="TestUpgrade" type="Node2D"]
+
+[node name="Character" parent="." instance=ExtResource("1_d7ebu")]
+layer = 3
+light = 30
+render = SubResource("ShaderMaterial_pdlq5")
