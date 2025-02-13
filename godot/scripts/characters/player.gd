@@ -42,7 +42,7 @@ func _physics_process(delta):
 			var bullet = BULLET.instantiate()
 			bullet.global_position = get_aim_position()
 			bullet.velocity = Vector2.from_angle(aim) * 80. + velocity/2.
-			bullet.lifetime = 3.
+			bullet.lifetime = 3. if dash_direction == Vector2.ZERO else .5
 			bullet.damage = 10 if dash_direction == Vector2.ZERO else 15
 			get_tree().current_scene.get_node("Game/World").add_child(bullet)
 		$ShootCooldown.start(shoot_cooldown)
