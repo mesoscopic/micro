@@ -15,4 +15,4 @@ jobs:
           DISCUSSION_URL: ${{ github.event.discussion.html_url }}
           WEBHOOK_URL: ${{ secrets.DISCORD_BETA_WEBHOOK_URL }}
         run: |
-          curl --header "Content-Type: application/json" --request POST --data '{"content":"Micro '"$DISCUSSION_NAME"' is out!\nView full patch notes at '"$DISCUSSION_URL"'\nPlay the beta at <https://mesoscopic.github.io/micro/beta>\nOr download a windows/linux build at <https://github.com/mesoscopic/micro/tree/beta/build>"}' $WEBHOOK_URL
+          curl --header "Content-Type: application/json" --request POST --data '{"content":"'"$DISCUSSION_NAME"' is out!\nView full patch notes at '"$DISCUSSION_URL"'\nPlay the beta at <https://mesoscopic.github.io/micro/beta>\nOr download a windows/linux build at <https://github.com/mesoscopic/micro/tree/beta/build>"}' $WEBHOOK_URL
