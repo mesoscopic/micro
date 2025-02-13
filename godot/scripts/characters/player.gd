@@ -10,6 +10,7 @@ const deceleration = 400;
 const shoot_cooldown = 0.5;
 
 var dash_direction := Vector2.ZERO;
+var boost_amount := 1.
 
 func _ready():
 	hurt.connect(_hurt)
@@ -21,15 +22,16 @@ func _physics_process(delta):
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	$AimMarker.global_position = get_aim_position()
 	$AimMarker.emitting = $ShootCooldown.is_stopped()
+	var boosted = !$UltraDuration.is_stopped()
 	if dash_direction != Vector2.ZERO:
 		velocity = dash_direction * max_speed * 10
 	else:
 		if direction != Vector2.ZERO:
-			velocity = velocity.move_toward(direction * max_speed, acceleration * delta)
+			velocity = velocity.move_toward(direction * max_speed * boost_amount, acceleration * (2 if boosted else 1) * delta)
 		else:
-			velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
+			velocity = velocity.move_toward(Vector2.ZERO, deceleration / boost_amount * delta)
 		
-	$Character/Render.material.set("shader_parameter/velocity", (velocity / max_speed) if (dash_direction == Vector2.ZERO) else dash_direction)
+	$Character/Render.material.set("shader_parameter/velocity", (velocity / max(max_speed, velocity.length())))
 	$Character/Render.material.set("shader_parameter/can_dash", $DashCooldown.is_stopped())
 	move_and_slide()
 	
@@ -41,9 +43,11 @@ func _physics_process(delta):
 			bullet.global_position = get_aim_position()
 			bullet.velocity = Vector2.from_angle(aim) * 80. + velocity/2.
 			bullet.lifetime = 3.
-			bullet.damage = 10
+			bullet.damage = 10 if dash_direction == Vector2.ZERO else 15
 			get_tree().current_scene.get_node("Game/World").add_child(bullet)
 		$ShootCooldown.start(shoot_cooldown)
+		if dash_direction != Vector2.ZERO:
+			end_dash(true)
 	
 	if Input.is_action_just_pressed("dash") and $DashCooldown.is_stopped():
 		start_dash()
@@ -70,12 +74,20 @@ func start_dash():
 	$Dashline.rotation = dash_direction.angle()
 	$Dashline.emitting = true
 
-func end_dash():
+func end_dash(early: bool = false):
+	if early: 
+		$DashDuration.stop()
+		boost_amount *= (1.5 if boost_amount == 1 else 1.2)
+		$UltraDuration.stop()
+		$UltraDuration.start($DashCooldown.time_left + 0.2)
+		$UltraEffect.amount_ratio = -1/boost_amount + 1
+		$UltraEffect.modulate.a = -1/boost_amount + 1
+		$UltraEffect.emitting = true
 	invincible = false
 	$DashArea.monitoring = false
-	$Afterimage.emitting = false
 	$Dashline.emitting = false
-	velocity = dash_direction * max_speed
+	$Afterimage.emitting = false
+	velocity = dash_direction * max_speed * boost_amount
 	dash_direction = Vector2.ZERO
 
 func _on_dash_cooldown_timeout() -> void:
@@ -95,3 +107,7 @@ func _hurt():
 func _die():
 	# todo
 	pass
+
+func _end_ultra() -> void:
+	boost_amount = 1.
+	$UltraEffect.emitting = false

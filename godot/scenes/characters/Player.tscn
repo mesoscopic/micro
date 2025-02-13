@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b14dvx67drebc"]
+[gd_scene load_steps=29 format=3 uid="uid://b14dvx67drebc"]
 
 [ext_resource type="Script" path="res://scripts/characters/player.gd" id="1_1im8n"]
 [ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="2_8klxi"]
@@ -133,6 +133,28 @@ scale_max = 6.0
 scale_curve = SubResource("CurveTexture_p6ejv")
 alpha_curve = SubResource("CurveTexture_yortb")
 
+[sub_resource type="Curve" id="Curve_1h7f1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_samvy"]
+curve = SubResource("Curve_1h7f1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wlwhf"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.0
+angle_min = 45.0
+angle_max = 45.0
+direction = Vector3(-1, 0, 0)
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 5.0
+alpha_curve = SubResource("CurveTexture_samvy")
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 16
 collision_mask = 5
@@ -207,7 +229,18 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 0.8
 
+[node name="UltraDuration" type="Timer" parent="."]
+wait_time = 1.2
+one_shot = true
+
+[node name="UltraEffect" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_wlwhf")
+lifetime = 0.5
+
 [connection signal="timeout" from="DashDuration" to="." method="end_dash"]
 [connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="body_entered" from="DashArea" to="." method="_on_dash_area_body_entered"]
 [connection signal="timeout" from="RegenTimer" to="." method="regen_tick"]
+[connection signal="timeout" from="UltraDuration" to="." method="_end_ultra"]

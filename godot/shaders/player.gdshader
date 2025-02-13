@@ -17,5 +17,5 @@ void fragment() {
 	if (d < 1.0 && d > 0.8) {
 		c = can_dash?1.0:0.75;
 	}
-	COLOR = vec4(1.0, 1.0, 1.0, c*opacity);
+	COLOR.a *= c*opacity;
 }

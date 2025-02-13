@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" path="res://scripts/characters/generic.gd" id="1_mj12y"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_fm3xv"]
+[sub_resource type="Gradient" id="Gradient_ns4qr"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_64ryf"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_71c5c"]
+gradient = SubResource("Gradient_ns4qr")
 width = 1
 height = 1
-noise = SubResource("FastNoiseLite_fm3xv")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hvjck"]
 
@@ -15,7 +16,7 @@ noise = SubResource("FastNoiseLite_fm3xv")
 script = ExtResource("1_mj12y")
 
 [node name="Render" type="Sprite2D" parent="."]
-texture = SubResource("NoiseTexture2D_64ryf")
+texture = SubResource("GradientTexture2D_71c5c")
 
 [node name="Occlusion" type="Area2D" parent="."]
 collision_layer = 256
