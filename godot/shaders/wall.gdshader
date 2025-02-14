@@ -10,6 +10,6 @@ void fragment() {
 	if(sin(20.0*(UV.x + UV.y)) < -0.8){
 		c = 1.0;
 	}
-	
+
 	COLOR = vec4(1.0, 1.0, 1.0, c*opacity);
 }

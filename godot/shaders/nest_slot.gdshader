@@ -8,6 +8,6 @@ void fragment() {
 	if ((UV.x > 0.1 && UV.x < 0.9 && UV.y > 0.1 && UV.y < 0.9)&&((UV.x > 0.1 && UV.x < 0.2-s) || (UV.x > 0.8+s && UV.x < 0.9) || (UV.y > 0.1 && UV.y < 0.2-s) || (UV.y > 0.8+s && UV.y < 0.9))) {
 		c = 1.0;
 	}
-	
+
 	COLOR = vec4(1.0, 1.0, 1.0, c*opacity);
 }

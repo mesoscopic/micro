@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://b14dvx67drebc"]
+[gd_scene load_steps=30 format=3 uid="uid://b14dvx67drebc"]
 
 [ext_resource type="Script" path="res://scripts/characters/player.gd" id="1_1im8n"]
 [ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="2_8klxi"]
+[ext_resource type="PackedScene" uid="uid://wwjxod2at3t3" path="res://scenes/Camera.tscn" id="2_nkqiv"]
 [ext_resource type="Shader" path="res://shaders/player.gdshader" id="4_0t1y4"]
 [ext_resource type="Shader" path="res://shaders/dash_ghost.gdshader" id="4_d5c1n"]
 
@@ -161,6 +162,8 @@ collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_1im8n")
 
+[node name="Camera" parent="." instance=ExtResource("2_nkqiv")]
+
 [node name="Character" parent="." instance=ExtResource("2_8klxi")]
 layer = 4
 light = 100
@@ -168,9 +171,6 @@ render = SubResource("ShaderMaterial_nvxwv")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
 
 [node name="AimMarker" type="GPUParticles2D" parent="."]
 amount = 6
