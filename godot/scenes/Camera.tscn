@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://wwjxod2at3t3"]
 
-[ext_resource type="Script" path="res://scripts/global_particles.gd" id="1_14tc0"]
+[ext_resource type="Script" uid="uid://chy20mxivcjvj" path="res://scripts/global_particles.gd" id="1_14tc0"]
 
 [sub_resource type="Curve" id="Curve_1shwr"]
 _data = [Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -47,7 +47,7 @@ autostart = true
 rotation = -6.28319
 emitting = false
 amount = 30
-process_material = SubResource("ParticleProcessMaterial_gbpsr")
 lifetime = 8.0
+process_material = SubResource("ParticleProcessMaterial_gbpsr")
 
 [connection signal="timeout" from="GlobalParticles/UpdateAmounts" to="GlobalParticles" method="_update_amounts"]

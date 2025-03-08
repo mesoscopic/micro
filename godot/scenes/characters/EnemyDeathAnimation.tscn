@@ -1,8 +1,8 @@
 [gd_scene load_steps=16 format=3 uid="uid://diqdkbr3crus3"]
 
-[ext_resource type="Script" path="res://scripts/characters/enemy_death_animation.gd" id="1_jqxkc"]
-[ext_resource type="Shader" path="res://shaders/sphere_particle.gdshader" id="1_qw1nt"]
-[ext_resource type="Shader" path="res://shaders/enemy.gdshader" id="2_dolrr"]
+[ext_resource type="Script" uid="uid://bgocxycd6xam0" path="res://scripts/characters/enemy_death_animation.gd" id="1_jqxkc"]
+[ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://shaders/sphere_particle.gdshader" id="1_qw1nt"]
+[ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://shaders/enemy.gdshader" id="2_dolrr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sxsfr"]
 shader = ExtResource("1_qw1nt")

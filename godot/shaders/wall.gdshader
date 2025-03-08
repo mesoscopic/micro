@@ -1,5 +1,8 @@
 shader_type canvas_item;
 
+#include "lygia/sdf/rectSDF.gdshaderinc"
+#include "lygia/draw/stroke.gdshaderinc"
+
 uniform float opacity = 1.0;
 
 void fragment() {
@@ -11,5 +14,5 @@ void fragment() {
 		c = 1.0;
 	}
 
-	COLOR = vec4(1.0, 1.0, 1.0, c*opacity);
+	COLOR.a *= opacity * c;
 }

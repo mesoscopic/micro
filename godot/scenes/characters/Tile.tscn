@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://44mpusw70x28"]
 
-[ext_resource type="Script" path="res://scripts/characters/tile.gd" id="1_dfypw"]
+[ext_resource type="Script" uid="uid://huho8heqbvv8" path="res://scripts/characters/tile.gd" id="1_dfypw"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5lvpu"]
 light_mode = 2

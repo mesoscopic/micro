@@ -58,7 +58,8 @@ float materialMetallic() {
 #else
     vec3 diffuse = materialAlbedo().rgb;
     vec3 specular = materialSpecular();
-    metallic = toMetallic(diffuse, specular);
+	float maxSpecula = max(max(specular.r, specular.g), specular.b);
+    metallic = toMetallic(diffuse, specular, maxSpecula);
 #endif
 
     return metallic;

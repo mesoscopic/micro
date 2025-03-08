@@ -7,3 +7,7 @@ func _process(delta):
 		$BottomLeft/Tile.text = "Tile: %s" % round(Micro.player.global_position / 20.)
 		var spores = Micro.player.get_node("Camera/GlobalParticles/Spores")
 		$BottomRight/Spores.text = "Spores %s @ %s" % ["ON" if spores.emitting else "OFF", spores.amount_ratio]
+
+func _first_shown() -> void:
+	if Micro.world:
+		$TopLeft/Seed.text = "World seed: %s" % Micro.world.world_seed

@@ -1,8 +1,10 @@
 shader_type canvas_item;
 
+#include "lygia/draw/fill.gdshaderinc"
+
 void fragment() {
-	vec2 uv = (UV - vec2(0.5)) * 2.0;
-	if (sqrt(uv.x*uv.x + uv.y*uv.y) > 1.) {
-		COLOR.a = 0.;
-	}
+	vec2 xy = (UV - vec2(0.5)) * 2.0;
+	float d = length(xy);
+
+	COLOR.a *= fill(d, 1.);
 }

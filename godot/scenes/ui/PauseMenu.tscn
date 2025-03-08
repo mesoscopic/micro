@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://e34y636bg76y"]
 
-[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_5eetr"]
+[ext_resource type="Script" uid="uid://cowf8lcpmdwgh" path="res://scripts/pause_menu.gd" id="1_5eetr"]
 [ext_resource type="FontFile" uid="uid://cfcgixnpb2wbw" path="res://assets/fonts/Krypton.ttf" id="1_hpbkc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_verg1"]

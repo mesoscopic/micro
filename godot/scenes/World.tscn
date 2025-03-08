@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://qujhsvriffxk"]
 
-[ext_resource type="Shader" path="res://shaders/bg.gdshader" id="1_gia2e"]
+[ext_resource type="Shader" uid="uid://0vacnrh74wjb" path="res://shaders/bg.gdshader" id="1_gia2e"]
 [ext_resource type="PackedScene" uid="uid://cas1ebkgs1kfw" path="res://scenes/structures/SpawnNest.tscn" id="1_kopsk"]
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_ndgmm"]
+[ext_resource type="Script" uid="uid://ce6jxw7xe1a86" path="res://scripts/game.gd" id="1_ndgmm"]
 [ext_resource type="PackedScene" uid="uid://b14dvx67drebc" path="res://scenes/characters/Player.tscn" id="1_yrunw"]
 [ext_resource type="PackedScene" uid="uid://dyl2gjyhyce57" path="res://scenes/characters/enemies/TestEnemy.tscn" id="5_gw0vu"]
 
@@ -45,10 +45,10 @@ script = ExtResource("1_ndgmm")
 
 [node name="Spores" type="GPUParticles2D" parent="."]
 amount = 100
-process_material = SubResource("ParticleProcessMaterial_2nmfm")
 lifetime = 15.0
 preprocess = 20.0
 visibility_rect = Rect2(-1500, -1500, 3000, 3000)
+process_material = SubResource("ParticleProcessMaterial_2nmfm")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -70,9 +70,11 @@ material = SubResource("ShaderMaterial_0ir6e")
 scale = Vector2(400, 400)
 texture = SubResource("PlaceholderTexture2D_2bd5p")
 
-[node name="SpawnNest" parent="." instance=ExtResource("1_kopsk")]
+[node name="Structures" type="Node2D" parent="."]
 
-[node name="TestEnemy" parent="." instance=ExtResource("5_gw0vu")]
+[node name="SpawnNest" parent="Structures" instance=ExtResource("1_kopsk")]
+
+[node name="TestEnemy" parent="Structures" instance=ExtResource("5_gw0vu")]
 position = Vector2(-100, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_yrunw")]

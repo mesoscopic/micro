@@ -1,11 +1,11 @@
 [gd_scene load_steps=14 format=3 uid="uid://b3ruxmindyv4y"]
 
 [ext_resource type="PackedScene" uid="uid://ba8r52rcgnydu" path="res://scenes/Splash.tscn" id="1_ijsoa"]
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_j1yuf"]
+[ext_resource type="Script" uid="uid://d1jr2f50q66j1" path="res://scripts/main.gd" id="1_j1yuf"]
 [ext_resource type="PackedScene" uid="uid://dopi38qw7h67h" path="res://scenes/shapes/Diamond.tscn" id="2_2kwd5"]
-[ext_resource type="Script" path="res://scripts/ui/blur.gd" id="2_8q41b"]
-[ext_resource type="Shader" path="res://assets/shaders/shaderx.gdshader" id="3_vkgri"]
-[ext_resource type="Shader" path="res://assets/shaders/shadery.gdshader" id="4_2ms0a"]
+[ext_resource type="Script" uid="uid://buvjqx446hadf" path="res://scripts/ui/blur.gd" id="2_8q41b"]
+[ext_resource type="Shader" uid="uid://bgvn8g52snud5" path="res://assets/shaders/shaderx.gdshader" id="3_vkgri"]
+[ext_resource type="Shader" uid="uid://pa6tc8tnq5u2" path="res://assets/shaders/shadery.gdshader" id="4_2ms0a"]
 [ext_resource type="PackedScene" uid="uid://b3eu3aqi46l3u" path="res://scenes/ui/DebugOverlay.tscn" id="6_hkwgg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_koa5f"]
@@ -77,9 +77,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2awcr"]
 _data = {
-"RESET": SubResource("Animation_bi3yf"),
-"wipe_in": SubResource("Animation_fsgsw"),
-"wipe_out": SubResource("Animation_lpyua")
+&"RESET": SubResource("Animation_bi3yf"),
+&"wipe_in": SubResource("Animation_fsgsw"),
+&"wipe_out": SubResource("Animation_lpyua")
 }
 
 [node name="Main" type="Control"]
@@ -143,7 +143,7 @@ grow_vertical = 2
 [node name="ScreenWipeAnimation" type="AnimationPlayer" parent="ScreenWipe/Layer"]
 root_node = NodePath("../..")
 libraries = {
-"": SubResource("AnimationLibrary_2awcr")
+&"": SubResource("AnimationLibrary_2awcr")
 }
 
 [node name="Diamond" parent="ScreenWipe/Layer" instance=ExtResource("2_2kwd5")]

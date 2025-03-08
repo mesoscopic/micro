@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8fwsw7kc6lgd"]
-
-[ext_resource type="Script" path="res://scenes/shapes/Lattice.gd" id="1_cu8re"]
-
-[node name="Lattice" type="Node2D"]
-script = ExtResource("1_cu8re")
-color = Color(1, 1, 1, 1)

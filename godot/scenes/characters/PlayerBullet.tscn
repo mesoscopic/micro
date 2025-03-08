@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dnrcdtyawedjb"]
 
-[ext_resource type="Script" path="res://scripts/characters/bullet.gd" id="1_6f5oh"]
-[ext_resource type="Shader" path="res://shaders/player_bullet.gdshader" id="1_slg20"]
+[ext_resource type="Script" uid="uid://3pdmhg11c70e" path="res://scripts/characters/bullet.gd" id="1_6f5oh"]
+[ext_resource type="Shader" uid="uid://csnb2kx6uvrj6" path="res://shaders/player_bullet.gdshader" id="1_slg20"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_epu1g"]
 resource_local_to_scene = true
@@ -9,7 +9,7 @@ shader = ExtResource("1_slg20")
 shader_parameter/explode_anim = 0.0
 
 [sub_resource type="Gradient" id="Gradient_lpqw0"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_hw8tv"]
 resource_local_to_scene = true
@@ -98,8 +98,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7ldk5"]
 _data = {
-"RESET": SubResource("Animation_r3uyc"),
-"explode": SubResource("Animation_rnuid")
+&"RESET": SubResource("Animation_r3uyc"),
+&"explode": SubResource("Animation_rnuid")
 }
 
 [sub_resource type="Curve" id="Curve_7qh73"]
@@ -141,18 +141,18 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_7ldk5")
+&"": SubResource("AnimationLibrary_7ldk5")
 }
 autoplay = "RESET"
 
 [node name="Particles" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 10
-process_material = SubResource("ParticleProcessMaterial_lyp1f")
 lifetime = 0.25
 one_shot = true
 explosiveness = 0.95
 randomness = 0.25
+process_material = SubResource("ParticleProcessMaterial_lyp1f")
 
 [connection signal="body_entered" from="." to="." method="_on_collide"]
 [connection signal="timeout" from="Timer" to="." method="_on_expire"]

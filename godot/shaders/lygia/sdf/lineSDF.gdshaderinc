@@ -11,7 +11,7 @@ use: lineSDF(<vec2> st, <vec2> A, <vec2> B)
 float lineSDF( in vec2 st, in vec2 a, in vec2 b ) {
     vec2 b_to_a = b - a;
     vec2 to_a = st - a;
-    float h = saturate(dot(to_a, b_to_a)/dot(b_to_a, b_to_a));
+    float h = FNC_SATURATE(dot(to_a, b_to_a)/dot(b_to_a, b_to_a));
     return length(to_a - h * b_to_a );
 }
 

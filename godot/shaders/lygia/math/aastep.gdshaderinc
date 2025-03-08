@@ -16,14 +16,8 @@ examples:
 #endif
 
 float aastep(float threshold, float value) {
-#if !defined(GL_ES) || __VERSION__ >= 300 || defined(GL_OES_standard_derivatives)
-    float afwidth = 0.7 * length(vec2(dFdx(value), dFdy(value)));
+	// godot will complain because the shader type isn't defined but this works when used in an actual shader
+	float afwidth = 0.7 * length(vec2(dFdx(value), dFdy(value)));
     return smoothstep(threshold-afwidth, threshold+afwidth, value);
-#elif defined(AA_EDGE)
-    float afwidth = AA_EDGE;
-    return smoothstep(threshold-afwidth, threshold+afwidth, value);
-#else 
-    return step(threshold, value);
-#endif
 }
 #endif

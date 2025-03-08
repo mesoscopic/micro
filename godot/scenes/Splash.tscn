@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ba8r52rcgnydu"]
 
-[ext_resource type="Script" path="res://scripts/splash.gd" id="1_2b6ft"]
+[ext_resource type="Script" uid="uid://8i8felc8ads7" path="res://scripts/splash.gd" id="1_2b6ft"]
 [ext_resource type="Texture2D" uid="uid://cbi67e7tu5s8i" path="res://assets/icons/mesoscopic.svg" id="2_7brp2"]
 [ext_resource type="FontFile" uid="uid://cfcgixnpb2wbw" path="res://assets/fonts/Krypton.ttf" id="2_730k0"]
 [ext_resource type="Texture2D" uid="uid://d3ef885lehcwr" path="res://assets/icons/godot_engine.svg" id="4_g6ldx"]
@@ -39,8 +39,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2oe5b"]
 _data = {
-"RESET": SubResource("Animation_8sdh2"),
-"fade_in": SubResource("Animation_2xvoc")
+&"RESET": SubResource("Animation_8sdh2"),
+&"fade_in": SubResource("Animation_2xvoc")
 }
 
 [node name="Splash" type="Control"]

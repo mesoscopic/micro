@@ -9,7 +9,6 @@ license:
     - Copyright (c) 2021 Patricio Gonzalez Vivo under Patron License - https://lygia.xyz/license
 */
 
-#if !defined(FNC_SATURATE) && !defined(saturate)
-#define FNC_SATURATE
-#define saturate(V) clamp(V, 0.0, 1.0)
+#if !defined(FNC_SATURATE)
+#define FNC_SATURATE(V) clamp(V, 0.0, 1.0)
 #endif

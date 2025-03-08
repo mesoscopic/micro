@@ -1,10 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://b14dvx67drebc"]
+[gd_scene load_steps=16 format=3 uid="uid://b14dvx67drebc"]
 
-[ext_resource type="Script" path="res://scripts/characters/player.gd" id="1_1im8n"]
+[ext_resource type="Script" uid="uid://de3rlx01ibq3d" path="res://scripts/characters/player.gd" id="1_1im8n"]
 [ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="2_8klxi"]
 [ext_resource type="PackedScene" uid="uid://wwjxod2at3t3" path="res://scenes/Camera.tscn" id="2_nkqiv"]
-[ext_resource type="Shader" path="res://shaders/player.gdshader" id="4_0t1y4"]
-[ext_resource type="Shader" path="res://shaders/dash_ghost.gdshader" id="4_d5c1n"]
+[ext_resource type="Shader" uid="uid://ja0tditl2iqa" path="res://shaders/player.gdshader" id="4_0t1y4"]
+[ext_resource type="PackedScene" uid="uid://0hra43oryyg4" path="res://scenes/abilities/Dash.tscn" id="5_wr4u2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nvxwv"]
 shader = ExtResource("4_0t1y4")
@@ -21,6 +21,7 @@ emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
 emission_ring_radius = 4.0
 emission_ring_inner_radius = 4.0
+emission_ring_cone_angle = 90.0
 angle_min = 45.0
 angle_max = 45.0
 gravity = Vector3(0, 0, 0)
@@ -28,85 +29,6 @@ radial_accel_min = -20.0
 radial_accel_max = -20.0
 scale_min = 0.25
 scale_max = 1.5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oa7yy"]
-shader = ExtResource("4_d5c1n")
-
-[sub_resource type="Curve" id="Curve_baswc"]
-_data = [Vector2(0, 1), 0.0, -2.93837, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_jlvt4"]
-curve = SubResource("Curve_baswc")
-
-[sub_resource type="Curve" id="Curve_1sgaw"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.51171, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_qqjxf"]
-curve = SubResource("Curve_1sgaw")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ejtmp"]
-particle_flag_disable_z = true
-gravity = Vector3(0, 0, 0)
-scale_min = 20.0
-scale_max = 20.0
-scale_curve = SubResource("CurveTexture_qqjxf")
-alpha_curve = SubResource("CurveTexture_jlvt4")
-
-[sub_resource type="Curve" id="Curve_y8kdx"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_cmitb"]
-curve = SubResource("Curve_y8kdx")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tbpya"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(0, 10, 0)
-angle_min = 45.0
-angle_max = 45.0
-direction = Vector3(-1, 0, 0)
-spread = 10.0
-initial_velocity_min = 10.0
-initial_velocity_max = 40.0
-gravity = Vector3(0, 0, 0)
-damping_min = 5.0
-damping_max = 15.0
-scale_max = 3.0
-alpha_curve = SubResource("CurveTexture_cmitb")
-
-[sub_resource type="Curve" id="Curve_0b12x"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_t7qaw"]
-curve = SubResource("Curve_0b12x")
-
-[sub_resource type="Curve" id="Curve_dxo3f"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.14286, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_heyqt"]
-curve = SubResource("Curve_dxo3f")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rgloq"]
-particle_flag_disable_z = true
-emission_shape = 6
-emission_ring_axis = Vector3(0, 0, 1)
-emission_ring_height = 1.0
-emission_ring_radius = 5.0
-emission_ring_inner_radius = 3.0
-angle_min = 45.0
-angle_max = 45.0
-radial_velocity_min = 30.0
-radial_velocity_max = 70.0
-radial_velocity_curve = SubResource("CurveTexture_heyqt")
-gravity = Vector3(0, 0, 0)
-scale_min = 0.5
-scale_max = 1.25
-alpha_curve = SubResource("CurveTexture_t7qaw")
 
 [sub_resource type="Curve" id="Curve_x1jv4"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -174,49 +96,15 @@ polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)
 
 [node name="AimMarker" type="GPUParticles2D" parent="."]
 amount = 6
-process_material = SubResource("ParticleProcessMaterial_58oe3")
 lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_58oe3")
 
 [node name="ShootCooldown" type="Timer" parent="."]
 one_shot = true
 
-[node name="Afterimage" type="GPUParticles2D" parent="."]
-material = SubResource("ShaderMaterial_oa7yy")
-emitting = false
-amount = 30
-process_material = SubResource("ParticleProcessMaterial_ejtmp")
-lifetime = 0.5
+[node name="Abilities" type="Node2D" parent="."]
 
-[node name="Dashline" type="GPUParticles2D" parent="."]
-emitting = false
-amount = 128
-process_material = SubResource("ParticleProcessMaterial_tbpya")
-
-[node name="DashDuration" type="Timer" parent="."]
-wait_time = 0.15
-one_shot = true
-
-[node name="DashCooldown" type="Timer" parent="."]
-one_shot = true
-
-[node name="Restore" type="GPUParticles2D" parent="."]
-emitting = false
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_rgloq")
-lifetime = 0.5
-one_shot = true
-explosiveness = 1.0
-
-[node name="DashArea" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 8
-monitoring = false
-monitorable = false
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DashArea"]
-position = Vector2(9.53674e-07, 9.53674e-07)
-scale = Vector2(1.25, 1.25)
-polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)
+[node name="Dash" parent="Abilities" instance=ExtResource("5_wr4u2")]
 
 [node name="RegenTimer" type="Timer" parent="."]
 wait_time = 0.3
@@ -224,10 +112,10 @@ autostart = true
 
 [node name="HurtEffect" type="GPUParticles2D" parent="."]
 emitting = false
-process_material = SubResource("ParticleProcessMaterial_d7jle")
 lifetime = 0.5
 one_shot = true
 explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_d7jle")
 
 [node name="UltraDuration" type="Timer" parent="."]
 wait_time = 1.2
@@ -236,11 +124,8 @@ one_shot = true
 [node name="UltraEffect" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 64
-process_material = SubResource("ParticleProcessMaterial_wlwhf")
 lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_wlwhf")
 
-[connection signal="timeout" from="DashDuration" to="." method="end_dash"]
-[connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
-[connection signal="body_entered" from="DashArea" to="." method="_on_dash_area_body_entered"]
 [connection signal="timeout" from="RegenTimer" to="." method="regen_tick"]
 [connection signal="timeout" from="UltraDuration" to="." method="_end_ultra"]

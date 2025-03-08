@@ -12,6 +12,8 @@ const shoot_cooldown = 0.5;
 var dash_direction := Vector2.ZERO;
 var boost_amount := 1.
 
+var selected_ability: int = 0
+
 func _ready():
 	hurt.connect(_hurt)
 	die.connect(_die)
@@ -32,7 +34,7 @@ func _physics_process(delta):
 			velocity = velocity.move_toward(Vector2.ZERO, deceleration / boost_amount * delta)
 		
 	$Character/Render.material.set("shader_parameter/velocity", (velocity / max(max_speed, velocity.length())))
-	$Character/Render.material.set("shader_parameter/can_dash", $DashCooldown.is_stopped())
+	$Character/Render.material.set("shader_parameter/can_dash", ($Abilities/Dash.can_dash() if has_ability("Dash") else true))
 	move_and_slide()
 	
 	if Input.is_action_pressed("shoot"):
@@ -42,15 +44,20 @@ func _physics_process(delta):
 			var bullet = BULLET.instantiate()
 			bullet.global_position = get_aim_position()
 			bullet.velocity = Vector2.from_angle(aim) * 80. + velocity/2.
-			bullet.lifetime = 3. if dash_direction == Vector2.ZERO else .5
+			bullet.lifetime = 3. if dash_direction == Vector2.ZERO else .25
 			bullet.damage = 10 if dash_direction == Vector2.ZERO else 15
 			get_tree().current_scene.get_node("Game/World").add_child(bullet)
 		$ShootCooldown.start(shoot_cooldown)
 		if dash_direction != Vector2.ZERO:
-			end_dash(true)
+			$Abilities/Dash.end_dash(true)
 	
-	if Input.is_action_just_pressed("dash") and $DashCooldown.is_stopped():
-		start_dash()
+	if Input.is_action_just_pressed("use_ability") and selected_ability >= 0:
+		$Abilities.get_child(selected_ability).activate()
+	
+	if Input.is_action_just_pressed("next_ability") and selected_ability >= 0:
+		selected_ability = wrap(selected_ability + 1, 0, $Abilities.get_children().size() - 1)
+	if Input.is_action_just_pressed("previous_ability") and selected_ability >= 0:
+		selected_ability = wrap(selected_ability - 1, 0, $Abilities.get_children().size() - 1)
 
 func get_aim_position() -> Vector2:
 	var space_state = get_world_2d().direct_space_state
@@ -64,40 +71,6 @@ func get_aim_position() -> Vector2:
 	else:
 		return direction
 
-func start_dash():
-	invincible = true
-	$DashArea.monitoring = true
-	$DashDuration.start()
-	$DashCooldown.start()
-	$Afterimage.emitting = true
-	dash_direction = get_local_mouse_position().normalized()
-	$Dashline.rotation = dash_direction.angle()
-	$Dashline.emitting = true
-
-func end_dash(early: bool = false):
-	if early: 
-		$DashDuration.stop()
-		boost_amount *= (1.5 if boost_amount == 1 else 1.2)
-		$UltraDuration.stop()
-		$UltraDuration.start($DashCooldown.time_left + 0.2)
-		$UltraEffect.amount_ratio = -1/boost_amount + 1
-		$UltraEffect.modulate.a = -1/boost_amount + 1
-		$UltraEffect.emitting = true
-	invincible = false
-	$DashArea.monitoring = false
-	$Dashline.emitting = false
-	$Afterimage.emitting = false
-	velocity = dash_direction * max_speed * boost_amount
-	dash_direction = Vector2.ZERO
-
-func _on_dash_cooldown_timeout() -> void:
-	$Restore.emitting = true
-
-
-func _on_dash_area_body_entered(body: Node2D) -> void:
-	if body is Damageable:
-		body.damage(20)
-
 func regen_tick():
 	heal(1)
 
@@ -108,6 +81,17 @@ func _die():
 	# todo
 	pass
 
+func _do_ultra(duration: float) -> void:
+	boost_amount *= (1.5 if boost_amount == 1 else 1.2)
+	$UltraDuration.stop()
+	$UltraDuration.start(duration)
+	$UltraEffect.amount_ratio = -1/boost_amount + 1
+	$UltraEffect.modulate.a = -1/boost_amount + 1
+	$UltraEffect.emitting = true
+
 func _end_ultra() -> void:
 	boost_amount = 1.
 	$UltraEffect.emitting = false
+
+func has_ability(ability_name: NodePath) -> bool:
+	return $Abilities.has_node(ability_name)

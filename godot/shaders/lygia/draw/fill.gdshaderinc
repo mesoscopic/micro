@@ -13,11 +13,10 @@ license:
 
 #ifndef FNC_FILL
 #define FNC_FILL
-float fill(float x, float size, float edge) {
-    return 1.0 - smoothstep(size - edge, size + edge, x);
-}
-
 float fill(float x, float size) {
     return 1.0 - aastep(size, x);
+}
+float fill(float x, float size, float edge) {
+    return 1.0 - smoothstep(size - edge, size + edge, x);
 }
 #endif

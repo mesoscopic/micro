@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://b1if5acbehiib"]
 
-[ext_resource type="Script" path="res://scripts/startrunmenu.gd" id="1_bwlxp"]
+[ext_resource type="Script" uid="uid://cy22rysuoir7f" path="res://scripts/startrunmenu.gd" id="1_bwlxp"]
 [ext_resource type="PackedScene" uid="uid://dopi38qw7h67h" path="res://scenes/shapes/Diamond.tscn" id="2_m7h72"]
 [ext_resource type="FontFile" uid="uid://cfcgixnpb2wbw" path="res://assets/fonts/Krypton.ttf" id="3_jfphj"]
 
@@ -85,8 +85,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h0mgd"]
 _data = {
-"RESET": SubResource("Animation_elhxr"),
-"menu_show": SubResource("Animation_hyfwm")
+&"RESET": SubResource("Animation_elhxr"),
+&"menu_show": SubResource("Animation_hyfwm")
 }
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ubjcs"]

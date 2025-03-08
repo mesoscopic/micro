@@ -3,8 +3,8 @@
 
 /*
 contributors:  Inigo Quiles
-description: Union operation of two SDFs 
-use: <float> opUnion( in <float|vec4> d1, in <float|vec4> d2 [, <float> smooth_factor] ) 
+description: Union operation of two SDFs
+use: <float> opUnion( in <float|vec4> d1, in <float|vec4> d2 [, <float> smooth_factor] )
 */
 
 #ifndef FNC_OPUNION
@@ -22,12 +22,12 @@ Material opUnion( Material d1, Material d2 ) {
 
 // Soft union
 float opUnion( float d1, float d2, float k ) {
-    float h = saturate( 0.5 + 0.5*(d2-d1)/k );
-    return mix( d2, d1, h ) - k*h*(1.0-h); 
+    float h = FNC_SATURATE( 0.5 + 0.5*(d2-d1)/k );
+    return mix( d2, d1, h ) - k*h*(1.0-h);
 }
 
 vec4 opUnion( vec4 d1, vec4 d2, float k ) {
-    float h = saturate( 0.5 + 0.5*(d2.a - d1.a)/k );
+    float h = FNC_SATURATE( 0.5 + 0.5*(d2.a - d1.a)/k );
     vec4 result = mix(d2, d1, h);
     result.a -= k * h * (1.0 - h);
     return result;

@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsq2j66vyglxf"]
+
+[ext_resource type="PackedScene" uid="uid://cr4fsl380sykj" path="res://scenes/characters/tiles/Wall.tscn" id="1_e3fm6"]
+
+[node name="ItemShrine" type="Node2D"]
+
+[node name="Wall" parent="." instance=ExtResource("1_e3fm6")]
+position = Vector2(-40, 40)
+
+[node name="Wall2" parent="." instance=ExtResource("1_e3fm6")]
+position = Vector2(-40, -40)
+
+[node name="Wall3" parent="." instance=ExtResource("1_e3fm6")]
+position = Vector2(40, -40)
+
+[node name="Wall4" parent="." instance=ExtResource("1_e3fm6")]
+position = Vector2(40, 40)
+
+[node name="Wall5" parent="." instance=ExtResource("1_e3fm6")]
+position = Vector2(-40, -60)
+
+[node name="Wall6" parent="." instance=ExtResource("1_e3fm6")]
+position = Vector2(-60, -40)
+
+[node name="Wall7" parent="." instance=ExtResource("1_e3fm6")]
+position = Vector2(-40, 60)
+
+[node name="Wall8" parent="." instance=ExtResource("1_e3fm6")]
+position = Vector2(-60, 40)
+
+[node name="Wall9" parent="." instance=ExtResource("1_e3fm6")]
+position = Vector2(60, -40)
+
+[node name="Wall10" parent="." instance=ExtResource("1_e3fm6")]
+position = Vector2(40, -60)
+
+[node name="Wall11" parent="." instance=ExtResource("1_e3fm6")]
+position = Vector2(60, 40)
+
+[node name="Wall12" parent="." instance=ExtResource("1_e3fm6")]
+position = Vector2(40, 60)

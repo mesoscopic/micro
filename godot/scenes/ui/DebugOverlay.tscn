@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b3eu3aqi46l3u"]
 
-[ext_resource type="Script" path="res://scripts/ui/debug.gd" id="1_v6tkm"]
+[ext_resource type="Script" uid="uid://c3rt787asmy7a" path="res://scripts/ui/debug.gd" id="1_v6tkm"]
 
 [node name="DebugOverlay" type="Control"]
 layout_mode = 3
@@ -49,3 +49,15 @@ alignment = 2
 [node name="Spores" type="Label" parent="BottomRight"]
 layout_mode = 2
 text = "<Spores>"
+
+[node name="TopLeft" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 77.0
+offset_bottom = 23.0
+alignment = 2
+
+[node name="Seed" type="Label" parent="TopLeft"]
+layout_mode = 2
+text = "<Seed>"
+
+[connection signal="visibility_changed" from="." to="." method="_first_shown"]

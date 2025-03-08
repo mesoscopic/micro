@@ -15,7 +15,7 @@ license:
 #ifndef FNC_TOMETALLIC
 #define FNC_TOMETALLIC
 
-float toMetallic(const in vec3 diffuse, const in vec3 specular, const in float maxSpecular) {
+float toMetallic(const vec3 diffuse, const vec3 specular, const float maxSpecular) {
     float perceivedDiffuse = sqrt(0.299 * diffuse.r * diffuse.r + 0.587 * diffuse.g * diffuse.g + 0.114 * diffuse.b * diffuse.b);
     float perceivedSpecular = sqrt(0.299 * specular.r * specular.r + 0.587 * specular.g * specular.g + 0.114 * specular.b * specular.b);
     if (perceivedSpecular < TOMETALLIC_MIN_REFLECTANCE) {
@@ -25,12 +25,7 @@ float toMetallic(const in vec3 diffuse, const in vec3 specular, const in float m
     float b = perceivedDiffuse * (1.0 - maxSpecular) / (1.0 - TOMETALLIC_MIN_REFLECTANCE) + perceivedSpecular - 2.0 * TOMETALLIC_MIN_REFLECTANCE;
     float c = TOMETALLIC_MIN_REFLECTANCE - perceivedSpecular;
     float D = max(b * b - 4.0 * a * c, 0.0);
-    return saturate((-b + sqrt(D)) / (2.0 * a));
-}
-
-float toMetallic(const in vec3 diffuse, const in vec3 specular) {
-    float maxSpecula = max(max(specular.r, specular.g), specular.b);
-    return toMetallic(diffuse, specular, maxSpecula);
+    return FNC_SATURATE((-b + sqrt(D)) / (2.0 * a));
 }
 
 #endif

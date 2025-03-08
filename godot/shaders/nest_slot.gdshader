@@ -1,13 +1,15 @@
 shader_type canvas_item;
 
+#include "lygia/sdf/rectSDF.gdshaderinc"
+#include "lygia/draw/stroke.gdshaderinc"
+
 uniform float opacity = 1.0;
 
 void fragment() {
-	float c = 0.0;
+	vec2 xy = (UV - vec2(0.5)) * 2.0;
+	float d = rectSDF(UV, 0.7);
 	float s = 0.025 * sin(4.0*TIME) + 0.025;
-	if ((UV.x > 0.1 && UV.x < 0.9 && UV.y > 0.1 && UV.y < 0.9)&&((UV.x > 0.1 && UV.x < 0.2-s) || (UV.x > 0.8+s && UV.x < 0.9) || (UV.y > 0.1 && UV.y < 0.2-s) || (UV.y > 0.8+s && UV.y < 0.9))) {
-		c = 1.0;
-	}
 
-	COLOR = vec4(1.0, 1.0, 1.0, c*opacity);
+	COLOR.a *= opacity;
+	COLOR.a *= stroke(d, 0.9, 0.1*sin(4.0*TIME)+0.2);
 }
