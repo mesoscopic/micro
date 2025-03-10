@@ -67,4 +67,7 @@ process_material = SubResource("ParticleProcessMaterial_am044")
 
 [node name="FiringCooldown" type="Timer" parent="."]
 
+[node name="RetargetTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="FiringCooldown" to="." method="_on_firing_cooldown_timeout"]
+[connection signal="timeout" from="RetargetTimer" to="." method="target_player"]

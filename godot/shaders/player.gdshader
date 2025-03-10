@@ -13,5 +13,6 @@ void fragment() {
 	vec2 xy_shifted = xy + velocity/10.;
 	float d = (abs(xy.x) + abs(xy.y));
 	float d_shifted = (abs(xy_shifted.x) + abs(xy_shifted.y));
+	COLOR.a *= opacity;
 	COLOR.a *= clamp(stroke(d, 0.9, 0.2) * (can_dash ? 1. : 0.75) + fill(d_shifted, 0.5*health), 0., 1.);
 }

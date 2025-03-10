@@ -1,41 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsq2j66vyglxf"]
+[gd_scene load_steps=3 format=3 uid="uid://bsq2j66vyglxf"]
 
 [ext_resource type="PackedScene" uid="uid://cr4fsl380sykj" path="res://scenes/characters/tiles/Wall.tscn" id="1_e3fm6"]
+[ext_resource type="PackedScene" uid="uid://ddd3twqttei4j" path="res://scenes/characters/tiles/Light.tscn" id="2_h10y8"]
 
 [node name="ItemShrine" type="Node2D"]
 
-[node name="Wall" parent="." instance=ExtResource("1_e3fm6")]
-position = Vector2(-40, 40)
-
-[node name="Wall2" parent="." instance=ExtResource("1_e3fm6")]
-position = Vector2(-40, -40)
-
-[node name="Wall3" parent="." instance=ExtResource("1_e3fm6")]
-position = Vector2(40, -40)
-
-[node name="Wall4" parent="." instance=ExtResource("1_e3fm6")]
-position = Vector2(40, 40)
-
 [node name="Wall5" parent="." instance=ExtResource("1_e3fm6")]
-position = Vector2(-40, -60)
+position = Vector2(-30, -50)
 
 [node name="Wall6" parent="." instance=ExtResource("1_e3fm6")]
-position = Vector2(-60, -40)
+position = Vector2(-50, -30)
 
 [node name="Wall7" parent="." instance=ExtResource("1_e3fm6")]
-position = Vector2(-40, 60)
+position = Vector2(-30, 50)
 
 [node name="Wall8" parent="." instance=ExtResource("1_e3fm6")]
-position = Vector2(-60, 40)
+position = Vector2(-50, 30)
 
 [node name="Wall9" parent="." instance=ExtResource("1_e3fm6")]
-position = Vector2(60, -40)
+position = Vector2(50, -30)
 
 [node name="Wall10" parent="." instance=ExtResource("1_e3fm6")]
-position = Vector2(40, -60)
+position = Vector2(30, -50)
 
 [node name="Wall11" parent="." instance=ExtResource("1_e3fm6")]
-position = Vector2(60, 40)
+position = Vector2(50, 30)
 
 [node name="Wall12" parent="." instance=ExtResource("1_e3fm6")]
-position = Vector2(40, 60)
+position = Vector2(30, 50)
+
+[node name="Light" parent="." instance=ExtResource("2_h10y8")]
+position = Vector2(-30, -30)
+
+[node name="Light2" parent="." instance=ExtResource("2_h10y8")]
+position = Vector2(30, 30)

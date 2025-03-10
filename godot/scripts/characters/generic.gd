@@ -1,11 +1,18 @@
 extends Node2D
 class_name Character
 
+## The layer this character is in. Characters occlude those in lower layers.
 @export_enum("Background tile", "Foreground tile", "Moving entity", "Item", "Player") var layer: int
+## The size of this character in units. 20 units is 1 tile.
 @export var size: int = 20
+## The size of this character's light in units. 20 units is 1 tile.
 @export var light: int = 0
+## The ShaderMaterial used to render this character.
 @export var render: ShaderMaterial
+## If this entity should always be faintly visible when on screen.
 @export var always_visible: bool = false
+## If the light emitted from this entity should be dimmer and more even.
+@export var ambient_light: bool = false
 
 var alpha_base: float = 1.0
 var light_multiplier: float = 0.0
@@ -37,7 +44,11 @@ func _physics_process(_delta):
 	if light > 0:
 		for area in $Light.get_overlapping_areas():
 			var c = area.get_parent()
-			var strength = 1.0-((abs(global_position[0]-c.global_position[0])+abs(global_position[1]-c.global_position[1]))/float(light))
+			var strength: float
+			if ambient_light:
+				strength = 0.3*smoothstep(1.0, 0.7, (abs(global_position[0]-c.global_position[0])+abs(global_position[1]-c.global_position[1]))/float(light))
+			else:
+				strength = 1.0-((abs(global_position[0]-c.global_position[0])+abs(global_position[1]-c.global_position[1]))/float(light))
 			if strength > 0: c.light_multiplier = min(1.0, c.light_multiplier+strength)
 
 func _process(_delta):

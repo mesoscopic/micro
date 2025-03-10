@@ -19,6 +19,10 @@ func _on_firing_cooldown_timeout() -> void:
 
 func _aggro() -> void:
 	$FiringCooldown.start()
+	$RetargetTimer.start()
+	target_player()
 
 func _deaggro() -> void:
 	$FiringCooldown.stop()
+	$RetargetTimer.stop()
+	wander()
