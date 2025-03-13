@@ -67,26 +67,29 @@ func change_aggro(_method: AggroMethod):
 
 func wander_target() -> Vector2:
 	var new_target := global_position + Vector2.from_angle(randf_range(0,2*PI)) * wander_length
-	while raycast(new_target):
+	while check(new_target):
 		new_target = global_position + Vector2.from_angle(randf_range(0,2*PI)) * wander_length
 	return new_target
 
 func player_target() -> Vector2:
-	if raycast(Micro.player.position):
+	if check(Micro.player.position):
 		var angle1 := get_angle_to(Micro.player.position)
 		var angle2 := get_angle_to(Micro.player.position)
-		while raycast(Vector2.from_angle(angle1) * turn_length + global_position) && raycast(Vector2.from_angle(angle2) * turn_length + global_position):
+		while check(Vector2.from_angle(angle1) * turn_length + global_position) && check(Vector2.from_angle(angle2) * turn_length + global_position):
 			angle1 -= PI/8.
 			angle2 += PI/8.
-		if !raycast(Vector2.from_angle(angle1) * turn_length + global_position):
+		if !check(Vector2.from_angle(angle1) * turn_length + global_position):
 			return Vector2.from_angle(angle1) * turn_length + global_position
-		elif !raycast(Vector2.from_angle(angle2) * turn_length + global_position):
+		elif !check(Vector2.from_angle(angle2) * turn_length + global_position):
 			return Vector2.from_angle(angle2) * turn_length + global_position
 	return Micro.player.position
 
-func raycast(to: Vector2, from: Vector2 = global_position) -> bool:
-	var query = PhysicsRayQueryParameters2D.create(from, to, 1)
-	return get_world_2d().direct_space_state.intersect_ray(query) != {}
+func check(to: Vector2) -> bool:
+	var query = PhysicsTestMotionParameters2D.new()
+	query.from = global_transform
+	query.motion = to - global_position
+	return PhysicsServer2D.body_test_motion(get_rid(), query)
+	
 
 func target_player():
 	wandering = false
