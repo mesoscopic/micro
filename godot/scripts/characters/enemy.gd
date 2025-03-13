@@ -11,6 +11,8 @@ var speed_multiplier := 1.
 @export var wander_speed_mult := .5
 var path_target: Vector2
 var wandering: bool = true
+var starting_position: Vector2
+var can_set_start: bool = true
 
 const DEATH_ANIMATION = preload("res://scenes/characters/EnemyDeathAnimation.tscn")
 
@@ -73,18 +75,24 @@ func wander_target() -> Vector2:
 
 func player_target() -> Vector2:
 	if check(Micro.player.position):
+		if can_set_start:
+			starting_position = global_position
+			can_set_start = false
 		var angle1 := get_angle_to(Micro.player.position)
 		var angle2 := get_angle_to(Micro.player.position)
-		while check(Vector2.from_angle(angle1) * turn_length + global_position) && check(Vector2.from_angle(angle2) * turn_length + global_position):
+		while check(Vector2.from_angle(angle1) * turn_length + global_position, true) && check(Vector2.from_angle(angle2) * turn_length + global_position, true):
 			angle1 -= PI/8.
 			angle2 += PI/8.
+			if angle1 == angle2: return Micro.player.position
 		if !check(Vector2.from_angle(angle1) * turn_length + global_position):
 			return Vector2.from_angle(angle1) * turn_length + global_position
 		elif !check(Vector2.from_angle(angle2) * turn_length + global_position):
 			return Vector2.from_angle(angle2) * turn_length + global_position
+	can_set_start = true
 	return Micro.player.position
 
-func check(to: Vector2) -> bool:
+func check(to: Vector2, avoid_starting_position: bool = false) -> bool:
+	if avoid_starting_position && (starting_position.distance_squared_to(to) <= starting_position.distance_squared_to(global_position)): return true
 	var query = PhysicsTestMotionParameters2D.new()
 	query.from = global_transform
 	query.motion = to - global_position

@@ -50,10 +50,6 @@ preprocess = 20.0
 visibility_rect = Rect2(-1500, -1500, 3000, 3000)
 process_material = SubResource("ParticleProcessMaterial_2nmfm")
 
-[node name="Line2D" type="Line2D" parent="."]
-width = 2.0
-default_color = Color(0.494118, 0.207843, 0, 1)
-
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]

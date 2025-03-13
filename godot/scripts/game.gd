@@ -9,7 +9,6 @@ func _ready():
 	Micro.world = self
 	random.seed = world_seed
 	generate_world()
-	$Structures/TestEnemy.repath.connect(_enemy_path_visualize)
 
 # --------------
 # World gen code
@@ -30,8 +29,3 @@ func structure_at(structure: PackedScene, pos: Vector2) -> Node2D:
 
 func place(thing: Node2D):
 	$Structures.add_child(thing)
-
-func _enemy_path_visualize() -> void:
-	$Line2D.clear_points()
-	$Line2D.add_point($Structures/TestEnemy.global_position)
-	$Line2D.add_point($Structures/TestEnemy.path_target)
