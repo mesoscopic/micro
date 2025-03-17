@@ -107,7 +107,6 @@ one_shot = true
 [node name="Dash" parent="Abilities" instance=ExtResource("5_wr4u2")]
 
 [node name="RegenTimer" type="Timer" parent="."]
-wait_time = 0.3
 autostart = true
 
 [node name="HurtEffect" type="GPUParticles2D" parent="."]

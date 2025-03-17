@@ -1,14 +1,8 @@
 extends Ability
 
 func _ready():
-	trigger.connect(_on_trigger)
-
-func _on_trigger():
-	if $Cooldown.is_stopped():
-		start_dash()
-
-func can_dash() -> bool:
-	return $Cooldown.is_stopped()
+	super()
+	trigger.connect(start_dash)
 
 func start_dash():
 	player.invincible = true

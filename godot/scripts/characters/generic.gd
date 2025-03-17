@@ -6,7 +6,16 @@ class_name Character
 ## The size of this character in units. 20 units is 1 tile.
 @export var size: int = 20
 ## The size of this character's light in units. 20 units is 1 tile.
-@export var light: int = 0
+@export var light: int = 0:
+	get:
+		return light
+	set(new_light):
+		light = new_light
+		if light == 0:
+			$Light/Area.set_deferred("disabled", true)
+		else:
+			$Light/Area.set_deferred("disabled", false)
+			$Light/Area.set_scale(Vector2(light, light))
 ## The ShaderMaterial used to render this character.
 @export var render: ShaderMaterial
 ## If this entity should always be faintly visible when on screen.
@@ -28,12 +37,10 @@ func _ready():
 		$Light/Area.disabled = true
 	else:
 		$Light/Area.disabled = false
-		$Light/Area.apply_scale(Vector2(light, light))
+		$Light/Area.set_scale(Vector2(light, light))
 
 
 func _physics_process(_delta):
-	alpha_base = 1.0
-	light_multiplier = 0.0 if light == 0 else 1.0
 	if layer != 0:
 		for area in $Occlusion.get_overlapping_areas():
 			var c = area.get_parent()
@@ -44,6 +51,7 @@ func _physics_process(_delta):
 	if light > 0:
 		for area in $Light.get_overlapping_areas():
 			var c = area.get_parent()
+			if c == self: continue
 			var strength: float
 			if ambient_light:
 				strength = 0.3*smoothstep(1.0, 0.7, (abs(global_position[0]-c.global_position[0])+abs(global_position[1]-c.global_position[1]))/float(light))
@@ -53,3 +61,5 @@ func _physics_process(_delta):
 
 func _process(_delta):
 	if $Render.material: $Render.material.set("shader_parameter/opacity", alpha_base * max(light_multiplier, 0.1 if always_visible else 0.))
+	alpha_base = 1.0
+	light_multiplier = float(light)/50. if light < 50 else 1.0

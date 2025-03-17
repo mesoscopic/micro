@@ -34,7 +34,7 @@ func _physics_process(delta):
 			velocity = velocity.move_toward(Vector2.ZERO, deceleration / boost_amount * delta)
 		
 	$Character/Render.material.set("shader_parameter/velocity", (velocity / max(max_speed, velocity.length())))
-	$Character/Render.material.set("shader_parameter/can_dash", ($Abilities/Dash.can_dash() if has_ability("Dash") else true))
+	$Character/Render.material.set("shader_parameter/can_dash", ($Abilities.get_child(selected_ability).available() if selected_ability >= 0 else true))
 	move_and_slide()
 	
 	if Input.is_action_pressed("shoot"):
@@ -43,7 +43,7 @@ func _physics_process(delta):
 			var aim = get_local_mouse_position().angle() + i*PI/16
 			var bullet = BULLET.instantiate()
 			bullet.global_position = get_aim_position()
-			bullet.velocity = Vector2.from_angle(aim) * 80. + velocity/2.
+			bullet.velocity = Vector2.from_angle(aim) * 80. * (1+0.5*velocity.length()/max_speed)
 			bullet.lifetime = 3. if dash_direction == Vector2.ZERO else .25
 			bullet.damage = 10 if dash_direction == Vector2.ZERO else 15
 			get_tree().current_scene.get_node("Game/World").add_child(bullet)

@@ -83,8 +83,9 @@ scale_min = 0.5
 scale_max = 1.25
 alpha_curve = SubResource("CurveTexture_t7qaw")
 
-[node name="Dash" type="Node2D"]
+[node name="Dash" type="Node2D" node_paths=PackedStringArray("timer")]
 script = ExtResource("1_qc7mc")
+timer = NodePath("Cooldown")
 
 [node name="Afterimage" type="GPUParticles2D" parent="."]
 material = SubResource("ShaderMaterial_xidau")
