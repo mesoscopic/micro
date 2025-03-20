@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://ba8r52rcgnydu"]
+[gd_scene load_steps=7 format=3 uid="uid://ba8r52rcgnydu"]
 
 [ext_resource type="Script" uid="uid://8i8felc8ads7" path="res://scripts/splash.gd" id="1_2b6ft"]
 [ext_resource type="Texture2D" uid="uid://cbi67e7tu5s8i" path="res://assets/icons/mesoscopic.svg" id="2_7brp2"]
-[ext_resource type="FontFile" uid="uid://cfcgixnpb2wbw" path="res://assets/fonts/Krypton.ttf" id="2_730k0"]
 [ext_resource type="Texture2D" uid="uid://d3ef885lehcwr" path="res://assets/icons/godot_engine.svg" id="4_g6ldx"]
 
 [sub_resource type="Animation" id="Animation_8sdh2"]
@@ -55,7 +54,7 @@ script = ExtResource("1_2b6ft")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_2oe5b")
+&"": SubResource("AnimationLibrary_2oe5b")
 }
 autoplay = "fade_in"
 
@@ -74,7 +73,6 @@ theme_override_constants/margin_bottom = 50
 [node name="VersionInformation" type="RichTextLabel" parent="MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_fonts/normal_font = ExtResource("2_730k0")
 theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
 text = "[center]Micro <version>
@@ -84,7 +82,6 @@ fit_content = true
 [node name="BuildInfo" type="Label" parent="MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("2_730k0")
 theme_override_font_sizes/font_size = 20
 text = "<status> - <os>"
 horizontal_alignment = 1
@@ -113,7 +110,6 @@ expand_mode = 4
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_730k0")
 theme_override_font_sizes/font_size = 40
 text = "mesoscopic
 gamedev"

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Micro"
-config/version="v0.0.0-10.0"
+config/version="v0.0.0-11.0"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
@@ -28,6 +28,11 @@ Micro="*res://scripts/micro.gd"
 
 window/size/mode=3
 window/stretch/mode="canvas_items"
+
+[gui]
+
+fonts/dynamic_fonts/use_oversampling=false
+theme/custom_font="uid://dspopkf3f3p5g"
 
 [input]
 

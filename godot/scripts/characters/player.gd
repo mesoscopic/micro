@@ -14,10 +14,15 @@ var boost_amount := 1.
 
 var selected_ability: int = 0
 
+var funds: int = 0
+var fund_buffer: int = 0
+var fund_animation: int = 0
+
 func _ready():
 	hurt.connect(_hurt)
 	die.connect(_die)
 	Micro.player = self
+	$FundsDisplay/HBoxContainer/Label.text = "%s" % funds
 
 func _physics_process(delta):
 	tick()
@@ -58,6 +63,19 @@ func _physics_process(delta):
 		selected_ability = wrap(selected_ability + 1, 0, $Abilities.get_children().size() - 1)
 	if Input.is_action_just_pressed("previous_ability") and selected_ability >= 0:
 		selected_ability = wrap(selected_ability - 1, 0, $Abilities.get_children().size() - 1)
+	
+	if fund_buffer > 0:
+		if fund_animation != 36:
+			$FundsDisplay.show()
+			fund_animation = 36
+		funds += ceil(fund_buffer/20.)
+		fund_buffer -= ceil(fund_buffer/20.)
+		$FundsDisplay/HBoxContainer/Label.text = "%s" % funds
+	elif fund_animation > 1:
+		fund_animation -= 1
+	elif fund_animation == 1:
+		fund_animation = 0
+		$FundsDisplay.hide()
 
 func get_aim_position() -> Vector2:
 	var space_state = get_world_2d().direct_space_state

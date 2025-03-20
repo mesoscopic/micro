@@ -2,7 +2,6 @@ shader_type canvas_item;
 
 #include "lygia/draw/stroke.gdshaderinc"
 #include "lygia/draw/fill.gdshaderinc"
-#include "lygia/sdf/opUnion.gdshaderinc"
 
 uniform float health = 1.0;
 uniform float opacity = 1.0;

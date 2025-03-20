@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://e34y636bg76y"]
+[gd_scene load_steps=9 format=3 uid="uid://e34y636bg76y"]
 
 [ext_resource type="Script" uid="uid://cowf8lcpmdwgh" path="res://scripts/pause_menu.gd" id="1_5eetr"]
-[ext_resource type="FontFile" uid="uid://cfcgixnpb2wbw" path="res://assets/fonts/Krypton.ttf" id="1_hpbkc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_verg1"]
 
@@ -61,7 +60,6 @@ theme_override_constants/margin_bottom = 40
 
 [node name="Label" type="Label" parent="Menu/VBoxContainer/MarginContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_hpbkc")
 theme_override_font_sizes/font_size = 40
 text = "Paused"
 horizontal_alignment = 1
@@ -72,7 +70,6 @@ mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
-theme_override_fonts/font = ExtResource("1_hpbkc")
 theme_override_font_sizes/font_size = 35
 theme_override_styles/focus = SubResource("StyleBoxEmpty_verg1")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_d0b5s")
@@ -87,7 +84,6 @@ mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
-theme_override_fonts/font = ExtResource("1_hpbkc")
 theme_override_font_sizes/font_size = 35
 theme_override_styles/focus = SubResource("StyleBoxEmpty_verg1")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_d0b5s")
@@ -102,7 +98,6 @@ mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
-theme_override_fonts/font = ExtResource("1_hpbkc")
 theme_override_font_sizes/font_size = 35
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ev1h7")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8helu")

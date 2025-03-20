@@ -1,10 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://b14dvx67drebc"]
+[gd_scene load_steps=21 format=3 uid="uid://b14dvx67drebc"]
 
 [ext_resource type="Script" uid="uid://de3rlx01ibq3d" path="res://scripts/characters/player.gd" id="1_1im8n"]
 [ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="2_8klxi"]
 [ext_resource type="PackedScene" uid="uid://wwjxod2at3t3" path="res://scenes/Camera.tscn" id="2_nkqiv"]
 [ext_resource type="Shader" uid="uid://ja0tditl2iqa" path="res://shaders/player.gdshader" id="4_0t1y4"]
 [ext_resource type="PackedScene" uid="uid://0hra43oryyg4" path="res://scenes/abilities/Dash.tscn" id="5_wr4u2"]
+[ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://shaders/funds.gdshader" id="6_rpfb3"]
+[ext_resource type="FontFile" uid="uid://dspopkf3f3p5g" path="res://assets/fonts/Krypton.otf" id="7_miirx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nvxwv"]
 shader = ExtResource("4_0t1y4")
@@ -78,6 +80,17 @@ scale_min = 3.0
 scale_max = 5.0
 alpha_curve = SubResource("CurveTexture_samvy")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_miirx"]
+shader = ExtResource("6_rpfb3")
+
+[sub_resource type="Gradient" id="Gradient_m6phi"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oihyf"]
+gradient = SubResource("Gradient_m6phi")
+width = 8
+height = 8
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 16
 collision_mask = 5
@@ -125,6 +138,39 @@ emitting = false
 amount = 64
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_wlwhf")
+
+[node name="FundsDisplay" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, 30)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FundsDisplay"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -5.0
+offset_right = 20.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="FundsDisplay/HBoxContainer"]
+material = SubResource("ShaderMaterial_miirx")
+layout_mode = 2
+texture = SubResource("GradientTexture2D_oihyf")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="FundsDisplay/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("7_miirx")
+theme_override_font_sizes/font_size = 9
+text = "0"
 
 [connection signal="timeout" from="RegenTimer" to="." method="regen_tick"]
 [connection signal="timeout" from="UltraDuration" to="." method="_end_ultra"]

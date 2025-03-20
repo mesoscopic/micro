@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://b1if5acbehiib"]
+[gd_scene load_steps=16 format=3 uid="uid://b1if5acbehiib"]
 
 [ext_resource type="Script" uid="uid://cy22rysuoir7f" path="res://scripts/startrunmenu.gd" id="1_bwlxp"]
 [ext_resource type="PackedScene" uid="uid://dopi38qw7h67h" path="res://scenes/shapes/Diamond.tscn" id="2_m7h72"]
-[ext_resource type="FontFile" uid="uid://cfcgixnpb2wbw" path="res://assets/fonts/Krypton.ttf" id="3_jfphj"]
 
 [sub_resource type="Animation" id="Animation_elhxr"]
 length = 0.001
@@ -122,7 +121,7 @@ script = ExtResource("1_bwlxp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_h0mgd")
+&"": SubResource("AnimationLibrary_h0mgd")
 }
 autoplay = "menu_show"
 
@@ -155,7 +154,6 @@ theme_override_constants/margin_bottom = 60
 
 [node name="Label" type="Label" parent="Menu/VBoxContainer/MarginContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_jfphj")
 theme_override_font_sizes/font_size = 80
 text = "Micro"
 
@@ -165,7 +163,6 @@ mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
-theme_override_fonts/font = ExtResource("3_jfphj")
 theme_override_font_sizes/font_size = 35
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ubjcs")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_arrat")
@@ -180,7 +177,6 @@ mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
-theme_override_fonts/font = ExtResource("3_jfphj")
 theme_override_font_sizes/font_size = 35
 theme_override_styles/focus = SubResource("StyleBoxEmpty_jhjnr")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_4fiux")
@@ -195,7 +191,6 @@ mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
-theme_override_fonts/font = ExtResource("3_jfphj")
 theme_override_font_sizes/font_size = 35
 theme_override_styles/focus = SubResource("StyleBoxEmpty_v1pwt")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_yfo8u")

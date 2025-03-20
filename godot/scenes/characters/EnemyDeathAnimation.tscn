@@ -23,16 +23,10 @@ curve = SubResource("Curve_vcs7t")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j114o"]
 particle_flag_disable_z = true
-orbit_velocity_min = 9.49949e-08
-orbit_velocity_max = 9.49949e-08
 radial_velocity_min = -2.23517e-05
 radial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
-radial_accel_min = -2000.0
-radial_accel_max = -2000.0
 radial_accel_curve = SubResource("CurveTexture_fophx")
-damping_min = 80.0
-damping_max = 80.0
 scale_min = 2.0
 scale_max = 4.0
 alpha_curve = SubResource("CurveTexture_yolx1")
@@ -71,21 +65,21 @@ script = ExtResource("1_jqxkc")
 [node name="ExplosionParticles" type="GPUParticles2D" parent="."]
 material = SubResource("ShaderMaterial_sxsfr")
 emitting = false
-amount = 500
-process_material = SubResource("ParticleProcessMaterial_j114o")
-lifetime = 2.0
+amount = 100
+lifetime = 0.75
 one_shot = true
 explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_j114o")
 
 [node name="Ring" type="GPUParticles2D" parent="."]
 material = SubResource("ShaderMaterial_nnu7a")
 emitting = false
 amount = 1
-process_material = SubResource("ParticleProcessMaterial_qkksp")
 one_shot = true
+process_material = SubResource("ParticleProcessMaterial_qkksp")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
