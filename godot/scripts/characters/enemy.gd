@@ -35,7 +35,7 @@ func _ready():
 func _die():
 	var anim = DEATH_ANIMATION.instantiate()
 	anim.global_position = global_position
-	anim.fund_drop = fund_drop + fund_drop_randomization*randf_range(-1.,1.)
+	anim.fund_drop = fund_drop + fund_drop*fund_drop_randomization*randf_range(-1.,1.)
 	add_sibling(anim)
 	queue_free()
 
