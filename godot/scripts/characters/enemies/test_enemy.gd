@@ -1,6 +1,6 @@
 extends Enemy
 
-const BULLET = preload("res://scenes/characters/EnemyBullet.tscn")
+const BULLET = preload("res://scenes/bullets/EnemyBullet.tscn")
 
 func _ready():
 	super()

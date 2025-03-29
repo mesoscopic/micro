@@ -13,8 +13,10 @@ var path_target: Vector2
 var wandering: bool = true
 var starting_position: Vector2
 var can_set_start: bool = true
+@export var fund_drop: int = 0
+@export var fund_drop_randomization: float = 0.1
 
-const DEATH_ANIMATION = preload("res://scenes/characters/EnemyDeathAnimation.tscn")
+const DEATH_ANIMATION = preload("res://scenes/fx/EnemyDeathAnimation.tscn")
 
 signal aggro
 signal deaggro
@@ -33,7 +35,8 @@ func _ready():
 func _die():
 	var anim = DEATH_ANIMATION.instantiate()
 	anim.global_position = global_position
-	get_parent().add_child(anim)
+	anim.fund_drop = fund_drop + fund_drop_randomization*randf_range(-1.,1.)
+	add_sibling(anim)
 	queue_free()
 
 func _hurt():
@@ -97,7 +100,6 @@ func check(to: Vector2, avoid_starting_position: bool = false) -> bool:
 	query.from = global_transform
 	query.motion = to - global_position
 	return PhysicsServer2D.body_test_motion(get_rid(), query)
-	
 
 func target_player():
 	wandering = false

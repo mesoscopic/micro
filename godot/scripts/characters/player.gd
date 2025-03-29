@@ -2,7 +2,7 @@ extends Damageable
 
 class_name Player
 
-const BULLET = preload("res://scenes/characters/PlayerBullet.tscn")
+const BULLET = preload("res://scenes/bullets/PlayerBullet.tscn")
 
 const max_speed = 60;
 const acceleration = 300;
@@ -15,8 +15,6 @@ var boost_amount := 1.
 var selected_ability: int = 0
 
 var funds: int = 0
-var fund_buffer: int = 0
-var fund_animation: int = 0
 
 func _ready():
 	hurt.connect(_hurt)
@@ -63,19 +61,6 @@ func _physics_process(delta):
 		selected_ability = wrap(selected_ability + 1, 0, $Abilities.get_children().size() - 1)
 	if Input.is_action_just_pressed("previous_ability") and selected_ability >= 0:
 		selected_ability = wrap(selected_ability - 1, 0, $Abilities.get_children().size() - 1)
-	
-	if fund_buffer > 0:
-		if fund_animation != 36:
-			$FundsDisplay.show()
-			fund_animation = 36
-		funds += ceil(fund_buffer/20.)
-		fund_buffer -= ceil(fund_buffer/20.)
-		$FundsDisplay/HBoxContainer/Label.text = "%s" % funds
-	elif fund_animation > 1:
-		fund_animation -= 1
-	elif fund_animation == 1:
-		fund_animation = 0
-		$FundsDisplay.hide()
 
 func get_aim_position() -> Vector2:
 	var space_state = get_world_2d().direct_space_state
@@ -113,3 +98,10 @@ func _end_ultra() -> void:
 
 func has_ability(ability_name: NodePath) -> bool:
 	return $Abilities.has_node(ability_name)
+
+func give_funds(amount: int) -> void:
+	funds += amount
+	if !Micro.loaded_settings.get("photosensitive_mode"): $FundsEffect.emit_particle(get_transform(), Vector2.ZERO, Color.WHITE, Color.WHITE, 0)
+	$FundsDisplay/HBoxContainer/Label.text = "%s" % funds
+	$FundsDisplay/AnimationPlayer.stop()
+	$FundsDisplay/AnimationPlayer.play("get_funds_simple" if Micro.loaded_settings.get("photosensitive_mode") else "get_funds")
