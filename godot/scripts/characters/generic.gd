@@ -7,8 +7,6 @@ class_name Character
 @export var size: int = 20
 ## The size of this character's light in units. 20 units is 1 tile.
 @export var light: int = 0:
-	get:
-		return light
 	set(new_light):
 		light = new_light
 		if light == 0:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://0hra43oryyg4"]
 
-[ext_resource type="Script" uid="uid://co0lj5ym7i2yf" path="res://scripts/items/dash.gd" id="1_qc7mc"]
+[ext_resource type="Script" uid="uid://co0lj5ym7i2yf" path="res://scripts/abilities/dash.gd" id="1_qc7mc"]
 [ext_resource type="Shader" uid="uid://cjhdxgx78hiya" path="res://shaders/dash_ghost.gdshader" id="2_coaln"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xidau"]

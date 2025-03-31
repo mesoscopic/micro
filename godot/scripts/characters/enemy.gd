@@ -3,7 +3,7 @@ extends Damageable
 class_name Enemy
 
 @export var speed := 50
-@export var acceleration = 300;
+@export var acceleration = 100;
 @export var deceleration = 400;
 var speed_multiplier := 1.
 @export var turn_length := 50
@@ -34,8 +34,8 @@ func _ready():
 
 func _die():
 	var anim = DEATH_ANIMATION.instantiate()
-	anim.global_position = global_position
 	anim.fund_drop = fund_drop + fund_drop*fund_drop_randomization*randf_range(-1.,1.)
+	anim.position = position
 	add_sibling(anim)
 	queue_free()
 
@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 			path_target = player_target()
 			repath.emit()
 	else:
-		velocity = velocity.move_toward((path_target - global_position).normalized() * speed * (wander_speed_mult if wandering else speed_multiplier), 100 * delta)
+		velocity = velocity.move_toward((path_target - global_position).normalized() * speed * (wander_speed_mult if wandering else speed_multiplier), acceleration * delta)
 	move_and_slide()
 	$Character/Render.material.set("shader_parameter/velocity", (velocity / max(speed, velocity.length())))
 

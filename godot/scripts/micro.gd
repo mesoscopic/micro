@@ -7,6 +7,8 @@ var menu: Node
 var player: Player
 var world: World
 
+const TRADE_COIN = preload("res://scenes/fx/TradeCoin.tscn")
+
 var loaded_settings = {
 	"photosensitive_mode": false
 }
@@ -36,3 +38,51 @@ func settings(modal: bool):
 
 func wait(time: float):
 	await get_tree().create_timer(time).timeout
+
+func show_trade_information(trader: Trader):
+	var overlay = get_tree().current_scene.get_node("UI/TradeOverlay")
+	overlay.get_node("HBoxContainer/Trader/VBoxContainer/ItemDisplay").material = trader.item.render
+	overlay.get_node("HBoxContainer/Trader/VBoxContainer/MarginContainer/HBoxContainer/Cost").text = "%s" % trader.item.cost
+	overlay.get_node("HBoxContainer/MarginContainer/VBoxContainer/Title").text = trader.item.title
+	overlay.get_node("HBoxContainer/MarginContainer/VBoxContainer/Description").text = trader.item.description
+	if !overlay.visible: overlay.get_node("Animations").play("show")
+
+func hide_trading():
+	get_tree().current_scene.get_node("UI/TradeOverlay/Animations").play("hide")
+
+func generate_trade_item() -> Upgrade:
+	return MultishotUpgrade.new()
+
+func attempt_trade(trader: Trader):
+	var overlay = get_tree().current_scene.get_node("UI/TradeOverlay")
+	var item = trader.item
+	if Micro.player.funds < item.cost:
+		overlay.get_node("Animations").play("cannot_afford")
+	else:
+		overlay.get_node("Animations").play("hide")
+		Micro.player.funds -= item.cost
+		Micro.player.get_node("FundsDisplay/HBoxContainer/Label").text = "%s" % Micro.player.funds
+		Micro.player.movement_disabled = true
+		var amount = item.cost
+		while amount > 0:
+			var coin := TRADE_COIN.instantiate()
+			coin.position = Micro.player.position
+			coin.amount = ceil(amount/8.)
+			coin.target = trader
+			Micro.player.add_sibling(coin)
+			amount -= ceil(amount/8.)
+		await wait(1.)
+		trader.item = generate_trade_item()
+		var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(Micro.player.get_node("Camera"), "global_position", Vector2.ZERO, 0.5)
+		get_tree().current_scene.get_node("Game/World/Structures/SpawnNest").activate()
+		await wait(.5)
+		get_tree().current_scene.get_node("Game/World/Structures/SpawnNest").purchased_upgrade = item
+
+func end_trade():
+	await wait(1.)
+	show_trade_information(Micro.player.chosen_trader)
+	Micro.player.movement_disabled = false
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(Micro.player.get_node("Camera"), "position", Vector2.ZERO, 0.5)
+	get_tree().current_scene.get_node("Game/World/Structures/SpawnNest").deactivate()

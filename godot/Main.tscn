@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3ruxmindyv4y"]
+[gd_scene load_steps=11 format=3 uid="uid://b3ruxmindyv4y"]
 
 [ext_resource type="PackedScene" uid="uid://ba8r52rcgnydu" path="res://scenes/Splash.tscn" id="1_ijsoa"]
 [ext_resource type="Script" uid="uid://d1jr2f50q66j1" path="res://scripts/main.gd" id="1_j1yuf"]
+[ext_resource type="PackedScene" uid="uid://dy06d53ihw0wa" path="res://scenes/ui/TradeOverlay.tscn" id="3_fos0i"]
 [ext_resource type="Shader" uid="uid://ok6qa4hqtubc" path="res://shaders/screen/wipe.gdshader" id="4_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://b3eu3aqi46l3u" path="res://scenes/ui/DebugOverlay.tscn" id="6_hkwgg"]
 
@@ -108,6 +109,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_j1yuf")
 
 [node name="Splash" parent="." instance=ExtResource("1_ijsoa")]
@@ -118,6 +120,8 @@ size_flags_stretch_ratio = 0.0
 process_mode = 1
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TradeOverlay" parent="UI" instance=ExtResource("3_fos0i")]
 
 [node name="DebugOverlay" parent="UI" instance=ExtResource("6_hkwgg")]
 visible = false
@@ -131,6 +135,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="ScreenWipeAnimation" type="AnimationPlayer" parent="ScreenWipe"]

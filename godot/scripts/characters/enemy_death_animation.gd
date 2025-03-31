@@ -9,8 +9,9 @@ func _ready():
 	$Ring.emitting = true
 	while fund_drop > 0:
 		var coin := fund_coin.instantiate()
+		coin.position = position
 		coin.amount = ceil(fund_drop/8.)
-		coin.global_position = global_position
+		coin.delay = randf_range(0., 0.25)
 		add_sibling(coin)
 		fund_drop -= ceil(fund_drop/8.)
 

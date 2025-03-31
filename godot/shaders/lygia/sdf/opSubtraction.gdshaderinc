@@ -2,8 +2,8 @@
 
 /*
 contributors:  Inigo Quiles
-description: Substraction operation of two SDFs 
-use: <float> opSubstraction( in <float> d1, in <float> d2 [, <float> smooth_factor]) 
+description: Substraction operation of two SDFs
+use: <float> opSubstraction( in <float> d1, in <float> d2 [, <float> smooth_factor])
 */
 
 #ifndef FNC_OPSUBSTRACTION

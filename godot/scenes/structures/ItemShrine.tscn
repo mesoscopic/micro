@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsq2j66vyglxf"]
+[gd_scene load_steps=4 format=3 uid="uid://bsq2j66vyglxf"]
 
 [ext_resource type="PackedScene" uid="uid://cr4fsl380sykj" path="res://scenes/characters/tiles/Wall.tscn" id="1_e3fm6"]
 [ext_resource type="PackedScene" uid="uid://ddd3twqttei4j" path="res://scenes/characters/tiles/Light.tscn" id="2_h10y8"]
+[ext_resource type="PackedScene" uid="uid://dyl2gjyhyce57" path="res://scenes/characters/enemies/TestEnemy.tscn" id="3_h7g53"]
 
 [node name="ItemShrine" type="Node2D"]
 
@@ -34,3 +35,5 @@ position = Vector2(-30, -30)
 
 [node name="Light2" parent="." instance=ExtResource("2_h10y8")]
 position = Vector2(30, 30)
+
+[node name="TestEnemy" parent="." instance=ExtResource("3_h7g53")]

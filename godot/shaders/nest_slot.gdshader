@@ -6,7 +6,6 @@ shader_type canvas_item;
 uniform float opacity = 1.0;
 
 void fragment() {
-	vec2 xy = (UV - vec2(0.5)) * 2.0;
 	float d = rectSDF(UV, 0.7);
 
 	COLOR.a *= opacity;

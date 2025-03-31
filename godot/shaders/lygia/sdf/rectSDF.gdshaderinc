@@ -27,15 +27,6 @@ float rectSDF(in vec2 st, in float s) {
                 abs(st.y / s) );
 }
 
-float rectSDF(vec2 p, vec2 b, float r) {
-    vec2 d = abs(p - 0.5) * 4.2 - b + vec2(r);
-    return min(max(d.x, d.y), 0.0) + length(max(d, 0.0)) - r;
-}
-
-float rectSDF(vec2 p, float b, float r) {
-    return rectSDF(p, vec2(b), r);
-}
-
 float rectSDF(in vec2 st, in vec2 s) {
     #ifdef CENTER_2D
         st -= CENTER_2D;
@@ -45,6 +36,15 @@ float rectSDF(in vec2 st, in vec2 s) {
     #endif
     return max( abs(st.x / s.x),
                 abs(st.y / s.y) );
+}
+
+float rectSDF(vec2 p, vec2 b, float r) {
+    vec2 d = abs(p - 0.5) * 4.2 - b + vec2(r);
+    return min(max(d.x, d.y), 0.0) + length(max(d, 0.0)) - r;
+}
+
+float rectSDF(vec2 p, float b, float r) {
+    return rectSDF(p, vec2(b), r);
 }
 
 float rectSDF(in vec2 st) {

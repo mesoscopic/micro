@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cas1ebkgs1kfw" path="res://scenes/structures/SpawnNest.tscn" id="1_kopsk"]
 [ext_resource type="Script" uid="uid://ce6jxw7xe1a86" path="res://scripts/game.gd" id="1_ndgmm"]
 [ext_resource type="PackedScene" uid="uid://b14dvx67drebc" path="res://scenes/characters/Player.tscn" id="1_yrunw"]
-[ext_resource type="PackedScene" uid="uid://dyl2gjyhyce57" path="res://scenes/characters/enemies/TestEnemy.tscn" id="5_gw0vu"]
+[ext_resource type="PackedScene" uid="uid://cww6x38j4owo7" path="res://scenes/characters/Trader.tscn" id="5_hlk0d"]
 
 [sub_resource type="Curve" id="Curve_1imk8"]
 _data = [Vector2(0, 0), 0.0, 6.42857, 0, 0, Vector2(0.486667, 1), 0.0, -3.64992, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -74,7 +74,13 @@ texture = SubResource("PlaceholderTexture2D_2bd5p")
 
 [node name="SpawnNest" parent="Structures" instance=ExtResource("1_kopsk")]
 
-[node name="TestEnemy" parent="Structures" instance=ExtResource("5_gw0vu")]
-position = Vector2(-140, -140)
+[node name="Trader" parent="Structures" instance=ExtResource("5_hlk0d")]
+position = Vector2(192, 127)
+
+[node name="Trader2" parent="Structures" instance=ExtResource("5_hlk0d")]
+position = Vector2(68, 169)
+
+[node name="Trader3" parent="Structures" instance=ExtResource("5_hlk0d")]
+position = Vector2(118, 66)
 
 [node name="Player" parent="." instance=ExtResource("1_yrunw")]

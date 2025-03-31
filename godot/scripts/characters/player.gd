@@ -4,10 +4,14 @@ class_name Player
 
 const BULLET = preload("res://scenes/bullets/PlayerBullet.tscn")
 
-const max_speed = 60;
-const acceleration = 300;
-const deceleration = 400;
-const shoot_cooldown = 0.5;
+var movement_disabled := false
+var max_speed = 60
+var acceleration = 300
+var deceleration = 400
+var shoot_cooldown = 0.5
+
+var multishot: int = 0
+var bullet_damage_mult: float = 1.
 
 var dash_direction := Vector2.ZERO;
 var boost_amount := 1.
@@ -15,6 +19,9 @@ var boost_amount := 1.
 var selected_ability: int = 0
 
 var funds: int = 0
+var trading: bool = false
+var traders: Array[Trader] = []
+var chosen_trader: Trader
 
 func _ready():
 	hurt.connect(_hurt)
@@ -24,6 +31,7 @@ func _ready():
 
 func _physics_process(delta):
 	tick()
+	if movement_disabled: return
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	$AimMarker.global_position = get_aim_position()
 	$AimMarker.emitting = $ShootCooldown.is_stopped()
@@ -42,13 +50,14 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("shoot"):
 		if $ShootCooldown.time_left > 0: return
-		for i in range(0,1):
+		for i in range(-multishot,multishot+1):
 			var aim = get_local_mouse_position().angle() + i*PI/16
 			var bullet = BULLET.instantiate()
 			bullet.global_position = get_aim_position()
 			bullet.velocity = Vector2.from_angle(aim) * 80. * (1+0.5*velocity.length()/max_speed)
 			bullet.lifetime = 3. if dash_direction == Vector2.ZERO else .25
-			bullet.damage = 10 if dash_direction == Vector2.ZERO else 15
+			bullet.damage = ceil(10*bullet_damage_mult) if dash_direction == Vector2.ZERO else ceil(15*bullet_damage_mult)
+			print(bullet.damage)
 			get_tree().current_scene.get_node("Game/World").add_child(bullet)
 		$ShootCooldown.start(shoot_cooldown)
 		if dash_direction != Vector2.ZERO:
@@ -61,6 +70,25 @@ func _physics_process(delta):
 		selected_ability = wrap(selected_ability + 1, 0, $Abilities.get_children().size() - 1)
 	if Input.is_action_just_pressed("previous_ability") and selected_ability >= 0:
 		selected_ability = wrap(selected_ability - 1, 0, $Abilities.get_children().size() - 1)
+		
+	if trading:
+		if traders.size() == 0:
+			trading = false
+			$FundsDisplay/AnimationPlayer.stop()
+			$FundsDisplay/AnimationPlayer.play("hide_funds")
+			Micro.hide_trading()
+			chosen_trader = null
+		else:
+			traders.sort_custom(func(a, b): return a.global_position.distance_squared_to(position) < b.global_position.distance_squared_to(position))
+			for i in range(traders.size()):
+				if i == 0:
+					# closest trader
+					traders[i].chosen = true
+					if traders[i] != chosen_trader:
+						chosen_trader = traders[i]
+						Micro.show_trade_information(chosen_trader)
+				else:
+					traders[i].chosen = false
 
 func get_aim_position() -> Vector2:
 	var space_state = get_world_2d().direct_space_state
@@ -84,6 +112,10 @@ func _die():
 	# todo
 	pass
 
+func _input(event: InputEvent) -> void:
+	if trading and event.is_action_pressed("ui_accept"):
+		Micro.attempt_trade(chosen_trader)
+
 func _do_ultra(duration: float) -> void:
 	boost_amount *= (1.5 if boost_amount == 1 else 1.2)
 	$UltraDuration.stop()
@@ -104,4 +136,15 @@ func give_funds(amount: int) -> void:
 	if !Micro.loaded_settings.get("photosensitive_mode"): $FundsEffect.emit_particle(get_transform(), Vector2.ZERO, Color.WHITE, Color.WHITE, 0)
 	$FundsDisplay/HBoxContainer/Label.text = "%s" % funds
 	$FundsDisplay/AnimationPlayer.stop()
-	$FundsDisplay/AnimationPlayer.play("get_funds_simple" if Micro.loaded_settings.get("photosensitive_mode") else "get_funds")
+	$FundsDisplay/AnimationPlayer.play(
+		("show_funds_simple" if Micro.loaded_settings.get("photosensitive_mode") else "show_funds")
+		if trading else # get_funds causes FundsDisplay to disappear, so we instead use show_funds which does not,
+						# but we still need a photosensitive version in this case
+		("get_funds_simple" if Micro.loaded_settings.get("photosensitive_mode") else "get_funds"))
+
+func add_trader(trader: Trader) -> void:
+	traders.append(trader)
+	if trading: return
+	trading = true
+	$FundsDisplay/AnimationPlayer.stop()
+	$FundsDisplay/AnimationPlayer.play("show_funds")
