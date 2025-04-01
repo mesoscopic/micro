@@ -40,7 +40,7 @@ scale_curve = SubResource("CurveTexture_n2nc4")
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_mj6mb")
-fund_drop = 40
+fund_drop = 200
 
 [node name="Character" parent="." instance=ExtResource("1_j0iy0")]
 layer = 2

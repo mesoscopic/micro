@@ -12,6 +12,10 @@ var shoot_cooldown = 0.5
 
 var multishot: int = 0
 var bullet_damage_mult: float = 1.
+var shoot_cooldown_mult: float = 1.
+var bullet_lifetime_mult: float = 1.
+var bullet_spread: float = 0.
+var evasion_mult: float = 1.
 
 var dash_direction := Vector2.ZERO;
 var boost_amount := 1.
@@ -40,7 +44,7 @@ func _physics_process(delta):
 		velocity = dash_direction * max_speed * 10
 	else:
 		if direction != Vector2.ZERO:
-			velocity = velocity.move_toward(direction * max_speed * boost_amount, acceleration * (2 if boosted else 1) * delta)
+			velocity = velocity.move_toward(direction * max_speed * boost_amount * (evasion_mult if $ShootCooldown.is_stopped() else 1.), acceleration * (2 if boosted else 1) * delta)
 		else:
 			velocity = velocity.move_toward(Vector2.ZERO, deceleration / boost_amount * delta)
 		
@@ -51,15 +55,14 @@ func _physics_process(delta):
 	if Input.is_action_pressed("shoot"):
 		if $ShootCooldown.time_left > 0: return
 		for i in range(-multishot,multishot+1):
-			var aim = get_local_mouse_position().angle() + i*PI/16
+			var aim = get_local_mouse_position().angle() + i*PI/16 + randf_range(-1,1)*bullet_spread
 			var bullet = BULLET.instantiate()
 			bullet.global_position = get_aim_position()
 			bullet.velocity = Vector2.from_angle(aim) * 80. * (1+0.5*velocity.length()/max_speed)
-			bullet.lifetime = 3. if dash_direction == Vector2.ZERO else .25
+			bullet.lifetime = (3. if dash_direction == Vector2.ZERO else .25)*bullet_lifetime_mult
 			bullet.damage = ceil(10*bullet_damage_mult) if dash_direction == Vector2.ZERO else ceil(15*bullet_damage_mult)
-			print(bullet.damage)
 			get_tree().current_scene.get_node("Game/World").add_child(bullet)
-		$ShootCooldown.start(shoot_cooldown)
+		$ShootCooldown.start(shoot_cooldown*shoot_cooldown_mult)
 		if dash_direction != Vector2.ZERO:
 			$Abilities/Dash.end_dash(true)
 	
@@ -113,7 +116,7 @@ func _die():
 	pass
 
 func _input(event: InputEvent) -> void:
-	if trading and event.is_action_pressed("ui_accept"):
+	if !movement_disabled and trading and event.is_action_pressed("ui_accept"):
 		Micro.attempt_trade(chosen_trader)
 
 func _do_ultra(duration: float) -> void:

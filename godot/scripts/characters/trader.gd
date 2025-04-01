@@ -45,12 +45,6 @@ func check(to: Vector2) -> bool:
 	query.motion = to
 	return PhysicsServer2D.body_test_motion(get_rid(), query)
 
-func _on_freeze_range_body_entered(_body: Node2D) -> void:
-	set_physics_process(true)
-
-func _on_freeze_range_body_exited(_body: Node2D) -> void:
-	set_physics_process(false)
-
 func _on_trade_range_body_entered(_body: Node2D) -> void:
 	trading = true
 	Micro.player.add_trader(self)

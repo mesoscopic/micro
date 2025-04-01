@@ -39,6 +39,9 @@ func _ready():
 
 
 func _physics_process(_delta):
+	if $Render.material: $Render.material.set("shader_parameter/opacity", alpha_base * max(light_multiplier, 0.1 if always_visible else 0.))
+	alpha_base = 1.0
+	light_multiplier = float(light)/50. if light < 50 else 1.0
 	if layer != 0:
 		for area in $Occlusion.get_overlapping_areas():
 			var c = area.get_parent()
@@ -56,8 +59,3 @@ func _physics_process(_delta):
 			else:
 				strength = 1.0-((abs(global_position[0]-c.global_position[0])+abs(global_position[1]-c.global_position[1]))/float(light))
 			if strength > 0: c.light_multiplier = min(1.0, c.light_multiplier+strength)
-
-func _process(_delta):
-	if $Render.material: $Render.material.set("shader_parameter/opacity", alpha_base * max(light_multiplier, 0.1 if always_visible else 0.))
-	alpha_base = 1.0
-	light_multiplier = float(light)/50. if light < 50 else 1.0

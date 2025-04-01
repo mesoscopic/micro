@@ -45,13 +45,22 @@ func show_trade_information(trader: Trader):
 	overlay.get_node("HBoxContainer/Trader/VBoxContainer/MarginContainer/HBoxContainer/Cost").text = "%s" % trader.item.cost
 	overlay.get_node("HBoxContainer/MarginContainer/VBoxContainer/Title").text = trader.item.title
 	overlay.get_node("HBoxContainer/MarginContainer/VBoxContainer/Description").text = trader.item.description
-	if !overlay.visible: overlay.get_node("Animations").play("show")
+	if !overlay.visible:
+		overlay.get_node("Animations").play("show")
+	else:
+		overlay.get_node("Animations").play("keep_shown")
 
 func hide_trading():
 	get_tree().current_scene.get_node("UI/TradeOverlay/Animations").play("hide")
 
 func generate_trade_item() -> Upgrade:
-	return MultishotUpgrade.new()
+	var item = randi_range(0, 3)
+	if item == 0:
+		return MultishotUpgrade.new()
+	elif item == 1:
+		return RecklessUpgrade.new()
+	else:
+		return EvasionUpgrade.new()
 
 func attempt_trade(trader: Trader):
 	var overlay = get_tree().current_scene.get_node("UI/TradeOverlay")

@@ -13,4 +13,4 @@ func disable() -> void:
 	pass
 
 func set_cost(base_cost) -> void:
-	cost = base_cost + int(base_cost*randf_range(-0.1,0.1))
+	cost = base_cost + round(base_cost*randf_range(-0.1,0.1))
