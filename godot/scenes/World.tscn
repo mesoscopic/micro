@@ -70,6 +70,10 @@ material = SubResource("ShaderMaterial_0ir6e")
 scale = Vector2(400, 400)
 texture = SubResource("PlaceholderTexture2D_2bd5p")
 
+[node name="WorldEnemySpawnAttempt" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
 [node name="Structures" type="Node2D" parent="."]
 
 [node name="SpawnNest" parent="Structures" instance=ExtResource("1_kopsk")]
@@ -84,3 +88,5 @@ position = Vector2(68, 169)
 position = Vector2(118, 66)
 
 [node name="Player" parent="." instance=ExtResource("1_yrunw")]
+
+[connection signal="timeout" from="WorldEnemySpawnAttempt" to="." method="spawn_attempt"]

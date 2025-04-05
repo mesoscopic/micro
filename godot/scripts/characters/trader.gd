@@ -17,7 +17,8 @@ var item: Upgrade
 
 func _ready() -> void:
 	wander()
-	item = Micro.generate_trade_item()
+	if !item: refresh()
+	Micro.refresh_trades.connect(refresh)
 
 func _physics_process(delta: float) -> void:
 	if trading:
@@ -57,3 +58,10 @@ func _on_trade_range_body_exited(_body: Node2D) -> void:
 
 func happy() -> void:
 	if !$HappyParticles.emitting: $HappyParticles.emitting = true
+
+func refresh() -> void:
+	var weights = RollWeights.new()
+	weights.add_item(MultishotUpgrade, 1)
+	weights.add_item(RecklessUpgrade, 1)
+	weights.add_item(EvasionUpgrade, 1)
+	item = Micro.roll(weights).new()

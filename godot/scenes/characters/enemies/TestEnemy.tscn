@@ -22,7 +22,7 @@ shader = ExtResource("4_thfgp")
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_n2nc4"]
+[sub_resource type="CurveTexture" id="CurveTexture_um8ux"]
 curve = SubResource("Curve_pxv7o")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_am044"]
@@ -34,7 +34,7 @@ radial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
 scale_min = 3.0
 scale_max = 6.0
-scale_curve = SubResource("CurveTexture_n2nc4")
+scale_curve = SubResource("CurveTexture_um8ux")
 
 [node name="TestEnemy" type="CharacterBody2D"]
 collision_layer = 8

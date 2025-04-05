@@ -27,7 +27,11 @@ func _on_splash_finished():
 
 func _on_start_run():
 	$UI.remove_child($UI.get_node("StartRun"))
-	$Game.add_child(WORLD.instantiate())
+	var world = WORLD.instantiate()
+	Micro.world = world
+	world.random.seed = world.world_seed
+	world.generate_world()
+	$Game.add_child(world)
 	await Micro.screen_wipe_in()
 	in_game = true
 

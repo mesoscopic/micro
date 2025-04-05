@@ -15,6 +15,8 @@ var starting_position: Vector2
 var can_set_start: bool = true
 @export var fund_drop: int = 0
 @export var fund_drop_randomization: float = 0.1
+@export var despawn_distance := 600
+@onready var despawn_distance_squared: float = despawn_distance**2
 
 const DEATH_ANIMATION = preload("res://scenes/fx/EnemyDeathAnimation.tscn")
 
@@ -47,6 +49,14 @@ func _physics_process(delta: float) -> void:
 	if global_position.distance_squared_to(path_target) < 100:
 		velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
 		if wandering:
+			if global_position.distance_squared_to(Micro.player.position) > despawn_distance_squared:
+				print("enemy despawned")
+				# 50% chance of doing another spawn attempt if this one despawns
+				# Since a lot of enemies that spawn will wander away from the player, this increases the likelihood of the player running into an enemy
+				if randi_range(1,2) == 1:
+					print("but another spawned in its place")
+					Micro.world.spawn_attempt()
+				queue_free()
 			path_target = wander_target()
 			repath.emit()
 		else:

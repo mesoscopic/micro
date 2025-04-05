@@ -13,6 +13,8 @@ var loaded_settings = {
 	"photosensitive_mode": false
 }
 
+signal refresh_trades
+
 func screen_wipe_out():
 	var SCREEN_WIPE_ANIMATOR = get_tree().current_scene.get_node("ScreenWipe/ScreenWipeAnimation")
 	SCREEN_WIPE_ANIMATOR.play("wipe_out")
@@ -53,15 +55,6 @@ func show_trade_information(trader: Trader):
 func hide_trading():
 	get_tree().current_scene.get_node("UI/TradeOverlay/Animations").play("hide")
 
-func generate_trade_item() -> Upgrade:
-	var item = randi_range(0, 3)
-	if item == 0:
-		return MultishotUpgrade.new()
-	elif item == 1:
-		return RecklessUpgrade.new()
-	else:
-		return EvasionUpgrade.new()
-
 func attempt_trade(trader: Trader):
 	var overlay = get_tree().current_scene.get_node("UI/TradeOverlay")
 	var item = trader.item
@@ -81,7 +74,7 @@ func attempt_trade(trader: Trader):
 			Micro.player.add_sibling(coin)
 			amount -= ceil(amount/8.)
 		await wait(1.)
-		trader.item = generate_trade_item()
+		refresh_trades.emit()
 		var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 		tween.tween_property(Micro.player.get_node("Camera"), "global_position", Vector2.ZERO, 0.5)
 		get_tree().current_scene.get_node("Game/World/Structures/SpawnNest").activate()
@@ -95,3 +88,13 @@ func end_trade():
 	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(Micro.player.get_node("Camera"), "position", Vector2.ZERO, 0.5)
 	get_tree().current_scene.get_node("Game/World/Structures/SpawnNest").deactivate()
+
+func roll(weights: RollWeights) -> Variant:
+	var random: RandomNumberGenerator
+	if Micro.world:
+		random = Micro.world.random
+	else:
+		random = RandomNumberGenerator.new()
+	
+	var choice: int = randi_range(1, weights.weights_sum)
+	return weights.get_item(choice)
