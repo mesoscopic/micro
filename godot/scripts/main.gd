@@ -36,6 +36,16 @@ func _on_start_run():
 	await Micro.screen_wipe_in()
 	in_game = true
 
+func _on_death():
+	$Game.remove_child(Micro.world)
+	Micro.world = null
+	get_tree().paused = false
+	await Micro.screen_wipe_in()
+	# death screen, stats, etc.
+	var run_menu = START_MENU.instantiate()
+	$UI.add_child(run_menu)
+	run_menu.play.connect(_on_start_run)
+
 func _input(_event):
 	if Input.is_action_just_pressed("open_menu") and in_game and not get_tree().paused:
 		var pause_menu = PAUSE_MENU.instantiate()

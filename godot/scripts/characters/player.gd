@@ -109,8 +109,17 @@ func _hurt():
 	$HurtEffect.restart()
 
 func _die():
-	# todo
-	pass
+	create_tween().tween_property(Engine, "time_scale", 0.1, .8)
+	await Micro.wait(1., true)
+	get_tree().paused = true
+	Engine.time_scale = 1.
+	await Micro.wait(0.5, true)
+	$DeathParticles.emitting = true
+	$Character.hide()
+	$Ring.emitting = true
+	await Micro.wait(1., true)
+	await Micro.screen_wipe_out()
+	get_tree().current_scene._on_death()
 
 func _input(event: InputEvent) -> void:
 	if !movement_disabled and trading and event.is_action_pressed("ui_accept"):

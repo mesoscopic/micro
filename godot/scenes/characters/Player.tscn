@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://b14dvx67drebc"]
+[gd_scene load_steps=44 format=3 uid="uid://b14dvx67drebc"]
 
 [ext_resource type="Script" uid="uid://de3rlx01ibq3d" path="res://scripts/characters/player.gd" id="1_1im8n"]
 [ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="2_8klxi"]
@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://0hra43oryyg4" path="res://scenes/abilities/Dash.tscn" id="5_wr4u2"]
 [ext_resource type="Shader" uid="uid://bm0iowttrwa5h" path="res://shaders/funds_sparkle.gdshader" id="6_m6phi"]
 [ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://shaders/funds.gdshader" id="6_rpfb3"]
+[ext_resource type="Shader" uid="uid://cjhdxgx78hiya" path="res://shaders/dash_ghost.gdshader" id="8_m6phi"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m6phi"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7lms1"]
 resource_local_to_scene = true
 shader = ExtResource("4_0t1y4")
 shader_parameter/health = 1.0
@@ -312,6 +313,52 @@ gradient = SubResource("Gradient_m6phi")
 width = 8
 height = 8
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ufbvs"]
+shader = ExtResource("8_m6phi")
+
+[sub_resource type="Curve" id="Curve_mqro2"]
+_data = [Vector2(0, 1), 0.0, -3.0817, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0q6kc"]
+curve = SubResource("Curve_mqro2")
+
+[sub_resource type="Curve" id="Curve_bpxo2"]
+_data = [Vector2(0, 0.125), 0.0, 5.66621, 0, 0, Vector2(0.42, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_16csq"]
+curve = SubResource("Curve_bpxo2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bb7xv"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 160.0
+scale_max = 160.0
+scale_curve = SubResource("CurveTexture_16csq")
+alpha_curve = SubResource("CurveTexture_0q6kc")
+
+[sub_resource type="Curve" id="Curve_oihyf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.28466, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7lms1"]
+curve = SubResource("Curve_oihyf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ufbvs"]
+particle_flag_disable_z = true
+angle_min = 45.0
+angle_max = 45.0
+spread = 180.0
+initial_velocity_min = 300.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 0, 0)
+damping_min = 300.0
+damping_max = 500.0
+scale_min = 2.0
+scale_max = 8.0
+alpha_curve = SubResource("CurveTexture_7lms1")
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 16
 collision_mask = 5
@@ -323,7 +370,7 @@ script = ExtResource("1_1im8n")
 [node name="Character" parent="." instance=ExtResource("2_8klxi")]
 layer = 4
 light = 100
-render = SubResource("ShaderMaterial_m6phi")
+render = SubResource("ShaderMaterial_7lms1")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)
@@ -401,5 +448,20 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 9
 text = "0"
+
+[node name="Ring" type="GPUParticles2D" parent="."]
+process_mode = 3
+material = SubResource("ShaderMaterial_ufbvs")
+emitting = false
+amount = 1
+lifetime = 4.0
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_bb7xv")
+
+[node name="DeathParticles" type="GPUParticles2D" parent="."]
+process_mode = 3
+emitting = false
+amount = 256
+process_material = SubResource("ParticleProcessMaterial_ufbvs")
 
 [connection signal="timeout" from="UltraDuration" to="." method="_end_ultra"]

@@ -39,8 +39,8 @@ func settings(modal: bool):
 	if modal: menu.be_modal()
 	await menu.done
 
-func wait(time: float, override_pause: bool = false):
-	await get_tree().create_timer(time, override_pause).timeout
+func wait(time: float, override_time: bool = false):
+	await get_tree().create_timer(time, override_time, false, override_time).timeout
 
 func worldgen_status(status: String) -> void:
 	get_tree().current_scene.get_node("ScreenWipe/StatusMessage").text = status

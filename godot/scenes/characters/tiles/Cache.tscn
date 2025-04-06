@@ -9,27 +9,27 @@
 [sub_resource type="Gradient" id="Gradient_40rxh"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_rtkwq"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qwbhg"]
 resource_local_to_scene = true
 noise_type = 2
 seed = 188
 fractal_type = 0
 cellular_return_type = 6
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pky5l"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rtkwq"]
 resource_local_to_scene = true
 width = 256
 height = 256
 color_ramp = SubResource("Gradient_40rxh")
-noise = SubResource("FastNoiseLite_rtkwq")
+noise = SubResource("FastNoiseLite_qwbhg")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_urixb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pky5l"]
 resource_local_to_scene = true
 shader = ExtResource("2_xgfmd")
 shader_parameter/opacity = 1.0
 shader_parameter/open_anim = 0.0
 shader_parameter/burn_anim = 0.0
-shader_parameter/noise = SubResource("NoiseTexture2D_pky5l")
+shader_parameter/noise = SubResource("NoiseTexture2D_rtkwq")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qwbhg"]
 shader = ExtResource("4_7011x")
@@ -148,7 +148,7 @@ script = ExtResource("1_xgfmd")
 [node name="Character" parent="." instance=ExtResource("1_40rxh")]
 layer = 1
 light = 30
-render = SubResource("ShaderMaterial_urixb")
+render = SubResource("ShaderMaterial_pky5l")
 
 [node name="FundHint" type="GPUParticles2D" parent="."]
 material = SubResource("ShaderMaterial_qwbhg")

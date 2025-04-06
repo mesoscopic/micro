@@ -41,14 +41,14 @@ shader_parameter/velocity = Vector2(0, 0)
 _data = [Vector2(0, 1), 0.0, -3.0817, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_0q6kc"]
+[sub_resource type="CurveTexture" id="CurveTexture_xb5g8"]
 curve = SubResource("Curve_smw0l")
 
 [sub_resource type="Curve" id="Curve_46tww"]
 _data = [Vector2(0, 0.25), 0.0, 5.66621, 0, 0, Vector2(0.42, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_16csq"]
+[sub_resource type="CurveTexture" id="CurveTexture_gkxl4"]
 curve = SubResource("Curve_46tww")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qkksp"]
@@ -56,8 +56,8 @@ particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
 scale_min = 80.0
 scale_max = 80.0
-scale_curve = SubResource("CurveTexture_16csq")
-alpha_curve = SubResource("CurveTexture_0q6kc")
+scale_curve = SubResource("CurveTexture_gkxl4")
+alpha_curve = SubResource("CurveTexture_xb5g8")
 
 [node name="EnemyDeathAnimation" type="Node2D"]
 script = ExtResource("1_xb5g8")

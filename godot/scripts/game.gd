@@ -11,12 +11,12 @@ func spawn_attempt() -> void:
 	if taxicab_distance < 30:
 		print("failed distance!")
 		return # Make sure the player is far enough from spawn
-	elif taxicab_distance < 60 and randi_range(1,3) != 1:
-		print("failed chance! (1 in 3)")
-		return # 1 in 3 chance to spawn if <60 tiles from spawn
-	elif taxicab_distance < 150 and randi_range(1,2) != 1:
+	elif taxicab_distance < 80 and randi_range(1,2) != 1:
 		print("failed chance! (1 in 2)")
-		return # 1 in 2 chance to spawn if >60 and <150 tiles from spawn
+		return # 1 in 2 chance to spawn if <80 tiles from spawn
+	elif taxicab_distance < 160 and randi_range(1,3) == 1:
+		print("failed chance! (2 in 3)")
+		return # 2 in 3 chance to spawn if >80 and <160 tiles from spawn
 	# Otherwise, spawn is guaranteed
 	var enemies: RollWeights = RollWeights.new()
 	enemies.add_item(preload("res://scenes/characters/enemies/BasicShooter.tscn"), 1)
