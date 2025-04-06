@@ -6,7 +6,7 @@ func _init() -> void:
 	description = "-20% recharge time, +5° spread"
 	render = ShaderMaterial.new()
 	render.shader = preload("res://shaders/upgrades/reckless.gdshader")
-	set_cost(30)
+	set_cost(45)
 
 func enable() -> void:
 	Micro.player.shoot_cooldown_mult *= 0.8

@@ -9,7 +9,7 @@
 [ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://shaders/funds.gdshader" id="6_rpfb3"]
 [ext_resource type="Shader" uid="uid://cjhdxgx78hiya" path="res://shaders/dash_ghost.gdshader" id="8_m6phi"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7lms1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m6phi"]
 resource_local_to_scene = true
 shader = ExtResource("4_0t1y4")
 shader_parameter/health = 1.0
@@ -370,7 +370,7 @@ script = ExtResource("1_1im8n")
 [node name="Character" parent="." instance=ExtResource("2_8klxi")]
 layer = 4
 light = 100
-render = SubResource("ShaderMaterial_7lms1")
+render = SubResource("ShaderMaterial_m6phi")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)

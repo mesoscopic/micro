@@ -11,10 +11,10 @@ func spawn_attempt() -> void:
 	if taxicab_distance < 30:
 		print("failed distance!")
 		return # Make sure the player is far enough from spawn
-	elif taxicab_distance < 80 and randi_range(1,2) != 1:
+	elif taxicab_distance < 60 and randi_range(1,2) != 1:
 		print("failed chance! (1 in 2)")
 		return # 1 in 2 chance to spawn if <80 tiles from spawn
-	elif taxicab_distance < 160 and randi_range(1,3) == 1:
+	elif taxicab_distance < 100 and randi_range(1,3) == 1:
 		print("failed chance! (2 in 3)")
 		return # 2 in 3 chance to spawn if >80 and <160 tiles from spawn
 	# Otherwise, spawn is guaranteed
@@ -23,8 +23,8 @@ func spawn_attempt() -> void:
 	var enemy: Enemy = Micro.roll(enemies).instantiate()
 	# Spawn the enemy 20 tiles away from the player.
 	# If you're closer to spawn, enemies will tend to come from the opposite direction to spawn.
-	var angle_randomization = taxicab_distance / 50.
-	var tile: Vector2 = (player_pos + Vector2.from_angle(player_pos.angle_to(Vector2.ZERO)+PI+randf_range(-angle_randomization,angle_randomization)) * 20.)
+	var angle_randomization = taxicab_distance / 60.
+	var tile: Vector2 = (player_pos + Vector2.from_angle(player_pos.angle_to_point(Vector2.ZERO)+PI+randf_range(-angle_randomization,angle_randomization)) * 20.)
 	enemy.position = tile * 20.
 	$Structures.add_child(enemy)
 	print("spawned an enemy at %s!" % tile)

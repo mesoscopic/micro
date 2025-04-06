@@ -6,7 +6,7 @@ func _init() -> void:
 	description = "+25% max velocity when not recharging\nFaster acceleration and deceleration"
 	render = ShaderMaterial.new()
 	render.shader = preload("res://shaders/upgrades/evasion.gdshader")
-	set_cost(25)
+	set_cost(45)
 
 func enable() -> void:
 	Micro.player.evasion_mult *= 1.25
