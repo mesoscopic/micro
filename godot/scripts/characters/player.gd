@@ -105,9 +105,6 @@ func get_aim_position() -> Vector2:
 	else:
 		return direction
 
-func regen_tick():
-	heal(1)
-
 func _hurt():
 	$HurtEffect.restart()
 

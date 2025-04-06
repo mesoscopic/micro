@@ -10,14 +10,14 @@ shader = ExtResource("2_coaln")
 _data = [Vector2(0, 1), 0.0, -2.93837, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_jlvt4"]
+[sub_resource type="CurveTexture" id="CurveTexture_yqces"]
 curve = SubResource("Curve_ue7mj")
 
 [sub_resource type="Curve" id="Curve_sldiq"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.51171, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_qqjxf"]
+[sub_resource type="CurveTexture" id="CurveTexture_bi3n6"]
 curve = SubResource("Curve_sldiq")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nma62"]
@@ -25,8 +25,8 @@ particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
 scale_min = 20.0
 scale_max = 20.0
-scale_curve = SubResource("CurveTexture_qqjxf")
-alpha_curve = SubResource("CurveTexture_jlvt4")
+scale_curve = SubResource("CurveTexture_bi3n6")
+alpha_curve = SubResource("CurveTexture_yqces")
 
 [sub_resource type="Curve" id="Curve_0ortg"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

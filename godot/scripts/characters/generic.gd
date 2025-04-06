@@ -27,14 +27,14 @@ var light_multiplier: float = 0.0
 # add any logic common to all characters here
 func _ready():
 	if render: 
-		$Render.material = render.duplicate();
+		$Render.material = render;
 		$Render.scale = Vector2(size, size);
 	process_priority = layer
 	$Occlusion/Area.shape.radius = float(size)/2.0
 	if light == 0:
-		$Light/Area.disabled = true
+		$Light/Area.set_deferred("disabled", true)
 	else:
-		$Light/Area.disabled = false
+		$Light/Area.set_deferred("disabled", false)
 		$Light/Area.set_scale(Vector2(light, light))
 
 

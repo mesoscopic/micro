@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name Damageable
 
 @export var max_hp := 100
-var hp := max_hp
+@onready var hp := max_hp
 @export var invincible: bool = false
 var ticks_since_damage = 0
 

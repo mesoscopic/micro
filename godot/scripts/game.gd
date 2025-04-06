@@ -28,19 +28,21 @@ func spawn_attempt() -> void:
 	enemy.position = tile * 20.
 	$Structures.add_child(enemy)
 	print("spawned an enemy at %s!" % tile)
-	
 
 # --------------
 # World gen code
 # --------------
 
-var ItemShrine := preload("res://scenes/structures/ItemShrine.tscn")
+var BasicCache := preload("res://scenes/characters/tiles/Cache.tscn")
 
 func generate_world():
-	place(structure_at(ItemShrine, Vector2(0,16)))
-	place(structure_at(ItemShrine, Vector2(0,-16)))
-	place(structure_at(ItemShrine, Vector2(16,0)))
-	place(structure_at(ItemShrine, Vector2(-16,0)))
+	var start = Time.get_ticks_usec()
+	Micro.worldgen_status("Placing caches...")
+	for i in 200:
+		var pos = Vector2(randfn(0., 3.), randfn(0., 3.)) * 20.
+		pos += pos.normalized()*18.
+		place(structure_at(BasicCache, round(pos)))
+	print("world gen took %s microseconds" % (Time.get_ticks_usec()-start))
 
 func structure_at(structure: PackedScene, pos: Vector2) -> Node2D:
 	var build = structure.instantiate()

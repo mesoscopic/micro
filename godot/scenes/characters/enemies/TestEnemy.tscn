@@ -7,7 +7,8 @@
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://shaders/sphere_particle.gdshader" id="4_thfgp"]
 [ext_resource type="PackedScene" uid="uid://diissjbt0i6uj" path="res://scenes/logic/HurtAggro.tscn" id="5_7p6f5"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_10i4l"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_um8ux"]
+resource_local_to_scene = true
 shader = ExtResource("2_3uu62")
 shader_parameter/health = 1.0
 shader_parameter/opacity = 1.0
@@ -45,7 +46,7 @@ fund_drop = 200
 [node name="Character" parent="." instance=ExtResource("1_j0iy0")]
 layer = 2
 light = 75
-render = SubResource("ShaderMaterial_10i4l")
+render = SubResource("ShaderMaterial_um8ux")
 always_visible = true
 
 [node name="RangeAggro" parent="." instance=ExtResource("4_bwbvg")]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cas1ebkgs1kfw"]
+[gd_scene load_steps=9 format=3 uid="uid://cas1ebkgs1kfw"]
 
 [ext_resource type="PackedScene" uid="uid://cr4fsl380sykj" path="res://scenes/characters/tiles/Wall.tscn" id="1_8wcy4"]
 [ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="1_82hb3"]
 [ext_resource type="Script" uid="uid://8mysmbmddama" path="res://scripts/characters/spawn_nest.gd" id="1_g6lmg"]
+[ext_resource type="PackedScene" uid="uid://ckkvvvr32yt5h" path="res://scenes/fx/HealRay.tscn" id="2_5pcos"]
 [ext_resource type="PackedScene" uid="uid://cshcf4y2ntrp5" path="res://scenes/characters/tiles/NestSlot.tscn" id="2_baksq"]
 [ext_resource type="Shader" uid="uid://ja0tditl2iqa" path="res://shaders/player.gdshader" id="2_g6lmg"]
 
@@ -31,6 +32,9 @@ shape = SubResource("RectangleShape2D_82hb3")
 
 [node name="RegenTimer" type="Timer" parent="."]
 wait_time = 0.1
+
+[node name="HealRay" parent="." instance=ExtResource("2_5pcos")]
+healing = 50.0
 
 [node name="Character" parent="." instance=ExtResource("1_82hb3")]
 layer = 2

@@ -5,6 +5,7 @@ var purchased_upgrade: Upgrade
 
 func _on_home_zone_entered(_body: Node2D) -> void:
 	$RegenTimer.start()
+	if Micro.player.hp < Micro.player.max_hp: $HealRay.start()
 	activate()
 
 func _on_home_zone_exited(_body: Node2D) -> void:

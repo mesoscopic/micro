@@ -30,7 +30,7 @@ initial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
 scale_max = 3.0
 scale_curve = SubResource("CurveTexture_fis63")
-color = Color(0.427451, 0.427451, 0.427451, 1)
+color = Color(1, 1, 1, 0.313726)
 alpha_curve = SubResource("CurveTexture_rqo8m")
 
 [node name="Camera" type="Camera2D"]

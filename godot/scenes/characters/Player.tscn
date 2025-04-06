@@ -8,7 +8,8 @@
 [ext_resource type="Shader" uid="uid://bm0iowttrwa5h" path="res://shaders/funds_sparkle.gdshader" id="6_m6phi"]
 [ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://shaders/funds.gdshader" id="6_rpfb3"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nvxwv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m6phi"]
+resource_local_to_scene = true
 shader = ExtResource("4_0t1y4")
 shader_parameter/health = 1.0
 shader_parameter/opacity = 1.0
@@ -322,7 +323,7 @@ script = ExtResource("1_1im8n")
 [node name="Character" parent="." instance=ExtResource("2_8klxi")]
 layer = 4
 light = 100
-render = SubResource("ShaderMaterial_nvxwv")
+render = SubResource("ShaderMaterial_m6phi")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)
@@ -338,9 +339,6 @@ one_shot = true
 [node name="Abilities" type="Node2D" parent="."]
 
 [node name="Dash" parent="Abilities" instance=ExtResource("5_wr4u2")]
-
-[node name="RegenTimer" type="Timer" parent="."]
-autostart = true
 
 [node name="HurtEffect" type="GPUParticles2D" parent="."]
 emitting = false
@@ -404,5 +402,4 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 9
 text = "0"
 
-[connection signal="timeout" from="RegenTimer" to="." method="regen_tick"]
 [connection signal="timeout" from="UltraDuration" to="." method="_end_ultra"]

@@ -25,6 +25,7 @@ func screen_wipe_in():
 	SCREEN_WIPE_ANIMATOR.play("wipe_in")
 	await SCREEN_WIPE_ANIMATOR.animation_finished
 	SCREEN_WIPE_ANIMATOR.play("RESET")
+	get_tree().current_scene.get_node("ScreenWipe/StatusMessage").text = ""
 
 func _input(event):
 	if event.is_action_pressed("debug_overlay"):
@@ -38,8 +39,11 @@ func settings(modal: bool):
 	if modal: menu.be_modal()
 	await menu.done
 
-func wait(time: float):
-	await get_tree().create_timer(time).timeout
+func wait(time: float, override_pause: bool = false):
+	await get_tree().create_timer(time, override_pause).timeout
+
+func worldgen_status(status: String) -> void:
+	get_tree().current_scene.get_node("ScreenWipe/StatusMessage").text = status
 
 func show_trade_information(trader: Trader):
 	var overlay = get_tree().current_scene.get_node("UI/TradeOverlay")

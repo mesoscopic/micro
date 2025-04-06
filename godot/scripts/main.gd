@@ -27,6 +27,7 @@ func _on_splash_finished():
 
 func _on_start_run():
 	$UI.remove_child($UI.get_node("StartRun"))
+	Micro.worldgen_status("Building starting area...")
 	var world = WORLD.instantiate()
 	Micro.world = world
 	world.random.seed = world.world_seed
@@ -41,7 +42,7 @@ func _input(_event):
 		$UI.add_child(pause_menu)
 		get_tree().paused = true
 		await pause_menu.finished
-		await Micro.wait(0.1)
+		await Micro.wait(0.1, true)
 		get_tree().paused = false
 	if Input.is_action_just_pressed("quick_settings") and in_game and !$UI.has_node("Settings"):
 		Micro.settings(false)

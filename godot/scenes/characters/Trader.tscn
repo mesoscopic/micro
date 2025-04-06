@@ -5,7 +5,8 @@
 [ext_resource type="Shader" uid="uid://cs7iamvps60cm" path="res://shaders/trader.gdshader" id="2_paeo7"]
 [ext_resource type="Shader" uid="uid://cjl6s6ce2grqm" path="res://shaders/selector.gdshader" id="4_0sdtu"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tqfba"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0sdtu"]
+resource_local_to_scene = true
 shader = ExtResource("2_paeo7")
 shader_parameter/opacity = 1.0
 shader_parameter/velocity = Vector2(0, 0)
@@ -51,7 +52,7 @@ script = ExtResource("1_tqfba")
 [node name="Character" parent="." instance=ExtResource("1_nu57o")]
 layer = 2
 light = 40
-render = SubResource("ShaderMaterial_tqfba")
+render = SubResource("ShaderMaterial_0sdtu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4dht5")
