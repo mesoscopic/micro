@@ -6,4 +6,15 @@ At least, it will be! It is far from finished, and its development lives in this
 
 Here's how it looks right now (or, since this README was last updated):
 
-https://github.com/user-attachments/assets/fed48fc2-f0a9-4628-9511-5f7d33096ef7
+https://github.com/user-attachments/assets/b9348486-67fd-495c-b367-1a66561b956d
+
+## Roadmap
+
+The current goal is **v0.0.0**, a proof of concept of the early-game.
+
+Here's what still needs to be done to achieve that:
+
+- Settings menu
+- More upgrades
+- More enemies
+- Basic structures
