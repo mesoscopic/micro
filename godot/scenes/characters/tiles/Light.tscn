@@ -4,38 +4,34 @@
 [ext_resource type="Shader" uid="uid://ci5ovcam7o22p" path="res://shaders/light.gdshader" id="2_14of0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5twxy"]
+resource_local_to_scene = true
 shader = ExtResource("2_14of0")
 shader_parameter/opacity = 1.0
 
 [sub_resource type="Curve" id="Curve_14of0"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.84154, 0.0, 0, 0]
+_data = [Vector2(0.499913, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_5twxy"]
 curve = SubResource("Curve_14of0")
 
-[sub_resource type="Curve" id="Curve_5twxy"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0955882, 1), 0.0, 0.0, 0, 0]
-point_count = 2
+[sub_resource type="Curve" id="Curve_50n1i"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_50n1i"]
-curve = SubResource("Curve_5twxy")
+[sub_resource type="CurveTexture" id="CurveTexture_re7py"]
+curve = SubResource("Curve_50n1i")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_50n1i"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cyr0d"]
 particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 5.0
-angle_min = 1.07288e-05
+angle_min = 45.0
 angle_max = 45.0
-orbit_velocity_min = -0.5
-orbit_velocity_max = 0.5
-radial_velocity_min = 3.99998
-radial_velocity_max = 16.0
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
 gravity = Vector3(0, 0, 0)
-radial_accel_min = -50.0
-radial_accel_max = -10.0
-scale_max = 1.5
-scale_curve = SubResource("CurveTexture_50n1i")
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_re7py")
 alpha_curve = SubResource("CurveTexture_5twxy")
 
 [node name="Light" type="Node2D"]
@@ -47,7 +43,7 @@ render = SubResource("ShaderMaterial_5twxy")
 ambient_light = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 15
-lifetime = 2.0
-preprocess = 2.0
-process_material = SubResource("ParticleProcessMaterial_50n1i")
+amount = 4
+trail_enabled = true
+trail_lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_cyr0d")

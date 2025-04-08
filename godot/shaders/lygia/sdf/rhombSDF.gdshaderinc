@@ -18,7 +18,7 @@ float rhombSDF(in vec2 st) {
     float offset = 1.0;
     #ifdef CENTER_2D
     offset = CENTER_2D.y * 2.0;
-    #endif 
+    #endif
     return max(triSDF(st),
                triSDF(vec2(st.x, offset-st.y)));
 

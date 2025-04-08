@@ -3,7 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="1_7ufqt"]
 [ext_resource type="Shader" uid="uid://da7cs348tnx37" path="res://shaders/wall.gdshader" id="2_sbw22"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qpdhe"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qw7bw"]
+resource_local_to_scene = true
 shader = ExtResource("2_sbw22")
 shader_parameter/opacity = 1.0
 
@@ -13,7 +14,7 @@ shader_parameter/opacity = 1.0
 
 [node name="Character" parent="." instance=ExtResource("1_7ufqt")]
 layer = 1
-render = SubResource("ShaderMaterial_qpdhe")
+render = SubResource("ShaderMaterial_qw7bw")
 always_visible = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

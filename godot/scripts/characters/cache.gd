@@ -26,7 +26,7 @@ func _hurt() -> void:
 
 func do_reward(reward: String) -> void:
 	if reward == "funds":
-		for i in randi_range(2, 7):
+		for i in randi_range(2, 5):
 			var coin := fund_coin.instantiate()
 			coin.position = position
 			coin.amount = 1

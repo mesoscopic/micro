@@ -62,6 +62,7 @@ func happy() -> void:
 func refresh() -> void:
 	var weights = RollWeights.new()
 	weights.add_item(MultishotUpgrade, 1)
-	weights.add_item(RecklessUpgrade, 1)
-	weights.add_item(EvasionUpgrade, 1)
+	weights.add_item(RecklessUpgrade, 4)
+	weights.add_item(EvasionUpgrade, 2)
+	weights.add_item(VolumeUpgrade, 2)
 	item = Micro.roll(weights).new()

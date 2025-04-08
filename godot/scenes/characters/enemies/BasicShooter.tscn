@@ -37,7 +37,7 @@ scale_min = 3.0
 scale_max = 6.0
 scale_curve = SubResource("CurveTexture_qeqcc")
 
-[node name="BasicShooter" type="CharacterBody2D"]
+[node name="BasicShooter" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_qeqcc")

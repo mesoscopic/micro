@@ -68,7 +68,7 @@ scale_curve = SubResource("CurveTexture_n2nc4")
 [sub_resource type="CircleShape2D" id="CircleShape2D_oeqg6"]
 radius = 5.0
 
-[node name="Surprise" type="CharacterBody2D"]
+[node name="Surprise" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_3elcu")

@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://cjl6s6ce2grqm" path="res://shaders/selector.gdshader" id="4_d11t0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l481g"]
+resource_local_to_scene = true
 shader = ExtResource("2_q7nok")
 shader_parameter/opacity = 1.0
 

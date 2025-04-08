@@ -56,8 +56,4 @@ vec3 scale(in vec3 st, in float s) {
     return (st - 0.5) * s + 0.5;
 #endif
 }
-
-// For tiles
-vec4 scale(in vec4 st, float s) { return vec4(scale(st.xy, s), st.zw); }
-vec4 scale(in vec4 st, vec2 s) { return vec4(scale(st.xy, s), st.zw); }
 #endif

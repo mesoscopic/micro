@@ -6,7 +6,7 @@ func _init() -> void:
 	description = "+2 bullets every shot, -33% bullet damage"
 	render = ShaderMaterial.new()
 	render.shader = preload("res://shaders/upgrades/multishot.gdshader")
-	set_cost(75)
+	set_cost(100)
 
 func enable() -> void:
 	Micro.player.multishot += 1

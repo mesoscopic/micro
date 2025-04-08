@@ -102,3 +102,11 @@ func roll(weights: RollWeights) -> Variant:
 	
 	var choice: int = randi_range(1, weights.weights_sum)
 	return weights.get_item(choice)
+
+func closest_enemy(to: Vector2) -> Enemy:
+	var closest: Enemy = null
+	for enemy in get_tree().get_nodes_in_group("enemy").filter(func (enemy): return to.distance_squared_to(enemy.global_position)<57600):
+		if enemy is Enemy: # which it should be
+			if !closest or to.distance_squared_to(enemy.global_position)<to.distance_squared_to(closest.global_position):
+				closest = enemy
+	return closest

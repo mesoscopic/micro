@@ -37,7 +37,7 @@ scale_min = 3.0
 scale_max = 6.0
 scale_curve = SubResource("CurveTexture_um8ux")
 
-[node name="TestEnemy" type="CharacterBody2D"]
+[node name="TestEnemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_mj6mb")
