@@ -36,7 +36,8 @@ func _input(event):
 		var overlay: Control = get_tree().current_scene.get_node("UI/DebugOverlay")
 		overlay.visible = !overlay.visible
 	elif event.is_action_pressed("debug_pause") and debug_paused == get_tree().paused:
-		get_tree().paused = !(get_tree().paused)
+		debug_paused = !(get_tree().paused)
+		get_tree().paused = debug_paused
 
 func settings(modal: bool):
 	if is_instance_valid(menu): return
