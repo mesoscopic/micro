@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://qujhsvriffxk"]
+[gd_scene load_steps=16 format=3 uid="uid://qujhsvriffxk"]
 
 [ext_resource type="Shader" uid="uid://0vacnrh74wjb" path="res://shaders/bg.gdshader" id="1_gia2e"]
 [ext_resource type="PackedScene" uid="uid://cas1ebkgs1kfw" path="res://scenes/structures/SpawnNest.tscn" id="1_kopsk"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bsq2j66vyglxf" path="res://scenes/structures/ItemShrine.tscn" id="4_hlk0d"]
 [ext_resource type="PackedScene" uid="uid://cww6x38j4owo7" path="res://scenes/characters/Trader.tscn" id="5_hlk0d"]
 [ext_resource type="PackedScene" uid="uid://c04qdfehiu2m5" path="res://scenes/characters/tiles/Cache.tscn" id="6_hlk0d"]
+[ext_resource type="PackedScene" uid="uid://ddxrbrnyk4jee" path="res://scenes/structures/TraderMinibossArena.tscn" id="8_b3faq"]
 
 [sub_resource type="Curve" id="Curve_1imk8"]
 _data = [Vector2(0, 0), 0.0, 6.42857, 0, 0, Vector2(0.486667, 1), 0.0, -3.64992, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -98,9 +99,6 @@ position = Vector2(192, 127)
 [node name="Trader2" parent="Structures" instance=ExtResource("5_hlk0d")]
 position = Vector2(68, 169)
 
-[node name="Trader3" parent="Structures" instance=ExtResource("5_hlk0d")]
-position = Vector2(118, 66)
-
 [node name="Cache" parent="Structures" instance=ExtResource("6_hlk0d")]
 position = Vector2(-200, -200)
 
@@ -124,6 +122,18 @@ position = Vector2(160, 200)
 
 [node name="Cache8" parent="Structures" instance=ExtResource("6_hlk0d")]
 position = Vector2(340, 240)
+
+[node name="TraderMinibossArena" parent="Structures" instance=ExtResource("8_b3faq")]
+position = Vector2(-800, -800)
+
+[node name="TraderMinibossArena2" parent="Structures" instance=ExtResource("8_b3faq")]
+position = Vector2(800, -800)
+
+[node name="TraderMinibossArena3" parent="Structures" instance=ExtResource("8_b3faq")]
+position = Vector2(-800, 800)
+
+[node name="TraderMinibossArena4" parent="Structures" instance=ExtResource("8_b3faq")]
+position = Vector2(800, 800)
 
 [node name="Player" parent="." instance=ExtResource("1_yrunw")]
 

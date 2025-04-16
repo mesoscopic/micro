@@ -1,0 +1,108 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddxrbrnyk4jee"]
+
+[ext_resource type="PackedScene" uid="uid://cr4fsl380sykj" path="res://scenes/characters/tiles/Wall.tscn" id="1_4agqc"]
+[ext_resource type="PackedScene" uid="uid://cc1xa4akv25v0" path="res://scenes/characters/tiles/EnemyPosition.tscn" id="2_5raij"]
+[ext_resource type="PackedScene" uid="uid://degw88c3u4obt" path="res://scenes/characters/enemies/TraderMiniboss.tscn" id="4_j2cri"]
+
+[node name="TraderMinibossArena" type="Node2D"]
+
+[node name="Wall9" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(-20, -180)
+
+[node name="Wall10" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(0, -180)
+
+[node name="Wall11" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(20, -180)
+
+[node name="Wall12" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(100, -160)
+
+[node name="Wall13" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(120, -160)
+
+[node name="Wall14" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(140, -140)
+
+[node name="Wall15" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(160, -120)
+
+[node name="Wall16" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(160, -100)
+
+[node name="Wall17" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(180, -20)
+
+[node name="Wall18" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(180, 0)
+
+[node name="Wall19" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(180, 20)
+
+[node name="Wall20" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(160, 100)
+
+[node name="Wall21" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(160, 120)
+
+[node name="Wall22" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(140, 140)
+
+[node name="Wall23" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(120, 160)
+
+[node name="Wall24" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(100, 160)
+
+[node name="Wall25" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(20, 180)
+
+[node name="Wall26" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(0, 180)
+
+[node name="Wall27" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(-20, 180)
+
+[node name="Wall28" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(-100, 160)
+
+[node name="Wall29" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(-120, 160)
+
+[node name="Wall30" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(-140, 140)
+
+[node name="Wall31" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(-160, 120)
+
+[node name="Wall32" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(-160, 100)
+
+[node name="Wall33" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(-180, 20)
+
+[node name="Wall34" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(-180, 0)
+
+[node name="Wall35" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(-180, -20)
+
+[node name="Wall36" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(-160, -100)
+
+[node name="Wall37" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(-160, -120)
+
+[node name="Wall38" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(-140, -140)
+
+[node name="Wall39" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(-120, -160)
+
+[node name="Wall40" parent="." instance=ExtResource("1_4agqc")]
+position = Vector2(-100, -160)
+
+[node name="EnemyPosition5" parent="." instance=ExtResource("2_5raij")]
+scale = Vector2(2.5, 2.5)
+enemy = ExtResource("4_j2cri")
+hit_only = true

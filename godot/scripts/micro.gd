@@ -6,6 +6,7 @@ const SETTINGS = preload("res://scenes/ui/Settings.tscn")
 var menu: Node
 var player: Player
 var world: World
+var debug_paused := false
 
 const TRADE_COIN = preload("res://scenes/fx/TradeCoin.tscn")
 
@@ -14,6 +15,9 @@ var loaded_settings = {
 }
 
 signal refresh_trades
+
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func screen_wipe_out():
 	var SCREEN_WIPE_ANIMATOR = get_tree().current_scene.get_node("ScreenWipe/ScreenWipeAnimation")
@@ -31,6 +35,8 @@ func _input(event):
 	if event.is_action_pressed("debug_overlay"):
 		var overlay: Control = get_tree().current_scene.get_node("UI/DebugOverlay")
 		overlay.visible = !overlay.visible
+	elif event.is_action_pressed("debug_pause") and debug_paused == get_tree().paused:
+		get_tree().paused = !(get_tree().paused)
 
 func settings(modal: bool):
 	if is_instance_valid(menu): return

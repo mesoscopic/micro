@@ -23,7 +23,7 @@ shader = ExtResource("6_u77d8")
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_qeqcc"]
+[sub_resource type="CurveTexture" id="CurveTexture_u77d8"]
 curve = SubResource("Curve_wf87e")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rwtxu"]
@@ -35,7 +35,7 @@ radial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
 scale_min = 3.0
 scale_max = 6.0
-scale_curve = SubResource("CurveTexture_qeqcc")
+scale_curve = SubResource("CurveTexture_u77d8")
 
 [node name="BasicShooter" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 8

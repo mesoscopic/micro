@@ -35,6 +35,7 @@ alpha_curve = SubResource("CurveTexture_rqo8m")
 
 [node name="Camera" type="Camera2D"]
 zoom = Vector2(2, 2)
+position_smoothing_speed = 10.0
 
 [node name="GlobalParticles" type="Node2D" parent="."]
 script = ExtResource("1_14tc0")

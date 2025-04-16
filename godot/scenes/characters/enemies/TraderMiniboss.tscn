@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=3 uid="uid://degw88c3u4obt"]
+
+[ext_resource type="Script" uid="uid://bd1nvuajonror" path="res://scripts/characters/enemies/trader_miniboss.gd" id="1_oj4li"]
+[ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="2_b1f70"]
+[ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://shaders/enemy.gdshader" id="3_3crh1"]
+[ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://shaders/sphere_particle.gdshader" id="4_icese"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b1f70"]
+resource_local_to_scene = true
+shader = ExtResource("3_3crh1")
+shader_parameter/health = 1.0
+shader_parameter/opacity = 1.0
+shader_parameter/velocity = Vector2(0, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wt047"]
+radius = 25.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c83qb"]
+shader = ExtResource("4_icese")
+
+[sub_resource type="Curve" id="Curve_wf87e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_u77d8"]
+curve = SubResource("Curve_wf87e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d344a"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+radial_velocity_min = 40.0
+radial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_u77d8")
+
+[node name="TraderMiniboss" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_oj4li")
+speed = 0
+acceleration = 0
+deceleration = 0
+turn_length = 0
+wander_length = 0
+wander_speed_mult = 0.0
+fund_drop = 50
+fund_drop_randomization = 0.2
+despawn_distance = 400
+stagger_time = 0.0
+is_boss = true
+max_hp = 500
+hp = 500
+metadata/_custom_type_script = "uid://oy7qpe47ti6v"
+
+[node name="Character" parent="." instance=ExtResource("2_b1f70")]
+layer = 2
+size = 50
+light = 100
+render = SubResource("ShaderMaterial_b1f70")
+always_visible = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wt047")
+
+[node name="HurtParticles" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_c83qb")
+emitting = false
+amount = 30
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_d344a")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

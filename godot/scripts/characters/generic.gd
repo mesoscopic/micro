@@ -30,7 +30,7 @@ func _ready():
 		$Render.material = render;
 		$Render.scale = Vector2(size, size);
 	process_priority = layer
-	$Occlusion/Area.shape.radius = float(size)/2.0
+	$Occlusion/Area.scale = Vector2(float(size)/2.0, float(size)/2.0)
 	if light == 0:
 		$Light/Area.set_deferred("disabled", true)
 	else:

@@ -37,8 +37,9 @@ func _on_start_run():
 	in_game = true
 
 func _on_death():
-	$Game.remove_child(Micro.world)
+	Micro.world.free()
 	Micro.world = null
+	in_game = false
 	get_tree().paused = false
 	await Micro.screen_wipe_in()
 	# death screen, stats, etc.

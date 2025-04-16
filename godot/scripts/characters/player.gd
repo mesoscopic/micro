@@ -113,6 +113,7 @@ func _hurt():
 	$HurtEffect.restart()
 
 func _die():
+	invincible = true
 	create_tween().tween_property(Engine, "time_scale", 0.1, .8)
 	await Micro.wait(1., true)
 	get_tree().paused = true

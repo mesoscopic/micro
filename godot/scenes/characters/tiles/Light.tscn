@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="1_g3qk7"]
 [ext_resource type="Shader" uid="uid://ci5ovcam7o22p" path="res://shaders/light.gdshader" id="2_14of0"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5twxy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_14of0"]
 resource_local_to_scene = true
 shader = ExtResource("2_14of0")
 shader_parameter/opacity = 1.0
@@ -39,7 +39,7 @@ alpha_curve = SubResource("CurveTexture_5twxy")
 [node name="Character" parent="." instance=ExtResource("1_g3qk7")]
 layer = 1
 light = 100
-render = SubResource("ShaderMaterial_5twxy")
+render = SubResource("ShaderMaterial_14of0")
 ambient_light = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]

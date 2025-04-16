@@ -76,7 +76,9 @@ speed = 150
 acceleration = 300
 deceleration = 1200
 fund_drop = 15
+stagger_time = 0.25
 max_hp = 20
+hp = 20
 
 [node name="Character" parent="." instance=ExtResource("2_kb0u7")]
 layer = 2

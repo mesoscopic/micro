@@ -5,7 +5,20 @@ class_name World
 var random: RandomNumberGenerator = RandomNumberGenerator.new()
 var world_seed: int = randi()
 
+var bosses_active: int = 0
+
+func world_enemy(taxicab_distance: float) -> Enemy:
+	var enemies: RollWeights = RollWeights.new()
+	enemies.add_item(preload("res://scenes/characters/enemies/BasicShooter.tscn"), 4)
+	if taxicab_distance >= 100:
+		enemies.add_item(preload("res://scenes/characters/enemies/Turret.tscn"), 2)
+		enemies.add_item(preload("res://scenes/characters/enemies/Teleporter.tscn"), 1)
+	return Micro.roll(enemies).instantiate()
+
 func spawn_attempt() -> void:
+	if bosses_active > 0:
+		print("a boss is active!")
+		return # World enemies shouldn't spawn during boss fights
 	var player_pos: Vector2 = Micro.player.position / 20.
 	var taxicab_distance: float = abs(player_pos.x) + abs(player_pos.y)
 	if taxicab_distance < 30:
@@ -18,9 +31,7 @@ func spawn_attempt() -> void:
 		print("failed chance! (2 in 3)")
 		return # 2 in 3 chance to spawn if >80 and <160 tiles from spawn
 	# Otherwise, spawn is guaranteed
-	var enemies: RollWeights = RollWeights.new()
-	enemies.add_item(preload("res://scenes/characters/enemies/BasicShooter.tscn"), 1)
-	var enemy: Enemy = Micro.roll(enemies).instantiate()
+	var enemy := world_enemy(taxicab_distance)
 	# Spawn the enemy 20 tiles away from the player.
 	# If you're closer to spawn, enemies will tend to come from the opposite direction to spawn.
 	var angle_randomization = taxicab_distance / 60.
@@ -29,11 +40,19 @@ func spawn_attempt() -> void:
 	$Structures.add_child(enemy)
 	print("spawned an enemy at %s!" % tile)
 
+const TRADER = preload("res://scenes/characters/Trader.tscn")
+
+func get_trader(from: Vector2):
+	var trader = TRADER.instantiate()
+	trader.position = from.normalized()*160.
+	$Structures.call_deferred("add_child", trader)
+	Micro.refresh_trades.emit()
+
 # --------------
 # World gen code
 # --------------
 
-var BasicCache := preload("res://scenes/characters/tiles/Cache.tscn")
+const BasicCache := preload("res://scenes/characters/tiles/Cache.tscn")
 
 func generate_world():
 	var start = Time.get_ticks_usec()

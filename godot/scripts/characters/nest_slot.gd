@@ -12,8 +12,8 @@ func put_upgrade(new_upgrade: Upgrade) -> void:
 	Micro.end_trade()
 
 func _on_mouse_entered() -> void:
-	$Selection.show()
 	if get_parent().purchased_upgrade:
+		$Selection.show()
 		Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 
 func _on_mouse_exited() -> void:

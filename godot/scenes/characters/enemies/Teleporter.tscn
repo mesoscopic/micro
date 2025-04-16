@@ -1,0 +1,91 @@
+[gd_scene load_steps=15 format=3 uid="uid://cr70dq40ddv00"]
+
+[ext_resource type="Script" uid="uid://5gvph6vdmik8" path="res://scripts/characters/enemies/teleporter.gd" id="1_0c61a"]
+[ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="2_okfon"]
+[ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://shaders/enemy.gdshader" id="3_up14l"]
+[ext_resource type="PackedScene" uid="uid://b2erii1hcv0u0" path="res://scenes/logic/RangeAggro.tscn" id="4_3c52e"]
+[ext_resource type="PackedScene" uid="uid://diissjbt0i6uj" path="res://scenes/logic/HurtAggro.tscn" id="5_ltnij"]
+[ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://shaders/sphere_particle.gdshader" id="6_jcwgh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_okfon"]
+resource_local_to_scene = true
+shader = ExtResource("3_up14l")
+shader_parameter/health = 1.0
+shader_parameter/opacity = 1.0
+shader_parameter/velocity = Vector2(0, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x6fk6"]
+radius = 9.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nl0dr"]
+shader = ExtResource("6_jcwgh")
+
+[sub_resource type="Curve" id="Curve_okfon"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.497785, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_up14l"]
+curve = SubResource("Curve_okfon")
+
+[sub_resource type="Curve" id="Curve_g1vjv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3c52e"]
+curve = SubResource("Curve_g1vjv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3c52e"]
+particle_flag_disable_z = true
+radial_velocity_min = -600.0
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, 0, 0)
+scale_min = 6.0
+scale_max = 18.0
+scale_curve = SubResource("CurveTexture_3c52e")
+alpha_curve = SubResource("CurveTexture_up14l")
+
+[node name="Teleporter" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_0c61a")
+acceleration = 200
+fund_drop = 15
+stagger_time = 0.2
+max_hp = 50
+hp = 50
+metadata/_custom_type_script = "uid://oy7qpe47ti6v"
+
+[node name="Character" parent="." instance=ExtResource("2_okfon")]
+layer = 2
+size = 18
+light = 75
+render = SubResource("ShaderMaterial_okfon")
+always_visible = true
+
+[node name="RangeAggro" parent="." instance=ExtResource("4_3c52e")]
+scale = Vector2(0.998148, 1)
+aggro_range = 200
+deaggro_range = 300
+
+[node name="HurtAggro" parent="." instance=ExtResource("5_ltnij")]
+aggro_length = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_x6fk6")
+
+[node name="HurtParticles" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_nl0dr")
+emitting = false
+amount = 30
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_3c52e")
+
+[node name="FiringCooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="RetargetTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="FiringCooldown" to="." method="_on_firing_cooldown_timeout"]
+[connection signal="timeout" from="RetargetTimer" to="." method="target_player"]

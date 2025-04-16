@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://dxgq0lr1hup54" path="res://shaders/nest_slot.gdshader" id="2_q7nok"]
 [ext_resource type="Shader" uid="uid://cjl6s6ce2grqm" path="res://shaders/selector.gdshader" id="4_d11t0"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l481g"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d11t0"]
 resource_local_to_scene = true
 shader = ExtResource("2_q7nok")
 shader_parameter/opacity = 1.0
@@ -67,7 +67,7 @@ input_pickable = true
 script = ExtResource("1_3cvli")
 
 [node name="Character" parent="." instance=ExtResource("1_nym66")]
-render = SubResource("ShaderMaterial_l481g")
+render = SubResource("ShaderMaterial_d11t0")
 always_visible = true
 
 [node name="PutParticles" type="GPUParticles2D" parent="."]
