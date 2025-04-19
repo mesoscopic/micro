@@ -8,13 +8,9 @@ var player: Player
 var world: World
 var debug_paused := false
 
-const TRADE_COIN = preload("res://scenes/fx/TradeCoin.tscn")
-
 var loaded_settings = {
 	"photosensitive_mode": false
 }
-
-signal refresh_trades
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -73,32 +69,7 @@ func attempt_trade(trader: Trader):
 		overlay.get_node("Animations").play("cannot_afford")
 	else:
 		overlay.get_node("Animations").play("hide")
-		Micro.player.funds -= item.cost
-		Micro.player.get_node("FundsDisplay/HBoxContainer/Label").text = "%s" % Micro.player.funds
-		Micro.player.movement_disabled = true
-		var amount = item.cost
-		while amount > 0:
-			var coin := TRADE_COIN.instantiate()
-			coin.position = Micro.player.position
-			coin.amount = ceil(amount/8.)
-			coin.target = trader
-			Micro.player.add_sibling(coin)
-			amount -= ceil(amount/8.)
-		await wait(1.)
-		refresh_trades.emit()
-		var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-		tween.tween_property(Micro.player.get_node("Camera"), "global_position", Vector2.ZERO, 0.5)
-		get_tree().current_scene.get_node("Game/World/Structures/SpawnNest").activate()
-		await wait(.5)
-		get_tree().current_scene.get_node("Game/World/Structures/SpawnNest").purchased_upgrade = item
-
-func end_trade():
-	await wait(1.)
-	show_trade_information(Micro.player.chosen_trader)
-	Micro.player.movement_disabled = false
-	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(Micro.player.get_node("Camera"), "position", Vector2.ZERO, 0.5)
-	get_tree().current_scene.get_node("Game/World/Structures/SpawnNest").deactivate()
+		world.trade(trader, item)
 
 func roll(weights: RollWeights) -> Variant:
 	var random: RandomNumberGenerator

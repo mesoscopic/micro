@@ -1,13 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://qujhsvriffxk"]
+[gd_scene load_steps=21 format=4 uid="uid://qujhsvriffxk"]
 
 [ext_resource type="Shader" uid="uid://0vacnrh74wjb" path="res://shaders/bg.gdshader" id="1_gia2e"]
-[ext_resource type="PackedScene" uid="uid://cas1ebkgs1kfw" path="res://scenes/structures/SpawnNest.tscn" id="1_kopsk"]
+[ext_resource type="PackedScene" uid="uid://cas1ebkgs1kfw" path="res://scenes/characters/tiles/SpawnNest.tscn" id="1_kopsk"]
 [ext_resource type="Script" uid="uid://ce6jxw7xe1a86" path="res://scripts/game.gd" id="1_ndgmm"]
 [ext_resource type="PackedScene" uid="uid://b14dvx67drebc" path="res://scenes/characters/Player.tscn" id="1_yrunw"]
-[ext_resource type="PackedScene" uid="uid://bsq2j66vyglxf" path="res://scenes/structures/ItemShrine.tscn" id="4_hlk0d"]
+[ext_resource type="PackedScene" uid="uid://cr4fsl380sykj" path="res://scenes/characters/tiles/Wall.tscn" id="3_7c4bj"]
+[ext_resource type="PackedScene" uid="uid://d3ewek3uwdb81" path="res://scenes/characters/tiles/Empty.tscn" id="3_pdh0q"]
+[ext_resource type="PackedScene" uid="uid://ddd3twqttei4j" path="res://scenes/characters/tiles/Light.tscn" id="4_nrtoj"]
 [ext_resource type="PackedScene" uid="uid://cww6x38j4owo7" path="res://scenes/characters/Trader.tscn" id="5_hlk0d"]
 [ext_resource type="PackedScene" uid="uid://c04qdfehiu2m5" path="res://scenes/characters/tiles/Cache.tscn" id="6_hlk0d"]
-[ext_resource type="PackedScene" uid="uid://ddxrbrnyk4jee" path="res://scenes/structures/TraderMinibossArena.tscn" id="8_b3faq"]
+[ext_resource type="PackedScene" uid="uid://ddxrbrnyk4jee" path="res://scenes/characters/tiles/TraderMinibossSpawn.tscn" id="8_b3faq"]
 
 [sub_resource type="Curve" id="Curve_1imk8"]
 _data = [Vector2(0, 0), 0.0, 6.42857, 0, 0, Vector2(0.486667, 1), 0.0, -3.64992, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -42,6 +44,24 @@ shader = ExtResource("1_gia2e")
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2bd5p"]
 size = Vector2(4, 4)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_h1bdy"]
+tile_data = PackedInt32Array(524288, 0, 131072, 589824, 0, 131072, 655360, 0, 131072, 196609, 0, 131072, 262145, 0, 131072, 327681, 0, 65536, 393217, 0, 65536, 458753, 0, 65536, 524289, 0, 65536, 589825, 0, 65536, 655361, 0, 65536, 720897, 0, 65536, 786433, 0, 65536, 851969, 0, 65536, 917505, 0, 131072, 983041, 0, 131072, 131074, 0, 131072, 196610, 0, 65536, 262146, 0, 65536, 327682, 0, 65536, 393218, 0, 65536, 458754, 0, 65536, 524290, 0, 65536, 589826, 0, 65536, 655362, 0, 65536, 720898, 0, 65536, 786434, 0, 65536, 851970, 0, 65536, 917506, 0, 65536, 983042, 0, 65536, 1048578, 0, 131072, 65539, 0, 131072, 131075, 0, 65536, 196611, 0, 65536, 262147, 0, 65536, 327683, 0, 65536, 393219, 0, 65536, 458755, 0, 65536, 524291, 0, 65536, 589827, 0, 65536, 655363, 0, 65536, 720899, 0, 65536, 786435, 0, 65536, 851971, 0, 65536, 917507, 0, 65536, 983043, 0, 65536, 1048579, 0, 65536, 1114115, 0, 131072, 65540, 0, 131072, 131076, 0, 65536, 196612, 0, 65536, 262148, 0, 65536, 327684, 0, 65536, 393220, 0, 65536, 458756, 0, 65536, 524292, 0, 65536, 589828, 0, 65536, 655364, 0, 65536, 720900, 0, 65536, 786436, 0, 65536, 851972, 0, 65536, 917508, 0, 65536, 983044, 0, 65536, 1048580, 0, 65536, 1114116, 0, 131072, 65541, 0, 65536, 131077, 0, 65536, 196613, 0, 65536, 262149, 0, 65536, 327685, 0, 65536, 393221, 0, 65536, 458757, 0, 65536, 524293, 0, 65536, 589829, 0, 65536, 655365, 0, 65536, 720901, 0, 65536, 786437, 0, 65536, 851973, 0, 65536, 917509, 0, 65536, 983045, 0, 65536, 1048581, 0, 65536, 1114117, 0, 65536, 65542, 0, 65536, 131078, 0, 65536, 196614, 0, 65536, 262150, 0, 65536, 327686, 0, 65536, 393222, 0, 65536, 458758, 0, 65536, 524294, 0, 65536, 589830, 0, 65536, 655366, 0, 65536, 720902, 0, 65536, 786438, 0, 65536, 851974, 0, 65536, 917510, 0, 65536, 983046, 0, 65536, 1048582, 0, 65536, 1114118, 0, 65536, 65543, 0, 65536, 131079, 0, 65536, 196615, 0, 65536, 262151, 0, 65536, 327687, 0, 65536, 393223, 0, 65536, 458759, 0, 65536, 524295, 0, 65536, 589831, 0, 65536, 655367, 0, 65536, 720903, 0, 65536, 786439, 0, 65536, 851975, 0, 65536, 917511, 0, 65536, 983047, 0, 65536, 1048583, 0, 65536, 1114119, 0, 65536, 8, 0, 131072, 65544, 0, 65536, 131080, 0, 65536, 196616, 0, 65536, 262152, 0, 65536, 327688, 0, 65536, 393224, 0, 65536, 458760, 0, 65536, 524296, 0, 65536, 589832, 0, 65536, 655368, 0, 65536, 720904, 0, 65536, 786440, 0, 65536, 851976, 0, 65536, 917512, 0, 65536, 983048, 0, 65536, 1048584, 0, 65536, 1114120, 0, 65536, 1179656, 0, 131072, 9, 0, 131072, 65545, 0, 65536, 131081, 0, 65536, 196617, 0, 65536, 262153, 0, 65536, 327689, 0, 65536, 393225, 0, 65536, 458761, 0, 65536, 524297, 0, 65536, 589833, 0, 393216, 655369, 0, 65536, 720905, 0, 65536, 786441, 0, 65536, 851977, 0, 65536, 917513, 0, 65536, 983049, 0, 65536, 1048585, 0, 65536, 1114121, 0, 65536, 1179657, 0, 131072, 10, 0, 131072, 65546, 0, 65536, 131082, 0, 65536, 196618, 0, 65536, 262154, 0, 65536, 327690, 0, 65536, 393226, 0, 65536, 458762, 0, 65536, 524298, 0, 65536, 589834, 0, 65536, 655370, 0, 65536, 720906, 0, 65536, 786442, 0, 65536, 851978, 0, 65536, 917514, 0, 65536, 983050, 0, 65536, 1048586, 0, 65536, 1114122, 0, 65536, 1179658, 0, 131072, 65547, 0, 65536, 131083, 0, 65536, 196619, 0, 65536, 262155, 0, 65536, 327691, 0, 65536, 393227, 0, 65536, 458763, 0, 65536, 524299, 0, 65536, 589835, 0, 65536, 655371, 0, 65536, 720907, 0, 65536, 786443, 0, 65536, 851979, 0, 65536, 917515, 0, 65536, 983051, 0, 65536, 1048587, 0, 65536, 1114123, 0, 65536, 65548, 0, 65536, 131084, 0, 65536, 196620, 0, 65536, 262156, 0, 65536, 327692, 0, 65536, 393228, 0, 65536, 458764, 0, 65536, 524300, 0, 65536, 589836, 0, 65536, 655372, 0, 65536, 720908, 0, 65536, 786444, 0, 65536, 851980, 0, 65536, 917516, 0, 65536, 983052, 0, 65536, 1048588, 0, 65536, 1114124, 0, 65536, 65549, 0, 65536, 131085, 0, 65536, 196621, 0, 65536, 262157, 0, 65536, 327693, 0, 65536, 393229, 0, 65536, 458765, 0, 65536, 524301, 0, 65536, 589837, 0, 65536, 655373, 0, 65536, 720909, 0, 65536, 786445, 0, 65536, 851981, 0, 65536, 917517, 0, 65536, 983053, 0, 65536, 1048589, 0, 65536, 1114125, 0, 65536, 65550, 0, 131072, 131086, 0, 65536, 196622, 0, 65536, 262158, 0, 65536, 327694, 0, 65536, 393230, 0, 65536, 458766, 0, 65536, 524302, 0, 65536, 589838, 0, 65536, 655374, 0, 65536, 720910, 0, 65536, 786446, 0, 65536, 851982, 0, 65536, 917518, 0, 65536, 983054, 0, 65536, 1048590, 0, 65536, 1114126, 0, 131072, 65551, 0, 131072, 131087, 0, 65536, 196623, 0, 65536, 262159, 0, 65536, 327695, 0, 65536, 393231, 0, 65536, 458767, 0, 65536, 524303, 0, 65536, 589839, 0, 65536, 655375, 0, 65536, 720911, 0, 65536, 786447, 0, 65536, 851983, 0, 65536, 917519, 0, 65536, 983055, 0, 65536, 1048591, 0, 65536, 1114127, 0, 131072, 131088, 0, 131072, 196624, 0, 65536, 262160, 0, 65536, 327696, 0, 65536, 393232, 0, 65536, 458768, 0, 65536, 524304, 0, 65536, 589840, 0, 65536, 655376, 0, 65536, 720912, 0, 65536, 786448, 0, 65536, 851984, 0, 65536, 917520, 0, 65536, 983056, 0, 65536, 1048592, 0, 131072, 196625, 0, 131072, 262161, 0, 131072, 327697, 0, 65536, 393233, 0, 65536, 458769, 0, 65536, 524305, 0, 65536, 589841, 0, 65536, 655377, 0, 65536, 720913, 0, 65536, 786449, 0, 65536, 851985, 0, 65536, 917521, 0, 131072, 983057, 0, 131072, 524306, 0, 131072, 589842, 0, 131072, 655378, 0, 131072)
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_h1bdy"]
+resource_name = "Tiles"
+scenes/1/scene = ExtResource("3_pdh0q")
+scenes/1/display_placeholder = ExtResource("3_pdh0q")
+scenes/2/scene = ExtResource("3_7c4bj")
+scenes/3/scene = ExtResource("4_nrtoj")
+scenes/4/scene = ExtResource("6_hlk0d")
+scenes/5/scene = ExtResource("1_kopsk")
+scenes/6/scene = ExtResource("8_b3faq")
+
+[sub_resource type="TileSet" id="TileSet_7c4bj"]
+tile_size = Vector2i(20, 20)
+sources/0 = SubResource("TileSetScenesCollectionSource_h1bdy")
+pattern_0 = SubResource("TileMapPattern_h1bdy")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_ndgmm")
@@ -79,61 +99,19 @@ autostart = true
 
 [node name="Structures" type="Node2D" parent="."]
 
-[node name="SpawnNest" parent="Structures" instance=ExtResource("1_kopsk")]
-
-[node name="ItemShrine" parent="Structures" instance=ExtResource("4_hlk0d")]
-position = Vector2(320, 0)
-
-[node name="ItemShrine2" parent="Structures" instance=ExtResource("4_hlk0d")]
-position = Vector2(0, 320)
-
-[node name="ItemShrine3" parent="Structures" instance=ExtResource("4_hlk0d")]
-position = Vector2(-320, 0)
-
-[node name="ItemShrine4" parent="Structures" instance=ExtResource("4_hlk0d")]
-position = Vector2(0, -320)
+[node name="Tiles" type="TileMapLayer" parent="Structures"]
+position = Vector2(-10, -10)
+tile_map_data = PackedByteArray("AAD7//7/AAAAAAAAAgD8//3/AAAAAAAAAgD9//z/AAAAAAAAAgD+//v/AAAAAAAAAgACAPv/AAAAAAAAAgADAPz/AAAAAAAAAgAEAP3/AAAAAAAAAgAFAP7/AAAAAAAAAgAFAAIAAAAAAAAAAgAEAAMAAAAAAAAAAgADAAQAAAAAAAAAAgACAAUAAAAAAAAAAgD+/wUAAAAAAAAAAgD9/wQAAAAAAAAAAgD8/wMAAAAAAAAAAgD7/wIAAAAAAAAAAgANAP7/AAAAAAAAAgANAAIAAAAAAAAAAgAOAP3/AAAAAAAAAgAOAP7/AAAAAAAAAwAOAAIAAAAAAAAAAwAOAAMAAAAAAAAAAgASAP3/AAAAAAAAAgASAP7/AAAAAAAAAwASAAIAAAAAAAAAAwASAAMAAAAAAAAAAgATAP7/AAAAAAAAAgATAAIAAAAAAAAAAgD9/w4AAAAAAAAAAgD9/xIAAAAAAAAAAgD+/w0AAAAAAAAAAgD+/w4AAAAAAAAAAwD+/xIAAAAAAAAAAwD+/xMAAAAAAAAAAgACAA0AAAAAAAAAAgACAA4AAAAAAAAAAwACABIAAAAAAAAAAwACABMAAAAAAAAAAgADAA4AAAAAAAAAAgADABIAAAAAAAAAAgDt//7/AAAAAAAAAgDt/wIAAAAAAAAAAgDu//3/AAAAAAAAAgDu//7/AAAAAAAAAwDu/wIAAAAAAAAAAwDu/wMAAAAAAAAAAgDy//3/AAAAAAAAAgDy//7/AAAAAAAAAwDy/wIAAAAAAAAAAwDy/wMAAAAAAAAAAgDz//7/AAAAAAAAAgDz/wIAAAAAAAAAAgD9/+7/AAAAAAAAAgD9//L/AAAAAAAAAgD+/+3/AAAAAAAAAgD+/+7/AAAAAAAAAwD+//L/AAAAAAAAAwD+//P/AAAAAAAAAgACAO3/AAAAAAAAAgACAO7/AAAAAAAAAwACAPL/AAAAAAAAAwACAPP/AAAAAAAAAgADAO7/AAAAAAAAAgADAPL/AAAAAAAAAgAIAPn/AAAAAAAABAAQAPP/AAAAAAAABAD2//b/AAAAAAAABADw//H/AAAAAAAABAD3/wgAAAAAAAAABADz/w4AAAAAAAAABAAIAAoAAAAAAAAABAARAAwAAAAAAAAABAAAAAAAAAAAAAAABQA=")
+tile_set = SubResource("TileSet_7c4bj")
+occlusion_enabled = false
+collision_enabled = false
+navigation_enabled = false
 
 [node name="Trader" parent="Structures" instance=ExtResource("5_hlk0d")]
 position = Vector2(192, 127)
 
 [node name="Trader2" parent="Structures" instance=ExtResource("5_hlk0d")]
 position = Vector2(68, 169)
-
-[node name="Cache" parent="Structures" instance=ExtResource("6_hlk0d")]
-position = Vector2(-200, -200)
-
-[node name="Cache2" parent="Structures" instance=ExtResource("6_hlk0d")]
-position = Vector2(-320, -300)
-
-[node name="Cache3" parent="Structures" instance=ExtResource("6_hlk0d")]
-position = Vector2(160, -140)
-
-[node name="Cache4" parent="Structures" instance=ExtResource("6_hlk0d")]
-position = Vector2(320, -260)
-
-[node name="Cache5" parent="Structures" instance=ExtResource("6_hlk0d")]
-position = Vector2(-180, 160)
-
-[node name="Cache6" parent="Structures" instance=ExtResource("6_hlk0d")]
-position = Vector2(-260, 280)
-
-[node name="Cache7" parent="Structures" instance=ExtResource("6_hlk0d")]
-position = Vector2(160, 200)
-
-[node name="Cache8" parent="Structures" instance=ExtResource("6_hlk0d")]
-position = Vector2(340, 240)
-
-[node name="TraderMinibossArena" parent="Structures" instance=ExtResource("8_b3faq")]
-position = Vector2(-800, -800)
-
-[node name="TraderMinibossArena2" parent="Structures" instance=ExtResource("8_b3faq")]
-position = Vector2(800, -800)
-
-[node name="TraderMinibossArena3" parent="Structures" instance=ExtResource("8_b3faq")]
-position = Vector2(-800, 800)
-
-[node name="TraderMinibossArena4" parent="Structures" instance=ExtResource("8_b3faq")]
-position = Vector2(800, 800)
 
 [node name="Player" parent="." instance=ExtResource("1_yrunw")]
 

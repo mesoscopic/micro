@@ -18,7 +18,7 @@ var item: Upgrade
 func _ready() -> void:
 	wander()
 	if !item: refresh()
-	Micro.refresh_trades.connect(refresh)
+	Micro.world.refresh_trades.connect(refresh)
 
 func _physics_process(delta: float) -> void:
 	if trading:

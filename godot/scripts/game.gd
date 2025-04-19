@@ -46,25 +46,56 @@ func get_trader(from: Vector2):
 	animation.position = from
 	$Structures.call_deferred("add_child", animation)
 
+const TRADE_COIN = preload("res://scenes/fx/TradeCoin.tscn")
+signal refresh_trades
+signal purchase_upgrade(item: Upgrade)
+
+func trade(trader: Trader, item: Upgrade):
+	Micro.player.funds -= item.cost
+	Micro.player.get_node("FundsDisplay/HBoxContainer/Label").text = "%s" % Micro.player.funds
+	Micro.player.movement_disabled = true
+	var amount = item.cost
+	while amount > 0:
+		var coin := TRADE_COIN.instantiate()
+		coin.position = Micro.player.position
+		coin.amount = ceil(amount/8.)
+		coin.target = trader
+		Micro.player.add_sibling(coin)
+		amount -= ceil(amount/8.)
+	await Micro.wait(1.)
+	refresh_trades.emit()
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(Micro.player.get_node("Camera"), "global_position", Vector2.ZERO, 0.5)
+	purchase_upgrade.emit(item)
+
+func end_trade():
+	await Micro.wait(1.)
+	Micro.show_trade_information(Micro.player.chosen_trader)
+	Micro.player.movement_disabled = false
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(Micro.player.get_node("Camera"), "position", Vector2.ZERO, 0.5)
+
 # --------------
 # World gen code
 # --------------
 
-const BasicCache := preload("res://scenes/characters/tiles/Cache.tscn")
-
 func generate_world():
 	var start = Time.get_ticks_usec()
+	Micro.worldgen_status("Placing arenas...")
+	place(0, Vector2i(50, 50))
+	place(0, Vector2i(50, -50))
+	place(0, Vector2i(-50, -50))
+	place(0, Vector2i(-50, 50))
 	Micro.worldgen_status("Placing caches...")
 	for i in 200:
 		var pos = Vector2(randfn(0., 3.), randfn(0., 3.)) * 20.
-		pos += pos.normalized()*18.
-		place(structure_at(BasicCache, round(pos)))
+		pos += pos.normalized()*18
+		while $Structures/Tiles.get_cell_alternative_tile(pos) > 0:
+			pos = Vector2(randfn(0., 3.), randfn(0., 3.)) * 20.
+			pos += pos.normalized()*18
+		$Structures/Tiles.set_cell(pos, 0, Vector2i.ZERO, 4)
 	print("world gen took %s microseconds" % (Time.get_ticks_usec()-start))
 
-func structure_at(structure: PackedScene, pos: Vector2) -> Node2D:
-	var build = structure.instantiate()
-	build.position = pos*20.
-	return build
-
-func place(thing: Node2D):
-	$Structures.add_child(thing)
+func place(id: int, pos: Vector2i):
+	var pattern: TileMapPattern = $Structures/Tiles.tile_set.get_pattern(id)
+	$Structures/Tiles.set_pattern(pos-pattern.get_size()/2, pattern)

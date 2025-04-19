@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://c886m5kf6lw62"]
 
-[ext_resource type="Script" uid="uid://bj6ofyil7mjft" path="res://scenes/fx/trader_spawn.gd" id="1_874oa"]
+[ext_resource type="Script" uid="uid://bj6ofyil7mjft" path="res://trader_spawn.gd" id="1_874oa"]
 [ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="1_sm5wc"]
 [ext_resource type="Shader" uid="uid://cs7iamvps60cm" path="res://shaders/trader.gdshader" id="2_874oa"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1rox6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_874oa"]
 resource_local_to_scene = true
 shader = ExtResource("2_874oa")
 shader_parameter/opacity = 1.0
@@ -31,7 +31,7 @@ script = ExtResource("1_874oa")
 
 [node name="Character" parent="." instance=ExtResource("1_sm5wc")]
 layer = 2
-render = SubResource("ShaderMaterial_1rox6")
+render = SubResource("ShaderMaterial_874oa")
 
 [node name="SpeedParticles" type="GPUParticles2D" parent="."]
 emitting = false

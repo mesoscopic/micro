@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddxrbrnyk4jee"]
+
+[ext_resource type="PackedScene" uid="uid://cc1xa4akv25v0" path="res://scenes/characters/tiles/EnemyPosition.tscn" id="2_5raij"]
+[ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://shaders/enemy.gdshader" id="3_kj638"]
+[ext_resource type="PackedScene" uid="uid://degw88c3u4obt" path="res://scenes/characters/enemies/TraderMiniboss.tscn" id="4_j2cri"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hcecv"]
+resource_local_to_scene = true
+shader = ExtResource("3_kj638")
+shader_parameter/health = 1.0
+shader_parameter/opacity = 1.0
+shader_parameter/velocity = Vector2(0, 0)
+
+[node name="EnemyPosition" instance=ExtResource("2_5raij")]
+scale = Vector2(2.5, 2.5)
+enemy = ExtResource("4_j2cri")
+hit_only = true
+
+[node name="Character" parent="." index="1"]
+render = SubResource("ShaderMaterial_hcecv")

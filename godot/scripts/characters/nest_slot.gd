@@ -9,7 +9,9 @@ func put_upgrade(new_upgrade: Upgrade) -> void:
 	upgrade.enable()
 	$Character/Render.material = new_upgrade.render
 	$PutParticles.emitting = true
-	Micro.end_trade()
+	Micro.world.end_trade()
+	await Micro.wait(1.)
+	get_parent().deactivate()
 
 func _on_mouse_entered() -> void:
 	if get_parent().purchased_upgrade:

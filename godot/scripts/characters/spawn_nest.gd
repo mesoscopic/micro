@@ -3,6 +3,13 @@ extends Node2D
 var tween: Tween
 var purchased_upgrade: Upgrade
 
+func _ready() -> void:
+	Micro.world.purchase_upgrade.connect(func (item: Upgrade):
+		activate()
+		await Micro.wait(0.5)
+		purchased_upgrade = item
+		)
+
 func _on_home_zone_entered(_body: Node2D) -> void:
 	$RegenTimer.start()
 	if Micro.player.hp < Micro.player.max_hp: $HealRay.start()

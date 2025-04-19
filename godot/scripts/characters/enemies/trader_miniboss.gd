@@ -12,7 +12,7 @@ var spiral_angle: float = 0.
 func _ready() -> void:
 	DEATH_ANIMATION = preload("res://scenes/fx/TraderMinibossDeathAnimation.tscn")
 	super()
-	fund_drop += 25 * Micro.world.trader_minibosses_fought
+	fund_drop += 10 * Micro.world.trader_minibosses_fought
 	max_hp += 150 * Micro.world.trader_minibosses_fought
 	hp += 150 * Micro.world.trader_minibosses_fought
 	next_phase_hp = max_hp - 150
