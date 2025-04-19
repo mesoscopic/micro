@@ -22,7 +22,7 @@ var can_set_start: bool = true
 var stagger: float = 0.
 @export var is_boss: bool = false
 
-const DEATH_ANIMATION = preload("res://scenes/fx/EnemyDeathAnimation.tscn")
+var DEATH_ANIMATION := preload("res://scenes/fx/EnemyDeathAnimation.tscn")
 
 signal aggro
 signal deaggro

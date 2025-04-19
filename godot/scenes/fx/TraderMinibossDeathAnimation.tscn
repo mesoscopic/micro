@@ -1,0 +1,124 @@
+[gd_scene load_steps=21 format=3 uid="uid://bxuryb1l0u0f8"]
+
+[ext_resource type="Script" uid="uid://b8loe86itnqta" path="res://scripts/characters/trader_miniboss_death_animation.gd" id="1_3t4fp"]
+[ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://shaders/sphere_particle.gdshader" id="2_ej47d"]
+[ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://shaders/enemy.gdshader" id="3_aii8j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sxsfr"]
+shader = ExtResource("2_ej47d")
+
+[sub_resource type="Curve" id="Curve_wf04k"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yolx1"]
+curve = SubResource("Curve_wf04k")
+
+[sub_resource type="Curve" id="Curve_vcs7t"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fophx"]
+curve = SubResource("Curve_vcs7t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j114o"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -4000.0
+radial_accel_max = -3000.0
+radial_accel_curve = SubResource("CurveTexture_fophx")
+scale_min = 4.0
+scale_max = 8.0
+alpha_curve = SubResource("CurveTexture_yolx1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nnu7a"]
+shader = ExtResource("3_aii8j")
+shader_parameter/health = 0.0
+shader_parameter/opacity = 1.0
+shader_parameter/velocity = Vector2(0, 0)
+
+[sub_resource type="Curve" id="Curve_smw0l"]
+_data = [Vector2(0, 1), 0.0, -3.0817, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xb5g8"]
+curve = SubResource("Curve_smw0l")
+
+[sub_resource type="Curve" id="Curve_46tww"]
+_data = [Vector2(0, 0.333), 0.0, 5.66621, 0, 0, Vector2(0.42, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gkxl4"]
+curve = SubResource("Curve_46tww")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qkksp"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 150.0
+scale_max = 150.0
+scale_curve = SubResource("CurveTexture_gkxl4")
+alpha_curve = SubResource("CurveTexture_xb5g8")
+
+[sub_resource type="Curve" id="Curve_3t4fp"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ej47d"]
+curve = SubResource("Curve_3t4fp")
+
+[sub_resource type="Curve" id="Curve_aii8j"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.33074, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_s4fir"]
+curve = SubResource("Curve_aii8j")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eqgqj"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_s4fir")
+alpha_curve = SubResource("CurveTexture_ej47d")
+
+[node name="TraderMinibossDeathAnimation" type="Node2D"]
+script = ExtResource("1_3t4fp")
+
+[node name="ExplosionParticles" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_sxsfr")
+emitting = false
+amount = 200
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.65
+process_material = SubResource("ParticleProcessMaterial_j114o")
+
+[node name="Ring" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_nnu7a")
+emitting = false
+amount = 1
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_qkksp")
+
+[node name="TraderParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 40
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_eqgqj")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="SpawnTrader" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="SpawnTrader" to="." method="_on_spawn_trader"]

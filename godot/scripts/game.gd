@@ -6,6 +6,7 @@ var random: RandomNumberGenerator = RandomNumberGenerator.new()
 var world_seed: int = randi()
 
 var bosses_active: int = 0
+var trader_minibosses_fought: int = 0
 
 func world_enemy(taxicab_distance: float) -> Enemy:
 	var enemies: RollWeights = RollWeights.new()
@@ -40,13 +41,10 @@ func spawn_attempt() -> void:
 	$Structures.add_child(enemy)
 	print("spawned an enemy at %s!" % tile)
 
-const TRADER = preload("res://scenes/characters/Trader.tscn")
-
 func get_trader(from: Vector2):
-	var trader = TRADER.instantiate()
-	trader.position = from.normalized()*160.
-	$Structures.call_deferred("add_child", trader)
-	Micro.refresh_trades.emit()
+	var animation = preload("res://scenes/fx/TraderSpawn.tscn").instantiate()
+	animation.position = from
+	$Structures.call_deferred("add_child", animation)
 
 # --------------
 # World gen code

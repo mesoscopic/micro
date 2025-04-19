@@ -16,7 +16,7 @@ func _on_firing_cooldown_timeout() -> void:
 		bullet.lifetime = 3.
 		bullet.damage = 10
 		get_tree().current_scene.get_node("Game/World").add_child(bullet)
-	$FiringCooldown.start(1.)
+	$FiringCooldown.start(1.2)
 
 func _aggro() -> void:
 	$FiringCooldown.start()
@@ -43,7 +43,8 @@ func _hurt() -> void:
 		bullet.global_position = global_position
 		bullet.velocity = Vector2.from_angle(angle) * 100.
 		bullet.lifetime = 3.
-		bullet.damage = 10
+		bullet.damage = 7.
+		bullet.scale = Vector2(0.8,0.8)
 		get_tree().current_scene.get_node("Game/World").add_child(bullet)
 
 func can_teleport_to(location: Vector2) -> bool:

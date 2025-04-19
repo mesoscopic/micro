@@ -28,12 +28,15 @@ curve = SubResource("Curve_wf87e")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d344a"]
 particle_flag_disable_z = true
 emission_shape = 1
-emission_sphere_radius = 10.0
-radial_velocity_min = 40.0
-radial_velocity_max = 100.0
+emission_sphere_radius = 20.0
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
 gravity = Vector3(0, 0, 0)
-scale_min = 3.0
-scale_max = 6.0
+damping_min = 20.0
+damping_max = 40.0
+scale_min = 4.0
+scale_max = 9.0
 scale_curve = SubResource("CurveTexture_u77d8")
 
 [node name="TraderMiniboss" type="CharacterBody2D" groups=["enemy"]]
@@ -51,8 +54,8 @@ fund_drop_randomization = 0.2
 despawn_distance = 400
 stagger_time = 0.0
 is_boss = true
-max_hp = 500
-hp = 500
+max_hp = 300
+hp = 300
 metadata/_custom_type_script = "uid://oy7qpe47ti6v"
 
 [node name="Character" parent="." instance=ExtResource("2_b1f70")]
@@ -68,14 +71,13 @@ shape = SubResource("CircleShape2D_wt047")
 [node name="HurtParticles" type="GPUParticles2D" parent="."]
 material = SubResource("ShaderMaterial_c83qb")
 emitting = false
-amount = 30
-lifetime = 0.5
+amount = 42
+lifetime = 0.25
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_d344a")
 
-[node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 10.0
-autostart = true
+[node name="FireRate" type="Timer" parent="."]
+wait_time = 0.5
 
-[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="FireRate" to="." method="_on_fire"]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://c886m5kf6lw62"]
+
+[ext_resource type="Script" uid="uid://bj6ofyil7mjft" path="res://scenes/fx/trader_spawn.gd" id="1_874oa"]
+[ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="1_sm5wc"]
+[ext_resource type="Shader" uid="uid://cs7iamvps60cm" path="res://shaders/trader.gdshader" id="2_874oa"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1rox6"]
+resource_local_to_scene = true
+shader = ExtResource("2_874oa")
+shader_parameter/opacity = 1.0
+shader_parameter/velocity = Vector2(0, 0)
+
+[sub_resource type="Curve" id="Curve_874oa"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.253924, 0.912658), -4.14994, -4.14994, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_1rox6"]
+curve = SubResource("Curve_874oa")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_efej0"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 10, 10)
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 8.0
+alpha_curve = SubResource("CurveTexture_1rox6")
+
+[node name="TraderSpawn" type="Node2D"]
+script = ExtResource("1_874oa")
+
+[node name="Character" parent="." instance=ExtResource("1_sm5wc")]
+layer = 2
+render = SubResource("ShaderMaterial_1rox6")
+
+[node name="SpeedParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 80
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_efej0")
