@@ -10,8 +10,8 @@ func _init() -> void:
 
 func enable() -> void:
 	Micro.player.max_hp += 15
-	Micro.player.hp = Micro.player.max_hp
+	Micro.player.set_hp(Micro.player.max_hp)
 
 func disable() -> void:
 	Micro.player.max_hp -= 15
-	Micro.player.hp = Micro.player.max_hp
+	Micro.player.set_hp(Micro.player.max_hp)

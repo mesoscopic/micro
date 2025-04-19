@@ -31,3 +31,7 @@ func damage(amount: int):
 func heal(amount: int):
 	hp = min(max_hp, hp + amount)
 	$Character/Render.material.set("shader_parameter/health", float(hp)/float(max_hp))
+
+func set_hp(amount: int):
+	hp = amount
+	$Character/Render.material.set("shader_parameter/health", float(hp)/float(max_hp))
