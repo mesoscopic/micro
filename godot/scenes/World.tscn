@@ -51,7 +51,6 @@ tile_data = PackedInt32Array(524288, 0, 131072, 589824, 0, 131072, 655360, 0, 13
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_h1bdy"]
 resource_name = "Tiles"
 scenes/1/scene = ExtResource("3_pdh0q")
-scenes/1/display_placeholder = ExtResource("3_pdh0q")
 scenes/2/scene = ExtResource("3_7c4bj")
 scenes/3/scene = ExtResource("4_nrtoj")
 scenes/4/scene = ExtResource("6_hlk0d")

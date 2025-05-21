@@ -26,7 +26,7 @@ func damage(amount: int):
 		invincible = true
 		die.emit()
 	else:
-		hurt.emit()
+		hurt.emit(amount)
 
 func heal(amount: int):
 	hp = min(max_hp, hp + amount)

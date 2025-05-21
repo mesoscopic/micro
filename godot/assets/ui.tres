@@ -1,6 +1,28 @@
-[gd_resource type="Theme" load_steps=23 format=3 uid="uid://do1iun3hb3o4e"]
+[gd_resource type="Theme" load_steps=26 format=3 uid="uid://do1iun3hb3o4e"]
 
 [ext_resource type="FontFile" uid="uid://dspopkf3f3p5g" path="res://assets/fonts/Krypton.otf" id="1_tnp0o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnp0o"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g6lb4"]
+bg_color = Color(0.741204, 0.741204, 0.741204, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xh2vi"]
+border_width_top = 4
+border_color = Color(0.137873, 0.137873, 0.137873, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="Image" id="Image_tnp0o"]
 data = {
@@ -122,6 +144,9 @@ bg_color = Color(0, 0, 0, 0.392157)
 
 [resource]
 default_font = ExtResource("1_tnp0o")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_tnp0o")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_g6lb4")
+HSlider/styles/slider = SubResource("StyleBoxFlat_xh2vi")
 TabContainer/colors/drop_mark_color = Color(1, 1, 1, 1)
 TabContainer/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
 TabContainer/colors/font_hovered_color = Color(0.95, 0.95, 0.95, 1)

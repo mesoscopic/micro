@@ -30,7 +30,7 @@ func _ready():
 		$Render.material = render;
 		$Render.scale = Vector2(size, size);
 	process_priority = layer
-	$Occlusion/Area.scale = Vector2(float(size)/2.0, float(size)/2.0)
+	$Occlusion/Area.scale = Vector2(float(size)/2., float(size)/2.)
 	if light == 0:
 		$Light/Area.set_deferred("disabled", true)
 	else:
@@ -47,7 +47,7 @@ func _physics_process(_delta):
 			var c = area.get_parent()
 			if c.layer < layer:
 				var a: float = c.alpha_base
-				var n: float = sqrt((global_position[0] - c.global_position[0])**2 + (global_position[1] - c.global_position[1])**2)/float(size)	
+				var n: float = sqrt((global_position[0] - c.global_position[0])**2 + (global_position[1] - c.global_position[1])**2)/float(size+c.size)*2.
 				if n < a: c.alpha_base = n
 	if light > 0:
 		for area in $Light.get_overlapping_areas():

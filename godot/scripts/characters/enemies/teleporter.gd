@@ -28,9 +28,9 @@ func _deaggro() -> void:
 	$RetargetTimer.stop()
 	wander()
 
-func _hurt() -> void:
+func _hurt(amount: int) -> void:
 	invincible = true
-	super()
+	super(amount)
 	$FiringCooldown.start(3.)
 	await Micro.wait(0.25)
 	invincible = false

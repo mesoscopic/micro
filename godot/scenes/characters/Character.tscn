@@ -1,22 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnwffnhs6gnwh"]
+[gd_scene load_steps=6 format=3 uid="uid://dnwffnhs6gnwh"]
 
 [ext_resource type="Script" uid="uid://ba8aaxbp8jkk7" path="res://scripts/characters/generic.gd" id="1_mj12y"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://scripts/char_texture.gd" id="2_evo8w"]
 
-[sub_resource type="Gradient" id="Gradient_ns4qr"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+[sub_resource type="Image" id="Image_typq7"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_71c5c"]
-gradient = SubResource("Gradient_ns4qr")
-width = 1
-height = 1
+[sub_resource type="ImageTexture" id="ImageTexture_0v81k"]
+image = SubResource("Image_typq7")
+script = ExtResource("2_evo8w")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hvjck"]
+radius = 1.0
 
 [node name="Character" type="Node2D"]
 script = ExtResource("1_mj12y")
 
 [node name="Render" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_71c5c")
+texture = SubResource("ImageTexture_0v81k")
 
 [node name="Occlusion" type="Area2D" parent="."]
 collision_layer = 256

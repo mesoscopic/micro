@@ -6,7 +6,7 @@ func _ready() -> void:
 	parent.hurt.connect(on_hurt)
 	$Timer.wait_time = aggro_length
 
-func on_hurt() -> void:
+func on_hurt(_amount: int) -> void:
 	aggro()
 	$Timer.stop()
 	$Timer.start()

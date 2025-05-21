@@ -8,7 +8,8 @@ var player: Player
 var world: World
 var debug_paused := false
 
-var loaded_settings = {
+var config: ConfigFile
+var settings_defaults := {
 	"photosensitive_mode": false
 }
 
@@ -88,3 +89,13 @@ func closest_enemy(to: Vector2) -> Enemy:
 			if !closest or to.distance_squared_to(enemy.global_position)<to.distance_squared_to(closest.global_position):
 				closest = enemy
 	return closest
+
+func setting(id: String, value: Variant = null) -> Variant:
+	if !config:
+		config = ConfigFile.new()
+		config.load("user://micro.cfg")
+	if value:
+		config.set_value("settings", id, value)
+		return config.save("user://micro.cfg")
+	else:
+		return config.get_value("settings", id, settings_defaults.get(id))

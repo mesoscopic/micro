@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://b14dvx67drebc"]
+[gd_scene load_steps=41 format=3 uid="uid://b14dvx67drebc"]
 
 [ext_resource type="Script" uid="uid://de3rlx01ibq3d" path="res://scripts/characters/player.gd" id="1_1im8n"]
 [ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="2_8klxi"]
@@ -59,28 +59,6 @@ scale_min = 3.0
 scale_max = 6.0
 scale_curve = SubResource("CurveTexture_p6ejv")
 alpha_curve = SubResource("CurveTexture_yortb")
-
-[sub_resource type="Curve" id="Curve_1h7f1"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_samvy"]
-curve = SubResource("Curve_1h7f1")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wlwhf"]
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 8.0
-angle_min = 45.0
-angle_max = 45.0
-direction = Vector3(-1, 0, 0)
-spread = 180.0
-initial_velocity_min = 10.0
-initial_velocity_max = 20.0
-gravity = Vector3(0, 0, 0)
-scale_min = 3.0
-scale_max = 5.0
-alpha_curve = SubResource("CurveTexture_samvy")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oihyf"]
 shader = ExtResource("6_m6phi")
@@ -394,16 +372,6 @@ one_shot = true
 explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_d7jle")
 
-[node name="UltraDuration" type="Timer" parent="."]
-wait_time = 1.2
-one_shot = true
-
-[node name="UltraEffect" type="GPUParticles2D" parent="."]
-emitting = false
-amount = 64
-lifetime = 0.5
-process_material = SubResource("ParticleProcessMaterial_wlwhf")
-
 [node name="FundsEffect" type="GPUParticles2D" parent="."]
 material = SubResource("ShaderMaterial_oihyf")
 emitting = false
@@ -463,5 +431,3 @@ process_mode = 3
 emitting = false
 amount = 256
 process_material = SubResource("ParticleProcessMaterial_ufbvs")
-
-[connection signal="timeout" from="UltraDuration" to="." method="_end_ultra"]

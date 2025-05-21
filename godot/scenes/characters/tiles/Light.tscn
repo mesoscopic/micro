@@ -44,6 +44,5 @@ ambient_light = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 4
-trail_enabled = true
 trail_lifetime = 0.2
 process_material = SubResource("ParticleProcessMaterial_cyr0d")

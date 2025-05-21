@@ -12,7 +12,7 @@ var trading: bool = false
 var chosen: bool = false:
 	set(chosen):
 		chosen = chosen
-		$Selection.visible = chosen
+		if chosen: $HappyParticles.emitting = true
 var item: Upgrade
 
 func _ready() -> void:
@@ -55,9 +55,6 @@ func _on_trade_range_body_exited(_body: Node2D) -> void:
 	chosen = false
 	Micro.player.traders.erase(self)
 	wander()
-
-func happy() -> void:
-	if !$HappyParticles.emitting: $HappyParticles.emitting = true
 
 func refresh() -> void:
 	var weights = RollWeights.new()

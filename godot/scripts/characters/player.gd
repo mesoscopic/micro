@@ -20,7 +20,6 @@ var bullet_velocity_mult: float = 1.
 var bullet_size_mult: float = 1.
 
 var dash_direction := Vector2.ZERO;
-var boost_amount := 1.
 
 var selected_ability: int = 0
 
@@ -41,14 +40,13 @@ func _physics_process(delta):
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	$AimMarker.global_position = get_aim_position()
 	$AimMarker.emitting = $ShootCooldown.is_stopped()
-	var boosted = !$UltraDuration.is_stopped()
 	if dash_direction != Vector2.ZERO:
 		velocity = dash_direction * max_speed * 10
 	else:
 		if direction != Vector2.ZERO:
-			velocity = velocity.move_toward(direction * max_speed * boost_amount * (evasion_mult if $ShootCooldown.is_stopped() else 1.), acceleration * (2 if boosted else 1) * delta)
+			velocity = velocity.move_toward(direction * max_speed * (evasion_mult if $ShootCooldown.is_stopped() else 1.), acceleration * delta)
 		else:
-			velocity = velocity.move_toward(Vector2.ZERO, deceleration / boost_amount * delta)
+			velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
 		
 	$Character/Render.material.set("shader_parameter/velocity", (velocity / max(max_speed, velocity.length())))
 	$Character/Render.material.set("shader_parameter/can_dash", ($Abilities.get_child(selected_ability).available() if selected_ability >= 0 else true))
@@ -109,16 +107,18 @@ func get_aim_position() -> Vector2:
 	else:
 		return direction
 
-func _hurt():
+func _hurt(amount: int):
 	$HurtEffect.restart()
+	if !Micro.setting("photosensitive_mode"): $Camera.hurt(clamp(float(amount)/float(hp), 0., 1.))
 
 func _die():
+	if !Micro.setting("photosensitive_mode"): $Camera.hurt(2.)
 	invincible = true
-	create_tween().tween_property(Engine, "time_scale", 0.1, .8)
-	await Micro.wait(1., true)
-	get_tree().paused = true
+	var slow = create_tween().set_ignore_time_scale(true)
+	slow.tween_property(Engine, "time_scale", 0.1, .8)
+	await slow.finished
+	process_mode = Node.PROCESS_MODE_DISABLED
 	Engine.time_scale = 1.
-	await Micro.wait(0.5, true)
 	$DeathParticles.emitting = true
 	$Character.hide()
 	$Ring.emitting = true
@@ -130,31 +130,19 @@ func _input(event: InputEvent) -> void:
 	if !movement_disabled and trading and event.is_action_pressed("ui_accept"):
 		Micro.attempt_trade(chosen_trader)
 
-func _do_ultra(duration: float) -> void:
-	boost_amount *= (1.5 if boost_amount == 1 else 1.2)
-	$UltraDuration.stop()
-	$UltraDuration.start(duration)
-	$UltraEffect.amount_ratio = -1/boost_amount + 1
-	$UltraEffect.modulate.a = -1/boost_amount + 1
-	$UltraEffect.emitting = true
-
-func _end_ultra() -> void:
-	boost_amount = 1.
-	$UltraEffect.emitting = false
-
 func has_ability(ability_name: NodePath) -> bool:
 	return $Abilities.has_node(ability_name)
 
 func give_funds(amount: int) -> void:
 	funds += amount
-	if !Micro.loaded_settings.get("photosensitive_mode"): $FundsEffect.emit_particle(get_transform(), Vector2.ZERO, Color.WHITE, Color.WHITE, 0)
+	if !Micro.setting("photosensitive_mode"): $FundsEffect.emit_particle(get_transform(), Vector2.ZERO, Color.WHITE, Color.WHITE, 0)
 	$FundsDisplay/HBoxContainer/Label.text = "%s" % funds
 	$FundsDisplay/AnimationPlayer.stop()
 	$FundsDisplay/AnimationPlayer.play(
-		("show_funds_simple" if Micro.loaded_settings.get("photosensitive_mode") else "show_funds")
+		("show_funds_simple" if Micro.setting("photosensitive_mode") else "show_funds")
 		if trading else # get_funds causes FundsDisplay to disappear, so we instead use show_funds which does not,
 						# but we still need a photosensitive version in this case
-		("get_funds_simple" if Micro.loaded_settings.get("photosensitive_mode") else "get_funds"))
+		("get_funds_simple" if Micro.setting("photosensitive_mode") else "get_funds"))
 
 func add_trader(trader: Trader) -> void:
 	traders.append(trader)

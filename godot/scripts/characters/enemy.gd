@@ -51,7 +51,7 @@ func _die():
 		Micro.world.bosses_active -= 1
 	queue_free()
 
-func _hurt():
+func _hurt(_amount: int):
 	stagger = stagger_time
 	$HurtParticles.restart()
 
@@ -157,13 +157,10 @@ func do_tactic(target: Vector2):
 	repath.emit()
 
 func do_despawn():
-	print("enemy despawned")
 	if is_boss:
 		Micro.world.bosses_active -= 1
 	despawn.emit()
 	# 50% chance of doing another spawn attempt if this one despawns
 	# Since a lot of enemies that spawn will wander away from the player, this increases the likelihood of the player running into an enemy
-	if randi_range(1,2) == 1:
-		print("but another spawned in its place")
-		Micro.world.spawn_attempt()
+	if randi_range(1,2) == 1: Micro.world.spawn_attempt()
 	queue_free()

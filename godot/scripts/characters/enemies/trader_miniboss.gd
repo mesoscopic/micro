@@ -18,8 +18,8 @@ func _ready() -> void:
 	next_phase_hp = max_hp - 150
 	phase_setup()
 
-func _hurt() -> void:
-	super()
+func _hurt(amount: int) -> void:
+	super(amount)
 	if phase == 3:
 		_on_fire()
 	if hp <= next_phase_hp and next_phase_hp > 0:
@@ -69,7 +69,7 @@ func phase_setup():
 				bullet.position = position
 				bullet.target = global_position + Vector2.from_angle(angle)*140.
 				bullet.time = i
-				bullet.spawn = preload("res://scenes/characters/enemies/BasicShooter.tscn")
+				bullet.spawn = preload("res://scenes/characters/enemies/AdvancedShooter.tscn")
 				add_sibling(bullet)
 
 func _on_fire() -> void:

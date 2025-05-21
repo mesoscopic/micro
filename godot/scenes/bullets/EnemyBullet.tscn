@@ -1,21 +1,27 @@
-[gd_scene load_steps=12 format=3 uid="uid://v7mv45nprvqq"]
+[gd_scene load_steps=13 format=3 uid="uid://v7mv45nprvqq"]
 
 [ext_resource type="Script" uid="uid://3pdmhg11c70e" path="res://scripts/characters/bullet.gd" id="1_n8fy3"]
 [ext_resource type="Shader" uid="uid://dnld05ugc5ccp" path="res://shaders/enemy_bullet.gdshader" id="2_wo8ob"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://scripts/char_texture.gd" id="3_wo8ob"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iim64"]
 resource_local_to_scene = true
 shader = ExtResource("2_wo8ob")
 shader_parameter/explode_anim = 0.0
 
-[sub_resource type="Gradient" id="Gradient_lpqw0"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+[sub_resource type="Image" id="Image_eb62p"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_hw8tv"]
-resource_local_to_scene = true
-gradient = SubResource("Gradient_lpqw0")
-width = 40
-height = 40
+[sub_resource type="ImageTexture" id="ImageTexture_rjho7"]
+image = SubResource("Image_eb62p")
+script = ExtResource("3_wo8ob")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="Animation" id="Animation_r3uyc"]
 length = 0.001
@@ -130,8 +136,8 @@ script = ExtResource("1_n8fy3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_iim64")
-scale = Vector2(0.25, 0.25)
-texture = SubResource("GradientTexture2D_hw8tv")
+scale = Vector2(10, 10)
+texture = SubResource("ImageTexture_rjho7")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(0, -4, -2, 0, 0, 4, 2, 0)

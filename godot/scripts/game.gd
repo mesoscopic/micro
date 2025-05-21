@@ -11,9 +11,13 @@ var trader_minibosses_fought: int = 0
 func world_enemy(taxicab_distance: float) -> Enemy:
 	var enemies: RollWeights = RollWeights.new()
 	enemies.add_item(preload("res://scenes/characters/enemies/BasicShooter.tscn"), 4)
+	enemies.add_item(preload("res://scenes/characters/enemies/AdvancedShooter.tscn"), 2)
 	if taxicab_distance >= 100:
+		enemies.add_item(preload("res://scenes/characters/enemies/AdvancedShooter.tscn"), 2)
 		enemies.add_item(preload("res://scenes/characters/enemies/Turret.tscn"), 2)
 		enemies.add_item(preload("res://scenes/characters/enemies/Teleporter.tscn"), 1)
+	if taxicab_distance >= 120:
+		enemies.add_item(preload("res://scenes/characters/enemies/Surpriser.tscn"), 1)
 	return Micro.roll(enemies).instantiate()
 
 func spawn_attempt() -> void:
@@ -22,15 +26,9 @@ func spawn_attempt() -> void:
 		return # World enemies shouldn't spawn during boss fights
 	var player_pos: Vector2 = Micro.player.position / 20.
 	var taxicab_distance: float = abs(player_pos.x) + abs(player_pos.y)
-	if taxicab_distance < 30:
-		print("failed distance!")
-		return # Make sure the player is far enough from spawn
-	elif taxicab_distance < 60 and randi_range(1,2) != 1:
-		print("failed chance! (1 in 2)")
-		return # 1 in 2 chance to spawn if <80 tiles from spawn
-	elif taxicab_distance < 100 and randi_range(1,3) == 1:
-		print("failed chance! (2 in 3)")
-		return # 2 in 3 chance to spawn if >80 and <160 tiles from spawn
+	if taxicab_distance < 30: return # Make sure the player is far enough from spawn
+	elif taxicab_distance < 60 and randi_range(1,2) != 1: return # 1 in 2 chance to spawn if <80 tiles from spawn
+	elif taxicab_distance < 100 and randi_range(1,3) == 1: return # 2 in 3 chance to spawn if >80 and <160 tiles from spawn
 	# Otherwise, spawn is guaranteed
 	var enemy := world_enemy(taxicab_distance)
 	# Spawn the enemy 20 tiles away from the player.
@@ -39,7 +37,6 @@ func spawn_attempt() -> void:
 	var tile: Vector2 = (player_pos + Vector2.from_angle(player_pos.angle_to_point(Vector2.ZERO)+PI+randf_range(-angle_randomization,angle_randomization)) * 20.)
 	enemy.position = tile * 20.
 	$Structures.add_child(enemy)
-	print("spawned an enemy at %s!" % tile)
 
 func get_trader(from: Vector2):
 	var animation = preload("res://scenes/fx/TraderSpawn.tscn").instantiate()

@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://ij3bdhvutjdc"]
+[gd_scene load_steps=13 format=3 uid="uid://b46bcw3s1yhbg"]
 
-[ext_resource type="Script" uid="uid://bmlnebh2gvi7m" path="res://scripts/characters/enemies/basic_shooter.gd" id="1_qeqcc"]
+[ext_resource type="Script" uid="uid://w8cbbqmraekc" path="res://scripts/characters/enemies/basic_shooter.gd" id="1_qeqcc"]
 [ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="1_wu1f4"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://shaders/enemy.gdshader" id="2_3448q"]
 [ext_resource type="PackedScene" uid="uid://b2erii1hcv0u0" path="res://scenes/logic/RangeAggro.tscn" id="3_mjjdd"]
@@ -41,8 +41,10 @@ scale_curve = SubResource("CurveTexture_u77d8")
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_qeqcc")
-fund_drop = 10
-fund_drop_randomization = 0.3
+fund_drop = 8
+fund_drop_randomization = 0.5
+max_hp = 50
+hp = 50
 
 [node name="Character" parent="." instance=ExtResource("1_wu1f4")]
 layer = 2
@@ -70,6 +72,7 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_rwtxu")
 
 [node name="FiringCooldown" type="Timer" parent="."]
+wait_time = 0.5
 
 [node name="RetargetTimer" type="Timer" parent="."]
 

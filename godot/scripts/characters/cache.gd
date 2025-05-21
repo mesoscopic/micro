@@ -9,14 +9,14 @@ func _ready():
 	noise.noise.seed = randi()
 	hurt.connect(_hurt)
 
-func _hurt() -> void:
+func _hurt(_amount: int) -> void:
 	$FundHint.emitting = false
 	$OpenParticles.emitting = true
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Animations.play("open")
 	var weights = RollWeights.new()
-	weights.add_item("funds", 10)
-	if Micro.player.hp < Micro.player.max_hp: weights.add_item("heal", 6)
+	weights.add_item("funds", 19)
+	if Micro.player.hp < Micro.player.max_hp: weights.add_item("heal", 10)
 	if global_position.length_squared() > 500000: weights.add_item("surprise", 1)
 	do_reward(Micro.roll(weights))
 	await Micro.wait(1.5)

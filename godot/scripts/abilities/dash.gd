@@ -17,12 +17,13 @@ func start_dash():
 func end_dash(early: bool = false):
 	if early: 
 		$Duration.stop()
-		player._do_ultra($Cooldown.time_left + 0.2)
+		player.velocity = -player.dash_direction * player.max_speed * 4.
+	else:
+		player.velocity = player.dash_direction * player.max_speed
 	player.invincible = false
 	$DashArea.monitoring = false
 	$Dashline.emitting = false
 	$Afterimage.emitting = false
-	player.velocity = player.dash_direction * player.max_speed * player.boost_amount
 	player.dash_direction = Vector2.ZERO
 
 func _on_dash_cooldown_timeout() -> void:

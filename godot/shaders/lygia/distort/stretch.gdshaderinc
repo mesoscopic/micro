@@ -53,13 +53,13 @@ STRETCH_TYPE stretch(in SAMPLER_TYPE tex, in vec2 st, in vec2 direction, const i
 }
 
 STRETCH_TYPE stretch(in SAMPLER_TYPE tex, in vec2 st, in vec2 direction) {
-    float f_samples = float(STRETCH_SAMPLES);  
+    float f_samples = float(STRETCH_SAMPLES);
     STRETCH_TYPE color = STRETCH_TYPE(0.);
     for (int i = 0; i < STRETCH_SAMPLES; i++) {
-        float f_sample = float(i);    
+        float f_sample = float(i);
         STRETCH_TYPE tx = STRETCH_SAMPLER_FNC(tex, st + direction * f_sample);
         #ifdef STRETCH_WEIGHT
-        tx *= STRETCH_WEIGHT;    
+        tx *= STRETCH_WEIGHT;
         #endif
         color += tx;
     }
