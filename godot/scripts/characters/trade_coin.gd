@@ -18,7 +18,6 @@ func _physics_process(delta: float) -> void:
 		point += direction * speed * delta
 		$Trail.add_point(point - global_position)
 		if point.distance_squared_to(target.global_position) < 80.:
-			target.happy()
 			moving = false
 	$Trail.remove_point(0)
 	if $Trail.get_point_count() == 0:

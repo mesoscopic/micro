@@ -34,10 +34,8 @@ func do_reward(reward: String) -> void:
 			add_sibling(coin)
 	elif reward == "heal":
 		var ray := heal_ray.instantiate()
-		ray.healing = 20.
 		add_child(ray)
-		ray.start()
-		$HealRay.start()
+		ray.heal(Micro.player, 20., 1.)
 	elif reward == "surprise":
 		var enemy := surprise.instantiate()
 		enemy.position = position

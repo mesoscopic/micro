@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func _on_home_zone_entered(_body: Node2D) -> void:
 	$RegenTimer.start()
-	if Micro.player.hp < Micro.player.max_hp: $HealRay.start()
+	if Micro.player.hp < Micro.player.max_hp: $HealRay.heal(Micro.player, Micro.player.max_hp, 1.)
 	activate()
 
 func _on_home_zone_exited(_body: Node2D) -> void:
