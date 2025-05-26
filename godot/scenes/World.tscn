@@ -53,7 +53,7 @@ alpha_curve = SubResource("CurveTexture_wpbas")
 shader = ExtResource("1_gia2e")
 shader_parameter/landing_effect = 1.0
 
-[sub_resource type="Image" id="Image_c0d7e"]
+[sub_resource type="Image" id="Image_i4b1j"]
 data = {
 "data": PackedByteArray("/////w=="),
 "format": "RGBA8",
@@ -63,7 +63,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_o1tcx"]
-image = SubResource("Image_c0d7e")
+image = SubResource("Image_i4b1j")
 script = ExtResource("4_i4b1j")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 

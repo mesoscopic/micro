@@ -21,14 +21,14 @@ shader = ExtResource("5_eqbkl")
 _data = [Vector2(0, 0), 0.0, 5.00249, 0, 0, Vector2(0.503854, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_fm3fe"]
+[sub_resource type="CurveTexture" id="CurveTexture_eqbkl"]
 curve = SubResource("Curve_vdo3p")
 
 [sub_resource type="Curve" id="Curve_k64oe"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.497059), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_wf8vn"]
+[sub_resource type="CurveTexture" id="CurveTexture_ioqel"]
 curve = SubResource("Curve_k64oe")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4jypl"]
@@ -44,8 +44,8 @@ radial_accel_min = -200.0
 radial_accel_max = -200.0
 scale_min = 2.0
 scale_max = 5.0
-scale_curve = SubResource("CurveTexture_wf8vn")
-alpha_curve = SubResource("CurveTexture_fm3fe")
+scale_curve = SubResource("CurveTexture_ioqel")
+alpha_curve = SubResource("CurveTexture_eqbkl")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oxxt1"]
 radius = 1.0

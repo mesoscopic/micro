@@ -3,14 +3,18 @@ extends Node2D
 @export var enemy: PackedScene
 @export var spawn_radius: float
 @export var hit_only: bool = false
+@export var require_close: bool = false
+@export var size: float = 20.
 var active := false
 
 func _ready() -> void:
-	if hit_only: $SpawnRange.monitoring = false
+	$CollisionShape2D.scale = Vector2(size/20., size/20.)
+	$ExplosionParticles.scale = Vector2(size/20., size/20.)
+	$Character.size = int(size)
 	$SpawnRange.scale = Vector2(spawn_radius, spawn_radius)
 
 func _on_spawn_range_body_entered(body: Node2D) -> void:
-	if active or body != Micro.player: return
+	if hit_only or active or body != Micro.player: return
 	active = true
 	create_tween().tween_property($Character, "light", 50, 0.25)
 	$SpawnParticles.emitting = true
@@ -31,6 +35,7 @@ func reactivate() -> void:
 
 func _on_hit(_area: Area2D) -> void:
 	if active: return
+	if require_close and !$SpawnRange.overlaps_body(Micro.player): return
 	active = true
 	$ExplosionParticles.emitting = true
 	$Character.hide()

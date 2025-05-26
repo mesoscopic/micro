@@ -31,6 +31,17 @@ func _die() -> void:
 	super()
 	Micro.world.trader_minibosses_fought += 1
 
+func do_despawn() -> void:
+	invincible = true
+	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($Character, "light", 0, 0.5)
+	tween.parallel().tween_property($Character/Render.material, "shader_parameter/health", 1., 0.5)
+	await tween.finished
+	if is_boss:
+		Micro.world.bosses_active -= 1
+	despawn.emit()
+	queue_free()
+
 func phase_setup():
 	match phase:
 		1:

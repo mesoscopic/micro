@@ -6,7 +6,7 @@ void fragment() {
 	if(abs(UV.x-.5)+abs(UV.y-.5) > .5){
 		discard;
 	}
-	
+
 	COLOR = vec4(0.);
 	if(landing_effect>0.){
 		float c = 0.0;

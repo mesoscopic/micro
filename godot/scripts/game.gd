@@ -11,16 +11,18 @@ var trader_minibosses_fought: int = 0
 enum Biome {
 	LANDING,
 	DEFAULT,
+	PEACE,
 	EMPTINESS
 }
 
 var current_biome: Biome = Biome.LANDING
 var biome_map: Image
+var biomes: Dictionary[Vector2i, Biome] = {}
 
 func world_enemy(distance: float) -> Enemy:
 	var enemies: RollWeights = RollWeights.new()
-	match get_biome(Micro.player.position):
-		Biome.LANDING when distance > 40:
+	match current_biome:
+		Biome.LANDING:
 			enemies.add_item(preload("res://scenes/characters/enemies/BasicShooter.tscn"), 4)
 			enemies.add_item(preload("res://scenes/characters/enemies/AdvancedShooter.tscn"), 2)
 		Biome.DEFAULT:
@@ -42,7 +44,7 @@ func spawn_attempt() -> void:
 	var player_pos: Vector2 = tile_at(Micro.player.position)
 	var distance: int = int(taxicab(player_pos))
 	
-	if distance < 40: return # Make sure the player is far enough from spawn
+	if distance < 40 or current_biome == Biome.PEACE: return # Make sure the player is far enough from spawn
 	elif distance < 100 and randi_range(1,2) != 1: return # 1 in 2 chance to spawn if <100 tiles from spawn
 	elif distance < 160 and randi_range(1,3) == 1: return # 2 in 3 chance to spawn if >100 and <160 tiles from spawn
 	# Otherwise, spawn is guaranteed
@@ -59,13 +61,16 @@ func _physics_process(_delta: float) -> void:
 	var biome: Biome = get_biome(Micro.player.position)
 	if biome == current_biome: return
 	current_biome = biome
-	match current_biome:
-		Biome.EMPTINESS:
-			$EmptinessDamage.start()
-			Micro.player.get_node("Camera/GlobalParticles/Emptiness").show()
-		_:
-			$EmptinessDamage.stop()
-			Micro.player.get_node("Camera/GlobalParticles/Emptiness").hide()
+	
+	# Biome effects
+	if current_biome == Biome.EMPTINESS:
+		$EmptinessDamage.start()
+		Micro.player.get_node("Camera/GlobalParticles/Emptiness").emitting = true
+	else:
+		$EmptinessDamage.stop()
+		Micro.player.get_node("Camera/GlobalParticles/Emptiness").emitting = false
+	
+	Micro.player.get_node("Camera/GlobalParticles/Peace").emitting = (current_biome == Biome.PEACE)
 
 func _on_emptiness_damage_timeout() -> void:
 	Micro.player.damage(1)
@@ -117,7 +122,9 @@ func get_biome(pos: Vector2) -> Biome:
 	elif taxicab_distance >= 512:
 		return Biome.EMPTINESS
 	else:
-		# sample biome map
+		var center := biome_center_at(tile_at(pos))
+		if biomes.has(center):
+			return biomes.get(center)
 		return Biome.DEFAULT
 
 # --------------
@@ -136,10 +143,11 @@ func generate_world():
 		ResourceSaver.save(ImageTexture.create_from_image(biome_map), "user://biome_map.png")
 		print("Saved biome map to user folder.")
 	Micro.worldgen_status("Placing arenas...")
-	place(0, Vector2i(50, 50))
-	place(0, Vector2i(50, -50))
-	place(0, Vector2i(-50, -50))
-	place(0, Vector2i(-50, 50))
+	for dir in [Vector2i(1,1),Vector2i(1,-1),Vector2i(-1,-1),Vector2i(-1,1)]:
+		var distance = 50
+		while !attempt_decide_biome_for_center_structure(dir*distance, Biome.PEACE, 10):
+			distance += 10
+		place(0, biome_center_at(dir*distance))
 	Micro.worldgen_status("Placing caches...")
 	for i in 200:
 		var pos = Vector2(randfn(0., 3.), randfn(0., 3.)) * 20.
@@ -151,5 +159,22 @@ func generate_world():
 	print("Post-init worldgen finished in %s microseconds" % (Time.get_ticks_usec()-start))
 
 func place(id: int, pos: Vector2i):
+	print("placed ", id, " at ", pos)
 	var pattern: TileMapPattern = $Structures/Tiles.tile_set.get_pattern(id)
 	$Structures/Tiles.set_pattern(pos-pattern.get_size()/2, pattern)
+
+# Returns false if we fail
+func attempt_decide_biome_for_center_structure(tile: Vector2i, biome: Biome, margin: int) -> bool:
+	var center := biome_center_at(tile)
+	# We'll be placing a structure at the center, so we can't have it be too close to spawn or the Emptiness
+	if (abs(center.x) + abs(center.y) <= 60+margin) or (abs(center.x) + abs(center.y)) >= 512-margin:
+		return false
+	# Don't place it here if there's already a biome
+	if biomes.has(center): return false
+	biomes.set(center, biome)
+	return true
+
+func biome_center_at(tile: Vector2i) -> Vector2i:
+	var color := biome_map.get_pixel(tile.x + 512, tile.y + 512)
+	var uv: Vector2i = Vector2(color.r, color.g) * 1024
+	return uv - Vector2i(512,512)

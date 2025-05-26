@@ -4,7 +4,11 @@ class_name Character
 ## The layer this character is in. Characters occlude those in lower layers.
 @export_enum("Background tile", "Foreground tile", "Moving entity", "Item", "Player") var layer: int
 ## The size of this character in units. 20 units is 1 tile.
-@export var size: int = 20
+@export var size: int = 20:
+	set(new_size):
+		size = new_size
+		$Render.scale = Vector2(new_size, new_size)
+		$Occlusion/Area.scale = Vector2(float(new_size)/2., float(new_size)/2.)
 ## The size of this character's light in units. 20 units is 1 tile.
 @export var light: int = 0:
 	set(new_light):
@@ -27,8 +31,8 @@ var light_multiplier: float = 0.0
 # add any logic common to all characters here
 func _ready():
 	if render: 
-		$Render.material = render;
-		$Render.scale = Vector2(size, size);
+		$Render.material = render
+		$Render.scale = Vector2(size, size)
 	process_priority = layer
 	$Occlusion/Area.scale = Vector2(float(size)/2., float(size)/2.)
 	if light == 0:
