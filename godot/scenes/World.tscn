@@ -1,15 +1,25 @@
-[gd_scene load_steps=21 format=4 uid="uid://qujhsvriffxk"]
+[gd_scene load_steps=32 format=4 uid="uid://qujhsvriffxk"]
 
 [ext_resource type="Shader" uid="uid://0vacnrh74wjb" path="res://shaders/bg.gdshader" id="1_gia2e"]
 [ext_resource type="PackedScene" uid="uid://cas1ebkgs1kfw" path="res://scenes/characters/tiles/SpawnNest.tscn" id="1_kopsk"]
 [ext_resource type="Script" uid="uid://ce6jxw7xe1a86" path="res://scripts/game.gd" id="1_ndgmm"]
 [ext_resource type="PackedScene" uid="uid://b14dvx67drebc" path="res://scenes/characters/Player.tscn" id="1_yrunw"]
+[ext_resource type="Shader" uid="uid://cxjhjvndfeyuk" path="res://shaders/logic/biomes.gdshader" id="2_h1bdy"]
 [ext_resource type="PackedScene" uid="uid://cr4fsl380sykj" path="res://scenes/characters/tiles/Wall.tscn" id="3_7c4bj"]
 [ext_resource type="PackedScene" uid="uid://d3ewek3uwdb81" path="res://scenes/characters/tiles/Empty.tscn" id="3_pdh0q"]
+[ext_resource type="Shader" uid="uid://m2ujlgdhoe3n" path="res://shaders/emptiness_border.gdshader" id="4_7c4bj"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://scripts/resources/char_texture.gd" id="4_i4b1j"]
 [ext_resource type="PackedScene" uid="uid://ddd3twqttei4j" path="res://scenes/characters/tiles/Light.tscn" id="4_nrtoj"]
 [ext_resource type="PackedScene" uid="uid://cww6x38j4owo7" path="res://scenes/characters/Trader.tscn" id="5_hlk0d"]
+[ext_resource type="Script" uid="uid://by5pvpniu1o1d" path="res://scripts/resources/bakeable_noise.gd" id="5_nrtoj"]
 [ext_resource type="PackedScene" uid="uid://c04qdfehiu2m5" path="res://scenes/characters/tiles/Cache.tscn" id="6_hlk0d"]
 [ext_resource type="PackedScene" uid="uid://ddxrbrnyk4jee" path="res://scenes/characters/tiles/TraderMinibossSpawn.tscn" id="8_b3faq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7c4bj"]
+shader = ExtResource("2_h1bdy")
+shader_parameter/seed = 0
+shader_parameter/FREQUENCY = 10.0
+shader_parameter/JITTER = 1.0
 
 [sub_resource type="Curve" id="Curve_1imk8"]
 _data = [Vector2(0, 0), 0.0, 6.42857, 0, 0, Vector2(0.486667, 1), 0.0, -3.64992, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -39,11 +49,50 @@ scale_curve = SubResource("CurveTexture_7rexb")
 color = Color(1, 1, 1, 0.313726)
 alpha_curve = SubResource("CurveTexture_wpbas")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ir6e"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i4b1j"]
 shader = ExtResource("1_gia2e")
+shader_parameter/landing_effect = 1.0
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2bd5p"]
-size = Vector2(4, 4)
+[sub_resource type="Image" id="Image_c0d7e"]
+data = {
+"data": PackedByteArray("/////w=="),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_o1tcx"]
+image = SubResource("Image_c0d7e")
+script = ExtResource("4_i4b1j")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_i4b1j"]
+noise_type = 0
+frequency = 0.02
+fractal_octaves = 2
+fractal_lacunarity = 5.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c0d7e"]
+width = 600
+height = 1
+seamless = true
+noise = SubResource("FastNoiseLite_i4b1j")
+script = ExtResource("5_nrtoj")
+bake_path = ""
+metadata/_custom_type_script = "uid://by5pvpniu1o1d"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nrtoj"]
+shader = ExtResource("4_7c4bj")
+shader_parameter/noise = SubResource("NoiseTexture2D_c0d7e")
+
+[sub_resource type="Gradient" id="Gradient_7c4bj"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nrtoj"]
+gradient = SubResource("Gradient_7c4bj")
+width = 1
+height = 256
+fill_to = Vector2(0, 1)
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_h1bdy"]
 tile_data = PackedInt32Array(524288, 0, 131072, 589824, 0, 131072, 655360, 0, 131072, 196609, 0, 131072, 262145, 0, 131072, 327681, 0, 65536, 393217, 0, 65536, 458753, 0, 65536, 524289, 0, 65536, 589825, 0, 65536, 655361, 0, 65536, 720897, 0, 65536, 786433, 0, 65536, 851969, 0, 65536, 917505, 0, 131072, 983041, 0, 131072, 131074, 0, 131072, 196610, 0, 65536, 262146, 0, 65536, 327682, 0, 65536, 393218, 0, 65536, 458754, 0, 65536, 524290, 0, 65536, 589826, 0, 65536, 655362, 0, 65536, 720898, 0, 65536, 786434, 0, 65536, 851970, 0, 65536, 917506, 0, 65536, 983042, 0, 65536, 1048578, 0, 131072, 65539, 0, 131072, 131075, 0, 65536, 196611, 0, 65536, 262147, 0, 65536, 327683, 0, 65536, 393219, 0, 65536, 458755, 0, 65536, 524291, 0, 65536, 589827, 0, 65536, 655363, 0, 65536, 720899, 0, 65536, 786435, 0, 65536, 851971, 0, 65536, 917507, 0, 65536, 983043, 0, 65536, 1048579, 0, 65536, 1114115, 0, 131072, 65540, 0, 131072, 131076, 0, 65536, 196612, 0, 65536, 262148, 0, 65536, 327684, 0, 65536, 393220, 0, 65536, 458756, 0, 65536, 524292, 0, 65536, 589828, 0, 65536, 655364, 0, 65536, 720900, 0, 65536, 786436, 0, 65536, 851972, 0, 65536, 917508, 0, 65536, 983044, 0, 65536, 1048580, 0, 65536, 1114116, 0, 131072, 65541, 0, 65536, 131077, 0, 65536, 196613, 0, 65536, 262149, 0, 65536, 327685, 0, 65536, 393221, 0, 65536, 458757, 0, 65536, 524293, 0, 65536, 589829, 0, 65536, 655365, 0, 65536, 720901, 0, 65536, 786437, 0, 65536, 851973, 0, 65536, 917509, 0, 65536, 983045, 0, 65536, 1048581, 0, 65536, 1114117, 0, 65536, 65542, 0, 65536, 131078, 0, 65536, 196614, 0, 65536, 262150, 0, 65536, 327686, 0, 65536, 393222, 0, 65536, 458758, 0, 65536, 524294, 0, 65536, 589830, 0, 65536, 655366, 0, 65536, 720902, 0, 65536, 786438, 0, 65536, 851974, 0, 65536, 917510, 0, 65536, 983046, 0, 65536, 1048582, 0, 65536, 1114118, 0, 65536, 65543, 0, 65536, 131079, 0, 65536, 196615, 0, 65536, 262151, 0, 65536, 327687, 0, 65536, 393223, 0, 65536, 458759, 0, 65536, 524295, 0, 65536, 589831, 0, 65536, 655367, 0, 65536, 720903, 0, 65536, 786439, 0, 65536, 851975, 0, 65536, 917511, 0, 65536, 983047, 0, 65536, 1048583, 0, 65536, 1114119, 0, 65536, 8, 0, 131072, 65544, 0, 65536, 131080, 0, 65536, 196616, 0, 65536, 262152, 0, 65536, 327688, 0, 65536, 393224, 0, 65536, 458760, 0, 65536, 524296, 0, 65536, 589832, 0, 65536, 655368, 0, 65536, 720904, 0, 65536, 786440, 0, 65536, 851976, 0, 65536, 917512, 0, 65536, 983048, 0, 65536, 1048584, 0, 65536, 1114120, 0, 65536, 1179656, 0, 131072, 9, 0, 131072, 65545, 0, 65536, 131081, 0, 65536, 196617, 0, 65536, 262153, 0, 65536, 327689, 0, 65536, 393225, 0, 65536, 458761, 0, 65536, 524297, 0, 65536, 589833, 0, 393216, 655369, 0, 65536, 720905, 0, 65536, 786441, 0, 65536, 851977, 0, 65536, 917513, 0, 65536, 983049, 0, 65536, 1048585, 0, 65536, 1114121, 0, 65536, 1179657, 0, 131072, 10, 0, 131072, 65546, 0, 65536, 131082, 0, 65536, 196618, 0, 65536, 262154, 0, 65536, 327690, 0, 65536, 393226, 0, 65536, 458762, 0, 65536, 524298, 0, 65536, 589834, 0, 65536, 655370, 0, 65536, 720906, 0, 65536, 786442, 0, 65536, 851978, 0, 65536, 917514, 0, 65536, 983050, 0, 65536, 1048586, 0, 65536, 1114122, 0, 65536, 1179658, 0, 131072, 65547, 0, 65536, 131083, 0, 65536, 196619, 0, 65536, 262155, 0, 65536, 327691, 0, 65536, 393227, 0, 65536, 458763, 0, 65536, 524299, 0, 65536, 589835, 0, 65536, 655371, 0, 65536, 720907, 0, 65536, 786443, 0, 65536, 851979, 0, 65536, 917515, 0, 65536, 983051, 0, 65536, 1048587, 0, 65536, 1114123, 0, 65536, 65548, 0, 65536, 131084, 0, 65536, 196620, 0, 65536, 262156, 0, 65536, 327692, 0, 65536, 393228, 0, 65536, 458764, 0, 65536, 524300, 0, 65536, 589836, 0, 65536, 655372, 0, 65536, 720908, 0, 65536, 786444, 0, 65536, 851980, 0, 65536, 917516, 0, 65536, 983052, 0, 65536, 1048588, 0, 65536, 1114124, 0, 65536, 65549, 0, 65536, 131085, 0, 65536, 196621, 0, 65536, 262157, 0, 65536, 327693, 0, 65536, 393229, 0, 65536, 458765, 0, 65536, 524301, 0, 65536, 589837, 0, 65536, 655373, 0, 65536, 720909, 0, 65536, 786445, 0, 65536, 851981, 0, 65536, 917517, 0, 65536, 983053, 0, 65536, 1048589, 0, 65536, 1114125, 0, 65536, 65550, 0, 131072, 131086, 0, 65536, 196622, 0, 65536, 262158, 0, 65536, 327694, 0, 65536, 393230, 0, 65536, 458766, 0, 65536, 524302, 0, 65536, 589838, 0, 65536, 655374, 0, 65536, 720910, 0, 65536, 786446, 0, 65536, 851982, 0, 65536, 917518, 0, 65536, 983054, 0, 65536, 1048590, 0, 65536, 1114126, 0, 131072, 65551, 0, 131072, 131087, 0, 65536, 196623, 0, 65536, 262159, 0, 65536, 327695, 0, 65536, 393231, 0, 65536, 458767, 0, 65536, 524303, 0, 65536, 589839, 0, 65536, 655375, 0, 65536, 720911, 0, 65536, 786447, 0, 65536, 851983, 0, 65536, 917519, 0, 65536, 983055, 0, 65536, 1048591, 0, 65536, 1114127, 0, 131072, 131088, 0, 131072, 196624, 0, 65536, 262160, 0, 65536, 327696, 0, 65536, 393232, 0, 65536, 458768, 0, 65536, 524304, 0, 65536, 589840, 0, 65536, 655376, 0, 65536, 720912, 0, 65536, 786448, 0, 65536, 851984, 0, 65536, 917520, 0, 65536, 983056, 0, 65536, 1048592, 0, 131072, 196625, 0, 131072, 262161, 0, 131072, 327697, 0, 65536, 393233, 0, 65536, 458769, 0, 65536, 524305, 0, 65536, 589841, 0, 65536, 655377, 0, 65536, 720913, 0, 65536, 786449, 0, 65536, 851985, 0, 65536, 917521, 0, 131072, 983057, 0, 131072, 524306, 0, 131072, 589842, 0, 131072, 655378, 0, 131072)
@@ -65,6 +114,18 @@ pattern_0 = SubResource("TileMapPattern_h1bdy")
 [node name="World" type="Node2D"]
 script = ExtResource("1_ndgmm")
 
+[node name="BiomeMap" type="SubViewport" parent="."]
+size = Vector2i(1024, 1024)
+render_target_update_mode = 0
+
+[node name="ColorRect" type="ColorRect" parent="BiomeMap"]
+material = SubResource("ShaderMaterial_7c4bj")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Spores" type="GPUParticles2D" parent="."]
 amount = 100
 lifetime = 15.0
@@ -72,29 +133,26 @@ preprocess = 20.0
 visibility_rect = Rect2(-1500, -1500, 3000, 3000)
 process_material = SubResource("ParticleProcessMaterial_2nmfm")
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(1600, 1600)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-material = SubResource("ShaderMaterial_0ir6e")
-scale = Vector2(400, 400)
-texture = SubResource("PlaceholderTexture2D_2bd5p")
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(1.125, 1.125)
-motion_offset = Vector2(-16, 0)
-motion_mirroring = Vector2(1600, 1600)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-material = SubResource("ShaderMaterial_0ir6e")
-scale = Vector2(400, 400)
-texture = SubResource("PlaceholderTexture2D_2bd5p")
+[node name="Background" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_i4b1j")
+scale = Vector2(20430, 20430)
+texture = SubResource("ImageTexture_o1tcx")
 
 [node name="WorldEnemySpawnAttempt" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
+
+[node name="EmptinessBorder" type="Line2D" parent="."]
+material = SubResource("ShaderMaterial_nrtoj")
+points = PackedVector2Array(10240, 0, 0, 10240, -10240, 0, 0, -10240)
+closed = true
+width = 40.0
+texture = SubResource("GradientTexture2D_nrtoj")
+texture_mode = 2
+antialiased = true
+
+[node name="EmptinessDamage" type="Timer" parent="."]
+wait_time = 0.1
 
 [node name="Structures" type="Node2D" parent="."]
 
@@ -115,3 +173,4 @@ position = Vector2(68, 169)
 [node name="Player" parent="." instance=ExtResource("1_yrunw")]
 
 [connection signal="timeout" from="WorldEnemySpawnAttempt" to="." method="spawn_attempt"]
+[connection signal="timeout" from="EmptinessDamage" to="." method="_on_emptiness_damage_timeout"]

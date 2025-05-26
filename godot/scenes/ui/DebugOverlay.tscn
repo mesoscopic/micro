@@ -22,10 +22,6 @@ offset_right = 77.0
 grow_vertical = 0
 alignment = 2
 
-[node name="FPS" type="Label" parent="BottomLeft"]
-layout_mode = 2
-text = "<FPS>"
-
 [node name="Pos" type="Label" parent="BottomLeft"]
 layout_mode = 2
 text = "<Pos>"
@@ -33,6 +29,10 @@ text = "<Pos>"
 [node name="Tile" type="Label" parent="BottomLeft"]
 layout_mode = 2
 text = "<Tile>"
+
+[node name="Biome" type="Label" parent="BottomLeft"]
+layout_mode = 2
+text = "<Biome>"
 
 [node name="BottomRight" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -47,9 +47,9 @@ grow_horizontal = 0
 grow_vertical = 0
 alignment = 2
 
-[node name="Spores" type="Label" parent="BottomRight"]
+[node name="FPS" type="Label" parent="BottomRight"]
 layout_mode = 2
-text = "<Spores>"
+text = "<FPS>"
 
 [node name="TopLeft" type="VBoxContainer" parent="."]
 layout_mode = 1

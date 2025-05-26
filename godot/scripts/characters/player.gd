@@ -112,7 +112,7 @@ func _hurt(amount: int):
 	if !Micro.setting("photosensitive_mode"): $Camera.hurt(clamp(float(amount)/float(hp), 0., 1.))
 
 func _die():
-	if !Micro.setting("photosensitive_mode"): $Camera.hurt(2.)
+	if !Micro.setting("photosensitive_mode"): $Camera.hurt(2., true)
 	invincible = true
 	var slow = create_tween().set_ignore_time_scale(true)
 	slow.tween_property(Engine, "time_scale", 0.1, .8)

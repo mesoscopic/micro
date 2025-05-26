@@ -17,6 +17,7 @@ func _on_finished(_anim_name):
 func _on_play():
 	if disable_menu: return
 	disable_menu = true
+	Micro.worldgen_status("Instantiating world...")
 	await Micro.screen_wipe_out()
 	play.emit()
 

@@ -8,8 +8,6 @@ var in_game: bool = false
 
 const START_MENU = preload("res://scenes/ui/StartRun.tscn")
 
-const WORLD = preload("res://scenes/World.tscn")
-
 func _ready():
 	# Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	pass
@@ -27,8 +25,7 @@ func _on_splash_finished():
 
 func _on_start_run():
 	$UI.remove_child($UI.get_node("StartRun"))
-	Micro.worldgen_status("Building starting area...")
-	var world = WORLD.instantiate()
+	var world = load("res://scenes/World.tscn").instantiate()
 	Micro.world = world
 	world.random.seed = world.world_seed
 	world.generate_world()

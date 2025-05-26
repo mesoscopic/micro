@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dnwffnhs6gnwh"]
 
 [ext_resource type="Script" uid="uid://ba8aaxbp8jkk7" path="res://scripts/characters/generic.gd" id="1_mj12y"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://scripts/char_texture.gd" id="2_evo8w"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://scripts/resources/char_texture.gd" id="2_evo8w"]
 
 [sub_resource type="Image" id="Image_typq7"]
 data = {

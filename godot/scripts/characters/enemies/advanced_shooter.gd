@@ -13,7 +13,7 @@ func _on_firing_cooldown_timeout() -> void:
 		var bullet = BULLET.instantiate()
 		bullet.global_position = global_position
 		bullet.velocity = Vector2.from_angle(aim) * 100.
-		bullet.lifetime = 3.
+		bullet.lifetime = 6.
 		bullet.damage = 10
 		get_tree().current_scene.get_node("Game/World").add_child(bullet)
 

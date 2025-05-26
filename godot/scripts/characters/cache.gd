@@ -10,7 +10,6 @@ func _ready():
 	hurt.connect(_hurt)
 
 func _hurt(_amount: int) -> void:
-	$FundHint.emitting = false
 	$OpenParticles.emitting = true
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Animations.play("open")

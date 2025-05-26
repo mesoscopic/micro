@@ -1,27 +1,26 @@
-[gd_scene load_steps=23 format=3 uid="uid://c04qdfehiu2m5"]
+[gd_scene load_steps=18 format=3 uid="uid://c04qdfehiu2m5"]
 
 [ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="1_40rxh"]
 [ext_resource type="Script" uid="uid://cx3peo4tlvbg2" path="res://scripts/characters/cache.gd" id="1_xgfmd"]
 [ext_resource type="Shader" uid="uid://ds33o6ingsxg6" path="res://shaders/cache.gdshader" id="2_xgfmd"]
-[ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://shaders/funds.gdshader" id="4_7011x"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://shaders/sphere_particle.gdshader" id="5_qwbhg"]
 
 [sub_resource type="Gradient" id="Gradient_40rxh"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_qwbhg"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7011x"]
 resource_local_to_scene = true
 noise_type = 2
 seed = 188
 fractal_type = 0
 cellular_return_type = 6
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rtkwq"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qwbhg"]
 resource_local_to_scene = true
 width = 256
 height = 256
 color_ramp = SubResource("Gradient_40rxh")
-noise = SubResource("FastNoiseLite_qwbhg")
+noise = SubResource("FastNoiseLite_7011x")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pky5l"]
 resource_local_to_scene = true
@@ -29,26 +28,7 @@ shader = ExtResource("2_xgfmd")
 shader_parameter/opacity = 1.0
 shader_parameter/open_anim = 0.0
 shader_parameter/burn_anim = 0.0
-shader_parameter/noise = SubResource("NoiseTexture2D_rtkwq")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qwbhg"]
-shader = ExtResource("4_7011x")
-
-[sub_resource type="Curve" id="Curve_rtkwq"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.365775, 0.356522), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.72116, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_pky5l"]
-curve = SubResource("Curve_rtkwq")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_urixb"]
-particle_flag_disable_z = true
-spread = 180.0
-initial_velocity_min = 5.0
-initial_velocity_max = 15.0
-scale_min = 4.0
-scale_max = 8.0
-alpha_curve = SubResource("CurveTexture_pky5l")
+shader_parameter/noise = SubResource("NoiseTexture2D_qwbhg")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rtkwq"]
 shader = ExtResource("5_qwbhg")
@@ -149,11 +129,6 @@ script = ExtResource("1_xgfmd")
 layer = 1
 light = 10
 render = SubResource("ShaderMaterial_pky5l")
-
-[node name="FundHint" type="GPUParticles2D" parent="."]
-material = SubResource("ShaderMaterial_qwbhg")
-amount = 2
-process_material = SubResource("ParticleProcessMaterial_urixb")
 
 [node name="OpenParticles" type="GPUParticles2D" parent="."]
 material = SubResource("ShaderMaterial_rtkwq")

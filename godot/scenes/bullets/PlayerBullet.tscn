@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://3pdmhg11c70e" path="res://scripts/characters/bullet.gd" id="1_6f5oh"]
 [ext_resource type="Shader" uid="uid://csnb2kx6uvrj6" path="res://shaders/player_bullet.gdshader" id="1_slg20"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://scripts/char_texture.gd" id="3_g2t78"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://scripts/resources/char_texture.gd" id="3_g2t78"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_epu1g"]
 resource_local_to_scene = true

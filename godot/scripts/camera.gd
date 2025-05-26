@@ -2,8 +2,8 @@ extends Camera2D
 
 var hurt_effect: bool = false
 
-func hurt(amount: float) -> void:
-	$Overlays/HurtEffect.material.set("shader_parameter/progress", amount)
+func hurt(amount: float, override: bool = false) -> void:
+	$Overlays/HurtEffect.material.set("shader_parameter/progress", amount if override else ($Overlays/HurtEffect.material.get("shader_parameter/progress") + amount))
 	$Overlays/HurtEffect.show()
 	hurt_effect = true
 

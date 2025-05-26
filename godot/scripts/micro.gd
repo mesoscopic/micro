@@ -47,6 +47,7 @@ func wait(time: float, override_time: bool = false):
 	await get_tree().create_timer(time, override_time, false, override_time).timeout
 
 func worldgen_status(status: String) -> void:
+	print(status)
 	get_tree().current_scene.get_node("ScreenWipe/StatusMessage").text = status
 
 func show_trade_information(trader: Trader):
@@ -90,12 +91,15 @@ func closest_enemy(to: Vector2) -> Enemy:
 				closest = enemy
 	return closest
 
-func setting(id: String, value: Variant = null) -> Variant:
+func config_field(category: String, id: String, default: Variant, value: Variant = null) -> Variant:
 	if !config:
 		config = ConfigFile.new()
 		config.load("user://micro.cfg")
 	if value:
-		config.set_value("settings", id, value)
+		config.set_value(category, id, value)
 		return config.save("user://micro.cfg")
 	else:
-		return config.get_value("settings", id, settings_defaults.get(id))
+		return config.get_value(category, id, default)
+
+func setting(id: String, value: Variant = null) -> Variant:
+	return config_field("settings", id, settings_defaults.get(id), value)
