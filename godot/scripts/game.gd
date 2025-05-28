@@ -38,15 +38,13 @@ func world_enemy(distance: float) -> Enemy:
 	return Micro.roll(enemies).instantiate()
 
 func spawn_attempt() -> void:
-	if bosses_active > 0:
-		print("a boss is active!")
-		return # World enemies shouldn't spawn during boss fights
+	if bosses_active > 0 or current_biome == Biome.PEACE: return
 	var player_pos: Vector2 = tile_at(Micro.player.position)
 	var distance: int = int(taxicab(player_pos))
 	
-	if distance < 40 or current_biome == Biome.PEACE: return # Make sure the player is far enough from spawn
-	elif distance < 100 and randi_range(1,2) != 1: return # 1 in 2 chance to spawn if <100 tiles from spawn
-	elif distance < 160 and randi_range(1,3) == 1: return # 2 in 3 chance to spawn if >100 and <160 tiles from spawn
+	if distance < 40: return
+	elif distance < 100 and randi_range(1,2) != 1: return
+	elif distance < 160 and randi_range(1,3) == 1: return
 	# Otherwise, spawn is guaranteed
 	
 	var enemy := world_enemy(distance)
@@ -69,16 +67,22 @@ func _physics_process(_delta: float) -> void:
 	else:
 		$EmptinessDamage.stop()
 		Micro.player.get_node("Camera/GlobalParticles/Emptiness").emitting = false
+		match current_biome:
+			Biome.PEACE:
+				change_bg("peace")
+			_:
+				change_bg("default")
 	
 	Micro.player.get_node("Camera/GlobalParticles/Peace").emitting = (current_biome == Biome.PEACE)
 
 func _on_emptiness_damage_timeout() -> void:
 	Micro.player.damage(1)
 
-func get_trader(from: Vector2):
+func get_trader(from: Vector2) -> Node:
 	var animation = preload("res://scenes/fx/TraderSpawn.tscn").instantiate()
 	animation.position = from
 	$Structures.call_deferred("add_child", animation)
+	return animation
 
 const TRADE_COIN = preload("res://scenes/fx/TradeCoin.tscn")
 signal refresh_trades
@@ -127,39 +131,60 @@ func get_biome(pos: Vector2) -> Biome:
 			return biomes.get(center)
 		return Biome.DEFAULT
 
+func change_bg(new_effect: String):
+	var effects := ["default", "peace"]
+	var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	for effect in effects:
+		if effect == new_effect:
+			tween.parallel().tween_property($Background.material, "shader_parameter/%s_effect" % effect, 1., 1.)
+		else:
+			tween.parallel().tween_property($Background.material, "shader_parameter/%s_effect" % effect, 0., 1.)
+
 # --------------
 # World gen code
 # --------------
 
 func generate_world():
-	var start = Time.get_ticks_usec()
 	Micro.worldgen_status("Shaping biomes...")
 	$BiomeMap/ColorRect.material.set("shader_parameter/seed", world_seed)
 	$BiomeMap.render_target_update_mode = SubViewport.UPDATE_ONCE
-	var biome_texture = $BiomeMap.get_texture()
+	var biome_texture: ViewportTexture = $BiomeMap.get_texture()
 	await RenderingServer.frame_post_draw
 	biome_map = biome_texture.get_image()
 	if Micro.config_field("debug", "save_biome_map", false):
 		ResourceSaver.save(ImageTexture.create_from_image(biome_map), "user://biome_map.png")
 		print("Saved biome map to user folder.")
-	Micro.worldgen_status("Placing arenas...")
+	Micro.worldgen_status("Placing traders...")
+	var starting_traders_to_place := 2
+	var opportunities := 4
 	for dir in [Vector2i(1,1),Vector2i(1,-1),Vector2i(-1,-1),Vector2i(-1,1)]:
-		var distance = 50
+		var distance := 50
 		while !attempt_decide_biome_for_center_structure(dir*distance, Biome.PEACE, 10):
 			distance += 10
-		place(0, biome_center_at(dir*distance))
+		var location := biome_center_at(dir*distance)
+		place(0, location)
+		opportunities -= 1
+		if random.randi_range(0,1)==1 and opportunities >= starting_traders_to_place or starting_traders_to_place == 0:
+			continue
+		var trader_location := Vector2i((Vector2(location).normalized()*40).round())
+		place(1, trader_location)
+		var trader := preload("res://scenes/characters/WildTrader.tscn").instantiate()
+		trader.position = trader_location * 20.
+		trader.wander_origin = trader_location * 20.
+		trader.wander_range = 70.
+		trader.wander_distance = 60.
+		$Structures.add_child(trader)
+		starting_traders_to_place -= 1
 	Micro.worldgen_status("Placing caches...")
 	for i in 200:
-		var pos = Vector2(randfn(0., 3.), randfn(0., 3.)) * 20.
+		var pos := Vector2(randfn(0., 3.), randfn(0., 3.)) * 20.
 		pos += pos.normalized()*18
 		while $Structures/Tiles.get_cell_alternative_tile(pos) > 0:
 			pos = Vector2(randfn(0., 3.), randfn(0., 3.)) * 20.
 			pos += pos.normalized()*18
 		$Structures/Tiles.set_cell(pos, 0, Vector2i.ZERO, 4)
-	print("Post-init worldgen finished in %s microseconds" % (Time.get_ticks_usec()-start))
 
 func place(id: int, pos: Vector2i):
-	print("placed ", id, " at ", pos)
 	var pattern: TileMapPattern = $Structures/Tiles.tile_set.get_pattern(id)
 	$Structures/Tiles.set_pattern(pos-pattern.get_size()/2, pattern)
 

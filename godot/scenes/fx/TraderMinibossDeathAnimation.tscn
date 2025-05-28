@@ -65,14 +65,14 @@ alpha_curve = SubResource("CurveTexture_xb5g8")
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_ej47d"]
+[sub_resource type="CurveTexture" id="CurveTexture_3t4fp"]
 curve = SubResource("Curve_3t4fp")
 
 [sub_resource type="Curve" id="Curve_aii8j"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.33074, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_s4fir"]
+[sub_resource type="CurveTexture" id="CurveTexture_ej47d"]
 curve = SubResource("Curve_aii8j")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eqgqj"]
@@ -83,8 +83,8 @@ initial_velocity_max = 60.0
 gravity = Vector3(0, 0, 0)
 scale_min = 4.0
 scale_max = 10.0
-scale_curve = SubResource("CurveTexture_s4fir")
-alpha_curve = SubResource("CurveTexture_ej47d")
+scale_curve = SubResource("CurveTexture_ej47d")
+alpha_curve = SubResource("CurveTexture_3t4fp")
 
 [node name="TraderMinibossDeathAnimation" type="Node2D"]
 script = ExtResource("1_3t4fp")

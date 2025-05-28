@@ -31,6 +31,7 @@ script = ExtResource("1_874oa")
 
 [node name="Character" parent="." instance=ExtResource("1_sm5wc")]
 layer = 2
+size = 16
 render = SubResource("ShaderMaterial_874oa")
 
 [node name="SpeedParticles" type="GPUParticles2D" parent="."]

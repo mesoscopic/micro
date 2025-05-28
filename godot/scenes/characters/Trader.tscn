@@ -40,7 +40,7 @@ script = ExtResource("1_tqfba")
 [node name="Character" parent="." instance=ExtResource("1_nu57o")]
 layer = 2
 size = 16
-light = 40
+light = 80
 render = SubResource("ShaderMaterial_tqfba")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

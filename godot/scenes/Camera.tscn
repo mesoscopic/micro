@@ -110,6 +110,7 @@ process_material = SubResource("ParticleProcessMaterial_7j4ev")
 
 [node name="Peace" type="GPUParticles2D" parent="GlobalParticles"]
 emitting = false
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_diili")
 
 [node name="Overlays" type="CanvasLayer" parent="."]

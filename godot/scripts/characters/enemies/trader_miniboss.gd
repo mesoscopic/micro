@@ -37,8 +37,6 @@ func do_despawn() -> void:
 	tween.tween_property($Character, "light", 0, 0.5)
 	tween.parallel().tween_property($Character/Render.material, "shader_parameter/health", 1., 0.5)
 	await tween.finished
-	if is_boss:
-		Micro.world.bosses_active -= 1
 	despawn.emit()
 	queue_free()
 
@@ -91,6 +89,6 @@ func _on_fire() -> void:
 		var bullet = BULLET.instantiate()
 		bullet.global_position = global_position
 		bullet.velocity = Vector2.from_angle(angle) * 50.
-		bullet.lifetime = 4.
+		bullet.lifetime = 5.
 		bullet.damage = 6
 		get_tree().current_scene.get_node("Game/World").call_deferred("add_child", bullet)

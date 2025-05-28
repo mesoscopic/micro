@@ -97,7 +97,7 @@ func _physics_process(delta):
 
 func get_aim_position() -> Vector2:
 	var space_state = get_world_2d().direct_space_state
-	var direction = get_local_mouse_position().normalized() * 40 + global_position
+	var direction = get_local_mouse_position().normalized() * 20 + global_position
 	var query = PhysicsRayQueryParameters2D.create(global_position, direction)
 	query.exclude = [self]
 	var result = space_state.intersect_ray(query)

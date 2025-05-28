@@ -85,7 +85,7 @@ vec2 random2(vec3 p3) {
 vec3 random3(float p) {
     vec3 p3 = fract(vec3(p) * RANDOM_SCALE.xyz);
     p3 += dot(p3, p3.yzx + 19.19);
-    return fract((p3.xxy + p3.yzz) * p3.zyx); 
+    return fract((p3.xxy + p3.yzz) * p3.zyx);
 }
 
 vec3 random3(vec2 p) {
@@ -103,7 +103,7 @@ vec3 random3(vec3 p) {
 vec4 random4(float p) {
     vec4 p4 = fract(p * RANDOM_SCALE);
     p4 += dot(p4, p4.wzxy + 19.19);
-    return fract((p4.xxyz + p4.yzzw) * p4.zywx);   
+    return fract((p4.xxyz + p4.yzzw) * p4.zywx);
 }
 
 vec4 random4(vec2 p) {
