@@ -24,10 +24,10 @@ void fragment() {
 	COLOR = vec4(0.);
 	if(default_effect>0.){
 		float c = 0.0;
-		if(sin(780. * PI * (UV.x) - 0.5 * PI) > 0.99){
+		if(sin(800. * PI * (UV.x) - 0.5 * PI) > 0.99){
 			c = 0.05;
 		}
-		if(sin(780. * PI * (UV.y) - 0.5 * PI) > 0.99){
+		if(sin(800. * PI * (UV.y) - 0.5 * PI) > 0.99){
 			c = 0.05;
 		}
 		COLOR += vec4(1.,1.,1.,c)*default_effect;

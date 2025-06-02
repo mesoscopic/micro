@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = velocity.move_toward((path_target - global_position).normalized() * speed, acceleration * delta)
 	move_and_slide()
-	$Character/Render.material.set("shader_parameter/velocity", (velocity / max(speed, velocity.length())))
+	$Render.material.set("shader_parameter/velocity", (velocity / max(speed, velocity.length())))
 
 func wander() -> void:
 	var new_target: Vector2 = Vector2.from_angle(PI/2. * randi_range(0,3)) * randf_range(wander_distance/2., wander_distance)

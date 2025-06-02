@@ -9,7 +9,7 @@ uniform float JITTER = 1.;
 const int PRIME_X = 501125321;
 const int PRIME_Y = 1136930381;
 
-// Code adopted from https://github.com/Auburn/FastNoiseLite
+// Code adapted from https://github.com/Auburn/FastNoiseLite
 // FastNoiseLite uses the MIT license.
 // Copyright(c) 2023 Jordan Peck (jordan.me2@gmail.com)
 // Copyright(c) 2023 Contributors

@@ -1,10 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://c0qyylco7xgk4"]
+[gd_scene load_steps=18 format=3 uid="uid://c0qyylco7xgk4"]
 
 [ext_resource type="Script" uid="uid://c57nhmckfrbx8" path="res://scripts/characters/enemies/turret.gd" id="1_n7j26"]
 [ext_resource type="Shader" uid="uid://bm1g538yscrip" path="res://shaders/dashedline.gdshader" id="2_cduuy"]
-[ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="2_dkfhv"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://shaders/enemy.gdshader" id="3_cduuy"]
 [ext_resource type="PackedScene" uid="uid://b2erii1hcv0u0" path="res://scenes/logic/RangeAggro.tscn" id="4_d8hp7"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://scripts/resources/char_texture.gd" id="4_dkfhv"]
 [ext_resource type="PackedScene" uid="uid://diissjbt0i6uj" path="res://scenes/logic/HurtAggro.tscn" id="5_vd4d6"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://shaders/sphere_particle.gdshader" id="6_u6axk"]
 
@@ -16,12 +16,26 @@ shader_parameter/fadeout = 0.25
 [sub_resource type="Gradient" id="Gradient_dkfhv"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dkfhv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cduuy"]
 resource_local_to_scene = true
 shader = ExtResource("3_cduuy")
 shader_parameter/health = 1.0
 shader_parameter/opacity = 1.0
 shader_parameter/velocity = Vector2(0, 0)
+
+[sub_resource type="Image" id="Image_d8hp7"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_vd4d6"]
+image = SubResource("Image_d8hp7")
+script = ExtResource("4_dkfhv")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u77d8"]
 radius = 12.5
@@ -68,12 +82,10 @@ points = PackedVector2Array(0, 0, 400, 0)
 width = 3.0
 gradient = SubResource("Gradient_dkfhv")
 
-[node name="Character" parent="." instance=ExtResource("2_dkfhv")]
-layer = 2
-size = 25
-light = 75
-render = SubResource("ShaderMaterial_dkfhv")
-always_visible = true
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_cduuy")
+scale = Vector2(25, 25)
+texture = SubResource("ImageTexture_vd4d6")
 
 [node name="RangeAggro" parent="." instance=ExtResource("4_d8hp7")]
 scale = Vector2(0.998148, 1)

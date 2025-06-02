@@ -1,7 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://5r4rapdj3ft"]
+[gd_scene load_steps=21 format=3 uid="uid://5r4rapdj3ft"]
 
 [ext_resource type="Script" uid="uid://cjmfb60xs2e7x" path="res://scripts/characters/enemies/surprise.gd" id="1_3elcu"]
-[ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="2_kb0u7"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://scripts/resources/char_texture.gd" id="3_bahcx"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://shaders/enemy.gdshader" id="3_oeqg6"]
 [ext_resource type="PackedScene" uid="uid://b2erii1hcv0u0" path="res://scenes/logic/RangeAggro.tscn" id="4_bahcx"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://shaders/sphere_particle.gdshader" id="5_oeqg6"]
@@ -12,6 +12,20 @@ shader = ExtResource("3_oeqg6")
 shader_parameter/health = 1.0
 shader_parameter/opacity = 1.0
 shader_parameter/velocity = Vector2(0, 0)
+
+[sub_resource type="Image" id="Image_exe20"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_5bo5h"]
+image = SubResource("Image_exe20")
+script = ExtResource("3_bahcx")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oeqg6"]
 shader = ExtResource("3_oeqg6")
@@ -80,12 +94,10 @@ stagger_time = 0.25
 max_hp = 20
 hp = 20
 
-[node name="Character" parent="." instance=ExtResource("2_kb0u7")]
-layer = 2
-size = 14
-light = 75
-render = SubResource("ShaderMaterial_ml7jd")
-always_visible = true
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ml7jd")
+scale = Vector2(14, 14)
+texture = SubResource("ImageTexture_5bo5h")
 
 [node name="Afterimage" type="GPUParticles2D" parent="."]
 material = SubResource("ShaderMaterial_oeqg6")

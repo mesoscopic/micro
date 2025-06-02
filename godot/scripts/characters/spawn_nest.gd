@@ -25,12 +25,12 @@ func _on_regen() -> void:
 
 func activate() -> void:
 	if tween: tween.stop()
-	tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property($Character, "light", 200, 0.5)
+	#tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	#tween.tween_property($Character, "light", 200, 0.5)
 
 func deactivate() -> void:
 	# Deactivated at end of trade "cutscene", so do not deactivate if player is still inside
 	if $HomeZone.has_overlapping_bodies(): return
 	if tween: tween.stop()
-	tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property($Character, "light", 0, 0.5)
+	#tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	#tween.tween_property($Character, "light", 0, 0.5)

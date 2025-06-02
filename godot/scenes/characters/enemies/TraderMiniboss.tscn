@@ -1,16 +1,30 @@
-[gd_scene load_steps=11 format=3 uid="uid://degw88c3u4obt"]
+[gd_scene load_steps=13 format=3 uid="uid://degw88c3u4obt"]
 
 [ext_resource type="Script" uid="uid://bd1nvuajonror" path="res://scripts/characters/enemies/trader_miniboss.gd" id="1_oj4li"]
-[ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="2_b1f70"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://shaders/enemy.gdshader" id="3_3crh1"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://scripts/resources/char_texture.gd" id="3_b1f70"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://shaders/sphere_particle.gdshader" id="4_icese"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b1f70"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3crh1"]
 resource_local_to_scene = true
 shader = ExtResource("3_3crh1")
 shader_parameter/health = 1.0
 shader_parameter/opacity = 1.0
 shader_parameter/velocity = Vector2(0, 0)
+
+[sub_resource type="Image" id="Image_icese"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_uur07"]
+image = SubResource("Image_icese")
+script = ExtResource("3_b1f70")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wt047"]
 radius = 25.0
@@ -57,12 +71,10 @@ max_hp = 300
 hp = 300
 metadata/_custom_type_script = "uid://oy7qpe47ti6v"
 
-[node name="Character" parent="." instance=ExtResource("2_b1f70")]
-layer = 2
-size = 50
-light = 100
-render = SubResource("ShaderMaterial_b1f70")
-always_visible = true
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3crh1")
+scale = Vector2(50, 50)
+texture = SubResource("ImageTexture_uur07")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wt047")

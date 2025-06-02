@@ -1,14 +1,27 @@
-[gd_scene load_steps=17 format=3 uid="uid://cshcf4y2ntrp5"]
+[gd_scene load_steps=19 format=3 uid="uid://cshcf4y2ntrp5"]
 
 [ext_resource type="Script" uid="uid://rv0jyu11oox2" path="res://scripts/characters/nest_slot.gd" id="1_3cvli"]
-[ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="1_nym66"]
 [ext_resource type="Shader" uid="uid://dxgq0lr1hup54" path="res://shaders/nest_slot.gdshader" id="2_q7nok"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://scripts/resources/char_texture.gd" id="3_o6utt"]
 [ext_resource type="Shader" uid="uid://cjl6s6ce2grqm" path="res://shaders/selector.gdshader" id="4_d11t0"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d11t0"]
-resource_local_to_scene = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ngyy"]
 shader = ExtResource("2_q7nok")
 shader_parameter/opacity = 1.0
+
+[sub_resource type="Image" id="Image_in67l"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_mmf4l"]
+image = SubResource("Image_in67l")
+script = ExtResource("3_o6utt")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="Curve" id="Curve_3cvli"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -66,9 +79,10 @@ collision_mask = 0
 input_pickable = true
 script = ExtResource("1_3cvli")
 
-[node name="Character" parent="." instance=ExtResource("1_nym66")]
-render = SubResource("ShaderMaterial_d11t0")
-always_visible = true
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_4ngyy")
+scale = Vector2(20, 20)
+texture = SubResource("ImageTexture_mmf4l")
 
 [node name="PutParticles" type="GPUParticles2D" parent="."]
 emitting = false

@@ -1,14 +1,27 @@
-[gd_scene load_steps=12 format=3 uid="uid://3p5kp6bhanbe"]
+[gd_scene load_steps=14 format=3 uid="uid://3p5kp6bhanbe"]
 
 [ext_resource type="Script" uid="uid://7q5sjfx04t" path="res://scripts/characters/wild_trader.gd" id="1_2sp57"]
-[ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="2_8qn8c"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://scripts/resources/char_texture.gd" id="3_8qn8c"]
 [ext_resource type="Shader" uid="uid://cs7iamvps60cm" path="res://shaders/trader.gdshader" id="3_vmuvh"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycnf6"]
-resource_local_to_scene = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vmuvh"]
 shader = ExtResource("3_vmuvh")
 shader_parameter/opacity = 1.0
 shader_parameter/velocity = Vector2(0, 0)
+
+[sub_resource type="Image" id="Image_ycnf6"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_ni6hh"]
+image = SubResource("Image_ycnf6")
+script = ExtResource("3_8qn8c")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ni6hh"]
 
@@ -44,11 +57,10 @@ alpha_curve = SubResource("CurveTexture_ej47d")
 collision_layer = 0
 script = ExtResource("1_2sp57")
 
-[node name="Character" parent="." instance=ExtResource("2_8qn8c")]
-layer = 2
-size = 16
-light = 80
-render = SubResource("ShaderMaterial_ycnf6")
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_vmuvh")
+scale = Vector2(16, 16)
+texture = SubResource("ImageTexture_ni6hh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ni6hh")

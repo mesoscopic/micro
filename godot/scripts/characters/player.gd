@@ -48,8 +48,8 @@ func _physics_process(delta):
 		else:
 			velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
 		
-	$Character/Render.material.set("shader_parameter/velocity", (velocity / max(max_speed, velocity.length())))
-	$Character/Render.material.set("shader_parameter/can_dash", ($Abilities.get_child(selected_ability).available() if selected_ability >= 0 else true))
+	$Render.material.set("shader_parameter/velocity", (velocity / max(max_speed, velocity.length())))
+	$Render.material.set("shader_parameter/can_dash", ($Abilities.get_child(selected_ability).available() if selected_ability >= 0 else true))
 	move_and_slide()
 	
 	if Input.is_action_pressed("shoot"):
@@ -120,7 +120,7 @@ func _die():
 	process_mode = Node.PROCESS_MODE_DISABLED
 	Engine.time_scale = 1.
 	$DeathParticles.emitting = true
-	$Character.hide()
+	$Render.hide()
 	$Ring.emitting = true
 	await Micro.wait(1., true)
 	await Micro.screen_wipe_out()

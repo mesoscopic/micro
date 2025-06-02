@@ -34,8 +34,8 @@ func _die() -> void:
 func do_despawn() -> void:
 	invincible = true
 	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property($Character, "light", 0, 0.5)
-	tween.parallel().tween_property($Character/Render.material, "shader_parameter/health", 1., 0.5)
+	#tween.tween_property($Character, "light", 0, 0.5)
+	tween.parallel().tween_property($Render.material, "shader_parameter/health", 1., 0.5)
 	await tween.finished
 	despawn.emit()
 	queue_free()

@@ -53,10 +53,10 @@ func spawn_attempt() -> void:
 	var angle_randomization = distance / 60.
 	var tile: Vector2 = (player_pos + Vector2.from_angle(player_pos.angle_to_point(Vector2.ZERO)+PI+randf_range(-angle_randomization,angle_randomization)) * 20.)
 	enemy.position = tile * 20.
-	$Structures.add_child(enemy)
+	$Entities.add_child(enemy)
 
 func _physics_process(_delta: float) -> void:
-	var biome: Biome = get_biome(Micro.player.position)
+	var biome: Biome = get_biome(tile_at(Micro.player.position))
 	if biome == current_biome: return
 	current_biome = biome
 	
@@ -81,7 +81,7 @@ func _on_emptiness_damage_timeout() -> void:
 func get_trader(from: Vector2) -> Node:
 	var animation = preload("res://scenes/fx/TraderSpawn.tscn").instantiate()
 	animation.position = from
-	$Structures.call_deferred("add_child", animation)
+	$Entities.call_deferred("add_child", animation)
 	return animation
 
 const TRADE_COIN = preload("res://scenes/fx/TradeCoin.tscn")
@@ -119,14 +119,14 @@ func tile_at(pos: Vector2) -> Vector2i:
 func taxicab(pos: Vector2) -> float:
 	return abs(pos.x) + abs(pos.y)
 
-func get_biome(pos: Vector2) -> Biome:
-	var taxicab_distance: int = int(taxicab(tile_at(pos)))
+func get_biome(pos: Vector2i) -> Biome:
+	var taxicab_distance: int = int(taxicab(pos))
 	if taxicab_distance <= 60:
 		return Biome.LANDING
 	elif taxicab_distance >= 512:
 		return Biome.EMPTINESS
 	else:
-		var center := biome_center_at(tile_at(pos))
+		var center := biome_center_at(pos)
 		if biomes.has(center):
 			return biomes.get(center)
 		return Biome.DEFAULT
@@ -145,7 +145,7 @@ func change_bg(new_effect: String):
 # --------------
 
 func generate_world():
-	Micro.worldgen_status("Shaping biomes...")
+	await Micro.worldgen_status("Shaping biomes...")
 	$BiomeMap/ColorRect.material.set("shader_parameter/seed", world_seed)
 	$BiomeMap.render_target_update_mode = SubViewport.UPDATE_ONCE
 	var biome_texture: ViewportTexture = $BiomeMap.get_texture()
@@ -154,7 +154,7 @@ func generate_world():
 	if Micro.config_field("debug", "save_biome_map", false):
 		ResourceSaver.save(ImageTexture.create_from_image(biome_map), "user://biome_map.png")
 		print("Saved biome map to user folder.")
-	Micro.worldgen_status("Placing traders...")
+	await Micro.worldgen_status("Placing traders...")
 	var starting_traders_to_place := 2
 	var opportunities := 4
 	for dir in [Vector2i(1,1),Vector2i(1,-1),Vector2i(-1,-1),Vector2i(-1,1)]:
@@ -163,6 +163,14 @@ func generate_world():
 			distance += 10
 		var location := biome_center_at(dir*distance)
 		place(0, location)
+		var miniboss := preload("res://scenes/characters/tiles/EnemyPosition.tscn").instantiate()
+		miniboss.enemy = preload("res://scenes/characters/enemies/TraderMiniboss.tscn")
+		miniboss.spawn_radius = 140.
+		miniboss.hit_only = true
+		miniboss.require_close = true
+		miniboss.size = 50.
+		miniboss.position = location * 20.
+		$Entities.add_child(miniboss)
 		opportunities -= 1
 		if random.randi_range(0,1)==1 and opportunities >= starting_traders_to_place or starting_traders_to_place == 0:
 			continue
@@ -173,20 +181,30 @@ func generate_world():
 		trader.wander_origin = trader_location * 20.
 		trader.wander_range = 70.
 		trader.wander_distance = 60.
-		$Structures.add_child(trader)
+		$Entities.add_child(trader)
 		starting_traders_to_place -= 1
-	Micro.worldgen_status("Placing caches...")
-	for i in 200:
-		var pos := Vector2(randfn(0., 3.), randfn(0., 3.)) * 20.
-		pos += pos.normalized()*18
-		while $Structures/Tiles.get_cell_alternative_tile(pos) > 0:
-			pos = Vector2(randfn(0., 3.), randfn(0., 3.)) * 20.
-			pos += pos.normalized()*18
-		$Structures/Tiles.set_cell(pos, 0, Vector2i.ZERO, 4)
+	await Micro.worldgen_status("Scattering features...")
+	var disks := VariablePoissonDiskSampler2D.new(random, Vector2(1000, 1000), 30)
+	disks.generate(
+		func (_pos):
+			return 10.
+	, 5, 20)
+	await Micro.worldgen_status("Placing features...")
+	for pos in disks.samples:
+		var tile := Vector2i(pos - Vector2(500, 500))
+		if abs(tile.x) + abs(tile.y) > 510:
+			continue
+		match get_biome(tile):
+			Biome.PEACE:
+				pass
+			Biome.DEFAULT when random.randf()>0.5:
+				pass
+			_:
+				$Structures/NewTiles.try_place("CACHE", tile)
 
 func place(id: int, pos: Vector2i):
-	var pattern: TileMapPattern = $Structures/Tiles.tile_set.get_pattern(id)
-	$Structures/Tiles.set_pattern(pos-pattern.get_size()/2, pattern)
+	var pattern: TileMapPattern = $Structures/NewTiles.tile_set.get_pattern(id)
+	$Structures/NewTiles.set_pattern(pos-pattern.get_size()/2, pattern)
 
 # Returns false if we fail
 func attempt_decide_biome_for_center_structure(tile: Vector2i, biome: Biome, margin: int) -> bool:

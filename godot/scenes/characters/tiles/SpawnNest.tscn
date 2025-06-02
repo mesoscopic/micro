@@ -1,20 +1,34 @@
-[gd_scene load_steps=8 format=3 uid="uid://cas1ebkgs1kfw"]
+[gd_scene load_steps=10 format=3 uid="uid://cas1ebkgs1kfw"]
 
-[ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="1_82hb3"]
 [ext_resource type="Script" uid="uid://8mysmbmddama" path="res://scripts/characters/spawn_nest.gd" id="1_g6lmg"]
 [ext_resource type="PackedScene" uid="uid://ckkvvvr32yt5h" path="res://scenes/fx/HealRay.tscn" id="2_5pcos"]
 [ext_resource type="PackedScene" uid="uid://cshcf4y2ntrp5" path="res://scenes/characters/NestSlot.tscn" id="2_baksq"]
 [ext_resource type="Shader" uid="uid://ja0tditl2iqa" path="res://shaders/player.gdshader" id="2_g6lmg"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://scripts/resources/char_texture.gd" id="4_dnu8s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82hb3"]
 size = Vector2(140, 140)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5pcos"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vpgj0"]
 shader = ExtResource("2_g6lmg")
 shader_parameter/health = 0.0
 shader_parameter/opacity = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 shader_parameter/can_dash = true
+
+[sub_resource type="Image" id="Image_yq1fs"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_jf3st"]
+image = SubResource("Image_yq1fs")
+script = ExtResource("4_dnu8s")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [node name="SpawnNest" type="Node2D"]
 script = ExtResource("1_g6lmg")
@@ -34,11 +48,10 @@ wait_time = 0.1
 
 [node name="HealRay" parent="." instance=ExtResource("2_5pcos")]
 
-[node name="Character" parent="." instance=ExtResource("1_82hb3")]
-layer = 2
-size = 40
-render = SubResource("ShaderMaterial_5pcos")
-always_visible = true
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_vpgj0")
+scale = Vector2(40, 40)
+texture = SubResource("ImageTexture_jf3st")
 
 [node name="NestSlot" parent="." instance=ExtResource("2_baksq")]
 position = Vector2(-20, -40)

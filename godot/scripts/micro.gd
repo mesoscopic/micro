@@ -49,6 +49,7 @@ func wait(time: float, override_time: bool = false):
 func worldgen_status(status: String) -> void:
 	print(status)
 	get_tree().current_scene.get_node("ScreenWipe/StatusMessage").text = status
+	await get_tree().process_frame
 
 func show_trade_information(trader: Trader):
 	var overlay = get_tree().current_scene.get_node("UI/TradeOverlay")

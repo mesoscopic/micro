@@ -18,7 +18,7 @@ license:
 float gnoise(float x) {
     float i = floor(x);  // integer
     float f = fract(x);  // fraction
-    return mix(random(i), random(i + 1.0), smoothstep(0.,1.,f)); 
+    return mix(random(i), random(i + 1.0), smoothstep(0.,1.,f));
 }
 
 float gnoise(vec2 st) {
@@ -38,29 +38,29 @@ float gnoise(vec3 p) {
     vec3 i = floor(p);
     vec3 f = fract(p);
     vec3 u = quintic(f);
-    return -1.0 + 2.0 * mix( mix( mix( random(i + vec3(0.0,0.0,0.0)), 
+    return -1.0 + 2.0 * mix( mix( mix( random(i + vec3(0.0,0.0,0.0)),
                                         random(i + vec3(1.0,0.0,0.0)), u.x),
-                                mix( random(i + vec3(0.0,1.0,0.0)), 
+                                mix( random(i + vec3(0.0,1.0,0.0)),
                                         random(i + vec3(1.0,1.0,0.0)), u.x), u.y),
-                            mix( mix( random(i + vec3(0.0,0.0,1.0)), 
+                            mix( mix( random(i + vec3(0.0,0.0,1.0)),
                                         random(i + vec3(1.0,0.0,1.0)), u.x),
-                                mix( random(i + vec3(0.0,1.0,1.0)), 
+                                mix( random(i + vec3(0.0,1.0,1.0)),
                                         random(i + vec3(1.0,1.0,1.0)), u.x), u.y), u.z );
 }
 
 float gnoise(vec3 p, float tileLength) {
     vec3 i = floor(p);
     vec3 f = fract(p);
-            
+
     vec3 u = quintic(f);
-        
-    return mix( mix( mix( dot( srandom3(i + vec3(0.0,0.0,0.0), tileLength), f - vec3(0.0,0.0,0.0)), 
+
+    return mix( mix( mix( dot( srandom3(i + vec3(0.0,0.0,0.0), tileLength), f - vec3(0.0,0.0,0.0)),
                             dot( srandom3(i + vec3(1.0,0.0,0.0), tileLength), f - vec3(1.0,0.0,0.0)), u.x),
-                    mix( dot( srandom3(i + vec3(0.0,1.0,0.0), tileLength), f - vec3(0.0,1.0,0.0)), 
+                    mix( dot( srandom3(i + vec3(0.0,1.0,0.0), tileLength), f - vec3(0.0,1.0,0.0)),
                             dot( srandom3(i + vec3(1.0,1.0,0.0), tileLength), f - vec3(1.0,1.0,0.0)), u.x), u.y),
-                mix( mix( dot( srandom3(i + vec3(0.0,0.0,1.0), tileLength), f - vec3(0.0,0.0,1.0)), 
+                mix( mix( dot( srandom3(i + vec3(0.0,0.0,1.0), tileLength), f - vec3(0.0,0.0,1.0)),
                             dot( srandom3(i + vec3(1.0,0.0,1.0), tileLength), f - vec3(1.0,0.0,1.0)), u.x),
-                    mix( dot( srandom3(i + vec3(0.0,1.0,1.0), tileLength), f - vec3(0.0,1.0,1.0)), 
+                    mix( dot( srandom3(i + vec3(0.0,1.0,1.0), tileLength), f - vec3(0.0,1.0,1.0)),
                             dot( srandom3(i + vec3(1.0,1.0,1.0), tileLength), f - vec3(1.0,1.0,1.0)), u.x), u.y), u.z );
 }
 

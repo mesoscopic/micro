@@ -7,7 +7,7 @@ func put_upgrade(new_upgrade: Upgrade) -> void:
 		upgrade.disable()
 	upgrade = new_upgrade
 	upgrade.enable()
-	$Character/Render.material = new_upgrade.render
+	$Render.material = new_upgrade.render
 	$PutParticles.emitting = true
 	Micro.world.end_trade()
 	await Micro.wait(1.)

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ba8aaxbp8jkk7" path="res://scripts/characters/generic.gd" id="1_mj12y"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://scripts/resources/char_texture.gd" id="2_evo8w"]
 
-[sub_resource type="Image" id="Image_typq7"]
+[sub_resource type="Image" id="Image_evo8w"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -13,7 +13,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_0v81k"]
-image = SubResource("Image_typq7")
+image = SubResource("Image_evo8w")
 script = ExtResource("2_evo8w")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -21,6 +21,7 @@ metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 radius = 1.0
 
 [node name="Character" type="Node2D"]
+process_mode = 4
 script = ExtResource("1_mj12y")
 
 [node name="Render" type="Sprite2D" parent="."]
@@ -29,6 +30,8 @@ texture = SubResource("ImageTexture_0v81k")
 [node name="Occlusion" type="Area2D" parent="."]
 collision_layer = 256
 collision_mask = 256
+input_pickable = false
+monitoring = false
 
 [node name="Area" type="CollisionShape2D" parent="Occlusion"]
 shape = SubResource("CircleShape2D_hvjck")
@@ -36,6 +39,8 @@ shape = SubResource("CircleShape2D_hvjck")
 [node name="Light" type="Area2D" parent="."]
 collision_layer = 512
 collision_mask = 256
+input_pickable = false
+monitoring = false
 
 [node name="Area" type="CollisionPolygon2D" parent="Light"]
 polygon = PackedVector2Array(0, -1, 1, 0, 0, 1, -1, 0)

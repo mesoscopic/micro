@@ -1,13 +1,35 @@
-[gd_scene load_steps=41 format=3 uid="uid://b14dvx67drebc"]
+[gd_scene load_steps=45 format=3 uid="uid://b14dvx67drebc"]
 
 [ext_resource type="Script" uid="uid://de3rlx01ibq3d" path="res://scripts/characters/player.gd" id="1_1im8n"]
 [ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="2_8klxi"]
 [ext_resource type="PackedScene" uid="uid://wwjxod2at3t3" path="res://scenes/Camera.tscn" id="2_nkqiv"]
 [ext_resource type="Shader" uid="uid://ja0tditl2iqa" path="res://shaders/player.gdshader" id="4_0t1y4"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://scripts/resources/char_texture.gd" id="4_oihyf"]
 [ext_resource type="PackedScene" uid="uid://0hra43oryyg4" path="res://scenes/abilities/Dash.tscn" id="5_wr4u2"]
 [ext_resource type="Shader" uid="uid://bm0iowttrwa5h" path="res://shaders/funds_sparkle.gdshader" id="6_m6phi"]
 [ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://shaders/funds.gdshader" id="6_rpfb3"]
 [ext_resource type="Shader" uid="uid://cjhdxgx78hiya" path="res://shaders/dash_ghost.gdshader" id="8_m6phi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7lms1"]
+shader = ExtResource("4_0t1y4")
+shader_parameter/health = 1.0
+shader_parameter/opacity = 1.0
+shader_parameter/velocity = Vector2(0, 0)
+shader_parameter/can_dash = true
+
+[sub_resource type="Image" id="Image_ufbvs"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_mqro2"]
+image = SubResource("Image_ufbvs")
+script = ExtResource("4_oihyf")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m6phi"]
 resource_local_to_scene = true
@@ -345,7 +367,13 @@ script = ExtResource("1_1im8n")
 
 [node name="Camera" parent="." instance=ExtResource("2_nkqiv")]
 
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_7lms1")
+scale = Vector2(20, 20)
+texture = SubResource("ImageTexture_mqro2")
+
 [node name="Character" parent="." instance=ExtResource("2_8klxi")]
+visible = false
 layer = 4
 light = 100
 render = SubResource("ShaderMaterial_m6phi")

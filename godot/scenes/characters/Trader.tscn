@@ -1,14 +1,27 @@
-[gd_scene load_steps=10 format=3 uid="uid://cww6x38j4owo7"]
+[gd_scene load_steps=12 format=3 uid="uid://cww6x38j4owo7"]
 
-[ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="1_nu57o"]
 [ext_resource type="Script" uid="uid://dhq6gwqee7y86" path="res://scripts/characters/trader.gd" id="1_tqfba"]
 [ext_resource type="Shader" uid="uid://cs7iamvps60cm" path="res://shaders/trader.gdshader" id="2_paeo7"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://scripts/resources/char_texture.gd" id="3_tqfba"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tqfba"]
-resource_local_to_scene = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0sdtu"]
 shader = ExtResource("2_paeo7")
 shader_parameter/opacity = 1.0
 shader_parameter/velocity = Vector2(0, 0)
+
+[sub_resource type="Image" id="Image_tqfba"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_imhq2"]
+image = SubResource("Image_tqfba")
+script = ExtResource("3_tqfba")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4dht5"]
 
@@ -37,11 +50,10 @@ disable_mode = 1
 collision_layer = 0
 script = ExtResource("1_tqfba")
 
-[node name="Character" parent="." instance=ExtResource("1_nu57o")]
-layer = 2
-size = 16
-light = 80
-render = SubResource("ShaderMaterial_tqfba")
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_0sdtu")
+scale = Vector2(16, 16)
+texture = SubResource("ImageTexture_imhq2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4dht5")

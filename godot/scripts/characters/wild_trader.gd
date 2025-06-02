@@ -16,6 +16,6 @@ func _on_collect_area_body_entered(body: Node2D) -> void:
 	await Micro.wait(1.)
 	await Micro.world.get_trader(global_position).ready
 	await Micro.wait(.5)
-	$Character.hide()
+	$Render.hide()
 	await Micro.wait(.5)
 	queue_free()

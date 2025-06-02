@@ -80,7 +80,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity = velocity.move_toward((path_target - global_position).normalized() * speed * (wander_speed_mult if wandering else speed_multiplier), acceleration * delta)
 	move_and_slide()
-	$Character/Render.material.set("shader_parameter/velocity", (velocity / max(speed, velocity.length())||1))
+	$Render.material.set("shader_parameter/velocity", (velocity / max(speed, velocity.length())||1))
 
 func change_aggro(_method: AggroMethod):
 	var should_aggro: bool = false

@@ -4,9 +4,10 @@ const fund_coin: PackedScene = preload("res://scenes/fx/FundCoin.tscn")
 const heal_ray: PackedScene = preload("res://scenes/fx/HealRay.tscn")
 const surprise: PackedScene = preload("res://scenes/characters/enemies/Surprise.tscn")
 
+
+
 func _ready():
-	var noise: NoiseTexture2D = $Character.render.get_shader_parameter("noise")
-	noise.noise.seed = randi()
+	$Render.material.set_shader_parameter("noise", load("res://assets/baked_noise/cache_variations/%s.png" % randi_range(1,16)))
 	hurt.connect(_hurt)
 
 func _hurt(_amount: int) -> void:

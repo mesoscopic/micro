@@ -1,18 +1,32 @@
-[gd_scene load_steps=13 format=3 uid="uid://ij3bdhvutjdc"]
+[gd_scene load_steps=15 format=3 uid="uid://ij3bdhvutjdc"]
 
 [ext_resource type="Script" uid="uid://bmlnebh2gvi7m" path="res://scripts/characters/enemies/advanced_shooter.gd" id="1_idjq7"]
-[ext_resource type="PackedScene" uid="uid://dnwffnhs6gnwh" path="res://scenes/characters/Character.tscn" id="2_tb7kd"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://shaders/enemy.gdshader" id="3_8ej3x"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://scripts/resources/char_texture.gd" id="3_idjq7"]
 [ext_resource type="PackedScene" uid="uid://b2erii1hcv0u0" path="res://scenes/logic/RangeAggro.tscn" id="4_c3yda"]
 [ext_resource type="PackedScene" uid="uid://diissjbt0i6uj" path="res://scenes/logic/HurtAggro.tscn" id="5_c1kgm"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://shaders/sphere_particle.gdshader" id="6_4ih7x"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_idjq7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tb7kd"]
 resource_local_to_scene = true
 shader = ExtResource("3_8ej3x")
 shader_parameter/health = 1.0
 shader_parameter/opacity = 1.0
 shader_parameter/velocity = Vector2(0, 0)
+
+[sub_resource type="Image" id="Image_idjq7"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_c3yda"]
+image = SubResource("Image_idjq7")
+script = ExtResource("3_idjq7")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u77d8"]
 
@@ -44,11 +58,10 @@ script = ExtResource("1_idjq7")
 fund_drop = 10
 fund_drop_randomization = 0.3
 
-[node name="Character" parent="." instance=ExtResource("2_tb7kd")]
-layer = 2
-light = 75
-render = SubResource("ShaderMaterial_idjq7")
-always_visible = true
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_tb7kd")
+scale = Vector2(20, 20)
+texture = SubResource("ImageTexture_c3yda")
 
 [node name="RangeAggro" parent="." instance=ExtResource("4_c3yda")]
 scale = Vector2(0.998148, 1)
