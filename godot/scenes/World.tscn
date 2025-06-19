@@ -51,7 +51,7 @@ shader = ExtResource("1_gia2e")
 shader_parameter/default_effect = 1.0
 shader_parameter/peace_effect = 0.0
 
-[sub_resource type="Image" id="Image_i4b1j"]
+[sub_resource type="Image" id="Image_h1bdy"]
 data = {
 "data": PackedByteArray("/////w=="),
 "format": "RGBA8",
@@ -61,7 +61,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_o1tcx"]
-image = SubResource("Image_i4b1j")
+image = SubResource("Image_h1bdy")
 script = ExtResource("4_i4b1j")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -100,7 +100,6 @@ tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608, 0, 0, 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c0d7e"]
 shader = ExtResource("7_i4b1j")
-shader_parameter/opacity = 1.0
 
 [sub_resource type="Gradient" id="Gradient_nrtoj"]
 offsets = PackedFloat32Array(0)
@@ -117,7 +116,7 @@ texture = SubResource("GradientTexture2D_i4b1j")
 texture_region_size = Vector2i(20, 20)
 use_texture_padding = false
 0:0/0 = 0
-0:0/0/modulate = Color(1, 1, 1, 0.0784314)
+0:0/0/modulate = Color(1, 1, 1, 0)
 1:0/0 = 0
 1:0/0/material = SubResource("ShaderMaterial_c0d7e")
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)

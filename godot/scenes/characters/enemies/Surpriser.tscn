@@ -14,7 +14,7 @@ shader_parameter/health = 1.0
 shader_parameter/opacity = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 
-[sub_resource type="Image" id="Image_0usk7"]
+[sub_resource type="Image" id="Image_8s0w8"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -24,7 +24,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_rsuf2"]
-image = SubResource("Image_0usk7")
+image = SubResource("Image_8s0w8")
 script = ExtResource("3_8s0w8")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 

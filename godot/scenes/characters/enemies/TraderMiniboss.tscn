@@ -12,7 +12,7 @@ shader_parameter/health = 1.0
 shader_parameter/opacity = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 
-[sub_resource type="Image" id="Image_icese"]
+[sub_resource type="Image" id="Image_b1f70"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -22,7 +22,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_uur07"]
-image = SubResource("Image_icese")
+image = SubResource("Image_b1f70")
 script = ExtResource("3_b1f70")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 

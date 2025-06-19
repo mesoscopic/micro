@@ -1,14 +1,11 @@
 shader_type canvas_item;
 
-uniform float opacity = 1.0;
-
 #include "../lygia/sdf/lineSDF.gdshaderinc"
 #include "../lygia/draw/stroke.gdshaderinc"
 
 void fragment() {
 	vec2 xy = (UV - vec2(0.5)) * 3.0;
 	xy.x -= 0.5;
-	COLOR.a *= opacity;
 	float circle = (abs(xy.x) + abs(xy.y));
 	float line1 = lineSDF(UV, vec2(0.05, 0.3), vec2(0.3, 0.3));
 	float line2 = lineSDF(UV, vec2(0.05, 0.7), vec2(0.4, 0.7));

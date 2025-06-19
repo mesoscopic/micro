@@ -13,11 +13,10 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7lms1"]
 shader = ExtResource("4_0t1y4")
 shader_parameter/health = 1.0
-shader_parameter/opacity = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 shader_parameter/can_dash = true
 
-[sub_resource type="Image" id="Image_ufbvs"]
+[sub_resource type="Image" id="Image_oihyf"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -27,15 +26,14 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_mqro2"]
-image = SubResource("Image_ufbvs")
+image = SubResource("Image_oihyf")
 script = ExtResource("4_oihyf")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m6phi"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mqro2"]
 resource_local_to_scene = true
 shader = ExtResource("4_0t1y4")
 shader_parameter/health = 1.0
-shader_parameter/opacity = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 shader_parameter/can_dash = true
 
@@ -376,7 +374,7 @@ texture = SubResource("ImageTexture_mqro2")
 visible = false
 layer = 4
 light = 100
-render = SubResource("ShaderMaterial_m6phi")
+render = SubResource("ShaderMaterial_mqro2")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)

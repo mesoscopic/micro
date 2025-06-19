@@ -1,13 +1,10 @@
 shader_type canvas_item;
 
-uniform float opacity = 1.0;
-
 #include "../lygia/sdf/lineSDF.gdshaderinc"
 #include "../lygia/sdf/circleSDF.gdshaderinc"
 #include "../lygia/draw/stroke.gdshaderinc"
 
 void fragment() {
-	COLOR.a *= opacity;
 	float circle = circleSDF(UV);
 	float line1 = lineSDF(UV, vec2(0.5, 0.5), vec2(0.5+sin(TIME/4./PI)/4., 0.5+cos(TIME/4./PI)/4.));
 	float line2 = lineSDF(UV, vec2(0.5, 0.5), vec2(0.5+cos(TIME/2.)/3., 0.5+sin(TIME/2.)/3.));

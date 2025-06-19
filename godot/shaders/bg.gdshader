@@ -1,6 +1,7 @@
 shader_type canvas_item;
 render_mode skip_vertex_transform;
 
+
 #include "lygia/generative/random.gdshaderinc"
 #include "lygia/sdf/rectSDF.gdshaderinc"
 #include "lygia/draw/stroke.gdshaderinc"
