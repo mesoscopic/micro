@@ -1,0 +1,94 @@
+[gd_scene load_steps=13 format=3 uid="uid://degw88c3u4obt"]
+
+[ext_resource type="Script" uid="uid://bd1nvuajonror" path="res://entities/enemies/trader_miniboss.gd" id="1_oj4li"]
+[ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="3_3crh1"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_b1f70"]
+[ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="4_icese"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3crh1"]
+resource_local_to_scene = true
+shader = ExtResource("3_3crh1")
+shader_parameter/health = 1.0
+shader_parameter/opacity = 1.0
+shader_parameter/velocity = Vector2(0, 0)
+
+[sub_resource type="Image" id="Image_b1f70"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_uur07"]
+image = SubResource("Image_b1f70")
+script = ExtResource("3_b1f70")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wt047"]
+radius = 25.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c83qb"]
+shader = ExtResource("4_icese")
+
+[sub_resource type="Curve" id="Curve_wf87e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_u77d8"]
+curve = SubResource("Curve_wf87e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d344a"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+damping_min = 20.0
+damping_max = 40.0
+scale_min = 4.0
+scale_max = 9.0
+scale_curve = SubResource("CurveTexture_u77d8")
+
+[node name="TraderMiniboss" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_oj4li")
+speed = 0
+acceleration = 0
+deceleration = 0
+turn_length = 0
+wander_length = 0
+wander_speed_mult = 0.0
+fund_drop = 50
+fund_drop_randomization = 0.2
+despawn_distance = 240
+stagger_time = 0.0
+max_hp = 300
+hp = 300
+metadata/_custom_type_script = "uid://oy7qpe47ti6v"
+
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3crh1")
+scale = Vector2(50, 50)
+texture = SubResource("ImageTexture_uur07")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wt047")
+
+[node name="HurtParticles" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_c83qb")
+emitting = false
+amount = 42
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_d344a")
+
+[node name="FireRate" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="FireRate" to="." method="_on_fire"]

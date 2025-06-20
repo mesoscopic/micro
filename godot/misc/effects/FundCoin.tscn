@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwsl01caneedv"]
+
+[ext_resource type="Script" uid="uid://cg1a2fqe2to7u" path="res://misc/effects/fund_coin.gd" id="1_cncoa"]
+
+[sub_resource type="Curve" id="Curve_w7jdu"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.99999, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="FundCoin" type="Node2D"]
+script = ExtResource("1_cncoa")
+
+[node name="Trail" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+width = 2.0
+width_curve = SubResource("Curve_w7jdu")
+joint_mode = 2
+end_cap_mode = 2
+antialiased = true

@@ -1,0 +1,114 @@
+[gd_scene load_steps=9 format=3 uid="uid://e34y636bg76y"]
+
+[ext_resource type="Script" uid="uid://cowf8lcpmdwgh" path="res://ui/pause_menu.gd" id="1_5eetr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_verg1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d0b5s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7thvf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yp34u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ev1h7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8helu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_25ii4"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5eetr")
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="Label" type="Label" parent="Menu/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
+theme_override_font_sizes/font_size = 35
+theme_override_styles/focus = SubResource("StyleBoxEmpty_verg1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_d0b5s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_7thvf")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yp34u")
+action_mode = 0
+text = "Resume"
+
+[node name="Options" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
+theme_override_font_sizes/font_size = 35
+theme_override_styles/focus = SubResource("StyleBoxEmpty_verg1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_d0b5s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_7thvf")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yp34u")
+action_mode = 0
+text = "Options"
+
+[node name="Quit" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
+theme_override_font_sizes/font_size = 35
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ev1h7")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8helu")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_25ii4")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yp34u")
+action_mode = 0
+text = "Quit"
+
+[connection signal="button_down" from="Menu/VBoxContainer/Resume" to="." method="_on_resume"]
+[connection signal="mouse_entered" from="Menu/VBoxContainer/Resume" to="." method="_on_button_hover" binds= [&"Resume"]]
+[connection signal="button_down" from="Menu/VBoxContainer/Options" to="." method="_on_options"]
+[connection signal="mouse_entered" from="Menu/VBoxContainer/Options" to="." method="_on_button_hover" binds= [&"Options"]]
+[connection signal="button_down" from="Menu/VBoxContainer/Quit" to="." method="_on_quit"]
+[connection signal="mouse_entered" from="Menu/VBoxContainer/Quit" to="." method="_on_button_hover" binds= [&"Quit"]]

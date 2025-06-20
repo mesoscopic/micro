@@ -1,0 +1,92 @@
+[gd_scene load_steps=15 format=3 uid="uid://b46bcw3s1yhbg"]
+
+[ext_resource type="Script" uid="uid://w8cbbqmraekc" path="res://entities/enemies/basic_shooter.gd" id="1_qeqcc"]
+[ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="2_3448q"]
+[ext_resource type="PackedScene" uid="uid://b2erii1hcv0u0" path="res://misc/logic/RangeAggro.tscn" id="3_mjjdd"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_qeqcc"]
+[ext_resource type="PackedScene" uid="uid://diissjbt0i6uj" path="res://misc/logic/HurtAggro.tscn" id="4_3448q"]
+[ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="6_u77d8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u77d8"]
+resource_local_to_scene = true
+shader = ExtResource("2_3448q")
+shader_parameter/health = 1.0
+shader_parameter/velocity = Vector2(0, 0)
+
+[sub_resource type="Image" id="Image_qeqcc"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_wf87e"]
+image = SubResource("Image_qeqcc")
+script = ExtResource("3_qeqcc")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u77d8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a60u8"]
+shader = ExtResource("6_u77d8")
+
+[sub_resource type="Curve" id="Curve_wf87e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_u77d8"]
+curve = SubResource("Curve_wf87e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rwtxu"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+radial_velocity_min = 40.0
+radial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_u77d8")
+
+[node name="BasicShooter" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_qeqcc")
+fund_drop = 8
+fund_drop_randomization = 0.5
+max_hp = 50
+hp = 50
+
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_u77d8")
+scale = Vector2(20, 20)
+texture = SubResource("ImageTexture_wf87e")
+
+[node name="RangeAggro" parent="." instance=ExtResource("3_mjjdd")]
+scale = Vector2(0.998148, 1)
+aggro_range = 200
+deaggro_range = 300
+
+[node name="HurtAggro" parent="." instance=ExtResource("4_3448q")]
+aggro_length = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u77d8")
+
+[node name="HurtParticles" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_a60u8")
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_rwtxu")
+
+[node name="FiringCooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="RetargetTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="FiringCooldown" to="." method="_on_firing_cooldown_timeout"]
+[connection signal="timeout" from="RetargetTimer" to="." method="target_player"]

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dwjddrkrav83g"]
+
+[node name="SettingsCategory" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="Settings" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Settings/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/HBoxContainer/CenterContainer"]
+layout_mode = 2
+text = "awawawawa"
+
+[node name="CenterContainer2" type="CenterContainer" parent="Settings/HBoxContainer"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="Settings/HBoxContainer/CenterContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2

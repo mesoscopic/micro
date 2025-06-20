@@ -1,0 +1,84 @@
+[gd_scene load_steps=15 format=3 uid="uid://tv3xkxmljps6"]
+
+[ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="1_25q7e"]
+[ext_resource type="Script" uid="uid://dgntbp3ccqege" path="res://bullets/spawner_projectile.gd" id="1_gk21p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gk21p"]
+shader = ExtResource("1_25q7e")
+
+[sub_resource type="Curve" id="Curve_gk21p"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_s52qs"]
+curve = SubResource("Curve_gk21p")
+
+[sub_resource type="Curve" id="Curve_s52qs"]
+_data = [Vector2(0, 0.991046), 0.0, -0.341642, 0, 0, Vector2(1, 0), -2.67659, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ii1bo"]
+curve = SubResource("Curve_s52qs")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ob4xr"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 8.0
+scale_max = 14.0
+scale_curve = SubResource("CurveTexture_ii1bo")
+alpha_curve = SubResource("CurveTexture_s52qs")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s52qs"]
+shader = ExtResource("1_25q7e")
+
+[sub_resource type="Curve" id="Curve_ii1bo"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0985107, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_oxxt1"]
+curve = SubResource("Curve_ii1bo")
+
+[sub_resource type="Curve" id="Curve_ob4xr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ioqel"]
+curve = SubResource("Curve_ob4xr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rkbpc"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+damping_min = 200.0
+damping_max = 200.0
+scale_min = 5.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_ioqel")
+alpha_curve = SubResource("CurveTexture_oxxt1")
+
+[node name="SpawnerProjectile" type="Node2D"]
+script = ExtResource("1_gk21p")
+
+[node name="Bubbles" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_gk21p")
+amount = 20
+lifetime = 0.75
+process_material = SubResource("ParticleProcessMaterial_ob4xr")
+
+[node name="ExplosionParticles" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_s52qs")
+emitting = false
+amount = 140
+lifetime = 0.75
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_rkbpc")
+
+[node name="Expiry" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Expiry" to="." method="_on_expiry_timeout"]

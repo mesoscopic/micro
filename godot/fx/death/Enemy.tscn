@@ -1,0 +1,82 @@
+[gd_scene load_steps=16 format=3 uid="uid://diqdkbr3crus3"]
+
+[ext_resource type="Script" uid="uid://bgocxycd6xam0" path="res://fx/death/enemy.gd" id="1_xb5g8"]
+[ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="2_gkxl4"]
+[ext_resource type="Shader" uid="uid://ds1rxv51ltkrj" path="res://misc/shaders/enemy_ghost.gdshader" id="3_xb5g8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sxsfr"]
+shader = ExtResource("2_gkxl4")
+
+[sub_resource type="Curve" id="Curve_wf04k"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yolx1"]
+curve = SubResource("Curve_wf04k")
+
+[sub_resource type="Curve" id="Curve_vcs7t"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fophx"]
+curve = SubResource("Curve_vcs7t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j114o"]
+particle_flag_disable_z = true
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+radial_accel_curve = SubResource("CurveTexture_fophx")
+scale_min = 2.0
+scale_max = 4.0
+alpha_curve = SubResource("CurveTexture_yolx1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nnu7a"]
+shader = ExtResource("3_xb5g8")
+
+[sub_resource type="Curve" id="Curve_smw0l"]
+_data = [Vector2(0, 1), 0.0, -3.0817, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xb5g8"]
+curve = SubResource("Curve_smw0l")
+
+[sub_resource type="Curve" id="Curve_46tww"]
+_data = [Vector2(0, 0.25), 0.0, 5.66621, 0, 0, Vector2(0.42, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gkxl4"]
+curve = SubResource("Curve_46tww")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qkksp"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 80.0
+scale_max = 80.0
+scale_curve = SubResource("CurveTexture_gkxl4")
+alpha_curve = SubResource("CurveTexture_xb5g8")
+
+[node name="EnemyDeathAnimation" type="Node2D"]
+script = ExtResource("1_xb5g8")
+
+[node name="ExplosionParticles" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_sxsfr")
+emitting = false
+amount = 100
+lifetime = 0.75
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_j114o")
+
+[node name="Ring" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_nnu7a")
+emitting = false
+amount = 1
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_qkksp")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

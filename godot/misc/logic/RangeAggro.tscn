@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2erii1hcv0u0"]
+
+[ext_resource type="Script" uid="uid://bfbdmepd2dt3s" path="res://misc/logic/range_aggro.gd" id="1_1o8el"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_86uek"]
+radius = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vw0mj"]
+radius = 1.0
+
+[node name="RangeAggro" type="Node2D"]
+script = ExtResource("1_1o8el")
+
+[node name="AggroRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRange"]
+shape = SubResource("CircleShape2D_86uek")
+
+[node name="DeaggroRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeaggroRange"]
+shape = SubResource("CircleShape2D_vw0mj")
+
+[connection signal="body_entered" from="AggroRange" to="." method="_on_aggro_range_body_entered"]
+[connection signal="body_exited" from="DeaggroRange" to="." method="_on_deaggro_range_body_exited"]

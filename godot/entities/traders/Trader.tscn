@@ -1,0 +1,78 @@
+[gd_scene load_steps=12 format=3 uid="uid://cww6x38j4owo7"]
+
+[ext_resource type="Script" uid="uid://dhq6gwqee7y86" path="res://entities/traders/trader.gd" id="1_tqfba"]
+[ext_resource type="Shader" uid="uid://cs7iamvps60cm" path="res://entities/trader.gdshader" id="2_paeo7"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_tqfba"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0sdtu"]
+shader = ExtResource("2_paeo7")
+shader_parameter/opacity = 1.0
+shader_parameter/velocity = Vector2(0, 0)
+
+[sub_resource type="Image" id="Image_tqfba"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_imhq2"]
+image = SubResource("Image_tqfba")
+script = ExtResource("3_tqfba")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dht5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tqfba"]
+radius = 60.0
+
+[sub_resource type="Curve" id="Curve_0sdtu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yvvdr"]
+curve = SubResource("Curve_0sdtu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_imhq2"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 10, 0)
+radial_accel_min = 20.0
+radial_accel_max = 30.0
+scale_min = 1.5
+scale_max = 2.5
+alpha_curve = SubResource("CurveTexture_yvvdr")
+
+[node name="Trader" type="CharacterBody2D"]
+disable_mode = 1
+collision_layer = 0
+script = ExtResource("1_tqfba")
+
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_0sdtu")
+scale = Vector2(16, 16)
+texture = SubResource("ImageTexture_imhq2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4dht5")
+
+[node name="TradeRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TradeRange"]
+shape = SubResource("CircleShape2D_tqfba")
+
+[node name="HappyParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_imhq2")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[connection signal="body_entered" from="TradeRange" to="." method="_on_trade_range_body_entered"]
+[connection signal="body_exited" from="TradeRange" to="." method="_on_trade_range_body_exited"]
