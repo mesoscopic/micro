@@ -1,6 +1,8 @@
 extends Enemy
 
-const BULLET = preload("res://bullets/EnemyBullet.tscn")
+const BULLET = preload("res://bullets/TelegraphedBullet.tscn")
+
+var prepared_bullet: TelegraphedBullet
 
 func _ready():
 	super()
@@ -8,13 +10,18 @@ func _ready():
 	deaggro.connect(_deaggro)
 
 func _on_firing_cooldown_timeout() -> void:
-	var aim = get_angle_to(Micro.player.position)
-	var bullet = BULLET.instantiate()
-	bullet.global_position = global_position
-	bullet.velocity = Vector2.from_angle(aim) * 90.
-	bullet.lifetime = 6.
-	bullet.damage = 8
-	get_tree().current_scene.get_node("Game/World").add_child(bullet)
+	if prepared_bullet:
+		prepared_bullet.speed = 90.
+		prepared_bullet.lifetime = 6.
+		prepared_bullet.damage = 8
+		prepared_bullet.fire()
+	
+	var bullet: TelegraphedBullet = BULLET.instantiate()
+	bullet.shooter = self
+	bullet.aim(get_angle_to(Micro.player.global_position))
+	bullet.distance = 20
+	Micro.world.get_node("Entities").add_child(bullet)
+	prepared_bullet = bullet
 
 func _aggro() -> void:
 	$FiringCooldown.start()

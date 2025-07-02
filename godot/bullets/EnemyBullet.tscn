@@ -7,9 +7,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iim64"]
 resource_local_to_scene = true
 shader = ExtResource("2_wo8ob")
-shader_parameter/explode_anim = 0.0
 
-[sub_resource type="Image" id="Image_eb62p"]
+[sub_resource type="Image" id="Image_086tk"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -19,7 +18,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_rjho7"]
-image = SubResource("Image_eb62p")
+image = SubResource("Image_086tk")
 script = ExtResource("3_wo8ob")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -28,7 +27,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/explode_anim")
+tracks/0/path = NodePath("Sprite2D:instance_shader_parameters/dissolve_anim")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -37,30 +36,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture:width")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [40]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:texture:height")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [40]
-}
 
 [sub_resource type="Animation" id="Animation_rnuid"]
 resource_name = "explode"
@@ -68,38 +43,14 @@ length = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/explode_anim")
+tracks/0/path = NodePath("Sprite2D:instance_shader_parameters/dissolve_anim")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(2, 1),
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture:width")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(0.05, 2, 1),
-"update": 0,
-"values": [40, 60, 1]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:texture:height")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(0.05, 2, 1),
-"update": 0,
-"values": [40, 60, 1]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7ldk5"]
@@ -136,6 +87,8 @@ script = ExtResource("1_n8fy3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_iim64")
+instance_shader_parameters/dissolve_anim = 0.0
+instance_shader_parameters/form_anim = 1.0
 scale = Vector2(10, 10)
 texture = SubResource("ImageTexture_rjho7")
 

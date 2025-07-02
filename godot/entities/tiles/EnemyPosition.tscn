@@ -10,7 +10,7 @@ shader = ExtResource("2_1tsol")
 shader_parameter/health = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 
-[sub_resource type="Image" id="Image_al0ij"]
+[sub_resource type="Image" id="Image_1tsol"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -20,7 +20,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_vydju"]
-image = SubResource("Image_al0ij")
+image = SubResource("Image_1tsol")
 script = ExtResource("2_rxnby")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 

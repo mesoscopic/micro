@@ -11,6 +11,7 @@ func _ready():
 	hurt.connect(_hurt)
 
 func _hurt(_amount: int) -> void:
+	$VisibleOnScreenEnabler2D.queue_free()
 	$OpenParticles.emitting = true
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Animations.play("open")

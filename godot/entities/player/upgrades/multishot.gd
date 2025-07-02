@@ -11,7 +11,9 @@ func _init() -> void:
 func enable() -> void:
 	Micro.player.multishot += 1
 	Micro.player.bullet_damage_mult /= 1.5
+	Micro.player.reset_bullets()
 
 func disable() -> void:
 	Micro.player.multishot -= 1
 	Micro.player.bullet_damage_mult *= 1.5
+	Micro.player.reset_bullets()

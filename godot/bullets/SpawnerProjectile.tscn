@@ -70,6 +70,7 @@ lifetime = 0.75
 process_material = SubResource("ParticleProcessMaterial_ob4xr")
 
 [node name="ExplosionParticles" type="GPUParticles2D" parent="."]
+z_index = 1
 material = SubResource("ShaderMaterial_s52qs")
 emitting = false
 amount = 140

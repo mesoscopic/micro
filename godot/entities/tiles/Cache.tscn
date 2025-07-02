@@ -11,7 +11,7 @@ shader = ExtResource("2_xgfmd")
 shader_parameter/open_anim = 0.0
 shader_parameter/burn_anim = 0.0
 
-[sub_resource type="Image" id="Image_i8mof"]
+[sub_resource type="Image" id="Image_3t0xa"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -21,7 +21,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_pky5l"]
-image = SubResource("Image_i8mof")
+image = SubResource("Image_3t0xa")
 script = ExtResource("3_7011x")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 

@@ -1,11 +1,11 @@
-[gd_scene load_steps=45 format=3 uid="uid://b14dvx67drebc"]
+[gd_scene load_steps=43 format=3 uid="uid://b14dvx67drebc"]
 
 [ext_resource type="Script" uid="uid://de3rlx01ibq3d" path="res://entities/player/player.gd" id="1_1im8n"]
 [ext_resource type="PackedScene" uid="uid://wwjxod2at3t3" path="res://entities/player/Camera.tscn" id="2_nkqiv"]
 [ext_resource type="Shader" uid="uid://ja0tditl2iqa" path="res://entities/player/player.gdshader" id="4_0t1y4"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="4_oihyf"]
 [ext_resource type="PackedScene" uid="uid://0hra43oryyg4" path="res://entities/player/abilities/Dash.tscn" id="5_wr4u2"]
-[ext_resource type="Shader" uid="uid://bm0iowttrwa5h" path="res://misc/shaders/funds_sparkle.gdshader" id="6_m6phi"]
+[ext_resource type="Shader" uid="uid://bm0iowttrwa5h" path="res://misc/shaders/sparkle.gdshader" id="6_m6phi"]
 [ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://misc/shaders/funds.gdshader" id="6_rpfb3"]
 [ext_resource type="Shader" uid="uid://cjhdxgx78hiya" path="res://misc/shaders/dash_ghost.gdshader" id="8_m6phi"]
 
@@ -15,7 +15,7 @@ shader_parameter/health = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 shader_parameter/can_dash = true
 
-[sub_resource type="Image" id="Image_oihyf"]
+[sub_resource type="Image" id="Image_rl6fg"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -25,16 +25,9 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_mqro2"]
-image = SubResource("Image_oihyf")
+image = SubResource("Image_rl6fg")
 script = ExtResource("4_oihyf")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mqro2"]
-resource_local_to_scene = true
-shader = ExtResource("4_0t1y4")
-shader_parameter/health = 1.0
-shader_parameter/velocity = Vector2(0, 0)
-shader_parameter/can_dash = true
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_58oe3"]
 particle_flag_rotate_y = true
@@ -373,12 +366,14 @@ texture = SubResource("ImageTexture_mqro2")
 polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)
 
 [node name="AimMarker" type="GPUParticles2D" parent="."]
+visible = false
 amount = 6
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_58oe3")
 
 [node name="ShootCooldown" type="Timer" parent="."]
 one_shot = true
+autostart = true
 
 [node name="Abilities" type="Node2D" parent="."]
 
@@ -450,3 +445,5 @@ process_mode = 3
 emitting = false
 amount = 256
 process_material = SubResource("ParticleProcessMaterial_ufbvs")
+
+[connection signal="timeout" from="ShootCooldown" to="." method="prepare_bullet"]

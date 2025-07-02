@@ -1,15 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://dnrcdtyawedjb"]
+[gd_scene load_steps=19 format=3 uid="uid://dnrcdtyawedjb"]
 
-[ext_resource type="Script" uid="uid://3pdmhg11c70e" path="res://bullets/bullet.gd" id="1_6f5oh"]
+[ext_resource type="Script" uid="uid://dhdyju55p570r" path="res://bullets/telegraphed_bullet.gd" id="1_gex5j"]
 [ext_resource type="Shader" uid="uid://csnb2kx6uvrj6" path="res://bullets/player_bullet.gdshader" id="1_slg20"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_g2t78"]
+[ext_resource type="Shader" uid="uid://bm0iowttrwa5h" path="res://misc/shaders/sparkle.gdshader" id="4_0ghsx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_epu1g"]
-resource_local_to_scene = true
 shader = ExtResource("1_slg20")
-shader_parameter/explode_anim = 0.0
 
-[sub_resource type="Image" id="Image_xpoxk"]
+[sub_resource type="Image" id="Image_0ghsx"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -19,123 +18,83 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_7jx42"]
-image = SubResource("Image_xpoxk")
+image = SubResource("Image_0ghsx")
 script = ExtResource("3_g2t78")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
-
-[sub_resource type="Animation" id="Animation_r3uyc"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/explode_anim")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture:width")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [40]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:texture:height")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [40]
-}
-
-[sub_resource type="Animation" id="Animation_rnuid"]
-resource_name = "explode"
-length = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/explode_anim")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(2, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture:width")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(0.05, 2, 1),
-"update": 0,
-"values": [40, 60, 1]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:texture:height")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(0.05, 2, 1),
-"update": 0,
-"values": [40, 60, 1]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7ldk5"]
-_data = {
-&"RESET": SubResource("Animation_r3uyc"),
-&"explode": SubResource("Animation_rnuid")
-}
 
 [sub_resource type="Curve" id="Curve_7qh73"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.44656, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_8us7s"]
+[sub_resource type="CurveTexture" id="CurveTexture_0ghsx"]
 curve = SubResource("Curve_7qh73")
+
+[sub_resource type="Curve" id="Curve_gex5j"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yt3jv"]
+curve = SubResource("Curve_gex5j")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lyp1f"]
 lifetime_randomness = 0.32
 particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 10.0
+emission_ring_inner_radius = 6.0
+emission_ring_cone_angle = 90.0
 angle_min = 45.0
 angle_max = 45.0
-spread = 180.0
-initial_velocity_min = 100.0
-initial_velocity_max = 100.0
+orbit_velocity_min = 0.25
+orbit_velocity_max = 1.0
+radial_velocity_min = -40.0
+radial_velocity_max = -20.0
 gravity = Vector3(0, 0, 0)
-damping_min = 100.0
-damping_max = 100.0
-scale_min = 0.5
-alpha_curve = SubResource("CurveTexture_8us7s")
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_yt3jv")
+alpha_curve = SubResource("CurveTexture_0ghsx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yt3jv"]
+shader = ExtResource("4_0ghsx")
+
+[sub_resource type="Curve" id="Curve_0ghsx"]
+_data = [Vector2(0, 1), 0.0, -2.53933, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_foti4"]
+curve = SubResource("Curve_0ghsx")
+
+[sub_resource type="Curve" id="Curve_k3o8w"]
+_data = [Vector2(0, 0), 0.0, 3.02301, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ljchb"]
+curve = SubResource("Curve_k3o8w")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_foti4"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 90.0
+gravity = Vector3(0, 0, 0)
+scale_min = 30.0
+scale_max = 50.0
+scale_curve = SubResource("CurveTexture_ljchb")
+alpha_curve = SubResource("CurveTexture_foti4")
 
 [node name="Area2D" type="Area2D"]
+process_physics_priority = 1
 collision_layer = 2
 collision_mask = 9
-script = ExtResource("1_6f5oh")
+monitoring = false
+script = ExtResource("1_gex5j")
+is_player = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_epu1g")
+instance_shader_parameters/dissolve_anim = 0.0
+instance_shader_parameters/form_anim = 0.0
 scale = Vector2(10, 10)
 texture = SubResource("ImageTexture_7jx42")
 
@@ -145,21 +104,23 @@ polygon = PackedVector2Array(0, -4, -2, 0, 0, 4, 2, 0)
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_7ldk5")
-}
-autoplay = "RESET"
-
-[node name="Particles" type="GPUParticles2D" parent="."]
+[node name="Form" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 10
 lifetime = 0.25
 one_shot = true
-explosiveness = 0.95
-randomness = 0.25
+explosiveness = 0.5
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_lyp1f")
+
+[node name="Impact" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_yt3jv")
+position = Vector2(0, 4)
+emitting = false
+amount = 1
+lifetime = 0.25
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_foti4")
 
 [connection signal="body_entered" from="." to="." method="_on_collide"]
 [connection signal="timeout" from="Timer" to="." method="_on_expire"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

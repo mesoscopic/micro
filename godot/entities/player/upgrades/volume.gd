@@ -13,9 +13,11 @@ func enable() -> void:
 	Micro.player.bullet_damage_mult *= 1.1
 	Micro.player.bullet_velocity_mult *= 0.85
 	Micro.player.bullet_lifetime_mult *= 1.1
+	Micro.player.reset_bullets()
 
 func disable() -> void:
 	Micro.player.bullet_size_mult -= 0.3
 	Micro.player.bullet_damage_mult /= 1.1
 	Micro.player.bullet_velocity_mult /= 0.85
 	Micro.player.bullet_lifetime_mult /= 1.1
+	Micro.player.reset_bullets()

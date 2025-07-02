@@ -13,7 +13,7 @@ shader = ExtResource("2_3448q")
 shader_parameter/health = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 
-[sub_resource type="Image" id="Image_qeqcc"]
+[sub_resource type="Image" id="Image_eohrb"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -23,7 +23,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_wf87e"]
-image = SubResource("Image_qeqcc")
+image = SubResource("Image_eohrb")
 script = ExtResource("3_qeqcc")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -84,7 +84,7 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_rwtxu")
 
 [node name="FiringCooldown" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.4
 
 [node name="RetargetTimer" type="Timer" parent="."]
 

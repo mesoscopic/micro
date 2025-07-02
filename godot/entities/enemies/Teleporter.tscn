@@ -11,10 +11,9 @@
 resource_local_to_scene = true
 shader = ExtResource("3_up14l")
 shader_parameter/health = 1.0
-shader_parameter/opacity = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 
-[sub_resource type="Image" id="Image_okfon"]
+[sub_resource type="Image" id="Image_df432"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -24,7 +23,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_ltnij"]
-image = SubResource("Image_okfon")
+image = SubResource("Image_df432")
 script = ExtResource("3_okfon")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 

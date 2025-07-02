@@ -23,10 +23,11 @@ var dash_direction := Vector2.ZERO;
 
 var selected_ability: int = 0
 
-var funds: int = 0
+@export var funds: int = 0
 var trading: bool = false
 var traders: Array[Trader] = []
 var chosen_trader: Trader
+var prepared_bullets: Array[TelegraphedBullet]
 
 func _ready():
 	hurt.connect(_hurt)
@@ -38,8 +39,8 @@ func _physics_process(delta):
 	tick()
 	if movement_disabled: return
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	$AimMarker.global_position = get_aim_position()
-	$AimMarker.emitting = $ShootCooldown.is_stopped()
+	for bullet in prepared_bullets:
+		bullet.aim(get_local_mouse_position().angle())
 	if dash_direction != Vector2.ZERO:
 		velocity = dash_direction * max_speed * 10
 	else:
@@ -52,18 +53,13 @@ func _physics_process(delta):
 	$Render.material.set("shader_parameter/can_dash", ($Abilities.get_child(selected_ability).available() if selected_ability >= 0 else true))
 	move_and_slide()
 	
-	if Input.is_action_pressed("shoot"):
-		if $ShootCooldown.time_left > 0: return
-		for i in range(-multishot,multishot+1):
-			var aim = get_local_mouse_position().angle()
-			aim += i*PI/16 + randf_range(-1,1)*bullet_spread
-			var bullet = BULLET.instantiate()
-			bullet.global_position = get_aim_position()
-			bullet.velocity = Vector2.from_angle(aim) * 80. * (1+0.5*velocity.length()/max_speed) * bullet_velocity_mult
-			bullet.lifetime = (3. if dash_direction == Vector2.ZERO else .25)*bullet_lifetime_mult
+	if Input.is_action_pressed("shoot") and len(prepared_bullets) > 0:
+		for bullet in prepared_bullets:
+			bullet.speed = 80.*(1+0.5*velocity.length()/max_speed) * bullet_velocity_mult
+			bullet.lifetime = (3.0 if dash_direction == Vector2.ZERO else .25)*bullet_lifetime_mult
 			bullet.damage = ceil(10*bullet_damage_mult) if dash_direction == Vector2.ZERO else ceil(15*bullet_damage_mult)
-			bullet.scale = Vector2(bullet_size_mult, bullet_size_mult)
-			get_tree().current_scene.get_node("Game/World").add_child(bullet)
+			bullet.fire()
+		prepared_bullets = []
 		$ShootCooldown.start(shoot_cooldown*shoot_cooldown_mult)
 		if dash_direction != Vector2.ZERO:
 			$Abilities/Dash.end_dash(true)
@@ -95,18 +91,6 @@ func _physics_process(delta):
 				else:
 					traders[i].chosen = false
 
-func get_aim_position() -> Vector2:
-	var space_state = get_world_2d().direct_space_state
-	var direction = get_local_mouse_position().normalized() * 20 + global_position
-	var query = PhysicsRayQueryParameters2D.create(global_position, direction)
-	query.exclude = [self]
-	var result = space_state.intersect_ray(query)
-	
-	if result:
-		return result.position
-	else:
-		return direction
-
 func _hurt(amount: int):
 	$HurtEffect.restart()
 	if !Micro.setting("photosensitive_mode"): $Camera.hurt(clamp(float(amount)/float(hp), 0., 1.))
@@ -116,6 +100,9 @@ func _die():
 	invincible = true
 	var slow = create_tween().set_ignore_time_scale(true)
 	slow.tween_property(Engine, "time_scale", 0.1, .8)
+	for bullet in prepared_bullets:
+		bullet.queue_free()
+	prepared_bullets = []
 	await slow.finished
 	process_mode = Node.PROCESS_MODE_DISABLED
 	Engine.time_scale = 1.
@@ -150,3 +137,20 @@ func add_trader(trader: Trader) -> void:
 	trading = true
 	$FundsDisplay/AnimationPlayer.stop()
 	$FundsDisplay/AnimationPlayer.play("show_funds")
+
+func prepare_bullet() -> void:
+	for i in range(-multishot,multishot+1):
+		var bullet: TelegraphedBullet = preload("res://bullets/PlayerBullet.tscn").instantiate()
+		bullet.shooter = self
+		bullet.angle_offset = i*PI/16 + randf_range(-1,1)*bullet_spread
+		bullet.aim(get_local_mouse_position().angle())
+		bullet.distance = 30
+		bullet.scale = Vector2(bullet_size_mult, bullet_size_mult)
+		Micro.world.get_node("Entities").add_child(bullet)
+		prepared_bullets.append(bullet)
+
+func reset_bullets():
+	for bullet in prepared_bullets:
+		bullet._on_expire()
+	prepared_bullets = []
+	$ShootCooldown.start(shoot_cooldown*shoot_cooldown_mult)
