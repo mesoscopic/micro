@@ -6,10 +6,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0sdtu"]
 shader = ExtResource("2_paeo7")
-shader_parameter/opacity = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 
-[sub_resource type="Image" id="Image_tqfba"]
+[sub_resource type="Image" id="Image_ena3u"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -19,7 +18,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_imhq2"]
-image = SubResource("Image_tqfba")
+image = SubResource("Image_ena3u")
 script = ExtResource("3_tqfba")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 

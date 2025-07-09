@@ -24,7 +24,7 @@ func _on_firing_cooldown_timeout() -> void:
 	summon.target = global_position + Vector2.from_angle(angle)*100.
 	summon.time = 2.-abs(variation)
 	summon.spawn = preload("res://entities/enemies/Surprise.tscn")
-	add_sibling(summon)
+	Micro.world.get_node("Bullets").add_child(summon)
 
 func _aggro() -> void:
 	$FiringCooldown.start()

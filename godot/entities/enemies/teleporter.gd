@@ -22,7 +22,7 @@ func _on_firing_cooldown_timeout() -> void:
 		bullet.angle_offset = i*PI/9
 		bullet.aim(get_angle_to(Micro.player.global_position))
 		bullet.distance = 20
-		Micro.world.get_node("Entities").add_child(bullet)
+		Micro.world.get_node("Bullets").add_child(bullet)
 		prepared_bullets.append(bullet)
 	$FiringCooldown.start(1.2)
 
@@ -56,7 +56,7 @@ func _hurt(amount: int) -> void:
 		bullet.lifetime = 3.
 		bullet.damage = 7.
 		bullet.scale = Vector2(0.8,0.8)
-		get_tree().current_scene.get_node("Game/World").add_child(bullet)
+		Micro.world.get_node("Bullets").add_child(bullet)
 
 func can_teleport_to(location: Vector2) -> bool:
 	var query = PhysicsShapeQueryParameters2D.new()

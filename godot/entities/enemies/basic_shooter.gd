@@ -20,7 +20,7 @@ func _on_firing_cooldown_timeout() -> void:
 	bullet.shooter = self
 	bullet.aim(get_angle_to(Micro.player.global_position))
 	bullet.distance = 20
-	Micro.world.get_node("Entities").add_child(bullet)
+	Micro.world.get_node("Bullets").add_child(bullet)
 	prepared_bullet = bullet
 
 func _aggro() -> void:

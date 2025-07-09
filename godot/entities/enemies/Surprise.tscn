@@ -12,8 +12,9 @@ resource_local_to_scene = true
 shader = ExtResource("3_oeqg6")
 shader_parameter/health = 1.0
 shader_parameter/velocity = Vector2(0, 0)
+shader_parameter/damaged = false
 
-[sub_resource type="Image" id="Image_bahcx"]
+[sub_resource type="Image" id="Image_hb3al"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -23,7 +24,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_5bo5h"]
-image = SubResource("Image_bahcx")
+image = SubResource("Image_hb3al")
 script = ExtResource("3_bahcx")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -34,14 +35,14 @@ shader = ExtResource("4_ml7jd")
 _data = [Vector2(0, 1), 0.0, -2.93837, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_jlvt4"]
+[sub_resource type="CurveTexture" id="CurveTexture_1c1hx"]
 curve = SubResource("Curve_bahcx")
 
 [sub_resource type="Curve" id="Curve_exe20"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.51171, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_qqjxf"]
+[sub_resource type="CurveTexture" id="CurveTexture_g4lk3"]
 curve = SubResource("Curve_exe20")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5bo5h"]
@@ -49,8 +50,8 @@ particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
 scale_min = 14.0
 scale_max = 14.0
-scale_curve = SubResource("CurveTexture_qqjxf")
-alpha_curve = SubResource("CurveTexture_jlvt4")
+scale_curve = SubResource("CurveTexture_g4lk3")
+alpha_curve = SubResource("CurveTexture_1c1hx")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kb0u7"]
 radius = 8.0

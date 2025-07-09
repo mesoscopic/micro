@@ -11,10 +11,10 @@
 resource_local_to_scene = true
 shader = ExtResource("3_8ej3x")
 shader_parameter/health = 1.0
-shader_parameter/opacity = 1.0
 shader_parameter/velocity = Vector2(0, 0)
+shader_parameter/damaged = false
 
-[sub_resource type="Image" id="Image_idjq7"]
+[sub_resource type="Image" id="Image_bbic5"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -24,7 +24,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_c3yda"]
-image = SubResource("Image_idjq7")
+image = SubResource("Image_bbic5")
 script = ExtResource("3_idjq7")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 

@@ -1,0 +1,131 @@
+[gd_scene load_steps=21 format=3 uid="uid://by8vbrl6i7h4x"]
+
+[ext_resource type="Script" uid="uid://b801y4bf62me" path="res://bullets/homing_bullet.gd" id="1_jb8fp"]
+[ext_resource type="Shader" uid="uid://biq78focw5lr" path="res://bullets/special_enemy_bullet.gdshader" id="2_jb8fp"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_np6rv"]
+[ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="4_nxspw"]
+[ext_resource type="Shader" uid="uid://bm0iowttrwa5h" path="res://misc/shaders/sparkle.gdshader" id="5_6geka"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iim64"]
+resource_local_to_scene = true
+shader = ExtResource("2_jb8fp")
+
+[sub_resource type="Image" id="Image_bpca0"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_rjho7"]
+image = SubResource("Image_bpca0")
+script = ExtResource("3_np6rv")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pepvr"]
+shader = ExtResource("4_nxspw")
+
+[sub_resource type="Curve" id="Curve_rd0fm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.44656, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8us7s"]
+curve = SubResource("Curve_rd0fm")
+
+[sub_resource type="Curve" id="Curve_pepvr"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0ghsx"]
+curve = SubResource("Curve_pepvr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m3aw7"]
+lifetime_randomness = 0.32
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 10.0
+emission_ring_inner_radius = 6.0
+emission_ring_cone_angle = 90.0
+angle_min = 45.0
+angle_max = 45.0
+orbit_velocity_min = 0.25
+orbit_velocity_max = 1.0
+radial_velocity_min = -40.0
+radial_velocity_max = -20.0
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_0ghsx")
+alpha_curve = SubResource("CurveTexture_8us7s")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3m2ur"]
+shader = ExtResource("5_6geka")
+
+[sub_resource type="Curve" id="Curve_yci87"]
+_data = [Vector2(0, 1), 0.0, -2.53933, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yt3jv"]
+curve = SubResource("Curve_yci87")
+
+[sub_resource type="Curve" id="Curve_uxwu4"]
+_data = [Vector2(0, 0), 0.0, 3.02301, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wbghd"]
+curve = SubResource("Curve_uxwu4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kca0u"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 90.0
+gravity = Vector3(0, 0, 0)
+scale_min = 30.0
+scale_max = 50.0
+scale_curve = SubResource("CurveTexture_wbghd")
+alpha_curve = SubResource("CurveTexture_yt3jv")
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 4
+collision_mask = 17
+monitoring = false
+monitorable = false
+script = ExtResource("1_jb8fp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_iim64")
+instance_shader_parameters/dissolve_anim = 0.0
+instance_shader_parameters/form_anim = 0.0
+scale = Vector2(10, 10)
+texture = SubResource("ImageTexture_rjho7")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -4, -2, 0, 0, 4, 2, 0)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Form" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_pepvr")
+emitting = false
+amount = 10
+lifetime = 0.25
+one_shot = true
+explosiveness = 0.5
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_m3aw7")
+
+[node name="Impact" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_3m2ur")
+position = Vector2(0, 4)
+emitting = false
+amount = 1
+lifetime = 0.25
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_kca0u")
+
+[connection signal="body_entered" from="." to="." method="_on_collide"]
+[connection signal="timeout" from="Timer" to="." method="_on_expire"]

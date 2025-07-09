@@ -6,10 +6,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vmuvh"]
 shader = ExtResource("3_vmuvh")
-shader_parameter/opacity = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 
-[sub_resource type="Image" id="Image_8qn8c"]
+[sub_resource type="Image" id="Image_flyc0"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -19,7 +18,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_ni6hh"]
-image = SubResource("Image_8qn8c")
+image = SubResource("Image_flyc0")
 script = ExtResource("3_8qn8c")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 

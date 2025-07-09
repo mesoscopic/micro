@@ -22,7 +22,7 @@ func _on_firing_cooldown_timeout() -> void:
 		bullet.angle_offset = i*PI/12
 		bullet.aim(get_angle_to(Micro.player.global_position))
 		bullet.distance = 25
-		Micro.world.get_node("Entities").add_child(bullet)
+		Micro.world.get_node("Bullets").add_child(bullet)
 		prepared_bullets.append(bullet)
 
 func _physics_process(delta: float) -> void:

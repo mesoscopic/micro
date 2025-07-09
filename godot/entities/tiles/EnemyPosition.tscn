@@ -9,6 +9,7 @@
 shader = ExtResource("2_1tsol")
 shader_parameter/health = 1.0
 shader_parameter/velocity = Vector2(0, 0)
+shader_parameter/damaged = false
 
 [sub_resource type="Image" id="Image_1tsol"]
 data = {

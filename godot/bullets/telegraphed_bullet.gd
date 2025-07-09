@@ -2,7 +2,7 @@ extends Area2D
 
 class_name TelegraphedBullet
 
-var shooter: CharacterBody2D
+var shooter: Damageable
 var angle_offset: float = 0.
 var aim_vec: Vector2
 var aim_angle: float
@@ -20,10 +20,12 @@ func _ready():
 	rotation = aim_angle - PI/2
 	global_position = get_aim_position()
 	$Form.emitting = true
-	if !is_player:
-		shooter.tree_exiting.connect(_on_expire)
+	shooter.die.connect(_on_expire)
 
 func get_aim_position() -> Vector2:
+	if !shooter: # Failsafe for if the enemy despawns
+		queue_free()
+		return global_position
 	var space_state = get_world_2d().direct_space_state
 	var direction = aim_vec * distance + shooter.global_position
 	var query = PhysicsRayQueryParameters2D.create(shooter.global_position, direction)
@@ -48,20 +50,22 @@ func aim(angle: float):
 
 func fire():
 	monitoring = true
+	monitorable = true
 	shot = true
 	$Timer.wait_time = lifetime
 	$Timer.start()
-	if shooter.tree_exiting.is_connected(_on_expire):
-		shooter.tree_exiting.disconnect(_on_expire)
+	if shooter.die.is_connected(_on_expire):
+		shooter.die.disconnect(_on_expire)
 
 func _on_expire():
 	set_physics_process(false)
 	set_deferred("monitoring", false)
+	set_deferred("monitorable", false)
 	var tween := get_tree().create_tween()
 	tween.tween_property($Sprite2D, "instance_shader_parameters/dissolve_anim", 1.0, 0.25)
 	tween.tween_callback(queue_free)
 
-func _on_collide(body):
+func _on_collide(body) -> void:
 	_on_expire()
 	$Impact.emitting = true
 	

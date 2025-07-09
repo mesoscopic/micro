@@ -6,7 +6,7 @@ var random: RandomNumberGenerator = RandomNumberGenerator.new()
 var world_seed: int = randi()
 
 var bosses_active: int = 0
-var trader_minibosses_fought: int = 0
+var second_trader_miniboss := false
 
 enum Biome {
 	LANDING,
@@ -158,6 +158,10 @@ func generate_world():
 	var starting_traders_to_place := 2
 	var opportunities := 4
 	for dir in [Vector2i(1,1),Vector2i(1,-1),Vector2i(-1,-1),Vector2i(-1,1)]:
+		opportunities -= 1
+		if random.randi_range(0,1)==1 and opportunities >= starting_traders_to_place or starting_traders_to_place == 0:
+			continue
+		starting_traders_to_place -= 1
 		var distance := 50
 		while !attempt_decide_biome_for_center_structure(dir*distance, Biome.PEACE, 10):
 			distance += 10
@@ -171,9 +175,6 @@ func generate_world():
 		miniboss.size = 50.
 		miniboss.position = location * 20.
 		$Entities.add_child(miniboss)
-		opportunities -= 1
-		if random.randi_range(0,1)==1 and opportunities >= starting_traders_to_place or starting_traders_to_place == 0:
-			continue
 		var trader_location := Vector2i((Vector2(location).normalized()*40).round())
 		place(1, trader_location)
 		var trader := preload("res://entities/traders/WildTrader.tscn").instantiate()
@@ -182,7 +183,6 @@ func generate_world():
 		trader.wander_range = 70.
 		trader.wander_distance = 60.
 		$Entities.add_child(trader)
-		starting_traders_to_place -= 1
 	await Micro.worldgen_status("Scattering features...")
 	var disks := VariablePoissonDiskSampler2D.new(random, Vector2(1000, 1000), 30)
 	disks.generate(

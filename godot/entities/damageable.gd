@@ -4,24 +4,26 @@ class_name Damageable
 
 @export var max_hp := 100
 @export var hp := 100
+@export var invulnerability_time := .2
 @export var invincible: bool = false
-var ticks_since_damage = 4
+var itimer: Timer
 
 signal hurt
 signal die
 
-func tick():
-	ticks_since_damage += 1
-	if ticks_since_damage == 3:
-		$Render.material.set("shader_parameter/health", 0)
-	if ticks_since_damage == 2 || ticks_since_damage == 4:
-		$Render.material.set("shader_parameter/health", float(hp)/float(max_hp))
+func _ready() -> void:
+	itimer = Timer.new()
+	itimer.one_shot = true
+	add_child(itimer)
 
-func damage(amount: int):
-	if invincible: return
+func tick():
+	$Render.material.set("shader_parameter/health", float(hp)/float(max_hp))
+	$Render.material.set("shader_parameter/damaged", !itimer.is_stopped() or invincible)
+
+func damage(amount: int, bypass_itime := false):
+	if invincible or (!itimer.is_stopped() and !bypass_itime): return
 	hp -= amount
-	$Render.material.set("shader_parameter/health", 0)
-	ticks_since_damage = 0
+	if invulnerability_time > .0 and !bypass_itime: itimer.start(invulnerability_time)
 	if hp <= 0:
 		invincible = true
 		die.emit()
@@ -30,8 +32,6 @@ func damage(amount: int):
 
 func heal(amount: int):
 	hp = min(max_hp, hp + amount)
-	$Render.material.set("shader_parameter/health", float(hp)/float(max_hp))
 
 func set_hp(amount: int):
 	hp = amount
-	$Render.material.set("shader_parameter/health", float(hp)/float(max_hp))

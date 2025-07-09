@@ -1,48 +1,57 @@
 extends Enemy
 
-const BULLET = preload("res://bullets/EnemyBullet.tscn")
+const LASER = preload("res://bullets/Laser.tscn")
 var aim := 0.
 var aiming := false
 var circle_angle := 0.
+
+var laser: LaserBullet
 
 func _ready():
 	super()
 	aggro.connect(_aggro)
 	deaggro.connect(_deaggro)
 	tactic_complete.connect(circle)
+	die.connect(func (): if laser: laser.stop())
 
 func _physics_process(delta: float) -> void:
 	super(delta)
 	if aiming:
-		aim = get_angle_to(Micro.player.position)
-		$Telegraph.set_point_position(1, Vector2.from_angle(aim)*400.)
+		aim_laser()
+
+func aim_laser() -> void:
+	laser.position = position
+	aim = get_angle_to(Micro.player.position)
+	laser.rotation = aim
+	var space_state = get_world_2d().direct_space_state
+	var direction = Vector2.from_angle(aim) * 400. + global_position
+	var query = PhysicsRayQueryParameters2D.create(global_position, direction)
+	query.collision_mask = 1
+	var result = space_state.intersect_ray(query)
+	
+	if result:
+		laser.length = global_position.distance_to(result.position)
+	else:
+		laser.length = 400.
 
 func _on_firing_cooldown_timeout() -> void:
 	if !can_see_player():
 		$FiringCooldown.start(1.)
 		return
 	speed_multiplier = 0.
-	aim = get_angle_to(Micro.player.position)
-	$Telegraph.set_point_position(1, Vector2.from_angle(aim)*400.)
-	$Telegraph.set_instance_shader_parameter("disappear", 0.)
-	$Telegraph.show()
+	laser = LASER.instantiate()
+	laser.damage = 25
+	laser.lifetime = 1.
+	aim_laser()
+	Micro.world.get_node("Bullets").add_child(laser)
 	aiming = true
 	await Micro.wait(0.5)
 	aiming = false
 	await Micro.wait(0.5)
-	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT).tween_property($Telegraph, "instance_shader_parameters/disappear", 1., 1.)
-	tween.finished.connect(func (): $Telegraph.hide())
-	for i in range(0,10):
-		var bullet = BULLET.instantiate()
-		bullet.global_position = global_position
-		bullet.velocity = Vector2.from_angle(aim) * 300.
-		bullet.lifetime = 3.
-		bullet.damage = 8
-		bullet.scale = Vector2(1.5, 1.5)
-		get_tree().current_scene.get_node("Game/World").add_child(bullet)
-		await Micro.wait(0.05)
+	laser.fire()
+	await Micro.wait(1.)
 	speed_multiplier = 1.
-	$FiringCooldown.start(2.)
+	$FiringCooldown.start(1.)
 
 func _aggro() -> void:
 	$FiringCooldown.start()
@@ -53,6 +62,9 @@ func _aggro() -> void:
 func _deaggro() -> void:
 	$FiringCooldown.stop()
 	$RetargetTimer.stop()
+	if laser:
+		laser.stop()
+		laser = null
 	wander()
 
 func circle() -> void:

@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://clpbwn742hbdn"]
+
+[ext_resource type="Script" uid="uid://4vgx4ui6ie2b" path="res://bullets/laser.gd" id="1_abvod"]
+[ext_resource type="Shader" uid="uid://dhs4kqa0be4v1" path="res://bullets/laser.gdshader" id="2_7kpxs"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="2_abvod"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_px184"]
+shader = ExtResource("2_7kpxs")
+
+[sub_resource type="Image" id="Image_7kpxs"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_px184"]
+image = SubResource("Image_7kpxs")
+script = ExtResource("2_abvod")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_7kpxs"]
+b = Vector2(1, 0)
+
+[node name="Laser" type="Area2D"]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("1_abvod")
+
+[node name="Lifetime" type="Timer" parent="."]
+one_shot = true
+
+[node name="Laser" type="Line2D" parent="."]
+texture_repeat = 1
+material = SubResource("ShaderMaterial_px184")
+instance_shader_parameters/activate = 0.0
+instance_shader_parameters/appear = 1.2
+instance_shader_parameters/disappear = 0.0
+instance_shader_parameters/line_length = 400.0
+points = PackedVector2Array(0, 0, 400, 0)
+texture = SubResource("ImageTexture_px184")
+texture_mode = 2
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+scale = Vector2(400, 1)
+shape = SubResource("SegmentShape2D_7kpxs")
+
+[connection signal="timeout" from="Lifetime" to="." method="stop"]

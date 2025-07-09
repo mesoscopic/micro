@@ -34,6 +34,7 @@ signal tactic_complete
 var is_aggro = false
 
 func _ready():
+	super()
 	hurt.connect(_hurt)
 	die.connect(_die)
 	for method in aggro_methods:
@@ -80,7 +81,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity = velocity.move_toward((path_target - global_position).normalized() * speed * (wander_speed_mult if wandering else speed_multiplier), acceleration * delta)
 	move_and_slide()
-	$Render.material.set("shader_parameter/velocity", (velocity / max(speed, velocity.length())||1))
+	$Render.material.set("shader_parameter/velocity", velocity / max(speed if speed > 0 else 1, velocity.length()))
 
 func change_aggro(_method: AggroMethod):
 	var should_aggro: bool = false

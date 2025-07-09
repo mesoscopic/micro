@@ -30,6 +30,7 @@ var chosen_trader: Trader
 var prepared_bullets: Array[TelegraphedBullet]
 
 func _ready():
+	super()
 	hurt.connect(_hurt)
 	die.connect(_die)
 	Micro.player = self
@@ -100,8 +101,6 @@ func _die():
 	invincible = true
 	var slow = create_tween().set_ignore_time_scale(true)
 	slow.tween_property(Engine, "time_scale", 0.1, .8)
-	for bullet in prepared_bullets:
-		bullet.queue_free()
 	prepared_bullets = []
 	await slow.finished
 	process_mode = Node.PROCESS_MODE_DISABLED
@@ -146,7 +145,7 @@ func prepare_bullet() -> void:
 		bullet.aim(get_local_mouse_position().angle())
 		bullet.distance = 30
 		bullet.scale = Vector2(bullet_size_mult, bullet_size_mult)
-		Micro.world.get_node("Entities").add_child(bullet)
+		Micro.world.get_node("Bullets").add_child(bullet)
 		prepared_bullets.append(bullet)
 
 func reset_bullets():

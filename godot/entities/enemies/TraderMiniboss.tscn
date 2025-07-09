@@ -1,18 +1,19 @@
-[gd_scene load_steps=13 format=3 uid="uid://degw88c3u4obt"]
+[gd_scene load_steps=20 format=3 uid="uid://degw88c3u4obt"]
 
 [ext_resource type="Script" uid="uid://bd1nvuajonror" path="res://entities/enemies/trader_miniboss.gd" id="1_oj4li"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="3_3crh1"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_b1f70"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="4_icese"]
+[ext_resource type="Shader" uid="uid://ds1rxv51ltkrj" path="res://misc/shaders/enemy_ghost.gdshader" id="5_6dwnx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3crh1"]
 resource_local_to_scene = true
 shader = ExtResource("3_3crh1")
 shader_parameter/health = 1.0
-shader_parameter/opacity = 1.0
 shader_parameter/velocity = Vector2(0, 0)
+shader_parameter/damaged = false
 
-[sub_resource type="Image" id="Image_b1f70"]
+[sub_resource type="Image" id="Image_232n0"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -22,7 +23,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_uur07"]
-image = SubResource("Image_b1f70")
+image = SubResource("Image_232n0")
 script = ExtResource("3_b1f70")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -53,8 +54,33 @@ scale_min = 4.0
 scale_max = 9.0
 scale_curve = SubResource("CurveTexture_u77d8")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hn53a"]
+shader = ExtResource("5_6dwnx")
+
+[sub_resource type="Curve" id="Curve_e0lej"]
+_data = [Vector2(0, 1), 0.0, -2.93837, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jlvt4"]
+curve = SubResource("Curve_e0lej")
+
+[sub_resource type="Curve" id="Curve_xfqrn"]
+_data = [Vector2(0, 0.50158), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.996471, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qqjxf"]
+curve = SubResource("Curve_xfqrn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mqcjo"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 100.0
+scale_max = 100.0
+scale_curve = SubResource("CurveTexture_qqjxf")
+alpha_curve = SubResource("CurveTexture_jlvt4")
+
 [node name="TraderMiniboss" type="CharacterBody2D" groups=["enemy"]]
-collision_layer = 8
+collision_layer = 14
 collision_mask = 2
 script = ExtResource("1_oj4li")
 speed = 0
@@ -63,12 +89,12 @@ deceleration = 0
 turn_length = 0
 wander_length = 0
 wander_speed_mult = 0.0
-fund_drop = 50
-fund_drop_randomization = 0.2
+fund_drop = 100
+fund_drop_randomization = 0.0
 despawn_distance = 240
 stagger_time = 0.0
-max_hp = 300
-hp = 300
+max_hp = 400
+hp = 400
 metadata/_custom_type_script = "uid://oy7qpe47ti6v"
 
 [node name="Render" type="Sprite2D" parent="."]
@@ -88,7 +114,21 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_d344a")
 
-[node name="FireRate" type="Timer" parent="."]
+[node name="Attack" type="Timer" parent="."]
 wait_time = 0.5
+one_shot = true
+autostart = true
 
-[connection signal="timeout" from="FireRate" to="." method="_on_fire"]
+[node name="ShieldEffect" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_hn53a")
+emitting = false
+amount = 16
+lifetime = 0.25
+process_material = SubResource("ParticleProcessMaterial_mqcjo")
+
+[node name="Shield" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="timeout" from="Attack" to="." method="fire"]
+[connection signal="timeout" from="Shield" to="." method="_on_shield_timeout"]

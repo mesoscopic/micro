@@ -7,6 +7,7 @@ const surprise: PackedScene = preload("res://entities/enemies/Surprise.tscn")
 
 
 func _ready():
+	super()
 	$Render.material.set_shader_parameter("noise", load("res://assets/baked_noise/cache_variations/%s.png" % randi_range(1,16)))
 	hurt.connect(_hurt)
 

@@ -1,28 +1,20 @@
-[gd_scene load_steps=18 format=3 uid="uid://c0qyylco7xgk4"]
+[gd_scene load_steps=15 format=3 uid="uid://c0qyylco7xgk4"]
 
 [ext_resource type="Script" uid="uid://c57nhmckfrbx8" path="res://entities/enemies/turret.gd" id="1_n7j26"]
-[ext_resource type="Shader" uid="uid://bm1g538yscrip" path="res://bullets/dashedline.gdshader" id="2_cduuy"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="3_cduuy"]
 [ext_resource type="PackedScene" uid="uid://b2erii1hcv0u0" path="res://misc/logic/RangeAggro.tscn" id="4_d8hp7"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="4_dkfhv"]
 [ext_resource type="PackedScene" uid="uid://diissjbt0i6uj" path="res://misc/logic/HurtAggro.tscn" id="5_vd4d6"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="6_u6axk"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d8hp7"]
-shader = ExtResource("2_cduuy")
-shader_parameter/speed = 20.0
-shader_parameter/fadeout = 0.25
-
-[sub_resource type="Gradient" id="Gradient_dkfhv"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cduuy"]
 resource_local_to_scene = true
 shader = ExtResource("3_cduuy")
 shader_parameter/health = 1.0
 shader_parameter/velocity = Vector2(0, 0)
+shader_parameter/damaged = false
 
-[sub_resource type="Image" id="Image_dkfhv"]
+[sub_resource type="Image" id="Image_myqr2"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -32,7 +24,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_vd4d6"]
-image = SubResource("Image_dkfhv")
+image = SubResource("Image_myqr2")
 script = ExtResource("4_dkfhv")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -64,20 +56,14 @@ scale_curve = SubResource("CurveTexture_qeqcc")
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_n7j26")
-speed = 25
+speed = 80
+acceleration = 200
+deceleration = 1000
 wander_length = 10
 wander_speed_mult = 0.1
 fund_drop = 25
 fund_drop_randomization = 0.3
 stagger_time = 0.0
-
-[node name="Telegraph" type="Line2D" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_d8hp7")
-instance_shader_parameters/disappear = 0.0
-points = PackedVector2Array(0, 0, 400, 0)
-width = 3.0
-gradient = SubResource("Gradient_dkfhv")
 
 [node name="Render" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_cduuy")

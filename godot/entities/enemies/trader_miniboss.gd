@@ -1,94 +1,180 @@
 extends Enemy
 
-const BULLET = preload("res://bullets/EnemyBullet.tscn")
+const BULLET = preload("res://bullets/TelegraphedBullet.tscn")
 const SPAWNER = preload("res://bullets/SpawnerProjectile.tscn")
-var next_phase_hp: int
-var phase: int = 1
+const BOMB = preload("res://bullets/Bomb.tscn")
+const LASER = preload("res://bullets/Laser.tscn")
+const HOMING_BULLET = preload("res://bullets/HomingBullet.tscn")
 
-var circle_density: int = 4
-var spiral: bool = false
+var phase: int = 0
+var shots: int
+var even_shot := false
+var prepared_bullets: Array[TelegraphedBullet] = []
 var spiral_angle: float = 0.
+var bombs: Array[BombBullet] = []
+var lasers: Array[LaserBullet] = []
 
 func _ready() -> void:
 	DEATH_ANIMATION = preload("res://fx/death/TraderMiniboss.tscn")
 	super()
-	fund_drop += 10 * Micro.world.trader_minibosses_fought
-	max_hp += 150 * Micro.world.trader_minibosses_fought
-	hp += 150 * Micro.world.trader_minibosses_fought
-	next_phase_hp = max_hp - 150
-	phase_setup()
+	shots = (Micro.world.random.randi_range(3,5) if Micro.world.second_trader_miniboss else Micro.world.random.randi_range(1,3)) * 2
+	if Micro.world.second_trader_miniboss:
+		fund_drop += 50
+		max_hp += 400
+		hp += 400
+
+func _physics_process(_delta: float) -> void:
+	super(_delta)
+	if $Shield.is_stopped():
+		for bullet in prepared_bullets:
+			bullet.aim(get_angle_to(Micro.player.global_position))
 
 func _hurt(amount: int) -> void:
 	super(amount)
-	if phase == 3:
-		_on_fire()
-	if hp <= next_phase_hp and next_phase_hp > 0:
-		next_phase_hp -= 150
+	if phase == 0 and hp <= max_hp*0.75:
 		phase += 1
-		phase_setup()
+		if Micro.world.second_trader_miniboss:
+			spawn()
+	if phase == 1 and hp <= max_hp*0.5:
+		phase += 1
+		spawn()
+	if phase == 2 and hp <= max_hp*0.25:
+		phase += 1
+		$Shield.start()
+		$ShieldEffect.emitting = true
+		invincible = true
+
+func spawn() -> void:
+	var summon = preload("res://bullets/SpawnerProjectile.tscn").instantiate()
+	summon.position = position
+	summon.target = Micro.player.global_position
+	summon.time = 1.
+	summon.spawn = preload("res://entities/enemies/Turret.tscn")
+	Micro.world.get_node("Bullets").add_child(summon)
 
 func _die() -> void:
 	super()
-	Micro.world.trader_minibosses_fought += 1
+	for laser in lasers:
+		laser.stop()
+	Micro.world.second_trader_miniboss = true
 
 func do_despawn() -> void:
 	invincible = true
+	$Attack.stop()
+	for laser in lasers:
+		laser.stop()
 	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	#tween.tween_property($Character, "light", 0, 0.5)
 	tween.parallel().tween_property($Render.material, "shader_parameter/health", 1., 0.5)
 	await tween.finished
 	despawn.emit()
 	queue_free()
 
-func phase_setup():
-	match phase:
-		1:
-			$FireRate.start(0.5)
-		2:
-			$FireRate.start(1.8)
-			for i in range(0,4):
-				var angle = PI/4.*(2*i+1)
-				var bullet = SPAWNER.instantiate()
-				bullet.position = position
-				bullet.target = global_position + Vector2.from_angle(angle)*140.
-				bullet.time = 1.+i/2.
-				bullet.spawn = preload("res://entities/enemies/Turret.tscn")
-				add_sibling(bullet)
-		3:
-			$FireRate.stop()
-			for i in range(0,2):
-				var angle := randf()*2.*PI
-				var bullet = SPAWNER.instantiate()
-				bullet.position = position
-				bullet.target = global_position + Vector2.from_angle(angle)*100.
-				bullet.time = 2.*i
-				bullet.spawn = preload("res://entities/enemies/Teleporter.tscn")
-				add_sibling(bullet)
-		4:
-			circle_density = 6
-			spiral = true
-			$FireRate.start(0.5)
-		5:
-			circle_density = 4
-			spiral = false
-			$FireRate.start(1.)
-			for i in range(0,3):
-				var angle := 2*i+1
-				var bullet = SPAWNER.instantiate()
-				bullet.position = position
-				bullet.target = global_position + Vector2.from_angle(angle)*140.
-				bullet.time = i
-				bullet.spawn = preload("res://entities/enemies/AdvancedShooter.tscn")
-				add_sibling(bullet)
+func fire() -> void:
+	for bullet in prepared_bullets:
+		bullet.fire()
+	prepared_bullets = []
+	if !$Shield.is_stopped():
+		for i in range(0,8):
+			var bullet: TelegraphedBullet = BULLET.instantiate()
+			bullet.shooter = self
+			bullet.angle_offset = i*PI/3
+			bullet.aim(spiral_angle)
+			bullet.distance = 35
+			bullet.speed = 80
+			bullet.lifetime = 2.
+			bullet.damage = 15
+			Micro.world.get_node("Bullets").add_child(bullet)
+			prepared_bullets.append(bullet)
+		if Micro.world.second_trader_miniboss and $Shield.time_left <= 5.:
+			spiral_angle -= PI/60
+		else:
+			spiral_angle += PI/60
+		$Attack.start(0.1)
+	elif shots > 0:
+		# Normal attack
+		shots -= 1
+		if even_shot:
+			for i in range(-3,3):
+				var bullet: TelegraphedBullet = BULLET.instantiate()
+				bullet.shooter = self
+				bullet.angle_offset = i*PI/9 + PI/18
+				bullet.aim(get_angle_to(Micro.player.global_position))
+				bullet.distance = 35
+				bullet.speed = 100
+				bullet.lifetime = 2.
+				bullet.damage = 15
+				Micro.world.get_node("Bullets").add_child(bullet)
+				prepared_bullets.append(bullet)
+		else:
+			for i in range(-2,3):
+				var bullet: TelegraphedBullet = BULLET.instantiate()
+				bullet.shooter = self
+				bullet.angle_offset = i*PI/9
+				bullet.aim(get_angle_to(Micro.player.global_position))
+				bullet.distance = 35
+				bullet.speed = 100
+				bullet.lifetime = 2.
+				bullet.damage = 15
+				Micro.world.get_node("Bullets").add_child(bullet)
+				prepared_bullets.append(bullet)
+		even_shot = !even_shot
+		$Attack.start(.5)
+	else:
+		# Special attack
+		match randi_range(0,1):
+			0:
+				shots = (Micro.world.random.randi_range(3,5) if Micro.world.second_trader_miniboss else Micro.world.random.randi_range(1,3)) * 2
+				if hp <= max_hp*0.5:
+					for i in range(-2,3):
+						var bullet: TelegraphedBullet = HOMING_BULLET.instantiate()
+						bullet.shooter = self
+						bullet.angle_offset = i*PI/9
+						bullet.aim(get_angle_to(Micro.player.global_position))
+						bullet.distance = 35
+						bullet.speed = 60
+						bullet.lifetime = 3.
+						bullet.damage = 15
+						Micro.world.get_node("Bullets").add_child(bullet)
+						prepared_bullets.append(bullet)
+					await Micro.wait(0.5)
+					for bullet in prepared_bullets:
+						bullet.fire()
+					prepared_bullets = []
+				else:
+					for i in range(0,8):
+						var bullet: TelegraphedBullet = BOMB.instantiate()
+						bullet.shooter = self
+						bullet.angle_offset = i*PI/4
+						bullet.aim(0)
+						bullet.distance = 40
+						bullet.speed = 150
+						bullet.scale = Vector2(2,2)
+						bullet.lifetime = 1.
+						bullet.damage = 30
+						bullet.split_number = 8
+						bullet.split_lifetime = 2.5
+						Micro.world.get_node("Bullets").call_deferred("add_child", bullet)
+						bombs.append(bullet)
+					await Micro.wait(0.75)
+					for b in bombs:
+						b.fire()
+					bombs = []
+				$Attack.start(1.5)
+			1:
+				shots = Micro.world.random.randi_range(1,3) * 2
+				var laser = LASER.instantiate()
+				laser.damage = 25
+				laser.lifetime = 1.
+				laser.rotation = get_angle_to(Micro.player.global_position)
+				laser.position = position
+				laser.length = 300
+				Micro.world.get_node("Bullets").add_child(laser)
+				lasers.append(laser)
+				await Micro.wait(.5 if Micro.world.second_trader_miniboss else 1.)
+				laser.fire()
+				lasers = []
+				fire()
 
-func _on_fire() -> void:
-	var aim := (spiral_angle if spiral else randf())
-	if spiral: spiral_angle += PI/18.
-	for i in range(0,circle_density*2):
-		var angle = aim+PI/circle_density*i
-		var bullet = BULLET.instantiate()
-		bullet.global_position = global_position
-		bullet.velocity = Vector2.from_angle(angle) * 50.
-		bullet.lifetime = 5.
-		bullet.damage = 6
-		get_tree().current_scene.get_node("Game/World").call_deferred("add_child", bullet)
+func _on_shield_timeout() -> void:
+	$ShieldEffect.emitting = false
+	invincible = false

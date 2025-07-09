@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Micro"
-config/version="v0.0.0-22.0"
+config/version="v0.0.0-23.0"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
@@ -153,8 +153,6 @@ debug_pause={
 2d_physics/layer_3="Things the player should collide with (enemy bullets)"
 2d_physics/layer_4="Things player bullets should collide with (enemies)"
 2d_physics/layer_5="Things enemy bullets should collide with (players)"
-2d_physics/layer_9="Character occlusion area"
-2d_physics/layer_10="Character light area"
 2d_physics/layer_11="mouse"
 
 [physics]

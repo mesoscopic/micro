@@ -19,7 +19,7 @@ func _process(_delta: float) -> void:
 func _on_expiry_timeout() -> void:
 	var enemy = spawn.instantiate()
 	enemy.position = position
-	add_sibling(enemy)
+	Micro.world.get_node("Entities").add_child(enemy)
 	$Bubbles.emitting = false
 	$ExplosionParticles.emitting = true
 	await Micro.wait(1.)
