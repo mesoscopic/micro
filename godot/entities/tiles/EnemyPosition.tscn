@@ -93,7 +93,7 @@ scale_max = 10.0
 scale_curve = SubResource("CurveTexture_oxxt1")
 alpha_curve = SubResource("CurveTexture_sbg4y")
 
-[node name="EnemyPosition" type="Area2D"]
+[node name="EnemyPosition" type="Area2D" groups=["boss"]]
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_hb8yp")

@@ -33,22 +33,27 @@ func _hurt(amount: int) -> void:
 	super(amount)
 	if phase == 0 and hp <= max_hp*0.75:
 		phase += 1
-		if Micro.world.second_trader_miniboss:
-			spawn()
-	if phase == 1 and hp <= max_hp*0.5:
-		phase += 1
-		spawn()
-	if phase == 2 and hp <= max_hp*0.25:
-		phase += 1
 		$Shield.start()
 		$ShieldEffect.emitting = true
 		invincible = true
+		
+	if phase == 1 and hp <= max_hp*0.5:
+		phase += 1
+		if Micro.world.second_trader_miniboss:
+			spawn()
+		else:
+			$Shield.start()
+			$ShieldEffect.emitting = true
+			invincible = true
+	if phase == 2 and hp <= max_hp*0.25:
+		phase += 1
+		spawn()
 
 func spawn() -> void:
 	var summon = preload("res://bullets/SpawnerProjectile.tscn").instantiate()
 	summon.position = position
 	summon.target = Micro.player.global_position
-	summon.time = 1.
+	summon.time = 3.
 	summon.spawn = preload("res://entities/enemies/Turret.tscn")
 	Micro.world.get_node("Bullets").add_child(summon)
 
@@ -123,24 +128,8 @@ func fire() -> void:
 		# Special attack
 		match randi_range(0,1):
 			0:
-				shots = (Micro.world.random.randi_range(3,5) if Micro.world.second_trader_miniboss else Micro.world.random.randi_range(1,3)) * 2
 				if hp <= max_hp*0.5:
-					for i in range(-2,3):
-						var bullet: TelegraphedBullet = HOMING_BULLET.instantiate()
-						bullet.shooter = self
-						bullet.angle_offset = i*PI/9
-						bullet.aim(get_angle_to(Micro.player.global_position))
-						bullet.distance = 35
-						bullet.speed = 60
-						bullet.lifetime = 3.
-						bullet.damage = 15
-						Micro.world.get_node("Bullets").add_child(bullet)
-						prepared_bullets.append(bullet)
-					await Micro.wait(0.5)
-					for bullet in prepared_bullets:
-						bullet.fire()
-					prepared_bullets = []
-				else:
+					shots = (Micro.world.random.randi_range(3,5) if Micro.world.second_trader_miniboss else Micro.world.random.randi_range(1,3)) * 2
 					for i in range(0,8):
 						var bullet: TelegraphedBullet = BOMB.instantiate()
 						bullet.shooter = self
@@ -152,28 +141,48 @@ func fire() -> void:
 						bullet.lifetime = 1.
 						bullet.damage = 30
 						bullet.split_number = 8
-						bullet.split_lifetime = 2.5
+						bullet.split_lifetime = 1.75
 						Micro.world.get_node("Bullets").call_deferred("add_child", bullet)
 						bombs.append(bullet)
 					await Micro.wait(0.75)
 					for b in bombs:
 						b.fire()
 					bombs = []
-				$Attack.start(1.5)
+					$Attack.start(3.)
+				else:
+					shots = Micro.world.random.randi_range(1,3) * 2
+					var laser = LASER.instantiate()
+					laser.damage = 25
+					laser.lifetime = 1.
+					laser.rotation = get_angle_to(Micro.player.global_position)
+					laser.position = position
+					laser.length = 300
+					Micro.world.get_node("Bullets").add_child(laser)
+					lasers.append(laser)
+					await Micro.wait(.5 if Micro.world.second_trader_miniboss else 1.)
+					laser.fire()
+					lasers = []
+					fire()
+					$Attack.start(1.)
 			1:
-				shots = Micro.world.random.randi_range(1,3) * 2
-				var laser = LASER.instantiate()
-				laser.damage = 25
-				laser.lifetime = 1.
-				laser.rotation = get_angle_to(Micro.player.global_position)
-				laser.position = position
-				laser.length = 300
-				Micro.world.get_node("Bullets").add_child(laser)
-				lasers.append(laser)
-				await Micro.wait(.5 if Micro.world.second_trader_miniboss else 1.)
-				laser.fire()
-				lasers = []
-				fire()
+				shots = (Micro.world.random.randi_range(3,5) if Micro.world.second_trader_miniboss else Micro.world.random.randi_range(1,3)) * 2
+				for i in range(-2,3):
+					var bullet: TelegraphedBullet = HOMING_BULLET.instantiate()
+					bullet.shooter = self
+					bullet.angle_offset = i*PI/9
+					bullet.aim(get_angle_to(Micro.player.global_position))
+					bullet.distance = 35
+					bullet.speed = 50
+					bullet.lifetime = 3.
+					bullet.damage = 15
+					bullet.scale = Vector2(1.5,1.5)
+					Micro.world.get_node("Bullets").add_child(bullet)
+					prepared_bullets.append(bullet)
+				await Micro.wait(.5)
+				for bullet in prepared_bullets:
+					bullet.fire()
+				prepared_bullets = []
+				$Attack.start(2.)
 
 func _on_shield_timeout() -> void:
 	$ShieldEffect.emitting = false

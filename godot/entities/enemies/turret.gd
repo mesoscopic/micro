@@ -16,7 +16,7 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	super(delta)
-	if aiming:
+	if aiming and laser:
 		aim_laser()
 
 func aim_laser() -> void:
