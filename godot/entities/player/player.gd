@@ -6,6 +6,7 @@ const BULLET = preload("res://bullets/PlayerBullet.tscn")
 
 var movement_disabled := false
 var max_speed = 60
+
 var acceleration = 300
 var deceleration = 400
 var shoot_cooldown = 0.5
@@ -20,8 +21,6 @@ var bullet_velocity_mult: float = 1.
 var bullet_size_mult: float = 1.
 
 var dash_direction := Vector2.ZERO;
-
-var selected_ability: int = 0
 
 @export var funds: int = 0
 var trading: bool = false
@@ -49,10 +48,17 @@ func _physics_process(delta):
 			velocity = velocity.move_toward(direction * max_speed * (evasion_mult if $ShootCooldown.is_stopped() else 1.), acceleration * delta)
 		else:
 			velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
-		
-	$Render.material.set("shader_parameter/velocity", (velocity / max(max_speed, velocity.length())))
-	$Render.material.set("shader_parameter/can_dash", ($Abilities.get_child(selected_ability).available() if selected_ability >= 0 else true))
 	move_and_slide()
+	
+	# Bounce if you collided while dashing
+	if dash_direction != Vector2.ZERO:
+		var collision = get_last_slide_collision()
+		if collision:
+			velocity = -dash_direction * max_speed * 2.
+			end_dash()
+	
+	$Render.material.set("shader_parameter/velocity", (velocity / max(max_speed, velocity.length())))
+	$Render.material.set("shader_parameter/can_dash", $DashCooldown.is_stopped())
 	
 	if Input.is_action_pressed("shoot") and len(prepared_bullets) > 0:
 		for bullet in prepared_bullets:
@@ -63,15 +69,18 @@ func _physics_process(delta):
 		prepared_bullets = []
 		$ShootCooldown.start(shoot_cooldown*shoot_cooldown_mult)
 		if dash_direction != Vector2.ZERO:
-			$Abilities/Dash.end_dash(true)
+			velocity = -dash_direction * max_speed * 4.
+			end_dash()
 	
-	if Input.is_action_just_pressed("use_ability") and selected_ability >= 0:
-		$Abilities.get_child(selected_ability).activate()
-	
-	if Input.is_action_just_pressed("next_ability") and selected_ability >= 0:
-		selected_ability = wrap(selected_ability + 1, 0, $Abilities.get_children().size() - 1)
-	if Input.is_action_just_pressed("previous_ability") and selected_ability >= 0:
-		selected_ability = wrap(selected_ability - 1, 0, $Abilities.get_children().size() - 1)
+	if Input.is_action_just_pressed("dash") and $DashCooldown.is_stopped():
+		invincible = true
+		$DashArea.monitoring = true
+		$DashDuration.start()
+		$DashCooldown.start()
+		$Afterimage.emitting = true
+		dash_direction = get_local_mouse_position().normalized()
+		$Dashline.rotation = dash_direction.angle()
+		$Dashline.emitting = true
 		
 	if trading:
 		if traders.size() == 0:
@@ -92,8 +101,8 @@ func _physics_process(delta):
 				else:
 					traders[i].chosen = false
 
-func _hurt(amount: int):
-	$HurtEffect.restart()
+func _hurt(amount: int, direction: float):
+	$HurtEffect.hurt(amount, direction)
 	if !Micro.setting("photosensitive_mode"): $Camera.hurt(clamp(float(amount)/float(hp), 0., 1.))
 
 func _die():
@@ -115,9 +124,6 @@ func _die():
 func _input(event: InputEvent) -> void:
 	if !movement_disabled and trading and event.is_action_pressed("ui_accept"):
 		Micro.attempt_trade(chosen_trader)
-
-func has_ability(ability_name: NodePath) -> bool:
-	return $Abilities.has_node(ability_name)
 
 func give_funds(amount: int) -> void:
 	funds += amount
@@ -153,3 +159,22 @@ func reset_bullets():
 		bullet._on_expire()
 	prepared_bullets = []
 	$ShootCooldown.start(shoot_cooldown*shoot_cooldown_mult)
+
+func _on_dash_hit(body: Node2D) -> void:
+	if body is Damageable:
+		body.damage(20, false, dash_direction.angle())
+
+func _on_dash_end() -> void:
+	velocity = dash_direction * max_speed
+	end_dash()
+
+func end_dash() -> void:
+	$DashDuration.stop()
+	invincible = false
+	$DashArea.monitoring = false
+	$Dashline.emitting = false
+	$Afterimage.emitting = false
+	dash_direction = Vector2.ZERO
+
+func _on_dash_cooldown_timeout() -> void:
+	$DashRestore.emitting = true

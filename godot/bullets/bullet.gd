@@ -27,7 +27,7 @@ func _on_collide(body):
 	set_physics_process(false)
 	
 	if body is Damageable:
-		body.damage(damage)
+		body.damage(damage, false, body.get_angle_to(global_position))
 
 func _on_animation_finished(anim_name):
 	if anim_name == "explode":

@@ -1,11 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://cr70dq40ddv00"]
+[gd_scene load_steps=11 format=3 uid="uid://cr70dq40ddv00"]
 
 [ext_resource type="Script" uid="uid://5gvph6vdmik8" path="res://entities/enemies/teleporter.gd" id="1_0c61a"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_okfon"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="3_up14l"]
 [ext_resource type="PackedScene" uid="uid://b2erii1hcv0u0" path="res://misc/logic/RangeAggro.tscn" id="4_3c52e"]
 [ext_resource type="PackedScene" uid="uid://diissjbt0i6uj" path="res://misc/logic/HurtAggro.tscn" id="5_ltnij"]
-[ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="6_jcwgh"]
+[ext_resource type="PackedScene" uid="uid://bmrdsgmlwoebu" path="res://fx/EnemyHurt.tscn" id="6_df432"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_up14l"]
 resource_local_to_scene = true
@@ -14,7 +14,7 @@ shader_parameter/health = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 shader_parameter/damaged = false
 
-[sub_resource type="Image" id="Image_df432"]
+[sub_resource type="Image" id="Image_5l7ag"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -24,39 +24,12 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_ltnij"]
-image = SubResource("Image_df432")
+image = SubResource("Image_5l7ag")
 script = ExtResource("3_okfon")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x6fk6"]
 radius = 9.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nl0dr"]
-shader = ExtResource("6_jcwgh")
-
-[sub_resource type="Curve" id="Curve_okfon"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.497785, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_up14l"]
-curve = SubResource("Curve_okfon")
-
-[sub_resource type="Curve" id="Curve_g1vjv"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_3c52e"]
-curve = SubResource("Curve_g1vjv")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3c52e"]
-particle_flag_disable_z = true
-radial_velocity_min = -600.0
-radial_velocity_max = -2.23517e-05
-gravity = Vector3(0, 0, 0)
-scale_min = 6.0
-scale_max = 18.0
-scale_curve = SubResource("CurveTexture_3c52e")
-alpha_curve = SubResource("CurveTexture_up14l")
 
 [node name="Teleporter" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 8
@@ -85,14 +58,7 @@ aggro_length = 8.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_x6fk6")
 
-[node name="HurtParticles" type="GPUParticles2D" parent="."]
-material = SubResource("ShaderMaterial_nl0dr")
-emitting = false
-amount = 30
-lifetime = 0.5
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_3c52e")
+[node name="HurtEffect" parent="." instance=ExtResource("6_df432")]
 
 [node name="FiringCooldown" type="Timer" parent="."]
 wait_time = 1.2

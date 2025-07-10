@@ -20,7 +20,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	for body in get_overlapping_bodies():
 		if body is Damageable and global_position.distance_to(body.global_position) < damage_length*length*scale.x:
-			body.damage(damage)
+			body.damage(damage, false, rotation)
 
 func fire() -> void:
 	var tween := get_tree().create_tween()

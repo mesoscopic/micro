@@ -1,8 +1,54 @@
-[gd_scene load_steps=16 format=3 uid="uid://diqdkbr3crus3"]
+[gd_scene load_steps=21 format=3 uid="uid://diqdkbr3crus3"]
 
 [ext_resource type="Script" uid="uid://bgocxycd6xam0" path="res://fx/death/enemy.gd" id="1_xb5g8"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="2_gkxl4"]
 [ext_resource type="Shader" uid="uid://ds1rxv51ltkrj" path="res://misc/shaders/enemy_ghost.gdshader" id="3_xb5g8"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_xbttu"]
+[ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://misc/shaders/funds.gdshader" id="4_xbttu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2nhur"]
+shader = ExtResource("3_xb5g8")
+
+[sub_resource type="Image" id="Image_xbttu"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_yor8o"]
+image = SubResource("Image_xbttu")
+script = ExtResource("3_xbttu")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yor8o"]
+shader = ExtResource("4_xbttu")
+
+[sub_resource type="Curve" id="Curve_1dcvf"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.210419, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_1q05o"]
+curve = SubResource("Curve_1dcvf")
+
+[sub_resource type="Curve" id="Curve_m361h"]
+_data = [Vector2(0, 0.499561), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_l2mxq"]
+curve = SubResource("Curve_m361h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i72it"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_l2mxq")
+alpha_curve = SubResource("CurveTexture_1q05o")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sxsfr"]
 shader = ExtResource("2_gkxl4")
@@ -23,7 +69,7 @@ curve = SubResource("Curve_vcs7t")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j114o"]
 particle_flag_disable_z = true
-radial_velocity_min = -2.23517e-05
+radial_velocity_min = 50.0
 radial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
 radial_accel_curve = SubResource("CurveTexture_fophx")
@@ -31,49 +77,23 @@ scale_min = 2.0
 scale_max = 4.0
 alpha_curve = SubResource("CurveTexture_yolx1")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nnu7a"]
-shader = ExtResource("3_xb5g8")
-
-[sub_resource type="Curve" id="Curve_smw0l"]
-_data = [Vector2(0, 1), 0.0, -3.0817, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_xb5g8"]
-curve = SubResource("Curve_smw0l")
-
-[sub_resource type="Curve" id="Curve_46tww"]
-_data = [Vector2(0, 0.25), 0.0, 5.66621, 0, 0, Vector2(0.42, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_gkxl4"]
-curve = SubResource("Curve_46tww")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qkksp"]
-particle_flag_disable_z = true
-gravity = Vector3(0, 0, 0)
-scale_min = 80.0
-scale_max = 80.0
-scale_curve = SubResource("CurveTexture_gkxl4")
-alpha_curve = SubResource("CurveTexture_xb5g8")
-
 [node name="EnemyDeathAnimation" type="Node2D"]
 script = ExtResource("1_xb5g8")
 
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_2nhur")
+texture = SubResource("ImageTexture_yor8o")
+
+[node name="FundParticles" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_yor8o")
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_i72it")
+
 [node name="ExplosionParticles" type="GPUParticles2D" parent="."]
 material = SubResource("ShaderMaterial_sxsfr")
-emitting = false
-amount = 100
+amount = 50
 lifetime = 0.75
-one_shot = true
-explosiveness = 0.5
 process_material = SubResource("ParticleProcessMaterial_j114o")
-
-[node name="Ring" type="GPUParticles2D" parent="."]
-material = SubResource("ShaderMaterial_nnu7a")
-emitting = false
-amount = 1
-one_shot = true
-process_material = SubResource("ParticleProcessMaterial_qkksp")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0

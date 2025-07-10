@@ -36,9 +36,9 @@ func _deaggro() -> void:
 	$RetargetTimer.stop()
 	wander()
 
-func _hurt(amount: int) -> void:
+func _hurt(amount: int, direction: float) -> void:
 	invincible = true
-	super(amount)
+	super(amount, direction)
 	for bullet in prepared_bullets:
 		bullet._on_expire()
 	prepared_bullets = []

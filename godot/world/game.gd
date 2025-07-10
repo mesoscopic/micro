@@ -76,7 +76,7 @@ func _physics_process(_delta: float) -> void:
 	Micro.player.get_node("Camera/GlobalParticles/Peace").emitting = (current_biome == Biome.PEACE)
 
 func _on_emptiness_damage_timeout() -> void:
-	Micro.player.damage(1)
+	Micro.player.damage(1, true)
 
 func get_trader(from: Vector2) -> Node:
 	var animation = preload("res://fx/TraderSpawn.tscn").instantiate()

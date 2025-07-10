@@ -46,15 +46,16 @@ func _ready():
 func _die():
 	var anim = DEATH_ANIMATION.instantiate()
 	anim.fund_drop = fund_drop + fund_drop*fund_drop_randomization*randf_range(-1.,1.)
+	anim.enemy_scale = $Render.scale.x
 	anim.position = position
 	add_sibling(anim)
 	if is_boss:
 		Micro.world.bosses_active -= 1
 	queue_free()
 
-func _hurt(_amount: int):
+func _hurt(amount: int, direction: float):
 	stagger = stagger_time
-	$HurtParticles.restart()
+	$HurtEffect.hurt(amount, direction)
 
 func _physics_process(delta: float) -> void:
 	tick()

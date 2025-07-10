@@ -11,7 +11,7 @@ func _on_collide(body) -> void:
 	$Impact.emitting = true
 	
 	if body is Damageable:
-		body.damage(damage)
+		body.damage(damage, false, body.get_angle_to(global_position))
 	else:
 		for i in range(0,split_number):
 			var angle = 2*PI/split_number*i

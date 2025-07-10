@@ -13,9 +13,9 @@ var prepared_bullets: Array[TelegraphedBullet] = []
 var spiral_angle: float = 0.
 var bombs: Array[BombBullet] = []
 var lasers: Array[LaserBullet] = []
+var doing_homing_attack := false
 
 func _ready() -> void:
-	DEATH_ANIMATION = preload("res://fx/death/TraderMiniboss.tscn")
 	super()
 	shots = (Micro.world.random.randi_range(3,5) if Micro.world.second_trader_miniboss else Micro.world.random.randi_range(1,3)) * 2
 	if Micro.world.second_trader_miniboss:
@@ -29,8 +29,8 @@ func _physics_process(_delta: float) -> void:
 		for bullet in prepared_bullets:
 			bullet.aim(get_angle_to(Micro.player.global_position))
 
-func _hurt(amount: int) -> void:
-	super(amount)
+func _hurt(amount: int, direction: float) -> void:
+	super(amount, direction)
 	if phase == 0 and hp <= max_hp*0.75:
 		phase += 1
 		$Shield.start()
@@ -58,6 +58,9 @@ func spawn() -> void:
 	Micro.world.get_node("Bullets").add_child(summon)
 
 func _die() -> void:
+	var trader = preload("res://fx/TraderSpawn.tscn").instantiate()
+	trader.position = position
+	add_sibling(trader)
 	super()
 	for laser in lasers:
 		laser.stop()
@@ -78,6 +81,10 @@ func fire() -> void:
 	for bullet in prepared_bullets:
 		bullet.fire()
 	prepared_bullets = []
+	if doing_homing_attack:
+		doing_homing_attack = false
+		$Attack.start(2.)
+		return
 	if !$Shield.is_stopped():
 		for i in range(0,8):
 			var bullet: TelegraphedBullet = BULLET.instantiate()
@@ -178,11 +185,8 @@ func fire() -> void:
 					bullet.scale = Vector2(1.5,1.5)
 					Micro.world.get_node("Bullets").add_child(bullet)
 					prepared_bullets.append(bullet)
-				await Micro.wait(.5)
-				for bullet in prepared_bullets:
-					bullet.fire()
-				prepared_bullets = []
-				$Attack.start(2.)
+				doing_homing_attack = true
+				$Attack.start(.5)
 
 func _on_shield_timeout() -> void:
 	$ShieldEffect.emitting = false

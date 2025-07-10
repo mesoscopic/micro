@@ -20,7 +20,7 @@ func tick():
 	$Render.material.set("shader_parameter/health", float(hp)/float(max_hp))
 	$Render.material.set("shader_parameter/damaged", !itimer.is_stopped() or invincible)
 
-func damage(amount: int, bypass_itime := false):
+func damage(amount: int, bypass_itime := false, direction := randf_range(0,2*PI)):
 	if invincible or (!itimer.is_stopped() and !bypass_itime): return
 	hp -= amount
 	if invulnerability_time > .0 and !bypass_itime: itimer.start(invulnerability_time)
@@ -28,7 +28,7 @@ func damage(amount: int, bypass_itime := false):
 		invincible = true
 		die.emit()
 	else:
-		hurt.emit(amount)
+		hurt.emit(amount, direction)
 
 func heal(amount: int):
 	hp = min(max_hp, hp + amount)

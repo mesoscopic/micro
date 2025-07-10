@@ -11,7 +11,7 @@ func _ready():
 	$Render.material.set_shader_parameter("noise", load("res://assets/baked_noise/cache_variations/%s.png" % randi_range(1,16)))
 	hurt.connect(_hurt)
 
-func _hurt(_amount: int) -> void:
+func _hurt(_amount: int, _direction: float) -> void:
 	$VisibleOnScreenEnabler2D.queue_free()
 	$OpenParticles.emitting = true
 	$CollisionShape2D.set_deferred("disabled", true)

@@ -10,7 +10,7 @@
 resource_local_to_scene = true
 shader = ExtResource("2_jb8fp")
 
-[sub_resource type="Image" id="Image_bpca0"]
+[sub_resource type="Image" id="Image_jb8fp"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -20,7 +20,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_rjho7"]
-image = SubResource("Image_bpca0")
+image = SubResource("Image_jb8fp")
 script = ExtResource("3_np6rv")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 

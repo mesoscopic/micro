@@ -1,11 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://c0qyylco7xgk4"]
+[gd_scene load_steps=11 format=3 uid="uid://c0qyylco7xgk4"]
 
 [ext_resource type="Script" uid="uid://c57nhmckfrbx8" path="res://entities/enemies/turret.gd" id="1_n7j26"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="3_cduuy"]
 [ext_resource type="PackedScene" uid="uid://b2erii1hcv0u0" path="res://misc/logic/RangeAggro.tscn" id="4_d8hp7"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="4_dkfhv"]
 [ext_resource type="PackedScene" uid="uid://diissjbt0i6uj" path="res://misc/logic/HurtAggro.tscn" id="5_vd4d6"]
-[ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="6_u6axk"]
+[ext_resource type="PackedScene" uid="uid://bmrdsgmlwoebu" path="res://fx/EnemyHurt.tscn" id="6_myqr2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cduuy"]
 resource_local_to_scene = true
@@ -14,7 +14,7 @@ shader_parameter/health = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 shader_parameter/damaged = false
 
-[sub_resource type="Image" id="Image_myqr2"]
+[sub_resource type="Image" id="Image_xj7pi"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -24,33 +24,12 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_vd4d6"]
-image = SubResource("Image_myqr2")
+image = SubResource("Image_xj7pi")
 script = ExtResource("4_dkfhv")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u77d8"]
 radius = 11.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_a60u8"]
-shader = ExtResource("6_u6axk")
-
-[sub_resource type="Curve" id="Curve_wf87e"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_qeqcc"]
-curve = SubResource("Curve_wf87e")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rwtxu"]
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 10.0
-radial_velocity_min = 40.0
-radial_velocity_max = 100.0
-gravity = Vector3(0, 0, 0)
-scale_min = 3.0
-scale_max = 6.0
-scale_curve = SubResource("CurveTexture_qeqcc")
 
 [node name="Turret" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 8
@@ -81,13 +60,7 @@ aggro_length = 10.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_u77d8")
 
-[node name="HurtParticles" type="GPUParticles2D" parent="."]
-material = SubResource("ShaderMaterial_a60u8")
-emitting = false
-lifetime = 0.5
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_rwtxu")
+[node name="HurtEffect" parent="." instance=ExtResource("6_myqr2")]
 
 [node name="FiringCooldown" type="Timer" parent="."]
 wait_time = 2.0
