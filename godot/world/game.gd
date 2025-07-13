@@ -19,6 +19,8 @@ var current_biome: Biome = Biome.LANDING
 var biome_map: Image
 var biomes: Dictionary[Vector2i, Biome] = {}
 
+var world_enemies: int = 0
+
 func world_enemy(distance: float) -> Enemy:
 	var enemies: RollWeights = RollWeights.new()
 	match current_biome:
@@ -37,14 +39,17 @@ func world_enemy(distance: float) -> Enemy:
 			enemies.add_item(preload("res://entities/enemies/Teleporter.tscn"), 1)
 	return Micro.roll(enemies).instantiate()
 
+func spawn_cap() -> int:
+	var distance := int(taxicab(tile_at(Micro.player.position)))
+	return 1 + ceil(float(distance)/64.)
+
 func spawn_attempt() -> void:
-	if bosses_active > 0 or current_biome == Biome.PEACE: return
+	if bosses_active > 0 or current_biome == Biome.PEACE or world_enemies >= spawn_cap(): return
 	var player_pos: Vector2 = tile_at(Micro.player.position)
 	var distance: int = int(taxicab(player_pos))
 	
-	if distance < 40: return
-	elif distance < 100 and randi_range(1,2) != 1: return
-	elif distance < 160 and randi_range(1,3) == 1: return
+	if distance < 30: return
+	elif distance < 200 and randi_range(1,2) != 1: return
 	# Otherwise, spawn is guaranteed
 	
 	var enemy := world_enemy(distance)
@@ -53,6 +58,9 @@ func spawn_attempt() -> void:
 	var angle_randomization = distance / 60.
 	var tile: Vector2 = (player_pos + Vector2.from_angle(player_pos.angle_to_point(Vector2.ZERO)+PI+randf_range(-angle_randomization,angle_randomization)) * 20.)
 	enemy.position = tile * 20.
+	world_enemies += 1
+	enemy.despawn.connect(func(): world_enemies -= 1)
+	enemy.die.connect(func(): world_enemies -= 1)
 	$Entities.add_child(enemy)
 
 func _physics_process(_delta: float) -> void:
@@ -77,12 +85,6 @@ func _physics_process(_delta: float) -> void:
 
 func _on_emptiness_damage_timeout() -> void:
 	Micro.player.damage(1, true)
-
-func get_trader(from: Vector2) -> Node:
-	var animation = preload("res://fx/TraderSpawn.tscn").instantiate()
-	animation.position = from
-	$Entities.call_deferred("add_child", animation)
-	return animation
 
 const TRADE_COIN = preload("res://misc/effects/TradeCoin.tscn")
 signal refresh_trades
@@ -121,7 +123,7 @@ func taxicab(pos: Vector2) -> float:
 
 func get_biome(pos: Vector2i) -> Biome:
 	var taxicab_distance: int = int(taxicab(pos))
-	if taxicab_distance <= 60:
+	if taxicab_distance <= 64:
 		return Biome.LANDING
 	elif taxicab_distance >= 512:
 		return Biome.EMPTINESS
@@ -177,9 +179,8 @@ func generate_world():
 		$Entities.add_child(miniboss)
 		var trader_location := Vector2i((Vector2(location).normalized()*40).round())
 		place(1, trader_location)
-		var trader := preload("res://entities/traders/WildTrader.tscn").instantiate()
+		var trader := preload("res://entities/Trader.tscn").instantiate()
 		trader.position = trader_location * 20.
-		trader.wander_origin = trader_location * 20.
 		trader.wander_range = 70.
 		trader.wander_distance = 60.
 		$Entities.add_child(trader)

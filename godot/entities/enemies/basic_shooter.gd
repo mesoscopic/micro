@@ -1,4 +1,4 @@
-extends Enemy
+extends ChaserEnemy
 
 const BULLET = preload("res://bullets/TelegraphedBullet.tscn")
 
@@ -6,10 +6,9 @@ var prepared_bullet: TelegraphedBullet
 
 func _ready():
 	super()
-	aggro.connect(_aggro)
-	deaggro.connect(_deaggro)
 
 func _on_firing_cooldown_timeout() -> void:
+	if position.distance_squared_to(Micro.player.position) > 57600: return
 	if prepared_bullet:
 		prepared_bullet.speed = 90.
 		prepared_bullet.lifetime = 6.
@@ -22,13 +21,3 @@ func _on_firing_cooldown_timeout() -> void:
 	bullet.distance = 20
 	Micro.world.get_node("Bullets").add_child(bullet)
 	prepared_bullet = bullet
-
-func _aggro() -> void:
-	$FiringCooldown.start()
-	$RetargetTimer.start()
-	target_player()
-
-func _deaggro() -> void:
-	$FiringCooldown.stop()
-	$RetargetTimer.stop()
-	wander()

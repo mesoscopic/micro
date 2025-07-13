@@ -1,4 +1,4 @@
-extends Enemy
+extends ChaserEnemy
 
 const BULLET = preload("res://bullets/TelegraphedBullet.tscn")
 
@@ -6,10 +6,9 @@ var prepared_bullets: Array[TelegraphedBullet] = []
 
 func _ready():
 	super()
-	aggro.connect(_aggro)
-	deaggro.connect(_deaggro)
 
 func _on_firing_cooldown_timeout() -> void:
+	if position.distance_squared_to(Micro.player.position) > 57600: $FiringCooldown.start(1.)
 	for bullet in prepared_bullets:
 		bullet.speed = 100.
 		bullet.lifetime = 3.
@@ -25,16 +24,6 @@ func _on_firing_cooldown_timeout() -> void:
 		Micro.world.get_node("Bullets").add_child(bullet)
 		prepared_bullets.append(bullet)
 	$FiringCooldown.start(1.2)
-
-func _aggro() -> void:
-	$FiringCooldown.start()
-	$RetargetTimer.start()
-	target_player()
-
-func _deaggro() -> void:
-	$FiringCooldown.stop()
-	$RetargetTimer.stop()
-	wander()
 
 func _hurt(amount: int, direction: float) -> void:
 	invincible = true

@@ -56,21 +56,22 @@ scale_curve = SubResource("CurveTexture_qqjxf")
 alpha_curve = SubResource("CurveTexture_jlvt4")
 
 [node name="TraderMiniboss" type="CharacterBody2D" groups=["enemy"]]
-collision_layer = 14
-collision_mask = 2
+collision_layer = 270
+collision_mask = 258
 script = ExtResource("1_oj4li")
 speed = 0
 acceleration = 0
 deceleration = 0
 turn_length = 0
-wander_length = 0
-wander_speed_mult = 0.0
 fund_drop = 100
 fund_drop_randomization = 0.0
 despawn_distance = 240
 stagger_time = 0.0
+is_boss = null
 max_hp = 400
 hp = 400
+invulnerability_time = null
+invincible = null
 metadata/_custom_type_script = "uid://oy7qpe47ti6v"
 
 [node name="Render" type="Sprite2D" parent="."]

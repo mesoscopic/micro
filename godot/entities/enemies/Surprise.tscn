@@ -1,9 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://5r4rapdj3ft"]
+[gd_scene load_steps=17 format=3 uid="uid://5r4rapdj3ft"]
 
 [ext_resource type="Script" uid="uid://cjmfb60xs2e7x" path="res://entities/enemies/surprise.gd" id="1_3elcu"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_bahcx"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="3_oeqg6"]
-[ext_resource type="PackedScene" uid="uid://b2erii1hcv0u0" path="res://misc/logic/RangeAggro.tscn" id="4_bahcx"]
 [ext_resource type="Shader" uid="uid://ds1rxv51ltkrj" path="res://misc/shaders/enemy_ghost.gdshader" id="4_ml7jd"]
 [ext_resource type="PackedScene" uid="uid://bmrdsgmlwoebu" path="res://fx/EnemyHurt.tscn" id="6_hb3al"]
 
@@ -14,7 +13,7 @@ shader_parameter/health = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 shader_parameter/damaged = false
 
-[sub_resource type="Image" id="Image_hb3al"]
+[sub_resource type="Image" id="Image_cdy31"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -24,7 +23,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_5bo5h"]
-image = SubResource("Image_hb3al")
+image = SubResource("Image_cdy31")
 script = ExtResource("3_bahcx")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -60,8 +59,8 @@ radius = 8.0
 radius = 5.0
 
 [node name="Surprise" type="CharacterBody2D" groups=["enemy"]]
-collision_layer = 8
-collision_mask = 3
+collision_layer = 264
+collision_mask = 259
 script = ExtResource("1_3elcu")
 speed = 150
 acceleration = 300
@@ -82,17 +81,10 @@ amount = 10
 lifetime = 0.25
 process_material = SubResource("ParticleProcessMaterial_5bo5h")
 
-[node name="RangeAggro" parent="." instance=ExtResource("4_bahcx")]
-scale = Vector2(0.998148, 1)
-aggro_range = 300
-deaggro_range = 500
-
 [node name="HurtEffect" parent="." instance=ExtResource("6_hb3al")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_kb0u7")
-
-[node name="RetargetTimer" type="Timer" parent="."]
 
 [node name="Attack" type="Area2D" parent="."]
 collision_layer = 4
@@ -101,5 +93,4 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
 shape = SubResource("CircleShape2D_oeqg6")
 
-[connection signal="timeout" from="RetargetTimer" to="." method="target_player"]
 [connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]

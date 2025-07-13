@@ -1,17 +1,13 @@
-extends Enemy
+extends CirclerEnemy
 
 const LASER = preload("res://bullets/Laser.tscn")
 var aim := 0.
 var aiming := false
-var circle_angle := 0.
 
 var laser: LaserBullet
 
 func _ready():
 	super()
-	aggro.connect(_aggro)
-	deaggro.connect(_deaggro)
-	tactic_complete.connect(circle)
 	die.connect(func (): if laser: laser.stop())
 
 func _physics_process(delta: float) -> void:
@@ -35,7 +31,7 @@ func aim_laser() -> void:
 		laser.length = 400.
 
 func _on_firing_cooldown_timeout() -> void:
-	if !can_see_player():
+	if !can_see_player() or position.distance_squared_to(Micro.player.position) > 57600:
 		$FiringCooldown.start(1.)
 		return
 	speed_multiplier = 0.
@@ -52,24 +48,6 @@ func _on_firing_cooldown_timeout() -> void:
 	await Micro.wait(1.)
 	speed_multiplier = 1.
 	$FiringCooldown.start(1.)
-
-func _aggro() -> void:
-	$FiringCooldown.start()
-	$RetargetTimer.start()
-	circle_angle = get_angle_to(Micro.player.position)
-	circle()
-
-func _deaggro() -> void:
-	$FiringCooldown.stop()
-	$RetargetTimer.stop()
-	if laser:
-		laser.stop()
-		laser = null
-	wander()
-
-func circle() -> void:
-	circle_angle += PI/8.
-	do_tactic(Micro.player.position + Vector2.from_angle(circle_angle)*120.)
 
 func can_see_player() -> bool:
 	var query = PhysicsRayQueryParameters2D.create(global_position, Micro.player.position, 1)

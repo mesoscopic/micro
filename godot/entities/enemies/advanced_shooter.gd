@@ -1,4 +1,4 @@
-extends Enemy
+extends ChaserEnemy
 
 const BULLET = preload("res://bullets/TelegraphedBullet.tscn")
 
@@ -6,10 +6,9 @@ var prepared_bullets: Array[TelegraphedBullet] = []
 
 func _ready():
 	super()
-	aggro.connect(_aggro)
-	deaggro.connect(_deaggro)
 
 func _on_firing_cooldown_timeout() -> void:
+	if position.distance_squared_to(Micro.player.position) > 57600: return
 	for bullet in prepared_bullets:
 		bullet.speed = 100.
 		bullet.lifetime = 6.
@@ -29,13 +28,3 @@ func _physics_process(delta: float) -> void:
 	super(delta)
 	for bullet in prepared_bullets:
 		bullet.aim(get_angle_to(Micro.player.global_position))
-
-func _aggro() -> void:
-	$FiringCooldown.start()
-	$RetargetTimer.start()
-	target_player()
-
-func _deaggro() -> void:
-	$FiringCooldown.stop()
-	$RetargetTimer.stop()
-	wander()

@@ -35,6 +35,8 @@ func _input(event):
 	elif event.is_action_pressed("debug_pause") and debug_paused == get_tree().paused:
 		debug_paused = !(get_tree().paused)
 		get_tree().paused = debug_paused
+	elif event.is_action_pressed("debug_print"):
+		print("\n== BREAK ==")
 	elif event.is_action_pressed("debug_tp"):
 		Micro.player.global_position = get_tree().get_first_node_in_group("boss").global_position
 

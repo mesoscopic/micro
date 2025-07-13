@@ -1,10 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cr70dq40ddv00"]
+[gd_scene load_steps=9 format=3 uid="uid://cr70dq40ddv00"]
 
 [ext_resource type="Script" uid="uid://5gvph6vdmik8" path="res://entities/enemies/teleporter.gd" id="1_0c61a"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_okfon"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="3_up14l"]
-[ext_resource type="PackedScene" uid="uid://b2erii1hcv0u0" path="res://misc/logic/RangeAggro.tscn" id="4_3c52e"]
-[ext_resource type="PackedScene" uid="uid://diissjbt0i6uj" path="res://misc/logic/HurtAggro.tscn" id="5_ltnij"]
 [ext_resource type="PackedScene" uid="uid://bmrdsgmlwoebu" path="res://fx/EnemyHurt.tscn" id="6_df432"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_up14l"]
@@ -14,7 +12,7 @@ shader_parameter/health = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 shader_parameter/damaged = false
 
-[sub_resource type="Image" id="Image_5l7ag"]
+[sub_resource type="Image" id="Image_8g7mr"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -24,7 +22,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_ltnij"]
-image = SubResource("Image_5l7ag")
+image = SubResource("Image_8g7mr")
 script = ExtResource("3_okfon")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -32,8 +30,8 @@ metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 radius = 9.0
 
 [node name="Teleporter" type="CharacterBody2D" groups=["enemy"]]
-collision_layer = 8
-collision_mask = 3
+collision_layer = 264
+collision_mask = 259
 script = ExtResource("1_0c61a")
 acceleration = 200
 fund_drop = 30
@@ -47,14 +45,6 @@ material = SubResource("ShaderMaterial_up14l")
 scale = Vector2(18, 18)
 texture = SubResource("ImageTexture_ltnij")
 
-[node name="RangeAggro" parent="." instance=ExtResource("4_3c52e")]
-scale = Vector2(0.998148, 1)
-aggro_range = 200
-deaggro_range = 300
-
-[node name="HurtAggro" parent="." instance=ExtResource("5_ltnij")]
-aggro_length = 8.0
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_x6fk6")
 
@@ -63,8 +53,6 @@ shape = SubResource("CircleShape2D_x6fk6")
 [node name="FiringCooldown" type="Timer" parent="."]
 wait_time = 1.2
 one_shot = true
-
-[node name="RetargetTimer" type="Timer" parent="."]
+autostart = true
 
 [connection signal="timeout" from="FiringCooldown" to="." method="_on_firing_cooldown_timeout"]
-[connection signal="timeout" from="RetargetTimer" to="." method="target_player"]

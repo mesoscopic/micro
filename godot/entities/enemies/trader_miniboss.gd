@@ -58,9 +58,9 @@ func spawn() -> void:
 	Micro.world.get_node("Bullets").add_child(summon)
 
 func _die() -> void:
-	var trader = preload("res://fx/TraderSpawn.tscn").instantiate()
+	var trader = preload("res://entities/Trader.tscn").instantiate()
 	trader.position = position
-	add_sibling(trader)
+	call_deferred("add_sibling", trader)
 	super()
 	for laser in lasers:
 		laser.stop()

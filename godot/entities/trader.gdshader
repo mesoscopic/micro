@@ -5,7 +5,7 @@ shader_type canvas_item;
 #include "res://lygia/draw/stroke.gdshaderinc"
 #include "res://lygia/draw/fill.gdshaderinc"
 
-uniform vec2 velocity = vec2(0.0);
+instance uniform vec2 velocity = vec2(0.0);
 
 void fragment() {
 	vec2 uv_shifted = UV + velocity/10.;

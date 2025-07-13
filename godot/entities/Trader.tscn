@@ -1,0 +1,141 @@
+[gd_scene load_steps=21 format=3 uid="uid://cjt7tm6d5ow8j"]
+
+[ext_resource type="Shader" uid="uid://cs7iamvps60cm" path="res://entities/trader.gdshader" id="1_2l6qv"]
+[ext_resource type="Script" uid="uid://bgi51q1qpnvci" path="res://entities/trader.gd" id="1_qhhoa"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="2_qhhoa"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6saqy"]
+shader = ExtResource("1_2l6qv")
+
+[sub_resource type="Image" id="Image_8tu8e"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_kem3a"]
+image = SubResource("Image_8tu8e")
+script = ExtResource("2_qhhoa")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bki2m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vhato"]
+size = Vector2(80, 80)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2l6qv"]
+radius = 60.0
+
+[sub_resource type="Curve" id="Curve_a1b7o"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ej47d"]
+curve = SubResource("Curve_a1b7o")
+
+[sub_resource type="Curve" id="Curve_y2vja"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.33074, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_s4fir"]
+curve = SubResource("Curve_y2vja")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jvihi"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_s4fir")
+alpha_curve = SubResource("CurveTexture_ej47d")
+
+[sub_resource type="Curve" id="Curve_2l6qv"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.253924, 0.912658), -4.14994, -4.14994, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_1rox6"]
+curve = SubResource("Curve_2l6qv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qhhoa"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 10, 10)
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 8.0
+alpha_curve = SubResource("CurveTexture_1rox6")
+
+[sub_resource type="Curve" id="Curve_qhhoa"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yvvdr"]
+curve = SubResource("Curve_qhhoa")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6saqy"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 10, 0)
+radial_accel_min = 20.0
+radial_accel_max = 30.0
+scale_min = 1.5
+scale_max = 2.5
+alpha_curve = SubResource("CurveTexture_yvvdr")
+
+[node name="Trader" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_qhhoa")
+
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_6saqy")
+scale = Vector2(16, 16)
+texture = SubResource("ImageTexture_kem3a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bki2m")
+
+[node name="OnScreenDetector" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollectArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
+shape = SubResource("RectangleShape2D_vhato")
+
+[node name="TradeRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TradeRange"]
+shape = SubResource("CircleShape2D_2l6qv")
+
+[node name="CollectParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 40
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_jvihi")
+
+[node name="SpeedParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 80
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_qhhoa")
+
+[node name="HappyParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_6saqy")
+
+[connection signal="screen_entered" from="OnScreenDetector" to="." method="_on_enter_screen"]
+[connection signal="screen_exited" from="OnScreenDetector" to="." method="_on_exit_screen"]
+[connection signal="body_entered" from="CollectArea" to="." method="_on_collect_area_entered"]
+[connection signal="body_entered" from="TradeRange" to="." method="_on_trade_range_body_entered"]
+[connection signal="body_exited" from="TradeRange" to="." method="_on_trade_range_body_exited"]

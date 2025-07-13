@@ -1,10 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://ij3bdhvutjdc"]
+[gd_scene load_steps=9 format=3 uid="uid://ij3bdhvutjdc"]
 
 [ext_resource type="Script" uid="uid://bmlnebh2gvi7m" path="res://entities/enemies/advanced_shooter.gd" id="1_idjq7"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="3_8ej3x"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_idjq7"]
-[ext_resource type="PackedScene" uid="uid://b2erii1hcv0u0" path="res://misc/logic/RangeAggro.tscn" id="4_c3yda"]
-[ext_resource type="PackedScene" uid="uid://diissjbt0i6uj" path="res://misc/logic/HurtAggro.tscn" id="5_c1kgm"]
 [ext_resource type="PackedScene" uid="uid://bmrdsgmlwoebu" path="res://fx/EnemyHurt.tscn" id="6_bbic5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tb7kd"]
@@ -14,7 +12,7 @@ shader_parameter/health = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 shader_parameter/damaged = false
 
-[sub_resource type="Image" id="Image_bbic5"]
+[sub_resource type="Image" id="Image_mgxxx"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -24,15 +22,15 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_c3yda"]
-image = SubResource("Image_bbic5")
+image = SubResource("Image_mgxxx")
 script = ExtResource("3_idjq7")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u77d8"]
 
 [node name="AdvancedShooter" type="CharacterBody2D" groups=["enemy"]]
-collision_layer = 8
-collision_mask = 3
+collision_layer = 264
+collision_mask = 259
 script = ExtResource("1_idjq7")
 fund_drop = 10
 fund_drop_randomization = 0.3
@@ -42,22 +40,12 @@ material = SubResource("ShaderMaterial_tb7kd")
 scale = Vector2(20, 20)
 texture = SubResource("ImageTexture_c3yda")
 
-[node name="RangeAggro" parent="." instance=ExtResource("4_c3yda")]
-scale = Vector2(0.998148, 1)
-aggro_range = 200
-deaggro_range = 300
-
-[node name="HurtAggro" parent="." instance=ExtResource("5_c1kgm")]
-aggro_length = 8.0
-
 [node name="HurtEffect" parent="." instance=ExtResource("6_bbic5")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_u77d8")
 
 [node name="FiringCooldown" type="Timer" parent="."]
-
-[node name="RetargetTimer" type="Timer" parent="."]
+autostart = true
 
 [connection signal="timeout" from="FiringCooldown" to="." method="_on_firing_cooldown_timeout"]
-[connection signal="timeout" from="RetargetTimer" to="." method="target_player"]

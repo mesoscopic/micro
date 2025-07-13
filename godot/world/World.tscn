@@ -51,7 +51,7 @@ shader = ExtResource("1_gia2e")
 shader_parameter/default_effect = 1.0
 shader_parameter/peace_effect = 0.0
 
-[sub_resource type="Image" id="Image_gqh78"]
+[sub_resource type="Image" id="Image_qpjny"]
 data = {
 "data": PackedByteArray("/////w=="),
 "format": "RGBA8",
@@ -61,7 +61,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_o1tcx"]
-image = SubResource("Image_gqh78")
+image = SubResource("Image_qpjny")
 script = ExtResource("4_i4b1j")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
