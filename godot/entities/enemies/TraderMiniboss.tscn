@@ -67,11 +67,8 @@ fund_drop = 100
 fund_drop_randomization = 0.0
 despawn_distance = 240
 stagger_time = 0.0
-is_boss = null
 max_hp = 400
 hp = 400
-invulnerability_time = null
-invincible = null
 metadata/_custom_type_script = "uid://oy7qpe47ti6v"
 
 [node name="Render" type="Sprite2D" parent="."]

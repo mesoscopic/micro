@@ -21,22 +21,21 @@ var biomes: Dictionary[Vector2i, Biome] = {}
 
 var world_enemies: int = 0
 
-func world_enemy(distance: float) -> Enemy:
+func world_enemy(biome: Biome, distance: int) -> Enemy:
 	var enemies: RollWeights = RollWeights.new()
-	match current_biome:
+	match biome:
 		Biome.LANDING:
-			enemies.add_item(preload("res://entities/enemies/BasicShooter.tscn"), 4)
-			enemies.add_item(preload("res://entities/enemies/AdvancedShooter.tscn"), 2)
+			enemies.add_item(preload("res://entities/enemies/TutorialEnemy.tscn"), 1)
 		Biome.DEFAULT:
-			enemies.add_item(preload("res://entities/enemies/BasicShooter.tscn"), 4)
-			enemies.add_item(preload("res://entities/enemies/AdvancedShooter.tscn"), 4)
+			enemies.add_item(preload("res://entities/enemies/SpreadShooter.tscn"), 4)
+			enemies.add_item(preload("res://entities/enemies/Turret.tscn"), 4)
 			if distance >= 100:
-				enemies.add_item(preload("res://entities/enemies/Turret.tscn"), 2)
+				enemies.add_item(preload("res://entities/enemies/MultiShooter.tscn"), 2)
 				enemies.add_item(preload("res://entities/enemies/Teleporter.tscn"), 1)
 			if distance >= 120:
 				enemies.add_item(preload("res://entities/enemies/Surpriser.tscn"), 1)
 		Biome.EMPTINESS:
-			enemies.add_item(preload("res://entities/enemies/Teleporter.tscn"), 1)
+			enemies.add_item(preload("res://entities/enemies/VoidEnemy.tscn"), 1)
 	return Micro.roll(enemies).instantiate()
 
 func spawn_cap() -> int:
@@ -52,11 +51,13 @@ func spawn_attempt() -> void:
 	elif distance < 200 and randi_range(1,2) != 1: return
 	# Otherwise, spawn is guaranteed
 	
-	var enemy := world_enemy(distance)
 	# Spawn the enemy 20 tiles away from the player.
 	# If you're closer to spawn, enemies will tend to come from the opposite direction to spawn.
 	var angle_randomization = distance / 60.
 	var tile: Vector2 = (player_pos + Vector2.from_angle(player_pos.angle_to_point(Vector2.ZERO)+PI+randf_range(-angle_randomization,angle_randomization)) * 20.)
+	var biome = get_biome(tile)
+	if biome == Biome.PEACE: return
+	var enemy := world_enemy(biome, int(taxicab(tile)))
 	enemy.position = tile * 20.
 	world_enemies += 1
 	enemy.despawn.connect(func(): world_enemies -= 1)
