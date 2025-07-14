@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8xv4bx33kxeg"]
+
+[ext_resource type="Script" uid="uid://g6d1a3v6oswd" path="res://entities/enemies/void_enemy.gd" id="1_je7qo"]
+[ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="2_3bveo"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_gjic1"]
+[ext_resource type="PackedScene" uid="uid://bmrdsgmlwoebu" path="res://fx/EnemyHurt.tscn" id="4_ugiha"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_acjqs"]
+resource_local_to_scene = true
+shader = ExtResource("2_3bveo")
+shader_parameter/health = 1.0
+shader_parameter/velocity = Vector2(0, 0)
+shader_parameter/damaged = false
+
+[sub_resource type="Image" id="Image_5l5xv"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_khwn6"]
+image = SubResource("Image_5l5xv")
+script = ExtResource("3_gjic1")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_txrs1"]
+radius = 20.0
+
+[node name="VoidEnemy" type="CharacterBody2D"]
+collision_layer = 264
+collision_mask = 259
+script = ExtResource("1_je7qo")
+speed = 20
+fund_drop = 50
+stagger_time = 1.0
+max_hp = 350
+hp = 350
+metadata/_custom_type_script = "uid://dqvwuq4r2ul6q"
+
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_acjqs")
+scale = Vector2(40, 40)
+texture = SubResource("ImageTexture_khwn6")
+
+[node name="HurtEffect" parent="." instance=ExtResource("4_ugiha")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_txrs1")
+
+[node name="FiringCooldown" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="FiringCooldown" to="." method="_on_firing_cooldown_timeout"]
