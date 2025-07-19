@@ -17,6 +17,7 @@ var can_set_start: bool = true
 @export var stagger_time: float = 0.1
 var stagger: float = 0.
 @export var is_boss: bool = false
+@export var is_void: bool = false
 
 var DEATH_ANIMATION := preload("res://fx/death/Enemy.tscn")
 
@@ -102,7 +103,7 @@ func player_target() -> Vector2:
 func check(to: Vector2, avoid_starting_position: bool = false) -> bool:
 	if avoid_starting_position && (starting_position.distance_squared_to(to) <= starting_position.distance_squared_to(global_position)): return true
 	# Enemies will not cross the world border
-	if (abs(global_position.x) + abs(global_position.y) < 10240.) != (abs(to.x) + abs(to.y) < 10240.): return true
+	if is_void != bool(abs(to.x) + abs(to.y) > 10240.): return true
 	var query = PhysicsTestMotionParameters2D.new()
 	query.from = global_transform
 	query.motion = to - global_position

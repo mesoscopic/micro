@@ -4,8 +4,12 @@ var prepared_bullets: Array[TelegraphedBullet] = []
 var fire := false
 
 func _on_firing_cooldown_timeout() -> void:
-	# Only attack if player is out of the world
-	if abs(Micro.player.position.x) + abs(Micro.player.position.y) < 10240.: return
+	# Only move and attack if the player is out of the world
+	if abs(Micro.player.position.x) + abs(Micro.player.position.y) > 10240.:
+		speed_multiplier = 1.
+	else:
+		speed_multiplier = 0.
+		return
 	if fire:
 		for bullet in prepared_bullets:
 			bullet.speed = 80.

@@ -34,8 +34,6 @@ func world_enemy(biome: Biome, distance: int) -> Enemy:
 				enemies.add_item(preload("res://entities/enemies/Teleporter.tscn"), 1)
 			if distance >= 120:
 				enemies.add_item(preload("res://entities/enemies/Surpriser.tscn"), 1)
-		Biome.EMPTINESS:
-			enemies.add_item(preload("res://entities/enemies/VoidEnemy.tscn"), 1)
 	return Micro.roll(enemies).instantiate()
 
 func spawn_cap() -> int:
@@ -55,9 +53,13 @@ func spawn_attempt() -> void:
 	# If you're closer to spawn, enemies will tend to come from the opposite direction to spawn.
 	var angle_randomization = distance / 60.
 	var tile: Vector2 = (player_pos + Vector2.from_angle(player_pos.angle_to_point(Vector2.ZERO)+PI+randf_range(-angle_randomization,angle_randomization)) * 20.)
+	var enemy: Enemy
 	var biome = get_biome(tile)
-	if biome == Biome.PEACE: return
-	var enemy := world_enemy(biome, int(taxicab(tile)))
+	if biome == Biome.EMPTINESS:
+		enemy = preload("res://entities/enemies/VoidEnemy.tscn").instantiate()
+	elif biome == Biome.PEACE or current_biome == Biome.EMPTINESS: return
+	else:
+		enemy = world_enemy(current_biome, distance)
 	enemy.position = tile * 20.
 	world_enemies += 1
 	enemy.despawn.connect(func(): world_enemies -= 1)

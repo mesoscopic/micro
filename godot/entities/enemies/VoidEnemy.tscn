@@ -12,7 +12,7 @@ shader_parameter/health = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 shader_parameter/damaged = false
 
-[sub_resource type="Image" id="Image_5l5xv"]
+[sub_resource type="Image" id="Image_je7qo"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -22,7 +22,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_khwn6"]
-image = SubResource("Image_5l5xv")
+image = SubResource("Image_je7qo")
 script = ExtResource("3_gjic1")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -36,6 +36,7 @@ script = ExtResource("1_je7qo")
 speed = 20
 fund_drop = 50
 stagger_time = 1.0
+is_void = true
 max_hp = 350
 hp = 350
 metadata/_custom_type_script = "uid://dqvwuq4r2ul6q"

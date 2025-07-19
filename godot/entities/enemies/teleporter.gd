@@ -28,6 +28,7 @@ func _on_firing_cooldown_timeout() -> void:
 func _hurt(amount: int, direction: float) -> void:
 	invincible = true
 	super(amount, direction)
+	$EnemyTeleport.restart()
 	for bullet in prepared_bullets:
 		bullet._on_expire()
 	prepared_bullets = []
