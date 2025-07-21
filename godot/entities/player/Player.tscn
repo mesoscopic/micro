@@ -16,7 +16,7 @@ shader_parameter/velocity = Vector2(0, 0)
 shader_parameter/can_dash = true
 shader_parameter/damaged = false
 
-[sub_resource type="Image" id="Image_q57vx"]
+[sub_resource type="Image" id="Image_rl6fg"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -26,7 +26,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_mqro2"]
-image = SubResource("Image_q57vx")
+image = SubResource("Image_rl6fg")
 script = ExtResource("4_oihyf")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 

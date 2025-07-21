@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://iep1chlalajb"]
+
+[ext_resource type="TileSet" uid="uid://cr8mn87yb0vyh" path="res://world/Tiles.tres" id="1_2qu8h"]
+[ext_resource type="Script" uid="uid://c7hkdhr5s8dvr" path="res://editor/pattern_maker.gd" id="2_id22o"]
+
+[node name="PatternMaker" type="TileMapLayer"]
+tile_set = ExtResource("1_2qu8h")
+script = ExtResource("2_id22o")

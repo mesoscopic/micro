@@ -12,6 +12,11 @@ func add_item(item: Variant, weight: int) -> RollWeights:
 	weights_sum += weight
 	return self
 
+func add_items(item_list: Array, weight: int) -> RollWeights:
+	for item in item_list:
+		add_item(item, weight)
+	return self
+
 func get_item(roll: int) -> Variant:
 	for i in weights.size():
 		roll -= weights[i]

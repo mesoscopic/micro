@@ -171,7 +171,7 @@ func generate_world():
 		while !attempt_decide_biome_for_center_structure(dir*distance, Biome.PEACE, 10):
 			distance += 10
 		var location := biome_center_at(dir*distance)
-		place(0, location)
+		place("trader_miniboss_arena", location)
 		var miniboss := preload("res://entities/tiles/EnemyPosition.tscn").instantiate()
 		miniboss.enemy = preload("res://entities/enemies/TraderMiniboss.tscn")
 		miniboss.spawn_radius = 140.
@@ -181,7 +181,7 @@ func generate_world():
 		miniboss.position = location * 20.
 		$Entities.add_child(miniboss)
 		var trader_location := Vector2i((Vector2(location).normalized()*40).round())
-		place(1, trader_location)
+		place("small_house", trader_location)
 		var trader := preload("res://entities/Trader.tscn").instantiate()
 		trader.position = trader_location * 20.
 		trader.wander_range = 70.
@@ -198,16 +198,25 @@ func generate_world():
 		var tile := Vector2i(pos - Vector2(500, 500))
 		if abs(tile.x) + abs(tile.y) > 510:
 			continue
+		if $Structures/NewTiles.get_cell_source_id(tile) > -1:
+			continue
 		match get_biome(tile):
+			Biome.LANDING:
+				place("cache", tile)
 			Biome.PEACE:
 				pass
+			Biome.DEFAULT when random.randf()>.5-biome_edgeness_at(tile):
+				var obstacles := RollWeights.new()
+				obstacles.add_items(["block", "cross", "thru", "thru2"], 2)
+				obstacles.add_items(["select", "select_r1", "select_r2"], 3)
+				obstacles.add_items(["diagonal", "diagonal2"], 5)
+				obstacles.add_items(["line", "line2", "line_r1", "line_r2", "line2_r1", "line2_r2"], 2)
+				place("obstacles/%s" % Micro.roll(obstacles), tile)
 			Biome.DEFAULT when random.randf()>0.5:
-				pass
-			_:
-				$Structures/NewTiles.try_place("CACHE", tile)
+				place("cache", tile)
 
-func place(id: int, pos: Vector2i):
-	var pattern: TileMapPattern = $Structures/NewTiles.tile_set.get_pattern(id)
+func place(id: String, pos: Vector2i):
+	var pattern: TileMapPattern = load("res://world/patterns/%s.tres" % id)
 	$Structures/NewTiles.set_pattern(pos-pattern.get_size()/2, pattern)
 
 # Returns false if we fail
@@ -225,3 +234,6 @@ func biome_center_at(tile: Vector2i) -> Vector2i:
 	var color := biome_map.get_pixel(tile.x + 512, tile.y + 512)
 	var uv: Vector2i = Vector2(color.r, color.g) * 1024
 	return uv - Vector2i(512,512)
+
+func biome_edgeness_at(tile: Vector2i) -> float:
+	return biome_map.get_pixel(tile.x + 512, tile.y + 512).b
