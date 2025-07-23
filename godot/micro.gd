@@ -2,15 +2,14 @@ extends Node
 
 # The Micro singleton
 
-const SETTINGS = preload("res://ui/Settings.tscn")
 var menu: Node
 var player: Player
 var world: World
 var debug_paused := false
 
 var config: ConfigFile
-var settings_defaults := {
-	"photosensitive_mode": false
+var settings_defaults: Dictionary[String, int] = {
+	"photosensitive_mode": 0
 }
 
 func _ready() -> void:
@@ -40,12 +39,11 @@ func _input(event):
 	elif event.is_action_pressed("debug_tp"):
 		Micro.player.global_position = get_tree().get_first_node_in_group("boss").global_position
 
-func settings(modal: bool):
-	if is_instance_valid(menu): return
-	menu = SETTINGS.instantiate()
-	get_tree().current_scene.find_child("UI").add_child(menu)
-	if modal: menu.be_modal()
-	await menu.done
+func settings():
+	var settings_menu := preload("res://ui/SettingsMenu.tscn").instantiate()
+	get_tree().current_scene.get_node("UI").add_child(settings_menu)
+	await settings_menu.done
+	settings_menu.queue_free()
 
 func wait(time: float, override_time: bool = false):
 	await get_tree().create_timer(time, override_time, false, override_time).timeout
@@ -96,15 +94,23 @@ func closest_enemy(to: Vector2) -> Enemy:
 				closest = enemy
 	return closest
 
-func config_field(category: String, id: String, default: Variant, value: Variant = null) -> Variant:
+func get_config(category: String, id: String, default: int) -> int:
 	if !config:
 		config = ConfigFile.new()
 		config.load("user://micro.cfg")
-	if value:
-		config.set_value(category, id, value)
-		return config.save("user://micro.cfg")
-	else:
-		return config.get_value(category, id, default)
+	return config.get_value(category, id, default)
 
-func setting(id: String, value: Variant = null) -> Variant:
-	return config_field("settings", id, settings_defaults.get(id), value)
+func set_config(category: String, id: String, value: int) -> void:
+	if !config:
+		config = ConfigFile.new()
+		config.load("user://micro.cfg")
+	config.set_value(category, id, value)
+	config.save("user://micro.cfg")
+
+func get_setting(id: String) -> int:
+	var default: Variant = settings_defaults.get(id)
+	if typeof(default) == TYPE_NIL: default = 0
+	return get_config("settings", id, default)
+
+func set_setting(id: String, value: int) -> void:
+	set_config("settings", id, value)

@@ -24,8 +24,9 @@ func _on_play():
 func _on_options():
 	if disable_menu: return
 	disable_menu = true
-	await Micro.settings(true)
+	await Micro.settings()
 	disable_menu = false
+	$Menu/VBoxContainer/Options.grab_focus()
 
 func _on_quit():
 	if disable_menu: return

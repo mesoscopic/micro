@@ -54,5 +54,3 @@ func _input(_event):
 		await pause_menu.finished
 		await Micro.wait(0.1, true)
 		get_tree().paused = false
-	if Input.is_action_just_pressed("quick_settings") and in_game and !$UI.has_node("Settings"):
-		Micro.settings(false)

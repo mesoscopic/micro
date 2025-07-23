@@ -103,10 +103,10 @@ func _physics_process(delta):
 
 func _hurt(amount: int, direction: float):
 	$HurtEffect.hurt(amount, direction)
-	if !Micro.setting("photosensitive_mode"): $Camera.hurt(clamp(float(amount)/float(hp), 0., 1.))
+	if !Micro.get_setting("photosensitive_mode"): $Camera.hurt(clamp(float(amount)/float(hp), 0., 1.))
 
 func _die():
-	if !Micro.setting("photosensitive_mode"): $Camera.hurt(2., true)
+	if !Micro.get_setting("photosensitive_mode"): $Camera.hurt(2., true)
 	invincible = true
 	var slow = create_tween().set_ignore_time_scale(true)
 	slow.tween_property(Engine, "time_scale", 0.1, .8)
@@ -127,14 +127,14 @@ func _input(event: InputEvent) -> void:
 
 func give_funds(amount: int) -> void:
 	funds += amount
-	if !Micro.setting("photosensitive_mode"): $FundsEffect.emit_particle(get_transform(), Vector2.ZERO, Color.WHITE, Color.WHITE, 0)
+	if !Micro.get_setting("photosensitive_mode"): $FundsEffect.emit_particle(get_transform(), Vector2.ZERO, Color.WHITE, Color.WHITE, 0)
 	$FundsDisplay/HBoxContainer/Label.text = "%s" % funds
 	$FundsDisplay/AnimationPlayer.stop()
 	$FundsDisplay/AnimationPlayer.play(
-		("show_funds_simple" if Micro.setting("photosensitive_mode") else "show_funds")
+		("show_funds_simple" if Micro.get_setting("photosensitive_mode") else "show_funds")
 		if trading else # get_funds causes FundsDisplay to disappear, so we instead use show_funds which does not,
 						# but we still need a photosensitive version in this case
-		("get_funds_simple" if Micro.setting("photosensitive_mode") else "get_funds"))
+		("get_funds_simple" if Micro.get_setting("photosensitive_mode") else "get_funds"))
 
 func add_trader(trader: Trader) -> void:
 	traders.append(trader)

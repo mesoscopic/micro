@@ -156,7 +156,7 @@ func generate_world():
 	var biome_texture: ViewportTexture = $BiomeMap.get_texture()
 	await RenderingServer.frame_post_draw
 	biome_map = biome_texture.get_image()
-	if Micro.config_field("debug", "save_biome_map", false):
+	if Micro.get_config("debug", "save_biome_map", false):
 		ResourceSaver.save(ImageTexture.create_from_image(biome_map), "user://biome_map.png")
 		print("Saved biome map to user folder.")
 	await Micro.worldgen_status("Placing traders...")

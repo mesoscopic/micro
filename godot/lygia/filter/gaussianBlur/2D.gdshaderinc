@@ -37,9 +37,9 @@ license:
 #define FNC_GAUSSIANBLUR2D
 GAUSSIANBLUR2D_TYPE gaussianBlur2D(in SAMPLER_TYPE tex, in vec2 st, in vec2 offset, const int kernelSize) {
     GAUSSIANBLUR2D_TYPE accumColor = GAUSSIANBLUR2D_TYPE(0.);
-    
+
     #ifndef GAUSSIANBLUR2D_KERNELSIZE
-    
+
         #if defined(PLATFORM_WEBGL)
             #define GAUSSIANBLUR2D_KERNELSIZE 20
             float kernelSizef = float(kernelSize);

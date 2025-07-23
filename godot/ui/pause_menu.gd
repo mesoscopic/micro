@@ -4,8 +4,8 @@ var disable_menu: bool = false
 
 signal finished
 
-func _input(_event: InputEvent):
-	if Input.is_action_just_pressed("open_menu"):
+func _input(event: InputEvent):
+	if event.is_action_pressed("open_menu"):
 		exit()
 
 func _ready() -> void:
@@ -20,8 +20,9 @@ func _on_resume() -> void:
 func _on_options():
 	if disable_menu: return
 	disable_menu = true
-	await Micro.settings(true)
+	await Micro.settings()
 	disable_menu = false
+	$Menu/VBoxContainer/Options.grab_focus()
 
 func _on_quit():
 	if disable_menu: return
