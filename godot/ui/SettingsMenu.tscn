@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://d2txisf020wo6"]
 
 [ext_resource type="Script" uid="uid://jetecqpkhaqa" path="res://ui/settings_menu.gd" id="1_7nnky"]
-[ext_resource type="PackedScene" uid="uid://ctn2krbcs71xh" path="res://ui/SettingButton.tscn" id="1_oqkcn"]
+[ext_resource type="PackedScene" uid="uid://ctn2krbcs71xh" path="res://ui/settings/SettingButton.tscn" id="1_oqkcn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4npji"]
 bg_color = Color(0, 0, 0, 1)
@@ -50,26 +50,34 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="Fullscreen" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
+layout_mode = 2
+setting_name = "Fullscreen"
+setting_id = "fullscreen"
+choices = Array[String](["No", "Yes"])
+description = "If Yes, the game window fills the entire screen.
+
+This setting does not update if you change the window mode through the operating system."
+
+[node name="VSync" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
+layout_mode = 2
+setting_name = "VSync"
+setting_id = "vsync"
+choices = Array[String](["Disabled", "Normal", "Adaptive", "Mailbox"])
+description = "If Disabled, frames will be displayed as fast as possible, which could cause screen tearing.
+
+If Normal, the frame rate is limited by your monitor's refresh rate, preventing screen tearing but potentially introducing stuttering.
+
+If Adaptive, VSync is disabled when your framerate drops below the monitor's refresh rate, reducing the stuttering problem.
+
+If Mailbox, frames are rendered as fast as possible, but only displayed when your monitor refreshes (preventing screen tearing). This is inefficient but reduces latency."
+
 [node name="PhotosensitiveMode" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
 layout_mode = 2
 setting_name = "Reduce Flashing"
 setting_id = "photosensitive_mode"
 choices = Array[String](["No", "Yes"])
 description = "If Yes, certain visual effects are simplified or disabled to reduce flashing on screen."
-
-[node name="Dummy1" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
-layout_mode = 2
-setting_name = "Dummy Setting 1"
-setting_id = "dummy_1"
-choices = Array[String](["A", "B", "C"])
-description = "This setting does nothing."
-
-[node name="Dummy2" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
-layout_mode = 2
-setting_name = "Dummy Setting 2"
-setting_id = "dummy_2"
-choices = Array[String](["D", "E", "F", "G"])
-description = "This setting also does nothing."
 
 [node name="Info" type="VBoxContainer" parent="Panel/Margin/MainBox"]
 layout_mode = 2
@@ -83,7 +91,7 @@ theme_override_constants/margin_left = 20
 [node name="Description" type="RichTextLabel" parent="Panel/Margin/MainBox/Info/Margin"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/normal_font_size = 18
 
 [node name="Prompt" type="Label" parent="Panel/Margin/MainBox/Info"]
 layout_mode = 2

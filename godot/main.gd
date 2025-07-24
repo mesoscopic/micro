@@ -9,8 +9,8 @@ var in_game: bool = false
 const START_MENU = preload("res://ui/StartRun.tscn")
 
 func _ready():
-	# Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-	pass
+	for setting in ["fullscreen", "vsync"]:
+		setting_hook(setting, Micro.get_setting(setting))
 
 func _process(_delta):
 	pass
@@ -54,3 +54,10 @@ func _input(_event):
 		await pause_menu.finished
 		await Micro.wait(0.1, true)
 		get_tree().paused = false
+
+func setting_hook(id: String, value: int) -> void:
+	match id:
+		"fullscreen":
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if value == 1 else DisplayServer.WINDOW_MODE_WINDOWED)
+		"vsync":
+			DisplayServer.window_set_vsync_mode(value)

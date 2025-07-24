@@ -9,7 +9,9 @@ var debug_paused := false
 
 var config: ConfigFile
 var settings_defaults: Dictionary[String, int] = {
-	"photosensitive_mode": 0
+	"photosensitive_mode": 0,
+	"fullscreen": 1,
+	"vsync": 1
 }
 
 func _ready() -> void:
@@ -114,3 +116,4 @@ func get_setting(id: String) -> int:
 
 func set_setting(id: String, value: int) -> void:
 	set_config("settings", id, value)
+	get_tree().current_scene.setting_hook(id, value)
