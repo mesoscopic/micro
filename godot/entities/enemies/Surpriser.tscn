@@ -37,8 +37,8 @@ speed = 80
 acceleration = 200
 deceleration = 800
 fund_drop = 30
-max_hp = 80
-hp = 80
+max_hp = 70
+hp = 70
 
 [node name="Render" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_r3cxs")

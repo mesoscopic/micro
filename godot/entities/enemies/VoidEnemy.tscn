@@ -37,8 +37,6 @@ speed = 20
 fund_drop = 50
 stagger_time = 1.0
 is_void = true
-max_hp = 350
-hp = 350
 metadata/_custom_type_script = "uid://dqvwuq4r2ul6q"
 
 [node name="Render" type="Sprite2D" parent="."]

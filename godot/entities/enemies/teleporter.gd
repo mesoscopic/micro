@@ -44,7 +44,7 @@ func _hurt(amount: int, direction: float) -> void:
 		bullet.global_position = global_position
 		bullet.velocity = Vector2.from_angle(angle) * 100.
 		bullet.lifetime = 3.
-		bullet.damage = 7.
+		bullet.damage = 7
 		bullet.scale = Vector2(0.8,0.8)
 		Micro.world.get_node("Bullets").add_child(bullet)
 
