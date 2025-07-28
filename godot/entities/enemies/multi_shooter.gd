@@ -12,7 +12,7 @@ func _on_firing_cooldown_timeout() -> void:
 	for bullet in prepared_bullets:
 		bullet.speed = 100.
 		bullet.lifetime = 6.
-		bullet.damage = 10
+		bullet.damage = 7
 		bullet.fire()
 	prepared_bullets = []
 	for i in range(-1,2):

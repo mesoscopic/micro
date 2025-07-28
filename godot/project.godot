@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Micro"
-config/version="v0.0.0-25.2"
+config/version="v0.0.0"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 boot_splash/image="res://assets/icons/mesoscopic.png"
 config/icon="res://assets/icons/micro.svg"
-config/version_description="Beta"
+config/version_description="Proof-of-concept"
 
 [autoload]
 

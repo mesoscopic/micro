@@ -39,6 +39,8 @@ deceleration = 1000
 fund_drop = 25
 fund_drop_randomization = 0.3
 stagger_time = 0.0
+max_hp = 50
+hp = 50
 
 [node name="Render" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_cduuy")

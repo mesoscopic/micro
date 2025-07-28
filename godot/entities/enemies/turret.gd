@@ -36,7 +36,7 @@ func _on_firing_cooldown_timeout() -> void:
 		return
 	speed_multiplier = 0.
 	laser = LASER.instantiate()
-	laser.damage = 25
+	laser.damage = 20
 	laser.lifetime = 1.
 	aim_laser()
 	Micro.world.get_node("Bullets").add_child(laser)
