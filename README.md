@@ -12,25 +12,21 @@ https://github.com/user-attachments/assets/491f1625-1735-4000-8913-c388783fc543
 
 ## Roadmap
 
-The current goal is **v0.0.0**, a proof of concept of the early-game.
+**v0.0.0**, a "proof-of-concept" version, has been released, but is of course very incomplete.
 
-Here's what still needs to be done to achieve that, roughly in the order I intend to focus on it:
+A patch **v0.0.1** might come soon, but more likely the next version will be **v0.1.0**, in which I'll focus on adding more content to the world and fleshing out the early-game.
 
-- More world features
-- Settings menu
-
-Soon after that, a lot more is planned, including:
-
-- **Balancing** (much-needed at the moment)
-- More biomes
+Here's what's planned for **v0.1.0**, roughly in order of importance:
 - More features
+- A healing rework
+- More/better upgrades
+- More biomes
 - More enemies
-- More upgrades
-- Bosses
+
+Here's what's planned for the future, roughly in the order of when I plan to work on it:
+- Balancing
+- More \*insert thing there will be multiple of here\*
 - Abilities
-
-Since there is currently no stable version, 1 commit = 1 beta (or tiny hotfix).
-
-So, whatever you download from the build folder is the current beta.
-
-When **v0.0.0** releases, I will move to a more traditional 1 commit = 1 feature and use git tags and all that.
+- Bosses
+- A final superboss for each world
+- Metaupgrades, etc.
