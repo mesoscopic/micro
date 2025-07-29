@@ -94,17 +94,19 @@ signal refresh_trades
 signal purchase_upgrade(item: Upgrade)
 
 func trade(trader: Trader, item: Upgrade):
-	Micro.player.funds -= item.cost
-	Micro.player.get_node("FundsDisplay/HBoxContainer/Label").text = "%s" % Micro.player.funds
 	Micro.player.movement_disabled = true
-	var amount = item.cost
+	var amount := item.cost
 	while amount > 0:
 		var coin := TRADE_COIN.instantiate()
 		coin.position = Micro.player.position
-		coin.amount = ceil(amount/8.)
+		var coin_amount: int = ceil(amount/8.)
+		coin.amount = coin_amount
+		Micro.player.funds -= coin_amount
+		Micro.player.get_node("FundsDisplay/HBoxContainer/Label").text = "%s" % Micro.player.funds
 		coin.target = trader
 		Micro.player.add_sibling(coin)
 		amount -= ceil(amount/8.)
+		await Micro.wait(0.05)
 	await Micro.wait(1.)
 	refresh_trades.emit()
 	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
