@@ -100,6 +100,7 @@ texture = SubResource("ImageTexture_kem3a")
 shape = SubResource("RectangleShape2D_bki2m")
 
 [node name="OnScreenDetector" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-100, -100, 200, 200)
 
 [node name="CollectArea" type="Area2D" parent="."]
 collision_layer = 0

@@ -96,6 +96,9 @@ func _on_collect_area_entered(body: Node2D) -> void:
 	await move_anim.finished
 	$SpeedParticles.emitting = false
 	init_state(TraderState.COLLECTED)
+	if !$OnScreenDetector.is_on_screen():
+		process_mode = Node.PROCESS_MODE_DISABLED
+		$SpeedParticles.hide()
 
 func refresh_item() -> void:
 	var weights = RollWeights.new()
@@ -116,7 +119,6 @@ func _on_trade_range_body_exited(body: Node2D) -> void:
 	trading = false
 	chosen = false
 	Micro.player.traders.erase(self)
-	wander()
 
 func _on_enter_screen() -> void:
 	process_mode = Node.PROCESS_MODE_INHERIT
