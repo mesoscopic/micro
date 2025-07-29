@@ -5,7 +5,7 @@ var disable_menu: bool = false
 signal finished
 
 func _input(event: InputEvent):
-	if event.is_action_pressed("open_menu"):
+	if event.is_action_pressed("open_menu") or event.is_action_pressed("ui_cancel"):
 		exit()
 
 func _ready() -> void:

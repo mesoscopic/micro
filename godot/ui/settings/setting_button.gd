@@ -36,3 +36,6 @@ func _input(event) -> void:
 func set_setting():
 	$Choice.text = "< %s >" % choices[choice]
 	Micro.set_setting(setting_id, choice)
+
+func _on_mouse_entered() -> void:
+	grab_focus()
