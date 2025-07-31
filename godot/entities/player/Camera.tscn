@@ -94,6 +94,7 @@ autostart = true
 
 [node name="Spores" type="GPUParticles2D" parent="GlobalParticles"]
 rotation = -2.48884
+emitting = false
 amount = 100
 lifetime = 15.0
 process_material = SubResource("ParticleProcessMaterial_gbpsr")

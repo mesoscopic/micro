@@ -11,7 +11,9 @@ var config: ConfigFile
 var settings_defaults: Dictionary[String, int] = {
 	"photosensitive_mode": 0,
 	"fullscreen": 1,
-	"vsync": 1
+	"vsync": 1,
+	"swap_joysticks": 0,
+	"gamepad_aim": 0
 }
 
 func _ready() -> void:

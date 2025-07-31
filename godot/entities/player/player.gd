@@ -20,7 +20,8 @@ var evasion_mult: float = 1.
 var bullet_velocity_mult: float = 1.
 var bullet_size_mult: float = 1.
 
-var dash_direction := Vector2.ZERO;
+var dash_direction := Vector2.ZERO
+var aim_direction := Vector2.RIGHT
 
 @export var funds: int = 0
 var trading: bool = false
@@ -38,9 +39,9 @@ func _ready():
 func _physics_process(delta):
 	tick()
 	if movement_disabled: return
-	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var direction = motion_input()
 	for bullet in prepared_bullets:
-		bullet.aim(get_local_mouse_position().angle())
+		bullet.aim(aim_input().angle())
 	if dash_direction != Vector2.ZERO:
 		velocity = dash_direction * max_speed * 10
 	else:
@@ -73,14 +74,7 @@ func _physics_process(delta):
 			end_dash()
 	
 	if Input.is_action_just_pressed("dash") and $DashCooldown.is_stopped():
-		invincible = true
-		$DashArea.monitoring = true
-		$DashDuration.start()
-		$DashCooldown.start()
-		$Afterimage.emitting = true
-		dash_direction = get_local_mouse_position().normalized()
-		$Dashline.rotation = dash_direction.angle()
-		$Dashline.emitting = true
+		start_dash(aim_input())
 		
 	if trading:
 		if traders.size() == 0:
@@ -148,7 +142,7 @@ func prepare_bullet() -> void:
 		var bullet: TelegraphedBullet = preload("res://bullets/PlayerBullet.tscn").instantiate()
 		bullet.shooter = self
 		bullet.angle_offset = i*PI/16 + randf_range(-1,1)*bullet_spread
-		bullet.aim(get_local_mouse_position().angle())
+		bullet.aim(aim_input().angle())
 		bullet.distance = 30
 		bullet.scale = Vector2(bullet_size_mult, bullet_size_mult)
 		Micro.world.get_node("Bullets").add_child(bullet)
@@ -178,3 +172,40 @@ func end_dash() -> void:
 
 func _on_dash_cooldown_timeout() -> void:
 	$DashRestore.emitting = true
+
+func motion_input() -> Vector2:
+	var swap := bool(Micro.get_setting("swap_joysticks"))
+	var joy_vector := Input.get_vector(
+		"aim_left" if swap else "move_left_joy",
+		"aim_right" if swap else "move_right_joy",
+		"aim_up" if swap else "move_up_joy",
+		"aim_down" if swap else "move_down_joy"
+	)
+	if joy_vector == Vector2.ZERO:
+		return Input.get_vector("move_left_key", "move_right_key", "move_up_key", "move_down_key")
+	else:
+		return joy_vector
+
+func aim_input() -> Vector2:
+	if Micro.get_setting("gamepad_aim") == 1 or len(Input.get_connected_joypads()) == 0:
+		return get_local_mouse_position().normalized()
+	else:
+		var swap := bool(Micro.get_setting("swap_joysticks"))
+		var joy_vector := Input.get_vector(
+			"move_left_joy" if swap else "aim_left",
+			"move_right_joy" if swap else "aim_right",
+			"move_up_joy" if swap else "aim_up",
+			"move_down_joy" if swap else "aim_down"
+		).normalized()
+		if joy_vector != Vector2.ZERO: aim_direction = joy_vector
+		return aim_direction
+
+func start_dash(direction: Vector2) -> void:
+	invincible = true
+	$DashArea.monitoring = true
+	$DashDuration.start()
+	$DashCooldown.start()
+	$Afterimage.emitting = true
+	dash_direction = direction
+	$Dashline.rotation = dash_direction.angle()
+	$Dashline.emitting = true

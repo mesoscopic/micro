@@ -24,12 +24,12 @@ func _on_pressed() -> void:
 	choice = wrap(choice + 1, 0, len(choices))
 	set_setting()
 
-func _input(event) -> void:
+func _input(_event) -> void:
 	if !has_focus(): return
-	if event.is_action_pressed("ui_left"):
+	if Input.is_action_just_pressed("ui_left"):
 		choice = wrap(choice - 1, 0, len(choices))
 		set_setting()
-	elif event.is_action_pressed("ui_right"):
+	elif Input.is_action_just_pressed("ui_right"):
 		choice = wrap(choice + 1, 0, len(choices))
 		set_setting()
 

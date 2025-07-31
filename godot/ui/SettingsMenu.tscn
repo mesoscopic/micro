@@ -79,6 +79,24 @@ setting_id = "photosensitive_mode"
 choices = Array[String](["No", "Yes"])
 description = "If Yes, certain visual effects are simplified or disabled to reduce flashing on screen."
 
+[node name="SwapJoysticks" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
+layout_mode = 2
+setting_name = "Movement Joystick"
+setting_id = "swap_joysticks"
+choices = Array[String](["Left", "Right"])
+description = "Decides which joystick to use for movement. The other joystick will be used for aiming."
+
+[node name="GamepadAim" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
+layout_mode = 2
+setting_name = "Aim Preference"
+setting_id = "gamepad_aim"
+choices = Array[String](["Gamepad", "Mouse"])
+description = "If Gamepad and a gamepad is connected, the game will ignore the mouse for aiming.
+
+If you do not intend to use a gamepad for aiming but have one connected, set this to Mouse.
+
+If you do not have a gamepad connected, this setting can be ignored."
+
 [node name="Info" type="VBoxContainer" parent="Panel/Margin/MainBox"]
 layout_mode = 2
 size_flags_horizontal = 3
