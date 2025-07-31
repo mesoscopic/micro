@@ -166,7 +166,7 @@ func generate_world():
 	var opportunities := 4
 	for dir in [Vector2i(1,1),Vector2i(1,-1),Vector2i(-1,-1),Vector2i(-1,1)]:
 		opportunities -= 1
-		if random.randi_range(0,1)==1 and opportunities >= starting_traders_to_place or starting_traders_to_place == 0:
+		if starting_traders_to_place == 0 or (random.randi_range(0,1)==1 and opportunities >= starting_traders_to_place):
 			continue
 		starting_traders_to_place -= 1
 		var distance := 50
