@@ -63,14 +63,14 @@ func _die() -> void:
 	call_deferred("add_sibling", trader)
 	super()
 	for laser in lasers:
-		laser.stop()
+		if laser: laser.stop()
 	Micro.world.second_trader_miniboss = true
 
 func do_despawn() -> void:
 	invincible = true
 	$Attack.stop()
 	for laser in lasers:
-		laser.stop()
+		if laser: laser.stop()
 	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.parallel().tween_property($Render.material, "shader_parameter/health", 1., 0.5)
 	await tween.finished
@@ -167,7 +167,7 @@ func fire() -> void:
 					Micro.world.get_node("Bullets").add_child(laser)
 					lasers.append(laser)
 					await Micro.wait(.5 if Micro.world.second_trader_miniboss else 1.)
-					laser.fire()
+					if laser: laser.fire()
 					lasers = []
 					fire()
 					$Attack.start(1.)

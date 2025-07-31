@@ -11,7 +11,6 @@ class_name LaserBullet extends Area2D
 @export var damage: int = 20
 
 var damage_length := 0.
-var bodies: Array[Damageable] = []
 
 func _ready() -> void:
 	var tween = get_tree().create_tween()
