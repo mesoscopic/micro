@@ -13,7 +13,8 @@ var settings_defaults: Dictionary[String, int] = {
 	"fullscreen": 1,
 	"vsync": 1,
 	"swap_joysticks": 0,
-	"gamepad_aim": 0
+	"gamepad_aim": 0,
+	"rumble": 2
 }
 
 func _ready() -> void:
@@ -119,3 +120,12 @@ func get_setting(id: String) -> int:
 func set_setting(id: String, value: int) -> void:
 	set_config("settings", id, value)
 	get_tree().current_scene.setting_hook(id, value)
+
+func rumble(important: bool, time: float) -> void:
+	if get_setting("rumble") == 0: return
+	if len(Input.get_connected_joypads()) == 0: return
+	var joy: int = Input.get_connected_joypads()[0]
+	var weak := get_setting("rumble") == 1
+	if important: Input.start_joy_vibration(joy, 1.0, 0.0 if weak else 1.0, time)
+	elif get_setting("rumble") == 1: return
+	else: Input.start_joy_vibration(joy, 1.0, 0.0, time)

@@ -55,6 +55,7 @@ func _physics_process(delta):
 	if dash_direction != Vector2.ZERO:
 		var collision = get_last_slide_collision()
 		if collision:
+			Micro.rumble(true, .10)
 			velocity = -dash_direction * max_speed * 2.
 			end_dash()
 	
@@ -70,6 +71,7 @@ func _physics_process(delta):
 		prepared_bullets = []
 		$ShootCooldown.start(shoot_cooldown*shoot_cooldown_mult)
 		if dash_direction != Vector2.ZERO:
+			Micro.rumble(true, .15)
 			velocity = -dash_direction * max_speed * 4.
 			end_dash()
 	
@@ -96,6 +98,7 @@ func _physics_process(delta):
 					traders[i].chosen = false
 
 func _hurt(amount: int, direction: float):
+	Micro.rumble(true, .2)
 	$HurtEffect.hurt(amount, direction)
 	if !Micro.get_setting("photosensitive_mode"): $Camera.hurt(clamp(float(amount)/float(hp), 0., 1.))
 
@@ -184,7 +187,7 @@ func motion_input() -> Vector2:
 	if joy_vector == Vector2.ZERO:
 		return Input.get_vector("move_left_key", "move_right_key", "move_up_key", "move_down_key")
 	else:
-		return joy_vector
+		return joy_vector.normalized()
 
 func aim_input() -> Vector2:
 	if Micro.get_setting("gamepad_aim") == 1 or len(Input.get_connected_joypads()) == 0:
@@ -209,3 +212,4 @@ func start_dash(direction: Vector2) -> void:
 	dash_direction = direction
 	$Dashline.rotation = dash_direction.angle()
 	$Dashline.emitting = true
+	Micro.rumble(false, .15)

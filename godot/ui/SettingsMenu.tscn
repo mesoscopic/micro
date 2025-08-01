@@ -84,7 +84,7 @@ layout_mode = 2
 setting_name = "Movement Joystick"
 setting_id = "swap_joysticks"
 choices = Array[String](["Left", "Right"])
-description = "Decides which joystick to use for movement. The other joystick will be used for aiming."
+description = "Controls which joystick to use for movement. The other joystick will be used for aiming."
 
 [node name="GamepadAim" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
 layout_mode = 2
@@ -96,6 +96,19 @@ description = "If Gamepad and a gamepad is connected, the game will ignore the m
 If you do not intend to use a gamepad for aiming but have one connected, set this to Mouse.
 
 If you do not have a gamepad connected, this setting can be ignored."
+
+[node name="Rumble" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
+layout_mode = 2
+setting_name = "Gamepad Rumble"
+setting_id = "rumble"
+choices = Array[String](["Off", "Reduced", "On"])
+description = "Controls whether the gamepad will rumble (if supported) on certain actions.
+
+If On, the controller will rumble when taking damage or recoil and rumble slightly when dashing.
+
+If Reduced, the controller will rumble slightly when taking damage or recoil.
+
+If Off, the controller will not rumble."
 
 [node name="Info" type="VBoxContainer" parent="Panel/Margin/MainBox"]
 layout_mode = 2
