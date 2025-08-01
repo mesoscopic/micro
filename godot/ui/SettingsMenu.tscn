@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2txisf020wo6"]
+[gd_scene load_steps=5 format=3 uid="uid://d2txisf020wo6"]
 
 [ext_resource type="Script" uid="uid://jetecqpkhaqa" path="res://ui/settings_menu.gd" id="1_7nnky"]
 [ext_resource type="PackedScene" uid="uid://ctn2krbcs71xh" path="res://ui/settings/SettingButton.tscn" id="1_oqkcn"]
+[ext_resource type="PackedScene" uid="uid://dmgimpw0u3pvn" path="res://ui/settings/SettingSection.tscn" id="3_rd3qm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4npji"]
 bg_color = Color(0, 0, 0, 1)
@@ -50,6 +51,10 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="Visual" parent="Panel/Margin/MainBox/Options" instance=ExtResource("3_rd3qm")]
+layout_mode = 2
+title = "VISUAL"
+
 [node name="Fullscreen" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
 layout_mode = 2
 setting_name = "Fullscreen"
@@ -78,6 +83,10 @@ setting_name = "Reduce Flashing"
 setting_id = "photosensitive_mode"
 choices = Array[String](["No", "Yes"])
 description = "If Yes, certain visual effects are simplified or disabled to reduce flashing on screen."
+
+[node name="Controller" parent="Panel/Margin/MainBox/Options" instance=ExtResource("3_rd3qm")]
+layout_mode = 2
+title = "CONTROLLER"
 
 [node name="SwapJoysticks" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
 layout_mode = 2

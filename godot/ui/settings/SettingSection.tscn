@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmgimpw0u3pvn"]
+
+[ext_resource type="Script" uid="uid://cm671ve0x6wf7" path="res://ui/settings/setting_section.gd" id="1_ftabu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ftabu"]
+draw_center = false
+border_width_bottom = 2
+border_color = Color(0.439216, 0.439216, 0.439216, 1)
+
+[node name="SettingSection" type="PanelContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 19.6667
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ftabu")
+script = ExtResource("1_ftabu")
+
+[node name="SectionTitle" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.439216, 0.439216, 1)

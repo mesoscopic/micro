@@ -5,7 +5,7 @@ signal done
 func _ready() -> void:
 	for setting_button in $Panel/Margin/MainBox/Options.get_children():
 		setting_button.show_description.connect(show_description)
-	$Panel/Margin/MainBox/Options.get_child(0).grab_focus()
+	$Panel/Margin/MainBox/Options.get_child(1).grab_focus()
 
 func _input(event) -> void:
 	if event.is_action_pressed("open_menu") or event.is_action_pressed("ui_cancel"):
