@@ -119,6 +119,8 @@ func _die():
 	get_tree().current_scene._on_death()
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		aim_direction = get_local_mouse_position().normalized()
 	if !movement_disabled and trading and event.is_action_pressed("ui_accept"):
 		Micro.attempt_trade(chosen_trader)
 
@@ -190,18 +192,15 @@ func motion_input() -> Vector2:
 		return joy_vector.normalized()
 
 func aim_input() -> Vector2:
-	if Micro.get_setting("gamepad_aim") == 1 or len(Input.get_connected_joypads()) == 0:
-		return get_local_mouse_position().normalized()
-	else:
-		var swap := bool(Micro.get_setting("swap_joysticks"))
-		var joy_vector := Input.get_vector(
-			"move_left_joy" if swap else "aim_left",
-			"move_right_joy" if swap else "aim_right",
-			"move_up_joy" if swap else "aim_up",
-			"move_down_joy" if swap else "aim_down"
-		).normalized()
-		if joy_vector != Vector2.ZERO: aim_direction = joy_vector
-		return aim_direction
+	var swap := bool(Micro.get_setting("swap_joysticks"))
+	var joy_vector := Input.get_vector(
+		"move_left_joy" if swap else "aim_left",
+		"move_right_joy" if swap else "aim_right",
+		"move_up_joy" if swap else "aim_up",
+		"move_down_joy" if swap else "aim_down"
+	).normalized()
+	if joy_vector != Vector2.ZERO: aim_direction = joy_vector
+	return aim_direction
 
 func start_dash(direction: Vector2) -> void:
 	invincible = true

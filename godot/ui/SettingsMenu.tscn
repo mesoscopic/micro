@@ -86,17 +86,6 @@ setting_id = "swap_joysticks"
 choices = Array[String](["Left", "Right"])
 description = "Controls which joystick to use for movement. The other joystick will be used for aiming."
 
-[node name="GamepadAim" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
-layout_mode = 2
-setting_name = "Aim Preference"
-setting_id = "gamepad_aim"
-choices = Array[String](["Gamepad", "Mouse"])
-description = "If Gamepad and a gamepad is connected, the game will ignore the mouse for aiming.
-
-If you do not intend to use a gamepad for aiming but have one connected, set this to Mouse.
-
-If you do not have a gamepad connected, this setting can be ignored."
-
 [node name="Rumble" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
 layout_mode = 2
 setting_name = "Gamepad Rumble"

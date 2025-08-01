@@ -13,7 +13,6 @@ var settings_defaults: Dictionary[String, int] = {
 	"fullscreen": 1,
 	"vsync": 1,
 	"swap_joysticks": 0,
-	"gamepad_aim": 0,
 	"rumble": 2
 }
 
