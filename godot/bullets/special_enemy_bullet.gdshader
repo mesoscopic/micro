@@ -13,10 +13,10 @@ void fragment() {
 	float d = (abs(2.*xy.x) + abs(xy.y));
 	COLOR.a *= fill(d, 1.0);
 	COLOR.rgb -= vec3(stroke(d, 0.5, 0.3));
-	
+
 	// Form animation
 	COLOR.a *= smoothstep(form_anim*-2.+1., form_anim*-4.+3., snoise(VERTEX/30.));
-	
+
 	// Dissolve animation
 	COLOR.a *= aastep(-2.+dissolve_anim*3.+UV.y, snoise(VERTEX/10.));
 }
