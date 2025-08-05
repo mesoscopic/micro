@@ -81,6 +81,8 @@ func _physics_process(_delta: float) -> void:
 		match current_biome:
 			Biome.PEACE:
 				change_bg("peace")
+			Biome.LANDING:
+				change_bg("landing")
 			_:
 				change_bg("default")
 	
@@ -139,7 +141,7 @@ func get_biome(pos: Vector2i) -> Biome:
 		return Biome.DEFAULT
 
 func change_bg(new_effect: String):
-	var effects := ["default", "peace"]
+	var effects := ["landing", "default", "peace"]
 	var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 	for effect in effects:
 		if effect == new_effect:
