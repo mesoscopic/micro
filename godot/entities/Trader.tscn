@@ -8,7 +8,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6saqy"]
 shader = ExtResource("1_2l6qv")
 
-[sub_resource type="Image" id="Image_qhhoa"]
+[sub_resource type="Image" id="Image_6saqy"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -18,7 +18,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_kem3a"]
-image = SubResource("Image_qhhoa")
+image = SubResource("Image_6saqy")
 script = ExtResource("2_qhhoa")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 

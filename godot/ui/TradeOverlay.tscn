@@ -64,7 +64,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [5]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -76,7 +76,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [5]
 }
 
 [sub_resource type="Animation" id="Animation_8mgf8"]
@@ -93,7 +93,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [10, 0, 10, 0]
+"values": [10, 0, 10, 5]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -102,10 +102,10 @@ tracks/1/path = NodePath("Panel/Margin/HBoxContainer/VBoxContainer/MarginContain
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 10, 0]
+"values": [0, 10, 0, 5]
 }
 
 [sub_resource type="Animation" id="Animation_q558e"]
@@ -328,8 +328,8 @@ texture = SubResource("GradientTexture2D_4mp1p")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_right = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/Margin/HBoxContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
