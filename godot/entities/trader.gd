@@ -38,8 +38,7 @@ func init_state(new_state: TraderState) -> void:
 			wander()
 		TraderState.COLLECTED:
 			if state == TraderState.COLLECTING:
-				wander_origin = Vector2.ZERO
-				wander_range = 240.
+				wander_range = 200.
 				wander_distance = 80.
 			Micro.world.refresh_trades.connect(refresh_item)
 			state = new_state
@@ -86,12 +85,14 @@ func _on_collect_area_entered(body: Node2D) -> void:
 	$CollectParticles.emitting = true
 	init_state(TraderState.COLLECTING)
 	await Micro.wait(1.5)
-	var charge_anim = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO).tween_property(self, "position", position+position.normalized()*60., 1.)
+	var house: Vector2 = Micro.world.houses.pop_front()*20.
+	var charge_anim = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO).tween_property(self, "position", position+(position-house).normalized()*60., 1.)
 	await charge_anim.finished
 	$SpeedParticles.emitting = true
-	var move_anim = create_tween().tween_property(self, "position", position.normalized()*160., (position.length()-160.)/500.)
+	var move_anim = create_tween().tween_property(self, "position", house, (position-house).length()/500.)
 	await move_anim.finished
 	$SpeedParticles.emitting = false
+	wander_origin = house
 	init_state(TraderState.COLLECTED)
 	if !$OnScreenDetector.is_on_screen():
 		process_mode = Node.PROCESS_MODE_DISABLED

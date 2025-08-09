@@ -98,6 +98,8 @@ signal purchase_upgrade(item: Upgrade)
 @warning_ignore("unused_signal")
 signal upgrade_purchased
 
+var houses: Array[Vector2i] = [Vector2i(0,15),Vector2i(15,0),Vector2i(0,-15),Vector2i(-15,0)]
+
 func tile_at(pos: Vector2) -> Vector2i:
 	return round(pos / 20.)
 
