@@ -59,10 +59,10 @@ func worldgen_status(status: String) -> void:
 
 func show_trade_information(trader: Trader):
 	var overlay = get_tree().current_scene.get_node("UI/TradeOverlay")
-	overlay.get_node("HBoxContainer/Trader/VBoxContainer/ItemDisplay").material = trader.item.render
-	overlay.get_node("HBoxContainer/Trader/VBoxContainer/MarginContainer/HBoxContainer/Cost").text = "%s" % trader.item.cost
-	overlay.get_node("HBoxContainer/MarginContainer/VBoxContainer/Title").text = trader.item.title
-	overlay.get_node("HBoxContainer/MarginContainer/VBoxContainer/Description").text = trader.item.description
+	overlay.get_node("Panel/Margin/HBoxContainer/VBoxContainer/ItemDisplay").material = trader.item.render
+	overlay.get_node("Panel/Margin/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Cost").text = "%s" % trader.item.cost
+	overlay.get_node("Panel/Margin/HBoxContainer/MarginContainer/VBoxContainer/Title").text = trader.item.title
+	overlay.get_node("Panel/Margin/HBoxContainer/MarginContainer/VBoxContainer/Description").text = trader.item.description
 	if !overlay.visible:
 		overlay.get_node("Animations").play("show")
 	else:

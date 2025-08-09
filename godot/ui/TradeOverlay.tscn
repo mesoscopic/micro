@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://dy06d53ihw0wa"]
+[gd_scene load_steps=17 format=3 uid="uid://dy06d53ihw0wa"]
 
-[ext_resource type="Shader" uid="uid://cs7iamvps60cm" path="res://entities/trader.gdshader" id="1_4oh78"]
+[ext_resource type="Shader" uid="uid://cmtdkyrhbqa78" path="res://ui/trade_overlay.gdshader" id="1_ld0m6"]
 [ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://misc/shaders/funds.gdshader" id="2_4mp1p"]
+[ext_resource type="Texture2D" uid="uid://xk0f0ogwow0a" path="res://assets/baked_noise/hurt_effect.png" id="2_5q244"]
 
 [sub_resource type="Animation" id="Animation_jl48y"]
 length = 0.001
@@ -20,46 +21,58 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
+tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 608)]
+"update": 1,
+"values": [false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:visible")
+tracks/2/path = NodePath("Panel:material:shader_parameter/disappear")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("HBoxContainer/Trader/VBoxContainer/MarginContainer:theme_override_constants/margin_left")
+tracks/3/path = NodePath("Panel:material:shader_parameter/modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
+"update": 0,
+"values": [1.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("HBoxContainer/Trader/VBoxContainer/MarginContainer:theme_override_constants/margin_right")
+tracks/4/path = NodePath("Panel/Margin/HBoxContainer/VBoxContainer/MarginContainer:theme_override_constants/margin_left")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Panel/Margin/HBoxContainer/VBoxContainer/MarginContainer:theme_override_constants/margin_right")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -73,26 +86,26 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("HBoxContainer/Trader/VBoxContainer/MarginContainer:theme_override_constants/margin_left")
+tracks/0/path = NodePath("Panel/Margin/HBoxContainer/VBoxContainer/MarginContainer:theme_override_constants/margin_left")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [10, 0, 10, 0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HBoxContainer/Trader/VBoxContainer/MarginContainer:theme_override_constants/margin_right")
+tracks/1/path = NodePath("Panel/Margin/HBoxContainer/VBoxContainer/MarginContainer:theme_override_constants/margin_right")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0, 10, 0, 0]
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 10, 0]
 }
 
 [sub_resource type="Animation" id="Animation_q558e"]
@@ -114,26 +127,26 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
+tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 608), Vector2(0, 708)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:material:shader_parameter/modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_0c6mr"]
@@ -155,26 +168,26 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
+tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 608)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:material:shader_parameter/modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
 }
 
 [sub_resource type="Animation" id="Animation_4mp1p"]
@@ -196,26 +209,26 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
+tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 708), Vector2(0, 608)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:material:shader_parameter/modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q558e"]
@@ -227,35 +240,28 @@ _data = {
 &"show": SubResource("Animation_4mp1p")
 }
 
-[sub_resource type="Gradient" id="Gradient_cm0pq"]
-offsets = PackedFloat32Array(0.309045, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5q244"]
+shader = ExtResource("1_ld0m6")
+shader_parameter/cracks = ExtResource("2_5q244")
+shader_parameter/modulate = 1.0
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_fos0i"]
-gradient = SubResource("Gradient_cm0pq")
-width = 1150
-height = 160
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4mp1p"]
-shader = ExtResource("1_4oh78")
-shader_parameter/opacity = 1.0
-shader_parameter/velocity = Vector2(0, 0)
-
-[sub_resource type="Gradient" id="Gradient_jl48y"]
-colors = PackedColorArray(1, 1, 1, 0.294118, 1, 1, 1, 0.294118)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_q558e"]
-gradient = SubResource("Gradient_jl48y")
-width = 160
-height = 160
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tv054"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_left = 30
+corner_radius_top_right = 30
 
 [sub_resource type="Gradient" id="Gradient_4oh78"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_4mp1p"]
 gradient = SubResource("Gradient_4oh78")
-width = 80
-height = 80
+width = 60
+height = 60
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jl48y"]
 shader = ExtResource("2_4mp1p")
@@ -271,11 +277,11 @@ height = 24
 [node name="TradeOverlay" type="Control"]
 visible = false
 layout_mode = 3
-anchors_preset = 2
+anchors_preset = 12
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 40.0
+grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 
@@ -284,68 +290,59 @@ libraries = {
 &"": SubResource("AnimationLibrary_q558e")
 }
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Panel" type="PanelContainer" parent="."]
+material = SubResource("ShaderMaterial_5q244")
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -160.0
-offset_right = 1150.0
-grow_vertical = 0
-texture = SubResource("GradientTexture2D_fos0i")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -64.0
-offset_right = 64.0
-grow_vertical = 0
-
-[node name="Trader" type="TextureRect" parent="HBoxContainer"]
-material = SubResource("ShaderMaterial_4mp1p")
-layout_mode = 2
-texture = SubResource("GradientTexture2D_q558e")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Trader"]
-layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -54.0
-offset_right = 40.0
-offset_bottom = 61.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_tv054")
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Margin"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Margin/HBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="ItemDisplay" type="TextureRect" parent="HBoxContainer/Trader/VBoxContainer"]
+[node name="ItemDisplay" type="TextureRect" parent="Panel/Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = SubResource("GradientTexture2D_4mp1p")
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Trader/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Margin/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_right = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Trader/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Margin/HBoxContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="FundsIcon" type="TextureRect" parent="HBoxContainer/Trader/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="FundsIcon" type="TextureRect" parent="Panel/Margin/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 material = SubResource("ShaderMaterial_jl48y")
 layout_mode = 2
 texture = SubResource("GradientTexture2D_8mgf8")
 stretch_mode = 3
 
-[node name="Cost" type="Label" parent="HBoxContainer/Trader/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="Cost" type="Label" parent="Panel/Margin/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -354,22 +351,22 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 20
 text = "0"
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Margin/HBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 30
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Margin/HBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Title" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="Panel/Margin/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 20
 text = "Upgrade Title"
 
-[node name="Description" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Description" type="Label" parent="Panel/Margin/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Upgrade Description"
