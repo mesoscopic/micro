@@ -128,10 +128,10 @@ func _on_toll_leave_range() -> void:
 
 func _on_toll_paid() -> void:
 	await Micro.wait(1.)
-	Micro.world.refresh_trades.emit()
 	get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).tween_property(Micro.player.get_node("Camera"), "global_position", Vector2.ZERO, 0.5)
 	Micro.world.purchase_upgrade.emit(item)
 	await Micro.world.upgrade_purchased
+	Micro.world.refresh_trades.emit()
 	await Micro.wait(1.)
 	Micro.show_trade_information(Micro.player.chosen_toll)
 	Micro.player.movement_disabled = false
