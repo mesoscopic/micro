@@ -28,7 +28,7 @@ func pay() -> void:
 		coin.target = self
 		Micro.player.add_sibling(coin)
 		amount -= ceil(amount/8.)
-		await Micro.wait(0.05)
+		await Micro.wait(0.01)
 	paid.emit()
 
 func set_for_upgrade(upgrade: Upgrade):
