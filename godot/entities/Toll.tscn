@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://ceq78x2nlo2eh"]
+
+[ext_resource type="Script" uid="uid://btvarogdmtbcd" path="res://entities/toll.gd" id="1_5axlk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5axlk"]
+radius = 60.0
+
+[node name="Toll" type="Node2D"]
+script = ExtResource("1_5axlk")
+
+[node name="Range" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_5axlk")
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_left"]

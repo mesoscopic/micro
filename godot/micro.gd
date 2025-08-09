@@ -57,12 +57,12 @@ func worldgen_status(status: String) -> void:
 	get_tree().current_scene.get_node("ScreenWipe/StatusMessage").text = status
 	await get_tree().process_frame
 
-func show_trade_information(trader: Trader):
+func show_trade_information(toll: Toll):
 	var overlay = get_tree().current_scene.get_node("UI/TradeOverlay")
-	overlay.get_node("Panel/Margin/HBoxContainer/VBoxContainer/ItemDisplay").material = trader.item.render
-	overlay.get_node("Panel/Margin/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Cost").text = "%s" % trader.item.cost
-	overlay.get_node("Panel/Margin/HBoxContainer/MarginContainer/VBoxContainer/Title").text = trader.item.title
-	overlay.get_node("Panel/Margin/HBoxContainer/MarginContainer/VBoxContainer/Description").text = trader.item.description
+	overlay.get_node("Panel/Margin/HBoxContainer/VBoxContainer/ItemDisplay").material = toll.render
+	overlay.get_node("Panel/Margin/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Cost").text = "%s" % toll.cost
+	overlay.get_node("Panel/Margin/HBoxContainer/MarginContainer/VBoxContainer/Title").text = toll.title
+	overlay.get_node("Panel/Margin/HBoxContainer/MarginContainer/VBoxContainer/Description").text = toll.description
 	if !overlay.visible:
 		overlay.get_node("Animations").play("show")
 	else:
@@ -71,14 +71,13 @@ func show_trade_information(trader: Trader):
 func hide_trading():
 	get_tree().current_scene.get_node("UI/TradeOverlay/Animations").play("hide")
 
-func attempt_trade(trader: Trader):
+func attempt_payment(toll: Toll):
 	var overlay = get_tree().current_scene.get_node("UI/TradeOverlay")
-	var item = trader.item
-	if Micro.player.funds < item.cost:
+	if Micro.player.funds < toll.cost:
 		overlay.get_node("Animations").play("cannot_afford")
 	else:
 		overlay.get_node("Animations").play("hide")
-		world.trade(trader, item)
+		toll.pay()
 
 func roll(weights: RollWeights) -> Variant:
 	var random: RandomNumberGenerator

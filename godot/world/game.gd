@@ -91,36 +91,12 @@ func _physics_process(_delta: float) -> void:
 func _on_emptiness_damage_timeout() -> void:
 	Micro.player.damage(1, true)
 
-const TRADE_COIN = preload("res://misc/effects/TradeCoin.tscn")
+@warning_ignore("unused_signal")
 signal refresh_trades
+@warning_ignore("unused_signal")
 signal purchase_upgrade(item: Upgrade)
-
-func trade(trader: Trader, item: Upgrade):
-	Micro.player.movement_disabled = true
-	var amount := item.cost
-	while amount > 0:
-		var coin := TRADE_COIN.instantiate()
-		coin.position = Micro.player.position
-		var coin_amount: int = ceil(amount/8.)
-		coin.amount = coin_amount
-		Micro.player.funds -= coin_amount
-		Micro.player.get_node("FundsDisplay/HBoxContainer/Label").text = "%s" % Micro.player.funds
-		coin.target = trader
-		Micro.player.add_sibling(coin)
-		amount -= ceil(amount/8.)
-		await Micro.wait(0.05)
-	await Micro.wait(1.)
-	refresh_trades.emit()
-	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(Micro.player.get_node("Camera"), "global_position", Vector2.ZERO, 0.5)
-	purchase_upgrade.emit(item)
-
-func end_trade():
-	await Micro.wait(1.)
-	Micro.show_trade_information(Micro.player.chosen_trader)
-	Micro.player.movement_disabled = false
-	var tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(Micro.player.get_node("Camera"), "position", Vector2.ZERO, 0.5)
+@warning_ignore("unused_signal")
+signal upgrade_purchased
 
 func tile_at(pos: Vector2) -> Vector2i:
 	return round(pos / 20.)

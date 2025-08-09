@@ -1,7 +1,7 @@
 extends Node2D
 
 var amount: int = 0
-var target: Trader
+var target: Toll
 
 var speed := 150.
 var moving: bool = true

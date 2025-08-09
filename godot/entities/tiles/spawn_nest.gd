@@ -8,7 +8,8 @@ func _ready() -> void:
 		activate()
 		await Micro.wait(0.5)
 		purchased_upgrade = item
-		)
+		Micro.world.upgrade_purchased.emit()
+	)
 
 func _on_home_zone_entered(_body: Node2D) -> void:
 	$RegenTimer.start()

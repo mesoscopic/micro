@@ -25,8 +25,8 @@ var aim_direction := Vector2.RIGHT
 
 @export var funds: int = 0
 var trading: bool = false
-var traders: Array[Trader] = []
-var chosen_trader: Trader
+var tolls: Array[Toll] = []
+var chosen_toll: Toll
 var prepared_bullets: Array[TelegraphedBullet]
 
 func _ready():
@@ -79,23 +79,23 @@ func _physics_process(delta):
 		start_dash(aim_input())
 		
 	if trading:
-		if traders.size() == 0:
+		if tolls.size() == 0:
 			trading = false
 			$FundsDisplay/AnimationPlayer.stop()
 			$FundsDisplay/AnimationPlayer.play("hide_funds")
 			Micro.hide_trading()
-			chosen_trader = null
+			chosen_toll = null
 		else:
-			traders.sort_custom(func(a, b): return a.global_position.distance_squared_to(position) < b.global_position.distance_squared_to(position))
-			for i in range(traders.size()):
+			tolls.sort_custom(func(a, b): return a.global_position.distance_squared_to(position) < b.global_position.distance_squared_to(position))
+			for i in range(tolls.size()):
 				if i == 0:
 					# closest trader
-					traders[i].chosen = true
-					if traders[i] != chosen_trader:
-						chosen_trader = traders[i]
-						Micro.show_trade_information(chosen_trader)
+					tolls[i].set_chosen(true)
+					if tolls[i] != chosen_toll:
+						chosen_toll = tolls[i]
+						Micro.show_trade_information(chosen_toll)
 				else:
-					traders[i].chosen = false
+					tolls[i].set_chosen(false)
 
 func _hurt(amount: int, direction: float):
 	Micro.rumble(true, .2)
@@ -122,7 +122,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		aim_direction = get_local_mouse_position().normalized()
 	if !movement_disabled and trading and event.is_action_pressed("ui_accept"):
-		Micro.attempt_trade(chosen_trader)
+		Micro.attempt_payment(chosen_toll)
 
 func give_funds(amount: int) -> void:
 	funds += amount
@@ -135,8 +135,8 @@ func give_funds(amount: int) -> void:
 						# but we still need a photosensitive version in this case
 		("get_funds_simple" if Micro.get_setting("photosensitive_mode") else "get_funds"))
 
-func add_trader(trader: Trader) -> void:
-	traders.append(trader)
+func add_toll(toll: Toll) -> void:
+	tolls.append(toll)
 	if trading: return
 	trading = true
 	$FundsDisplay/AnimationPlayer.stop()

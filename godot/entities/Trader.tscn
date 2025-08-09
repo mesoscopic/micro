@@ -3,6 +3,7 @@
 [ext_resource type="Shader" uid="uid://cs7iamvps60cm" path="res://entities/trader.gdshader" id="1_2l6qv"]
 [ext_resource type="Script" uid="uid://bgi51q1qpnvci" path="res://entities/trader.gd" id="1_qhhoa"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="2_qhhoa"]
+[ext_resource type="PackedScene" uid="uid://ceq78x2nlo2eh" path="res://entities/Toll.tscn" id="4_6saqy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6saqy"]
 shader = ExtResource("1_2l6qv")
@@ -25,9 +26,6 @@ metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vhato"]
 size = Vector2(80, 80)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_2l6qv"]
-radius = 60.0
 
 [sub_resource type="Curve" id="Curve_a1b7o"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -96,6 +94,9 @@ material = SubResource("ShaderMaterial_6saqy")
 scale = Vector2(16, 16)
 texture = SubResource("ImageTexture_kem3a")
 
+[node name="Toll" parent="." instance=ExtResource("4_6saqy")]
+enabled = false
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_bki2m")
 
@@ -108,13 +109,6 @@ collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
 shape = SubResource("RectangleShape2D_vhato")
-
-[node name="TradeRange" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TradeRange"]
-shape = SubResource("CircleShape2D_2l6qv")
 
 [node name="CollectParticles" type="GPUParticles2D" parent="."]
 emitting = false
@@ -132,11 +126,13 @@ process_material = SubResource("ParticleProcessMaterial_qhhoa")
 emitting = false
 amount = 16
 lifetime = 0.5
-one_shot = true
 process_material = SubResource("ParticleProcessMaterial_6saqy")
 
+[connection signal="chosen" from="Toll" to="." method="_on_toll_chosen"]
+[connection signal="enter_range" from="Toll" to="." method="_on_toll_enter_range"]
+[connection signal="leave_range" from="Toll" to="." method="_on_toll_leave_range"]
+[connection signal="paid" from="Toll" to="." method="_on_toll_paid"]
+[connection signal="unchosen" from="Toll" to="." method="_on_toll_unchosen"]
 [connection signal="screen_entered" from="OnScreenDetector" to="." method="_on_enter_screen"]
 [connection signal="screen_exited" from="OnScreenDetector" to="." method="_on_exit_screen"]
 [connection signal="body_entered" from="CollectArea" to="." method="_on_collect_area_entered"]
-[connection signal="body_entered" from="TradeRange" to="." method="_on_trade_range_body_entered"]
-[connection signal="body_exited" from="TradeRange" to="." method="_on_trade_range_body_exited"]

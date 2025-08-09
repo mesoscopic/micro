@@ -19,10 +19,6 @@ var last_direction: Vector2 = Vector2.ZERO
 var first_frame := true
 
 var trading: bool = false
-var chosen: bool = false:
-	set(chosen):
-		chosen = chosen
-		if chosen: $HappyParticles.emitting = true
 var item: Upgrade
 
 func should_stop() -> bool:
@@ -47,6 +43,7 @@ func init_state(new_state: TraderState) -> void:
 				wander_distance = 80.
 			Micro.world.refresh_trades.connect(refresh_item)
 			state = new_state
+			$Toll.enabled = true
 			Micro.world.refresh_trades.emit()
 			wander()
 		_:
@@ -108,17 +105,7 @@ func refresh_item() -> void:
 	weights.add_item(VolumeUpgrade, 2)
 	weights.add_item(VitalityUpgrade, 4)
 	item = Micro.roll(weights).new()
-
-func _on_trade_range_body_entered(body: Node2D) -> void:
-	if body != Micro.player or state != TraderState.COLLECTED: return
-	trading = true
-	Micro.player.add_trader(self)
-
-func _on_trade_range_body_exited(body: Node2D) -> void:
-	if body != Micro.player or state != TraderState.COLLECTED: return
-	trading = false
-	chosen = false
-	Micro.player.traders.erase(self)
+	$Toll.set_for_upgrade(item)
 
 func _on_enter_screen() -> void:
 	process_mode = Node.PROCESS_MODE_INHERIT
@@ -126,3 +113,26 @@ func _on_enter_screen() -> void:
 func _on_exit_screen() -> void:
 	if state != TraderState.COLLECTING:
 		process_mode = Node.PROCESS_MODE_DISABLED
+
+func _on_toll_chosen() -> void:
+	$HappyParticles.emitting = true
+
+func _on_toll_unchosen() -> void:
+	$HappyParticles.emitting = false
+
+func _on_toll_enter_range() -> void:
+	trading = true
+
+func _on_toll_leave_range() -> void:
+	trading = false
+
+func _on_toll_paid() -> void:
+	await Micro.wait(1.)
+	Micro.world.refresh_trades.emit()
+	get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).tween_property(Micro.player.get_node("Camera"), "global_position", Vector2.ZERO, 0.5)
+	Micro.world.purchase_upgrade.emit(item)
+	await Micro.world.upgrade_purchased
+	await Micro.wait(1.)
+	Micro.show_trade_information(Micro.player.chosen_toll)
+	Micro.player.movement_disabled = false
+	get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).tween_property(Micro.player.get_node("Camera"), "position", Vector2.ZERO, 0.5)
