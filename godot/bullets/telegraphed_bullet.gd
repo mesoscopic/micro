@@ -29,7 +29,8 @@ func get_aim_position() -> Vector2:
 	var space_state = get_world_2d().direct_space_state
 	var direction = aim_vec * distance + shooter.global_position
 	var query = PhysicsRayQueryParameters2D.create(shooter.global_position, direction)
-	query.collision_mask = 1 | (int(is_player)<<3)
+	query.collision_mask = 1 | (int(is_player)<<3) | (int(!is_player)<<4)
+	query.hit_from_inside = true
 	var result = space_state.intersect_ray(query)
 	
 	if result:
