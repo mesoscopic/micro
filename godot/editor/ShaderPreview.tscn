@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://by05sm0h6q6d0"]
+
+[ext_resource type="Shader" uid="uid://35bujm7yhajd" path="res://entities/player/upgrades/volume.gdshader" id="1_40mjc"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="2_mulxe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bn4b0"]
+shader = ExtResource("1_40mjc")
+
+[sub_resource type="Image" id="Image_4o0wo"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_s6ovp"]
+image = SubResource("Image_4o0wo")
+script = ExtResource("2_mulxe")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[node name="ShaderPreview" type="Sprite2D"]
+material = SubResource("ShaderMaterial_bn4b0")
+scale = Vector2(50, 50)
+texture = SubResource("ImageTexture_s6ovp")
