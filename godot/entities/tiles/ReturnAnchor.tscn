@@ -1,0 +1,147 @@
+[gd_scene load_steps=25 format=3 uid="uid://crgc4i8l7fixw"]
+
+[ext_resource type="Script" uid="uid://71gemlmplsmg" path="res://entities/tiles/return_anchor.gd" id="1_3rb1k"]
+[ext_resource type="Shader" uid="uid://cl4tmvo4r3y2u" path="res://entities/tiles/portal.gdshader" id="1_tvuwn"]
+[ext_resource type="PackedScene" uid="uid://ceq78x2nlo2eh" path="res://entities/Toll.tscn" id="2_31usi"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="2_kfqnq"]
+[ext_resource type="Shader" uid="uid://cjhdxgx78hiya" path="res://misc/shaders/dash_ghost.gdshader" id="3_kfqnq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ssdt4"]
+shader = ExtResource("1_tvuwn")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3rb1k"]
+shader = ExtResource("1_tvuwn")
+
+[sub_resource type="Image" id="Image_31usi"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_ssdt4"]
+image = SubResource("Image_31usi")
+script = ExtResource("2_kfqnq")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_31usi"]
+shader = ExtResource("3_kfqnq")
+
+[sub_resource type="Curve" id="Curve_ssdt4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.154867, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.69775, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hmd6r"]
+curve = SubResource("Curve_ssdt4")
+
+[sub_resource type="Curve" id="Curve_3rb1k"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.353982, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_31usi"]
+curve = SubResource("Curve_3rb1k")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jqxmy"]
+particle_flag_disable_z = true
+angle_min = -45.0
+angle_max = 45.0
+spread = 0.0
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+scale_min = 10.0
+scale_max = 25.0
+scale_curve = SubResource("CurveTexture_31usi")
+alpha_curve = SubResource("CurveTexture_hmd6r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hmd6r"]
+shader = ExtResource("3_kfqnq")
+
+[sub_resource type="Curve" id="Curve_jqxmy"]
+_data = [Vector2(0, 1), 0.0, -1.99518, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_m2qx7"]
+curve = SubResource("Curve_jqxmy")
+
+[sub_resource type="Curve" id="Curve_2r7o7"]
+_data = [Vector2(0, 0), 0.0, 9.64944, 0, 0, Vector2(0.150442, 0.910112), 1.15424, 0.338577, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_oswgk"]
+curve = SubResource("Curve_2r7o7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ws2q8"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 40.0
+scale_max = 100.0
+scale_curve = SubResource("CurveTexture_oswgk")
+alpha_curve = SubResource("CurveTexture_m2qx7")
+
+[sub_resource type="Curve" id="Curve_31usi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.32066, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ssdt4"]
+curve = SubResource("Curve_31usi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m2qx7"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 10, 1)
+angle_min = 45.0
+angle_max = 45.0
+spread = 0.0
+initial_velocity_min = 100.0
+initial_velocity_max = 2000.0
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 10.0
+alpha_curve = SubResource("CurveTexture_ssdt4")
+
+[node name="ReturnAnchor" type="Node2D"]
+script = ExtResource("1_3rb1k")
+
+[node name="Toll" parent="." instance=ExtResource("2_31usi")]
+cost = 20
+title = "Anchor"
+description = "Return to the start"
+render = SubResource("ShaderMaterial_ssdt4")
+
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3rb1k")
+scale = Vector2(30, 30)
+texture = SubResource("ImageTexture_ssdt4")
+
+[node name="Guide" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_31usi")
+emitting = false
+amount = 10
+lifetime = 2.0
+visibility_rect = Rect2(-500, -500, 1000, 1000)
+process_material = SubResource("ParticleProcessMaterial_jqxmy")
+
+[node name="Boom" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_hmd6r")
+emitting = false
+amount = 4
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ws2q8")
+
+[node name="Trail" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_m2qx7")
+
+[connection signal="chosen" from="Toll" to="." method="_on_toll_chosen"]
+[connection signal="paid" from="Toll" to="." method="_on_toll_paid"]
+[connection signal="unchosen" from="Toll" to="." method="_on_toll_unchosen"]
