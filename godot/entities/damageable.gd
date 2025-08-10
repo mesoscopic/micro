@@ -21,7 +21,7 @@ func tick():
 	$Render.material.set("shader_parameter/damaged", !itimer.is_stopped() or invincible)
 
 func damage(amount: int, bypass_itime := false, direction := randf_range(0,2*PI)):
-	if invincible or (!itimer.is_stopped() and !bypass_itime): return
+	if invincible or Micro.player.movement_disabled or (!itimer.is_stopped() and !bypass_itime): return
 	hp -= amount
 	if invulnerability_time > .0 and !bypass_itime: itimer.start(invulnerability_time)
 	if hp <= 0:
