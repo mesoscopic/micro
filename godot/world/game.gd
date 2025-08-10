@@ -153,7 +153,7 @@ func generate_world():
 		while !attempt_decide_biome_for_center_structure(dir*distance, Biome.PEACE, 10):
 			distance += 10
 		var location := biome_center_at(dir*distance)
-		place("trader_miniboss_arena", location)
+		place("trader_miniboss_arena", location, true)
 		var miniboss := preload("res://entities/tiles/EnemyPosition.tscn").instantiate()
 		miniboss.enemy = preload("res://entities/enemies/TraderMiniboss.tscn")
 		miniboss.spawn_radius = 140.
@@ -163,7 +163,7 @@ func generate_world():
 		miniboss.position = location * 20.
 		$Entities.add_child(miniboss)
 		var trader_location := Vector2i((Vector2(location).normalized()*40).round())
-		place("small_house", trader_location)
+		place("small_house", trader_location, true)
 		var trader := preload("res://entities/Trader.tscn").instantiate()
 		trader.position = trader_location * 20.
 		trader.wander_range = 70.
@@ -172,9 +172,11 @@ func generate_world():
 	await Micro.worldgen_status("Scattering features...")
 	var disks := VariablePoissonDiskSampler2D.new(random, Vector2(1000, 1000), 30)
 	disks.generate(
-		func (_pos):
-			return 10.
-	, 5, 20)
+		func (pos):
+			match get_biome(pos):
+				Biome.PEACE: return 30
+				_: return 10
+	, 5, 30)
 	await Micro.worldgen_status("Placing features...")
 	for pos in disks.samples:
 		var tile := Vector2i(pos - Vector2(500, 500))
@@ -185,8 +187,10 @@ func generate_world():
 		match get_biome(tile):
 			Biome.LANDING:
 				place("cache", tile)
-			Biome.PEACE:
-				pass
+			Biome.PEACE when random.randf()>.5:
+				var structures := RollWeights.new()
+				structures.add_item("anchor_room", 1)
+				place("%s" % Micro.roll(structures), tile)
 			Biome.DEFAULT when random.randf()>.5-biome_edgeness_at(tile):
 				var obstacles := RollWeights.new()
 				obstacles.add_items(["block", "cross", "thru", "thru2"], 2)
@@ -197,9 +201,19 @@ func generate_world():
 			Biome.DEFAULT when random.randf()>0.5:
 				place("cache", tile)
 
-func place(id: String, pos: Vector2i):
+func place(id: String, pos: Vector2i, force := false):
 	var pattern: TileMapPattern = load("res://world/patterns/%s.tres" % id)
-	$Structures/NewTiles.set_pattern(pos-pattern.get_size()/2, pattern)
+	var origin := pos-pattern.get_size()/2
+	if !force:
+		for cell in pattern.get_used_cells():
+			if $Structures/NewTiles.get_cell_source_id(origin + cell) > -1:
+				return
+	for cell in pattern.get_used_cells():
+		$Structures/NewTiles.set_cell(origin + cell,
+			pattern.get_cell_source_id(cell),
+			pattern.get_cell_atlas_coords(cell),
+			pattern.get_cell_alternative_tile(cell)
+		)
 
 # Returns false if we fail
 func attempt_decide_biome_for_center_structure(tile: Vector2i, biome: Biome, margin: int) -> bool:
