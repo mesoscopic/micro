@@ -1,0 +1,96 @@
+[gd_scene load_steps=13 format=3 uid="uid://degva33wjvowa"]
+
+[ext_resource type="Shader" uid="uid://cjsixrrxcu8rt" path="res://misc/effects/heal_orb.gdshader" id="1_b02qu"]
+[ext_resource type="Script" uid="uid://be6diwae80dak" path="res://misc/effects/heal_orb.gd" id="1_xjikr"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="2_xjikr"]
+
+[sub_resource type="Curve" id="Curve_xjikr"]
+_data = [Vector2(0, 0.503029), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3461w"]
+curve = SubResource("Curve_xjikr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xm2bj"]
+particle_flag_disable_z = true
+angle_min = 45.0
+angle_max = 45.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 5.0
+alpha_curve = SubResource("CurveTexture_3461w")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3461w"]
+shader = ExtResource("1_b02qu")
+
+[sub_resource type="Image" id="Image_xm2bj"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_muy47"]
+image = SubResource("Image_xm2bj")
+script = ExtResource("2_xjikr")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="Curve" id="Curve_3461w"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.01769, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xm2bj"]
+curve = SubResource("Curve_3461w")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_muy47"]
+particle_flag_disable_z = true
+angle_min = 45.0
+angle_max = 45.0
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+damping_min = 200.0
+damping_max = 200.0
+scale_max = 3.0
+alpha_curve = SubResource("CurveTexture_xm2bj")
+
+[node name="HealOrb" type="Node2D"]
+script = ExtResource("1_xjikr")
+
+[node name="TravelParticles" type="GPUParticles2D" parent="."]
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_xm2bj")
+
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3461w")
+instance_shader_parameters/offset = 0.0
+scale = Vector2(8, 8)
+texture = SubResource("ImageTexture_muy47")
+
+[node name="HealParticles" type="GPUParticles2D" parent="."]
+emitting = false
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_muy47")
+
+[node name="Lifetime" type="Timer" parent="."]
+wait_time = 17.0
+one_shot = true
+autostart = true
+
+[node name="Warning" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="WarningParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 4
+lifetime = 0.25
+process_material = SubResource("ParticleProcessMaterial_muy47")
+
+[connection signal="timeout" from="Lifetime" to="." method="warning"]
+[connection signal="timeout" from="Warning" to="." method="burst"]

@@ -3,8 +3,7 @@ extends Damageable
 const fund_coin: PackedScene = preload("res://misc/effects/FundCoin.tscn")
 const heal_ray: PackedScene = preload("res://misc/effects/HealRay.tscn")
 const surprise: PackedScene = preload("res://entities/enemies/Surprise.tscn")
-
-
+const heal_orb: PackedScene = preload("res://misc/effects/HealOrb.tscn")
 
 func _ready():
 	super()
@@ -33,13 +32,15 @@ func do_reward(reward: String) -> void:
 			coin.position = position
 			coin.amount = 1
 			coin.delay = randf_range(0.15, 0.4)
-			add_sibling(coin)
+			Micro.world.get_node("Entities").add_child(coin)
 	elif reward == "heal":
-		var ray := heal_ray.instantiate()
-		add_child(ray)
-		ray.heal(Micro.player, 20., 1.)
+		for i in randi_range(3, 6):
+			var orb := heal_orb.instantiate()
+			orb.position = position
+			orb.distance = randf_range(20.,50.)
+			Micro.world.get_node("Entities").add_child(orb)
 	elif reward == "surprise":
 		var enemy := surprise.instantiate()
 		enemy.position = position
 		await Micro.wait(0.25)
-		call_deferred("add_sibling", enemy)
+		Micro.world.get_node("Entities").call_deferred("add_child", enemy)

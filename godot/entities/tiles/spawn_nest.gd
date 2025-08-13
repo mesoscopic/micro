@@ -10,12 +10,8 @@ func _ready() -> void:
 	)
 
 func _on_home_zone_entered(_body: Node2D) -> void:
-	$RegenTimer.start()
-	if Micro.player.hp < Micro.player.max_hp: $HealRay.heal(Micro.player, Micro.player.max_hp, 1.)
-
-func _on_home_zone_exited(_body: Node2D) -> void:
-	$RegenTimer.stop()
-
-func _on_regen() -> void:
-	if Micro.player.hp < Micro.player.max_hp:
-		Micro.player.heal(1)
+	for i in ceil((Micro.player.max_hp - Micro.player.hp)/5.*randf_range(1.,2.)):
+		var orb := preload("res://misc/effects/HealOrb.tscn").instantiate()
+		orb.position = position
+		orb.distance = randf_range(40.,80.)
+		Micro.world.get_node("Entities").add_child(orb)
