@@ -1,11 +1,11 @@
 extends Upgrade
-class_name RecklessUpgrade
+class_name RecklessnessUpgrade
 
 func _init() -> void:
-	title = "Reckless"
+	title = "Recklessness"
 	description = "-20% recharge time, +5° spread"
 	render = ShaderMaterial.new()
-	render.shader = preload("res://entities/player/upgrades/reckless.gdshader")
+	render.shader = preload("res://entities/player/upgrades/recklessness.gdshader")
 	set_cost(60)
 
 func enable() -> void:
