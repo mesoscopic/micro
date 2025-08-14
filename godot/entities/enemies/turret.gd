@@ -22,7 +22,8 @@ func aim_laser() -> void:
 	var space_state = get_world_2d().direct_space_state
 	var direction = Vector2.from_angle(aim) * 400. + global_position
 	var query = PhysicsRayQueryParameters2D.create(global_position, direction)
-	query.collision_mask = 1
+	query.collision_mask = 17
+	query.exclude = [Micro.player]
 	var result = space_state.intersect_ray(query)
 	
 	if result:

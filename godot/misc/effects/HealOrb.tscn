@@ -23,7 +23,7 @@ alpha_curve = SubResource("CurveTexture_3461w")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3461w"]
 shader = ExtResource("1_b02qu")
 
-[sub_resource type="Image" id="Image_xm2bj"]
+[sub_resource type="Image" id="Image_xjikr"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -33,7 +33,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_muy47"]
-image = SubResource("Image_xm2bj")
+image = SubResource("Image_xjikr")
 script = ExtResource("2_xjikr")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
