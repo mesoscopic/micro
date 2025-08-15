@@ -10,6 +10,7 @@ class_name BombBullet extends Node2D
 
 func _ready() -> void:
 	$Rays.set_instance_shader_parameter("rays", split_number)
+	$Flash.set_instance_shader_parameter("rays", split_number)
 	$Rays.rotation = spin
 	$Bomb.position = origin - global_position
 	$Telegraph.rotate(get_angle_to(origin))
