@@ -2,8 +2,8 @@ extends Enemy
 
 const BULLET = preload("res://bullets/TelegraphedBullet.tscn")
 const SPAWNER = preload("res://bullets/SpawnerProjectile.tscn")
-const BOMB = preload("res://bullets/Bomb.tscn")
 const LASER = preload("res://bullets/Laser.tscn")
+const BOMB = preload("res://bullets/Bomb.tscn")
 const HOMING_BULLET = preload("res://bullets/HomingBullet.tscn")
 
 var phase: int = 0
@@ -11,8 +11,8 @@ var shots: int
 var even_shot := false
 var prepared_bullets: Array[TelegraphedBullet] = []
 var spiral_angle: float = 0.
-var bombs: Array[BombBullet] = []
 var lasers: Array[LaserBullet] = []
+var bombs: Array[BombBullet] = []
 var doing_homing_attack := false
 
 func _ready() -> void:
@@ -135,27 +135,21 @@ func fire() -> void:
 		# Special attack
 		match randi_range(0,1):
 			0:
-				if hp <= max_hp*0.5:
+				if hp <= max_hp*0.9:
 					shots = (Micro.world.random.randi_range(3,5) if Micro.world.second_trader_miniboss else Micro.world.random.randi_range(1,3)) * 2
-					for i in range(0,8):
-						var bullet: TelegraphedBullet = BOMB.instantiate()
-						bullet.shooter = self
-						bullet.angle_offset = i*PI/4
-						bullet.aim(0)
-						bullet.distance = 40
-						bullet.speed = 150
-						bullet.scale = Vector2(2,2)
-						bullet.lifetime = 1.
-						bullet.damage = 30
-						bullet.split_number = 8
-						bullet.split_lifetime = 1.75
-						Micro.world.get_node("Bullets").call_deferred("add_child", bullet)
-						bombs.append(bullet)
-					await Micro.wait(0.75)
-					for b in bombs:
-						b.fire()
+					for i in range(0,5):
+						var bomb: BombBullet = BOMB.instantiate()
+						var aim := Vector2.from_angle(PI/2.*i)
+						bomb.position = position + aim*140.
+						bomb.origin = global_position + aim*35.
+						bomb.split_lifetime = 1.5
+						bombs.append(bomb)
+						Micro.world.get_node("Bullets").add_child(bomb)
+					await Micro.wait(1.5)
+					for bomb in bombs:
+						bomb.fire()
 					bombs = []
-					$Attack.start(3.)
+					$Attack.start(1.)
 				else:
 					shots = Micro.world.random.randi_range(1,3) * 2
 					var laser = LASER.instantiate()

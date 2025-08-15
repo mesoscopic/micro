@@ -31,14 +31,14 @@ shader = ExtResource("4_rd0fm")
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.44656, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_8us7s"]
+[sub_resource type="CurveTexture" id="CurveTexture_ytu0n"]
 curve = SubResource("Curve_rd0fm")
 
 [sub_resource type="Curve" id="Curve_pepvr"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_0ghsx"]
+[sub_resource type="CurveTexture" id="CurveTexture_rd0fm"]
 curve = SubResource("Curve_pepvr")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m3aw7"]
@@ -58,8 +58,8 @@ radial_velocity_min = -40.0
 radial_velocity_max = -20.0
 gravity = Vector3(0, 0, 0)
 scale_max = 2.0
-scale_curve = SubResource("CurveTexture_0ghsx")
-alpha_curve = SubResource("CurveTexture_8us7s")
+scale_curve = SubResource("CurveTexture_rd0fm")
+alpha_curve = SubResource("CurveTexture_ytu0n")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3m2ur"]
 shader = ExtResource("4_ytu0n")

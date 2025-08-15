@@ -1,24 +1,42 @@
-class_name BombBullet extends TelegraphedBullet
+class_name BombBullet extends Node2D
 
-var split_number: int = 8
-var split_speed: float = 100.
-var split_lifetime: float = 3.
-var split_damage: int = 10
-var split_scale: float = 1.
+@export var split_number: int = 8
+@export var split_speed: float = 100.
+@export var split_damage: int = 10
+@export var split_lifetime: float = 2.
+@export var origin: Vector2
+@export var spin: float = 0.
+@export var explosion_damage: int = 15
 
-func _on_collide(body) -> void:
-	_on_expire()
-	$Impact.emitting = true
+func _ready() -> void:
+	$Rays.set_instance_shader_parameter("rays", split_number)
+	$Rays.rotation = spin
+	$Bomb.position = origin - global_position
+	$Telegraph.rotate(get_angle_to(origin))
+	$Bomb.rotate(get_angle_to(origin))
 	
-	if body is Damageable:
-		body.damage(damage, false, body.get_angle_to(global_position))
-	else:
-		for i in range(0,split_number):
-			var angle = 2*PI/split_number*i
-			var bullet = preload("res://bullets/EnemyBullet.tscn").instantiate()
-			bullet.global_position = global_position
-			bullet.velocity = Vector2.from_angle(angle) * split_speed
-			bullet.lifetime = split_lifetime
+	$Bomb/Form.restart()
+	get_tree().create_tween().tween_property($Bomb, "instance_shader_parameters/form_anim", 1.0, 0.25)
+
+func fire() -> void:
+	var tween := get_tree().create_tween()
+	tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC).tween_property($Bomb, "position", Vector2.ZERO, 0.25)
+	tween.tween_callback(func():
+		$Bomb.hide()
+		$Telegraph.hide()
+		$Rays.hide()
+		$Flash.restart()
+		$Explosion.restart()
+		if global_position.distance_squared_to(Micro.player.position) < 400.:
+			Micro.player.damage(explosion_damage, false, Micro.player.get_angle_to(global_position))
+		# never would i have come up with making Vector3 the float equivalent of range. like, what?
+		for angle in Vector3(PI/float(split_number), 2.*PI, 2.*PI/float(split_number)):
+			var bullet: Bullet = preload("res://bullets/EnemyBullet.tscn").instantiate()
+			bullet.position = position
+			bullet.velocity = Vector2.from_angle(angle-spin) * split_speed
 			bullet.damage = split_damage
-			bullet.scale = Vector2(split_scale,split_scale)
-			Micro.world.get_node("Bullets").call_deferred("add_child", bullet)
+			bullet.lifetime = split_lifetime
+			add_sibling(bullet)
+		await Micro.wait(1.)
+		queue_free()
+	)
