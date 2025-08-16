@@ -32,6 +32,7 @@ func world_enemy(biome: Biome, distance: int) -> Enemy:
 			if distance >= 100:
 				enemies.add_item(preload("res://entities/enemies/MultiShooter.tscn"), 2)
 				enemies.add_item(preload("res://entities/enemies/Teleporter.tscn"), 1)
+				enemies.add_item(preload("res://entities/enemies/Bomber.tscn"), 1)
 			if distance >= 120:
 				enemies.add_item(preload("res://entities/enemies/Surpriser.tscn"), 1)
 	return Micro.roll(enemies).instantiate()

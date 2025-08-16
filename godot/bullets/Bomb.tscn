@@ -11,40 +11,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1r46a"]
 shader = ExtResource("6_jhuci")
 
-[sub_resource type="Image" id="Image_fupv5"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_dwxqm"]
-image = SubResource("Image_fupv5")
-script = ExtResource("3_g4o4w")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5t6lw"]
-shader = ExtResource("6_g4o4w")
-
-[sub_resource type="Image" id="Image_g4o4w"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_d5h8y"]
-image = SubResource("Image_g4o4w")
-script = ExtResource("3_g4o4w")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4o4w"]
-shader = ExtResource("5_fupv5")
-
 [sub_resource type="Image" id="Image_jhuci"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
@@ -54,8 +20,42 @@ data = {
 "width": 1
 }
 
-[sub_resource type="ImageTexture" id="ImageTexture_5t6lw"]
+[sub_resource type="ImageTexture" id="ImageTexture_dwxqm"]
 image = SubResource("Image_jhuci")
+script = ExtResource("3_g4o4w")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5t6lw"]
+shader = ExtResource("6_g4o4w")
+
+[sub_resource type="Image" id="Image_5t6lw"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_d5h8y"]
+image = SubResource("Image_5t6lw")
+script = ExtResource("3_g4o4w")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4o4w"]
+shader = ExtResource("5_fupv5")
+
+[sub_resource type="Image" id="Image_1r46a"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_5t6lw"]
+image = SubResource("Image_1r46a")
 script = ExtResource("3_g4o4w")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
