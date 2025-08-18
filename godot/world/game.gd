@@ -163,7 +163,7 @@ func generate_world():
 		miniboss.size = 50.
 		miniboss.position = location * 20.
 		$Entities.add_child(miniboss)
-		var trader_location := Vector2i((Vector2(location).normalized()*40).round())
+		var trader_location := Vector2i((Vector2(location).normalized()*30).round())
 		place("small_house", trader_location, true)
 		var trader := preload("res://entities/Trader.tscn").instantiate()
 		trader.position = trader_location * 20.
