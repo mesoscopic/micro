@@ -1,5 +1,8 @@
 extends Node2D
 
+func _ready() -> void:
+	$Clouds.set_instance_shader_parameter("angle", global_position.normalized())
+
 func activate(body: Node2D) -> void:
 	if body != Micro.player: return
 	$Activate.restart()

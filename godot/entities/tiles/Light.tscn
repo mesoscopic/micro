@@ -11,7 +11,7 @@ radius = 80.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xut0m"]
 shader = ExtResource("1_yopc8")
 
-[sub_resource type="Image" id="Image_yopc8"]
+[sub_resource type="Image" id="Image_0sgbh"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -21,7 +21,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_dhktf"]
-image = SubResource("Image_yopc8")
+image = SubResource("Image_0sgbh")
 script = ExtResource("2_yopc8")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -72,7 +72,7 @@ point_count = 2
 curve = SubResource("Curve_15mwo")
 
 [sub_resource type="Curve" id="Curve_5w8h4"]
-_data = [Vector2(0, 0.200053), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.125), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_q5a68"]
@@ -81,15 +81,15 @@ curve = SubResource("Curve_5w8h4")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o215r"]
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
-scale_min = 100.0
-scale_max = 100.0
+scale_min = 160.0
+scale_max = 160.0
 scale_curve = SubResource("CurveTexture_q5a68")
 alpha_curve = SubResource("CurveTexture_dhktf")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0sgbh"]
 shader = ExtResource("1_0fpnf")
 
-[sub_resource type="Image" id="Image_0sgbh"]
+[sub_resource type="Image" id="Image_xut0m"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -99,7 +99,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_15mwo"]
-image = SubResource("Image_0sgbh")
+image = SubResource("Image_xut0m")
 script = ExtResource("2_yopc8")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -116,8 +116,8 @@ shape = SubResource("CircleShape2D_xut0m")
 [node name="Clouds" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
 material = SubResource("ShaderMaterial_xut0m")
-instance_shader_parameters/angle = Vector2(0.5, 0.5)
-scale = Vector2(60, 60)
+instance_shader_parameters/angle = Vector2(0, 0)
+scale = Vector2(120, 120)
 texture = SubResource("ImageTexture_dhktf")
 
 [node name="Activate" type="GPUParticles2D" parent="."]
@@ -134,7 +134,7 @@ lifetime = 3.0
 process_material = SubResource("ParticleProcessMaterial_o215r")
 
 [node name="Render" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.25)
+modulate = Color(1, 1, 1, 0.5)
 material = SubResource("ShaderMaterial_0sgbh")
 scale = Vector2(20, 20)
 texture = SubResource("ImageTexture_15mwo")
