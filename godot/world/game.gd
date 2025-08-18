@@ -163,6 +163,8 @@ func generate_world():
 		miniboss.size = 50.
 		miniboss.position = location * 20.
 		$Entities.add_child(miniboss)
+		var anchor_location := Vector2i(Vector2(location).move_toward(Vector2.ZERO, 20).round())
+		place("anchor_room", anchor_location, true)
 		var trader_location := Vector2i((Vector2(location).normalized()*30).round())
 		place("small_house", trader_location, true)
 		var trader := preload("res://entities/Trader.tscn").instantiate()
@@ -188,10 +190,6 @@ func generate_world():
 		match get_biome(tile):
 			Biome.LANDING:
 				place("cache", tile)
-			Biome.PEACE when random.randf()>.5:
-				var structures := RollWeights.new()
-				structures.add_item("anchor_room", 1)
-				place("%s" % Micro.roll(structures), tile)
 			Biome.DEFAULT when random.randf()>.5-biome_edgeness_at(tile):
 				var obstacles := RollWeights.new()
 				obstacles.add_items(["block", "cross", "thru", "thru2"], 2)
