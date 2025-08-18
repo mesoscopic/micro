@@ -163,10 +163,11 @@ func generate_world():
 		miniboss.size = 50.
 		miniboss.position = location * 20.
 		$Entities.add_child(miniboss)
-		var anchor_location := Vector2i(Vector2(location).move_toward(Vector2.ZERO, 20).round())
-		place("anchor_room", anchor_location, true)
-		var trader_location := Vector2i((Vector2(location).normalized()*30).round())
+		place("anchor_room", Vector2i(Vector2(location).move_toward(Vector2.ZERO, 20).round()), true)
+		var trader_location := Vector2i((Vector2(location).normalized()*40).round())
 		place("small_house", trader_location, true)
+		place("guiding_light", Vector2i((Vector2(location).normalized()*25).round()), false)
+		
 		var trader := preload("res://entities/Trader.tscn").instantiate()
 		trader.position = trader_location * 20.
 		trader.wander_range = 70.

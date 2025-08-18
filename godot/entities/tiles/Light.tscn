@@ -1,0 +1,142 @@
+[gd_scene load_steps=25 format=3 uid="uid://b6smc1rpaeugb"]
+
+[ext_resource type="Shader" uid="uid://ci5ovcam7o22p" path="res://entities/tiles/light.gdshader" id="1_0fpnf"]
+[ext_resource type="Script" uid="uid://bw5172ki2lflb" path="res://entities/tiles/light.gd" id="1_0sgbh"]
+[ext_resource type="Shader" uid="uid://cs7vq0v8l44qx" path="res://entities/tiles/light_clouds.gdshader" id="1_yopc8"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="2_yopc8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xut0m"]
+radius = 80.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xut0m"]
+shader = ExtResource("1_yopc8")
+
+[sub_resource type="Image" id="Image_yopc8"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_dhktf"]
+image = SubResource("Image_yopc8")
+script = ExtResource("2_yopc8")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="Curve" id="Curve_yopc8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_d11t0"]
+curve = SubResource("Curve_yopc8")
+
+[sub_resource type="Curve" id="Curve_0sgbh"]
+_data = [Vector2(0.0204592, 0.994382), 0.0, -2.86888, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_x43o2"]
+curve = SubResource("Curve_0sgbh")
+
+[sub_resource type="Curve" id="Curve_xut0m"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_k1qer"]
+curve = SubResource("Curve_xut0m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_15mwo"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 5.0
+angle_min = 45.0
+angle_max = 45.0
+radial_velocity_min = 200.0
+radial_velocity_max = 300.0
+radial_velocity_curve = SubResource("CurveTexture_x43o2")
+gravity = Vector3(0, 0, 0)
+scale_min = 8.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_k1qer")
+alpha_curve = SubResource("CurveTexture_d11t0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yopc8"]
+shader = ExtResource("1_0fpnf")
+
+[sub_resource type="Curve" id="Curve_15mwo"]
+_data = [Vector2(0, 0.202203), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dhktf"]
+curve = SubResource("Curve_15mwo")
+
+[sub_resource type="Curve" id="Curve_5w8h4"]
+_data = [Vector2(0, 0.200053), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_q5a68"]
+curve = SubResource("Curve_5w8h4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o215r"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 100.0
+scale_max = 100.0
+scale_curve = SubResource("CurveTexture_q5a68")
+alpha_curve = SubResource("CurveTexture_dhktf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0sgbh"]
+shader = ExtResource("1_0fpnf")
+
+[sub_resource type="Image" id="Image_0sgbh"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_15mwo"]
+image = SubResource("Image_0sgbh")
+script = ExtResource("2_yopc8")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[node name="Light" type="Node2D"]
+script = ExtResource("1_0sgbh")
+
+[node name="Detection" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
+shape = SubResource("CircleShape2D_xut0m")
+
+[node name="Clouds" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+material = SubResource("ShaderMaterial_xut0m")
+instance_shader_parameters/angle = Vector2(0.5, 0.5)
+scale = Vector2(60, 60)
+texture = SubResource("ImageTexture_dhktf")
+
+[node name="Activate" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_15mwo")
+
+[node name="Illumination" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_yopc8")
+emitting = false
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_o215r")
+
+[node name="Render" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.25)
+material = SubResource("ShaderMaterial_0sgbh")
+scale = Vector2(20, 20)
+texture = SubResource("ImageTexture_15mwo")
+
+[connection signal="body_entered" from="Detection" to="." method="activate"]
