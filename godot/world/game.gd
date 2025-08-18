@@ -150,7 +150,7 @@ func generate_world():
 		if starting_traders_to_place == 0 or (random.randi_range(0,1)==1 and opportunities >= starting_traders_to_place):
 			continue
 		starting_traders_to_place -= 1
-		var distance := 50
+		var distance := 80
 		while !attempt_decide_biome_for_center_structure(dir*distance, Biome.PEACE, 10):
 			distance += 10
 		var location := biome_center_at(dir*distance)
@@ -164,6 +164,10 @@ func generate_world():
 		miniboss.position = location * 20.
 		$Entities.add_child(miniboss)
 		place("anchor_room", Vector2i(Vector2(location).move_toward(Vector2.ZERO, 20).round()), true)
+		var magnitude := int(location.length()) - 30
+		while magnitude > 50:
+			magnitude -= random.randi_range(15,20)
+			place("guiding_light", Vector2i((Vector2(location).normalized()*magnitude).round()), true)
 		var trader_location := Vector2i((Vector2(location).normalized()*40).round())
 		place("small_house", trader_location, true)
 		place("guiding_light", Vector2i((Vector2(location).normalized()*25).round()), false)
@@ -219,7 +223,7 @@ func place(id: String, pos: Vector2i, force := false):
 func attempt_decide_biome_for_center_structure(tile: Vector2i, biome: Biome, margin: int) -> bool:
 	var center := biome_center_at(tile)
 	# We'll be placing a structure at the center, so we can't have it be too close to spawn or the Emptiness
-	if (abs(center.x) + abs(center.y) <= 60+margin) or (abs(center.x) + abs(center.y)) >= 512-margin:
+	if (abs(center.x) + abs(center.y) <= 80+margin) or (abs(center.x) + abs(center.y)) >= 512-margin:
 		return false
 	# Don't place it here if there's already a biome
 	if biomes.has(center): return false
