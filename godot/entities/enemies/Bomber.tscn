@@ -12,7 +12,7 @@ shader_parameter/health = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 shader_parameter/damaged = false
 
-[sub_resource type="Image" id="Image_j4vdi"]
+[sub_resource type="Image" id="Image_enisn"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -22,7 +22,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_vd4d6"]
-image = SubResource("Image_j4vdi")
+image = SubResource("Image_enisn")
 script = ExtResource("3_j4inx")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 

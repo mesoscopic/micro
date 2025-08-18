@@ -151,11 +151,13 @@ func fire() -> void:
 				# bombs
 				if hp <= max_hp*0.5:
 					shots = (Micro.world.random.randi_range(2,4) if Micro.world.second_trader_miniboss else Micro.world.random.randi_range(4,6))
-					for i in range(0,5):
+					for i in range(0,4):
 						var bomb: BombBullet = BOMB.instantiate()
 						var aim := Vector2.from_angle(PI/2.*i)
 						bomb.position = position + aim*140.
 						bomb.origin = global_position + aim*35.
+						bomb.spin = randf_range(0.,2.*PI)
+						bomb.split_speed = 150.
 						bomb.split_lifetime = 1.5
 						bombs.append(bomb)
 						Micro.world.get_node("Bullets").add_child(bomb)
@@ -166,16 +168,15 @@ func fire() -> void:
 					$Attack.start(1.)
 				else:
 					shots = Micro.world.random.randi_range(2,3)
-					var bomb: BombBullet = BOMB.instantiate()
-					var aim := Vector2.from_angle(get_angle_to(Micro.player.position))
-					bomb.position = position + aim*140.
-					bomb.origin = global_position + aim*35.
-					bomb.split_number = 12
-					bombs.append(bomb)
-					Micro.world.get_node("Bullets").add_child(bomb)
-					await Micro.wait(1. if Micro.world.second_trader_miniboss else 1.5)
-					bomb.fire()
-					bombs = []
+					for i in 4:
+						var bomb: BombBullet = BOMB.instantiate()
+						bomb.position = Micro.player.position
+						bomb.origin = global_position.move_toward(Micro.player.position, 35)
+						bomb.split_number = 6 if Micro.world.second_trader_miniboss else 4
+						bomb.spin = randf_range(0., 2.*PI)
+						bomb.fire_in(1.)
+						Micro.world.get_node("Bullets").add_child(bomb)
+						await Micro.wait(.5)
 					$Attack.start(1.)
 		special = (special + 1) % 3
 

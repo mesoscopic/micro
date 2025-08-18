@@ -41,3 +41,7 @@ func fire() -> void:
 		await Micro.wait(1.)
 		queue_free()
 	)
+
+func fire_in(time: float) -> void:
+	await Micro.wait(time)
+	fire()
