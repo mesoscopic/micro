@@ -78,13 +78,12 @@ func check(to: Vector2) -> bool:
 	query.motion = to
 	return PhysicsServer2D.body_test_motion(get_rid(), query)
 
-func _on_collect_area_entered(body: Node2D) -> void:
-	if body != Micro.player or state != TraderState.WILD: return
+func collect() -> void:
 	$CollectArea.set_deferred("monitoring", false)
 	$CollectArea.set_deferred("monitorable", false)
 	$CollectParticles.emitting = true
 	init_state(TraderState.COLLECTING)
-	await Micro.wait(1.5)
+	await Micro.wait(1.)
 	var house: Vector2 = Micro.world.houses.pop_front()*20.
 	var charge_anim = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO).tween_property(self, "position", position+(position-house).normalized()*60., 1.)
 	await charge_anim.finished
@@ -97,6 +96,10 @@ func _on_collect_area_entered(body: Node2D) -> void:
 	if !$OnScreenDetector.is_on_screen():
 		process_mode = Node.PROCESS_MODE_DISABLED
 		$SpeedParticles.hide()
+
+func _on_collect_area_entered(body: Node2D) -> void:
+	if body != Micro.player or state != TraderState.WILD: return
+	collect()
 
 func refresh_item() -> void:
 	var weights = RollWeights.new()

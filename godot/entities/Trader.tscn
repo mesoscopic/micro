@@ -114,6 +114,7 @@ shape = SubResource("RectangleShape2D_vhato")
 emitting = false
 amount = 40
 one_shot = true
+explosiveness = 0.5
 process_material = SubResource("ParticleProcessMaterial_jvihi")
 
 [node name="SpeedParticles" type="GPUParticles2D" parent="."]

@@ -17,6 +17,12 @@ var special: int = 0
 
 func _ready() -> void:
 	super()
+	extra_reward = func(pos):
+		var trader = preload("res://entities/Trader.tscn").instantiate()
+		trader.position = pos
+		Micro.world.get_node("Entities").call_deferred("add_child", trader)
+		trader.collect()
+		await Micro.wait(1.)
 	shots = (3 if Micro.world.second_trader_miniboss else 6)
 	if Micro.world.second_trader_miniboss:
 		fund_drop += 50
@@ -37,9 +43,6 @@ func spawn() -> void:
 	Micro.world.get_node("Bullets").add_child(summon)
 
 func _die() -> void:
-	var trader = preload("res://entities/Trader.tscn").instantiate()
-	trader.position = position
-	call_deferred("add_sibling", trader)
 	super()
 	for laser in lasers:
 		if laser: laser.stop()

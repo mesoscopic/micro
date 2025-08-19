@@ -18,6 +18,7 @@ var can_set_start: bool = true
 var stagger: float = 0.
 @export var is_boss: bool = false
 @export var is_void: bool = false
+var extra_reward: Callable
 
 var DEATH_ANIMATION := preload("res://fx/death/Enemy.tscn")
 
@@ -45,6 +46,7 @@ func _die():
 	anim.fund_drop = fund_drop + fund_drop*fund_drop_randomization*randf_range(-1.,1.)
 	anim.enemy_scale = $Render.scale.x
 	anim.position = position
+	anim.extra_reward = extra_reward
 	add_sibling(anim)
 	if is_boss:
 		Micro.world.bosses_active -= 1
