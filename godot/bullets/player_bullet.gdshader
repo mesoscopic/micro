@@ -1,9 +1,7 @@
 shader_type canvas_item;
 
-#include "res://lygia/draw/stroke.gdshaderinc"
-#include "res://lygia/draw/fill.gdshaderinc"
-#include "res://lygia/math/aastep.gdshaderinc"
-#include "res://lygia/generative/snoise.gdshaderinc"
+#include "res://lib/shader/sdfutil.gdshaderinc"
+#include "res://lib/shader/simplexnoise.gdshaderinc"
 
 instance uniform float form_anim: hint_range(0,1) = 0.;
 instance uniform float dissolve_anim: hint_range(0,1) = 0.;
@@ -15,8 +13,8 @@ void fragment() {
 	COLOR.rgb *= stroke(d, 0.85, 0.3);
 
 	// Form animation
-	COLOR.a *= smoothstep(form_anim*-2.+1., form_anim*-4.+3., snoise(VERTEX/30.));
+	COLOR.a *= smoothstep(form_anim*-2.+1., form_anim*-4.+3., simplex_noise(VERTEX/30.));
 
 	// Dissolve animation
-	COLOR.a *= aastep(-2.+dissolve_anim*3.+UV.y, snoise(VERTEX/10.));
+	COLOR.a *= aastep(-2.+dissolve_anim*3.+UV.y, simplex_noise(VERTEX/10.));
 }

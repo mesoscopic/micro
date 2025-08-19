@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-#include "res://lygia/draw/stroke.gdshaderinc"
+#include "res://lib/shader/sdfutil.gdshaderinc"
 
 void fragment() {
 	vec2 xy = (UV - vec2(0.5)) * 2.0;

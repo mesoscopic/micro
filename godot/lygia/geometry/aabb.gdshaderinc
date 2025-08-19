@@ -1,6 +1,0 @@
-#include "aabb/centroid.gdshaderinc"
-#include "aabb/contain.gdshaderinc"
-#include "aabb/diagonal.gdshaderinc"
-#include "aabb/expand.gdshaderinc"
-#include "aabb/intersect.gdshaderinc"
-#include "aabb/square.gdshaderinc"

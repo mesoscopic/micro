@@ -5,7 +5,7 @@ uniform float burn_anim = 0.;
 
 uniform sampler2D noise;
 
-#include "res://lygia/math/aastep.gdshaderinc"
+#include "res://lib/shader/aa.gdshaderinc"
 
 void fragment() {
 	vec2 xy = (UV - vec2(0.5)) * 2.0;

@@ -1,12 +1,18 @@
 shader_type canvas_item;
 
-#include "res://lygia/sdf/rectSDF.gdshaderinc"
-#include "res://lygia/sdf/crossSDF.gdshaderinc"
-#include "res://lygia/draw/stroke.gdshaderinc"
+#include "res://lib/shader/squaresdf.gdshaderinc"
+#include "res://lib/shader/rectsdf.gdshaderinc"
+#include "res://lib/shader/sdfutil.gdshaderinc"
+
+float crossSDF(in vec2 uv, in float s) {
+    vec2 size = vec2(.25, s);
+    return min(rectSDF(uv.xy, size.xy),
+               rectSDF(uv.xy, size.yx));
+}
 
 void fragment() {
 	vec2 xy = (UV - vec2(0.5)) * 2.0;
-	float d = min(rectSDF(UV, 1.), crossSDF(UV, 1.25) * 0.5);
+	float d = min(squareSDF(UV), crossSDF(UV, 1.25) * 0.5);
 
 	COLOR.a *= stroke(d, .9, 0.2);
 }

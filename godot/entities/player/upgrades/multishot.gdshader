@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
-#include "res://lygia/sdf/lineSDF.gdshaderinc"
-#include "res://lygia/draw/stroke.gdshaderinc"
+#include "res://lib/shader/sdfutil.gdshaderinc"
+#include "res://lib/shader/linesdf.gdshaderinc"
 
 void fragment() {
 	float w = lineSDF(UV, vec2(0.133975,0.866025), vec2(0.707107, 0.292893));

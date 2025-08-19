@@ -1,11 +1,10 @@
 shader_type canvas_item;
 
-#include "res://lygia/sdf/lineSDF.gdshaderinc"
-#include "res://lygia/sdf/circleSDF.gdshaderinc"
-#include "res://lygia/draw/stroke.gdshaderinc"
+#include "res://lib/shader/sdfutil.gdshaderinc"
+#include "res://lib/shader/linesdf.gdshaderinc"
 
 void fragment() {
-	float circle = circleSDF(UV);
+	float circle = length(UV - 0.5) * 2.;
 	float line1 = lineSDF(UV, vec2(0.5, 0.5), vec2(0.716506, 0.375));
 	float line2 = lineSDF(UV, vec2(0.5, 0.5), vec2(0.333333, 0.211325));
 	float lines = min(line1, line2);

@@ -1,7 +1,6 @@
 shader_type canvas_item;
 
-#include "res://lygia/draw/stroke.gdshaderinc"
-#include "res://lygia/draw/fill.gdshaderinc"
+#include "res://lib/shader/sdfutil.gdshaderinc"
 
 uniform float health = 1.0;
 uniform vec2 velocity = vec2(0.0);

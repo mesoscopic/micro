@@ -5,7 +5,7 @@ uniform float fadeout = 0.25;
 instance uniform float appear: hint_range(0, 1) = 0.;
 instance uniform float disappear: hint_range(0, 1) = 0.;
 
-#include "res://lygia/math/aastep.gdshaderinc"
+#include "res://lib/shader/aa.gdshaderinc"
 
 void fragment() {
 	float x = COLOR.a;

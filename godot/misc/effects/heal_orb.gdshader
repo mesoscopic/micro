@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 instance uniform float offset = 0.;
-#include "res://lygia/draw/fill.gdshaderinc"
+#include "res://lib/shader/sdfutil.gdshaderinc"
 
 void fragment() {
 	float t = TIME + offset;

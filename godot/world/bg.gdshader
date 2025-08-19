@@ -2,10 +2,10 @@ shader_type canvas_item;
 render_mode skip_vertex_transform;
 
 
-#include "res://lygia/generative/random.gdshaderinc"
-#include "res://lygia/sdf/rectSDF.gdshaderinc"
-#include "res://lygia/draw/stroke.gdshaderinc"
-#include "res://lygia/generative/snoise.gdshaderinc"
+#include "res://lib/shader/rand.gdshaderinc"
+#include "res://lib/shader/squaresdf.gdshaderinc"
+#include "res://lib/shader/sdfutil.gdshaderinc"
+#include "res://lib/shader/simplexnoise.gdshaderinc"
 
 uniform float alpha_mult = 1.0;
 
@@ -46,7 +46,7 @@ void fragment() {
 		COLOR += vec4(1.,1.,1.,c)*default_effect;
 	}
 	if(peace_effect>0.){
-		vec2 uv = UV + vec2(snoise(UV*100.+TIME/10.), snoise(-UV*100.+TIME/10.))/5000.;
+		vec2 uv = UV + vec2(simplex_noise(UV*100.+TIME/10.), simplex_noise(-UV*100.+TIME/10.))/5000.;
 		vec2 st = 100.*mod(uv, vec2(0.01));
 		float layer = 0.;
 		for(float i = 0.; i < 5.; i++){
@@ -56,7 +56,7 @@ void fragment() {
 			}
 			st = 2.*mod(st, vec2(0.5));
 		}
-		float d = rectSDF(st, 1.);
+		float d = squareSDF(st);
 		COLOR += vec4(1., 1., 1., (.05+0.025*sin(PI*(TIME/5.+layer)))*stroke(d, .8, 0.1+0.05*sin(PI*(TIME/5.+layer))))*peace_effect;
 	}
 	COLOR.a *= alpha_mult;
