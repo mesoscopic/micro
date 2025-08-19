@@ -1,15 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://e34y636bg76y"]
+[gd_scene load_steps=11 format=3 uid="uid://e34y636bg76y"]
 
 [ext_resource type="Script" uid="uid://cowf8lcpmdwgh" path="res://ui/pause_menu.gd" id="1_5eetr"]
 [ext_resource type="Shader" uid="uid://bgelc5i8kwxge" path="res://ui/screenblur.gdshader" id="2_8tehv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1q10k"]
 shader = ExtResource("2_8tehv")
-shader_parameter/dir = Vector2(1, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8tehv"]
-shader = ExtResource("2_8tehv")
-shader_parameter/dir = Vector2(0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_verg1"]
 
@@ -44,15 +39,6 @@ grow_vertical = 2
 
 [node name="BlurX" type="ColorRect" parent="Menu"]
 material = SubResource("ShaderMaterial_1q10k")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="BlurY" type="ColorRect" parent="Menu"]
-material = SubResource("ShaderMaterial_8tehv")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
