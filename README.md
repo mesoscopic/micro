@@ -4,11 +4,9 @@ Micro is an abstract bullet-hell roguelite with shader-based graphics and an ext
 
 At least, it will be! It is far from finished, and its development lives in this repo.
 
-Here's some gameplay footage from when this README was last updated:
+Here's some gameplay footage from when this README was last updated (it's on YouTube, sorry, but have you heard of [FreeTube](https://github.com/FreeTubeApp/FreeTube)?):
 
-https://github.com/user-attachments/assets/7bb6cab2-c686-4f66-9531-46bd4c25bf43
-
-https://github.com/user-attachments/assets/491f1625-1735-4000-8913-c388783fc543
+[![Showcase footage. Unfortunately links to YouTube.](https://img.youtube.com/vi/NJgURpAxG3Q/maxresdefault.jpg)](https://www.youtube.com/watch?v=NJgURpAxG3Q)
 
 ## Roadmap
 
@@ -18,7 +16,6 @@ A patch **v0.0.1** might come soon, but more likely the next version will be **v
 
 Here's what's planned for **v0.1.0**, roughly in order of importance:
 - More features
-- A healing rework
 - More/better upgrades
 - More biomes
 - More enemies
