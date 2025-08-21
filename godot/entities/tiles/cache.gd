@@ -16,9 +16,16 @@ func _hurt(_amount: int, _direction: float) -> void:
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Animations.play("open")
 	var weights = RollWeights.new()
-	weights.add_item("funds", 19)
-	if Micro.player.hp < Micro.player.max_hp: weights.add_item("heal", 10)
-	if global_position.length_squared() > 500000: weights.add_item("surprise", 1)
+	match Micro.world.get_biome(Micro.world.tile_at(global_position)):
+		Micro.world.Biome.LANDING:
+			weights.add_item("funds", 1)
+		_:
+			weights.add_item("funds", 19)
+			if Micro.player.hp < Micro.player.max_hp: weights.add_item("heal", 10)
+			weights.add_item("surprise", 1)
+			if Micro.world.taxicab(global_position)/20. > 256:
+				weights.add_item("big_funds", 2)
+				weights.add_item("surprise", 2)
 	do_reward(Micro.roll(weights))
 	await Micro.wait(1.5)
 	$Animations.play("burn")
@@ -31,6 +38,13 @@ func do_reward(reward: String) -> void:
 			var coin := fund_coin.instantiate()
 			coin.position = position
 			coin.amount = 1
+			coin.delay = randf_range(0.15, 0.4)
+			Micro.world.get_node("Entities").add_child(coin)
+	elif reward == "big_funds":
+		for i in randi_range(5, 12):
+			var coin := fund_coin.instantiate()
+			coin.position = position
+			coin.amount = 2
 			coin.delay = randf_range(0.15, 0.4)
 			Micro.world.get_node("Entities").add_child(coin)
 	elif reward == "heal":

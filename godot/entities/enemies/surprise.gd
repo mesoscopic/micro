@@ -2,7 +2,7 @@ extends ChaserEnemy
 
 func _ready():
 	super()
-	extra_reward = func(pos): await Micro.wait(.5)
+	extra_reward = func(_pos): await Micro.wait(.5)
 
 func _on_attack_body_entered(body: Node2D) -> void:
 	if body is Damageable:
