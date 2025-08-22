@@ -49,8 +49,9 @@ alpha_curve = SubResource("CurveTexture_wpbas")
 shader = ExtResource("1_gia2e")
 shader_parameter/alpha_mult = 1.0
 shader_parameter/landing_effect = 1.0
-shader_parameter/default_effect = 0.0
+shader_parameter/placeholder_effect = 0.0
 shader_parameter/peace_effect = 0.0
+shader_parameter/default_effect = 0.0
 
 [sub_resource type="Image" id="Image_crsqw"]
 data = {

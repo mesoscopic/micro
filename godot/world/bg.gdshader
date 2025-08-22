@@ -10,8 +10,9 @@ render_mode skip_vertex_transform;
 uniform float alpha_mult = 1.0;
 
 uniform float landing_effect: hint_range(0,1);
-uniform float default_effect: hint_range(0,1);
+uniform float placeholder_effect: hint_range(0,1);
 uniform float peace_effect: hint_range(0,1);
+uniform float default_effect: hint_range(0,1);
 
 varying vec2 CAMERA;
 
@@ -35,7 +36,7 @@ void fragment() {
 		}
 		COLOR += vec4(1.,1.,1.,0.06*mod(total, 1.))*landing_effect;
 	}
-	if(default_effect>0.){
+	if(placeholder_effect>0.){
 		float c = 0.0;
 		if(sin(800. * PI * (UV.x) - 0.5 * PI) > 0.99){
 			c = 0.05;
@@ -43,7 +44,7 @@ void fragment() {
 		if(sin(800. * PI * (UV.y) - 0.5 * PI) > 0.99){
 			c = 0.05;
 		}
-		COLOR += vec4(1.,1.,1.,c)*default_effect;
+		COLOR += vec4(1.,1.,1.,c)*placeholder_effect;
 	}
 	if(peace_effect>0.){
 		vec2 uv = UV + vec2(simplex_noise(UV*100.+TIME/10.), simplex_noise(-UV*100.+TIME/10.))/5000.;
@@ -58,6 +59,12 @@ void fragment() {
 		}
 		float d = squareSDF(st);
 		COLOR += vec4(1., 1., 1., (.05+0.025*sin(PI*(TIME/5.+layer)))*stroke(d, .8, 0.1+0.05*sin(PI*(TIME/5.+layer))))*peace_effect;
+	}
+	if(default_effect>0.){
+		vec2 circles = mod(UV+TIME/vec2(1000., 2000.), 0.0025)*400.-.5;
+		vec2 diamonds = mod(UV-TIME/1200., 0.0025)*400.-.5;
+		vec2 squares = mod(UV-TIME/vec2(-1000., 600.), 0.002)*500.-.5;
+		COLOR += vec4(1.,1.,1.,0.05*default_effect*stroke(min(length(circles),min(abs(diamonds.x)+abs(diamonds.y), max(abs(squares.x), abs(squares.y)))), 0.3, 0.05));
 	}
 	COLOR.a *= alpha_mult;
 }
