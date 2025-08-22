@@ -11,7 +11,6 @@ var even_shot := false
 var prepared_bullets: Array[TelegraphedBullet] = []
 var spiral_angle: float = 0.
 var lasers: Array[LaserBullet] = []
-var bombs: Array[BombBullet] = []
 var doing_homing_attack := false
 var special: int = 0
 
@@ -46,8 +45,6 @@ func _die() -> void:
 	super()
 	for laser in lasers:
 		if laser: laser.stop()
-	for bomb in bombs:
-		if bomb: bomb.fire()
 	Micro.world.second_trader_miniboss = true
 
 func do_despawn() -> void:
@@ -162,12 +159,8 @@ func fire() -> void:
 						bomb.spin = randf_range(0.,2.*PI)
 						bomb.split_speed = 150.
 						bomb.split_lifetime = 1.5
-						bombs.append(bomb)
+						bomb.fire_in(1. if Micro.world.second_trader_miniboss else 1.5)
 						Micro.world.get_node("Bullets").add_child(bomb)
-					await Micro.wait(1. if Micro.world.second_trader_miniboss else 1.5)
-					for bomb in bombs:
-						bomb.fire()
-					bombs = []
 					$Attack.start(1.)
 				else:
 					shots = Micro.world.random.randi_range(2,3)
