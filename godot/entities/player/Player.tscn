@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://de3rlx01ibq3d" path="res://entities/player/player.gd" id="1_1im8n"]
 [ext_resource type="PackedScene" uid="uid://wwjxod2at3t3" path="res://entities/player/Camera.tscn" id="2_nkqiv"]
 [ext_resource type="Shader" uid="uid://ja0tditl2iqa" path="res://entities/player/player.gdshader" id="4_0t1y4"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="4_oihyf"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="4_oihyf"]
 [ext_resource type="Shader" uid="uid://bm0iowttrwa5h" path="res://misc/shaders/sparkle.gdshader" id="6_m6phi"]
 [ext_resource type="PackedScene" uid="uid://c7h6twa0ran3j" path="res://fx/PlayerHurt.tscn" id="6_q57vx"]
 [ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://misc/shaders/funds.gdshader" id="6_rpfb3"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dhdyju55p570r" path="res://bullets/telegraphed_bullet.gd" id="1_wtf3i"]
 [ext_resource type="Shader" uid="uid://dnld05ugc5ccp" path="res://bullets/enemy_bullet.gdshader" id="2_wtf3i"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_ytu0n"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_ytu0n"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="4_rd0fm"]
 [ext_resource type="Shader" uid="uid://bm0iowttrwa5h" path="res://misc/shaders/sparkle.gdshader" id="4_ytu0n"]
 

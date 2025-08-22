@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b14dvx67drebc" path="res://entities/player/Player.tscn" id="1_yrunw"]
 [ext_resource type="Shader" uid="uid://cxjhjvndfeyuk" path="res://misc/logic/biomes.gdshader" id="2_h1bdy"]
 [ext_resource type="Shader" uid="uid://m2ujlgdhoe3n" path="res://world/emptiness_border.gdshader" id="4_7c4bj"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="4_i4b1j"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="4_i4b1j"]
 [ext_resource type="Script" uid="uid://by5pvpniu1o1d" path="res://editor/bakeable_noise.gd" id="5_nrtoj"]
 [ext_resource type="TileSet" uid="uid://cr8mn87yb0vyh" path="res://world/Tiles.tres" id="7_8mymi"]
 

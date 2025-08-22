@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=3 uid="uid://bbs436j75kwf1"]
 
 [ext_resource type="Script" uid="uid://ciq5glgt0dw1b" path="res://bullets/bomb.gd" id="1_fupv5"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_g4o4w"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_g4o4w"]
 [ext_resource type="Shader" uid="uid://biq78focw5lr" path="res://bullets/special_enemy_bullet.gdshader" id="5_fupv5"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="6_5t6lw"]
 [ext_resource type="Shader" uid="uid://csnb2kx6uvrj6" path="res://bullets/player_bullet.gdshader" id="6_g4o4w"]

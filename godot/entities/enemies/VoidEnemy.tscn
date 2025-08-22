@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://g6d1a3v6oswd" path="res://entities/enemies/void_enemy.gd" id="1_je7qo"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="2_3bveo"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_gjic1"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_gjic1"]
 [ext_resource type="PackedScene" uid="uid://bmrdsgmlwoebu" path="res://fx/EnemyHurt.tscn" id="4_ugiha"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_acjqs"]

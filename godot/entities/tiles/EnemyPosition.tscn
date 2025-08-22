@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dhi7edrbv0ga6" path="res://entities/tiles/enemy_position.gd" id="1_hb8yp"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="2_1tsol"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="2_rxnby"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_rxnby"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="2_v31pk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vydju"]

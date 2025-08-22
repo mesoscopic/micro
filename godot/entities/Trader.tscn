@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://cs7iamvps60cm" path="res://entities/trader.gdshader" id="1_2l6qv"]
 [ext_resource type="Script" uid="uid://bgi51q1qpnvci" path="res://entities/trader.gd" id="1_qhhoa"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="2_qhhoa"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_qhhoa"]
 [ext_resource type="PackedScene" uid="uid://ceq78x2nlo2eh" path="res://entities/Toll.tscn" id="4_6saqy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6saqy"]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bgocxycd6xam0" path="res://fx/death/enemy.gd" id="1_xb5g8"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="2_gkxl4"]
 [ext_resource type="Shader" uid="uid://ds1rxv51ltkrj" path="res://misc/shaders/enemy_ghost.gdshader" id="3_xb5g8"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_xbttu"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_xbttu"]
 [ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://misc/shaders/funds.gdshader" id="4_xbttu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2nhur"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cx3peo4tlvbg2" path="res://entities/tiles/cache.gd" id="1_xgfmd"]
 [ext_resource type="Shader" uid="uid://ds33o6ingsxg6" path="res://entities/tiles/cache.gdshader" id="2_xgfmd"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_7011x"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_7011x"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="5_qwbhg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qwbhg"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://da4uam7bgmyfs"]
 
 [ext_resource type="Script" uid="uid://8pjwwvpu033l" path="res://entities/enemies/surpriser.gd" id="1_8s0w8"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_8s0w8"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_8s0w8"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="4_dbf1b"]
 [ext_resource type="PackedScene" uid="uid://bmrdsgmlwoebu" path="res://fx/EnemyHurt.tscn" id="6_ambfd"]
 

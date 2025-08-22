@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://by7l5djd4ppw8" path="res://entities/enemies/bomber.gd" id="1_enisn"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="2_j4vdi"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_j4inx"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_j4inx"]
 [ext_resource type="PackedScene" uid="uid://bmrdsgmlwoebu" path="res://fx/EnemyHurt.tscn" id="4_omnjx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cduuy"]

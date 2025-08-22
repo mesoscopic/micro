@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://cjsixrrxcu8rt" path="res://misc/effects/heal_orb.gdshader" id="1_b02qu"]
 [ext_resource type="Script" uid="uid://be6diwae80dak" path="res://misc/effects/heal_orb.gd" id="1_xjikr"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="2_xjikr"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_xjikr"]
 
 [sub_resource type="Curve" id="Curve_xjikr"]
 _data = [Vector2(0, 0.503029), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

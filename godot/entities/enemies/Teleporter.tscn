@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://cr70dq40ddv00"]
 
 [ext_resource type="Script" uid="uid://5gvph6vdmik8" path="res://entities/enemies/teleporter.gd" id="1_0c61a"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://misc/logic/char_texture.gd" id="3_okfon"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_okfon"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="3_up14l"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="5_meybd"]
 [ext_resource type="PackedScene" uid="uid://bmrdsgmlwoebu" path="res://fx/EnemyHurt.tscn" id="6_df432"]
