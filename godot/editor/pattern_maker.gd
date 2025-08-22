@@ -9,4 +9,5 @@ extends TileMapLayer
 
 @export_tool_button("Load TileMapPattern", "TileSet") var load = func ():
 	var pattern: TileMapPattern = ResourceLoader.load("res://world/patterns/%s.tres" % pattern_name, "TileMapPattern")
+	clear()
 	set_pattern(Vector2i.ZERO, pattern)

@@ -183,6 +183,9 @@ func generate_world():
 		func (pos):
 			match get_biome(pos):
 				Biome.PEACE: return 30
+				Biome.LANDING: return 6
+				Biome.DEFAULT:
+					return 25 - biome_edgeness_at(pos)*15
 				_: return 10
 	, 5, 30)
 	await Micro.worldgen_status("Placing features...")
@@ -195,15 +198,16 @@ func generate_world():
 		match get_biome(tile):
 			Biome.LANDING:
 				place("cache", tile)
-			Biome.DEFAULT when random.randf()>.5-biome_edgeness_at(tile):
-				var obstacles := RollWeights.new()
-				obstacles.add_items(["block", "cross", "thru", "thru2"], 2)
-				obstacles.add_items(["select", "select_r1", "select_r2"], 3)
-				obstacles.add_items(["diagonal", "diagonal2"], 5)
-				obstacles.add_items(["line", "line2", "line_r1", "line_r2", "line2_r1", "line2_r2"], 2)
-				place("obstacles/%s" % Micro.roll(obstacles), tile)
-			Biome.DEFAULT when random.randf()>0.5:
-				place("cache", tile)
+			Biome.DEFAULT:
+				var features := RollWeights.new()
+				features.add_item("cache", 30)
+				if biome_edgeness_at(tile) < 0.5:
+					features.add_item("obstacles/small_block", 7)
+				if biome_edgeness_at(tile) < 0.25:
+					features.add_item("obstacles/block", 1)
+					features.add_item("obstacles/cross", 1)
+					features.add_item("anchor_room", 1)
+				place("%s" % Micro.roll(features), tile)
 
 func place(id: String, pos: Vector2i, force := false):
 	var pattern: TileMapPattern = load("res://world/patterns/%s.tres" % id)
