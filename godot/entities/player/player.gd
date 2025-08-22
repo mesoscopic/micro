@@ -63,17 +63,19 @@ func _physics_process(delta):
 	$Render.material.set("shader_parameter/can_dash", $DashCooldown.is_stopped())
 	
 	if Input.is_action_pressed("shoot") and len(prepared_bullets) > 0:
-		for bullet in prepared_bullets:
-			bullet.speed = 80.*(1+0.5*velocity.length()/max_speed) * bullet_velocity_mult
-			bullet.lifetime = (3.0 if dash_direction == Vector2.ZERO else .25)*bullet_lifetime_mult
-			bullet.damage = ceil(10*bullet_damage_mult) if dash_direction == Vector2.ZERO else ceil(15*bullet_damage_mult)
-			bullet.fire()
-		prepared_bullets = []
-		$ShootCooldown.start(shoot_cooldown*shoot_cooldown_mult)
+		var ultra := false
 		if dash_direction != Vector2.ZERO:
 			Micro.rumble(true, .15)
 			velocity = -dash_direction * max_speed * 4.
 			end_dash()
+			ultra = true
+		for bullet in prepared_bullets:
+			bullet.speed = 120.*(4.0 if ultra else 1.0) * bullet_velocity_mult
+			bullet.lifetime = (.25 if ultra else 1.5) * bullet_lifetime_mult
+			bullet.damage = ceil(10*bullet_damage_mult) if dash_direction == Vector2.ZERO else ceil(15*bullet_damage_mult)
+			bullet.fire()
+		prepared_bullets = []
+		$ShootCooldown.start(shoot_cooldown*shoot_cooldown_mult)
 	
 	if Input.is_action_just_pressed("dash") and $DashCooldown.is_stopped():
 		start_dash(aim_input())
@@ -148,7 +150,7 @@ func prepare_bullet() -> void:
 		bullet.shooter = self
 		bullet.angle_offset = i*PI/16 + randf_range(-1,1)*bullet_spread
 		bullet.aim(aim_input().angle())
-		bullet.distance = 30
+		bullet.distance = 20
 		bullet.scale = Vector2(bullet_size_mult, bullet_size_mult)
 		Micro.world.get_node("Bullets").add_child(bullet)
 		prepared_bullets.append(bullet)
