@@ -7,6 +7,10 @@ func hurt(amount: float, override: bool = false) -> void:
 	$Overlays/HurtEffect.show()
 	hurt_effect = true
 
+func reset_particles() -> void:
+	$GlobalParticles/Spores.restart()
+	$GlobalParticles/Spores.emitting = false
+
 func _process(delta: float) -> void:
 	if hurt_effect:
 		$Overlays/HurtEffect.material.set("shader_parameter/progress", $Overlays/HurtEffect.material.get("shader_parameter/progress")/pow(2., delta*10.))

@@ -23,4 +23,5 @@ func _on_toll_paid() -> void:
 	Micro.player.get_node("Render").show()
 	Micro.player.position = Vector2.ZERO
 	Micro.screen_wipe_in()
+	Micro.player.get_node("Camera").reset_particles()
 	Micro.player.movement_disabled = false
