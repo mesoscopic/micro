@@ -148,7 +148,7 @@ func prepare_bullet() -> void:
 	for i in range(-multishot,multishot+1):
 		var bullet: TelegraphedBullet = preload("res://bullets/PlayerBullet.tscn").instantiate()
 		bullet.shooter = self
-		bullet.angle_offset = i*PI/16 + randf_range(-1,1)*bullet_spread
+		bullet.angle_offset = i*PI/12 + randf_range(-1,1)*bullet_spread
 		bullet.aim(aim_input().angle())
 		bullet.distance = 20
 		bullet.scale = Vector2(bullet_size_mult, bullet_size_mult)

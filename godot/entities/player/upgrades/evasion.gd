@@ -3,7 +3,7 @@ class_name EvasionUpgrade
 
 func _init() -> void:
 	title = "Evasion"
-	description = "+25% max velocity when not recharging\nFaster acceleration and deceleration"
+	description = "Move 25% faster when not shooting\nFaster acceleration and deceleration"
 	render = ShaderMaterial.new()
 	render.shader = preload("res://entities/player/upgrades/evasion.gdshader")
 	set_cost(40)
