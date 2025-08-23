@@ -1,12 +1,20 @@
 extends Upgrade
 class_name MultishotUpgrade
 
-func _init() -> void:
-	title = "Multishot"
-	description = "+2 bullets every shot"
-	render = ShaderMaterial.new()
-	render.shader = preload("res://entities/player/upgrades/multishot.gdshader")
-	set_cost(100)
+static func get_title() -> String:
+	return "Multishot"
+
+static func get_description() -> String:
+	return "+2 bullets every shot"
+
+static func get_shader() -> Shader:
+	return preload("res://entities/player/upgrades/multishot.gdshader")
+
+func get_cost(count: int) -> int:
+	return Micro.world.random.randi_range(100, 110) + 40 * count
+
+static func available() -> bool:
+	return get_count(get_title()) < 3
 
 func enable() -> void:
 	Micro.player.multishot += 1

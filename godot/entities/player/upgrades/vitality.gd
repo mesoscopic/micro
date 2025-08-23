@@ -1,12 +1,17 @@
 extends Upgrade
 class_name VitalityUpgrade
 
-func _init() -> void:
-	title = "Vitality"
-	description = "+20% health"
-	render = ShaderMaterial.new()
-	render.shader = preload("res://entities/player/upgrades/vitality.gdshader")
-	set_cost(75)
+static func get_title() -> String:
+	return "Vitality"
+
+static func get_description() -> String:
+	return "+20% health"
+
+static func get_shader() -> Shader:
+	return preload("res://entities/player/upgrades/vitality.gdshader")
+
+func get_cost(count: int) -> int:
+	return Micro.world.random.randi_range(45,55) + 25 * count
 
 func enable() -> void:
 	Micro.player.max_hp += 20

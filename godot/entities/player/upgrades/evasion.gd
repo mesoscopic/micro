@@ -1,12 +1,20 @@
 extends Upgrade
 class_name EvasionUpgrade
 
-func _init() -> void:
-	title = "Evasion"
-	description = "Move 25% faster when not shooting\nFaster acceleration and deceleration"
-	render = ShaderMaterial.new()
-	render.shader = preload("res://entities/player/upgrades/evasion.gdshader")
-	set_cost(40)
+static func get_title() -> String:
+	return "Evasion"
+
+static func get_description() -> String:
+	return "Move 25% faster when not shooting\nFaster acceleration and deceleration"
+
+static func get_shader() -> Shader:
+	return preload("res://entities/player/upgrades/evasion.gdshader")
+
+func get_cost(_count: int) -> int:
+	return 50
+
+static func available() -> bool:
+	return get_count(get_title()) < 2
 
 func enable() -> void:
 	Micro.player.evasion_mult *= 1.25

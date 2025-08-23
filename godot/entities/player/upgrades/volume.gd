@@ -1,12 +1,17 @@
 extends Upgrade
 class_name VolumeUpgrade
 
-func _init() -> void:
-	title = "Volume"
-	description = "Larger, slower bullets\n+10% bullet damage"
-	render = ShaderMaterial.new()
-	render.shader = preload("res://entities/player/upgrades/volume.gdshader")
-	set_cost(75)
+static func get_title() -> String:
+	return "Volume"
+
+static func get_description() -> String:
+	return "Larger, slower bullets\n+10% bullet damage"
+
+static func get_shader() -> Shader:
+	return preload("res://entities/player/upgrades/volume.gdshader")
+
+func get_cost(_count: int) -> int:
+	return 75
 
 func enable() -> void:
 	Micro.player.bullet_size_mult += 0.3

@@ -103,11 +103,11 @@ func _on_collect_area_entered(body: Node2D) -> void:
 
 func refresh_item() -> void:
 	var weights = RollWeights.new()
-	weights.add_item(MultishotUpgrade, 1)
-	weights.add_item(RecklessnessUpgrade, 3)
-	weights.add_item(EvasionUpgrade, 2)
-	weights.add_item(VolumeUpgrade, 2)
-	weights.add_item(VitalityUpgrade, 4)
+	if MultishotUpgrade.available(): weights.add_item(MultishotUpgrade, 1)
+	#weights.add_item(RecklessnessUpgrade, 3)
+	if EvasionUpgrade.available(): weights.add_item(EvasionUpgrade, 2)
+	#weights.add_item(VolumeUpgrade, 2)
+	weights.add_item(VitalityUpgrade, 2)
 	item = Micro.roll(weights).new()
 	$Toll.set_for_upgrade(item)
 

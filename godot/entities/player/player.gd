@@ -29,6 +29,8 @@ var tolls: Array[Toll] = []
 var chosen_toll: Toll
 var prepared_bullets: Array[TelegraphedBullet]
 
+var upgrades: Dictionary[String, int] = {}
+
 func _ready():
 	super()
 	hurt.connect(_hurt)
