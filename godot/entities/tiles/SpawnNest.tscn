@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://cas1ebkgs1kfw"]
+[gd_scene load_steps=12 format=3 uid="uid://cas1ebkgs1kfw"]
 
 [ext_resource type="Script" uid="uid://8mysmbmddama" path="res://entities/tiles/spawn_nest.gd" id="1_g6lmg"]
-[ext_resource type="PackedScene" uid="uid://ckkvvvr32yt5h" path="res://misc/effects/HealRay.tscn" id="2_5pcos"]
 [ext_resource type="PackedScene" uid="uid://cshcf4y2ntrp5" path="res://entities/tiles/NestSlot.tscn" id="2_baksq"]
 [ext_resource type="Shader" uid="uid://cjhdxgx78hiya" path="res://misc/shaders/dash_ghost.gdshader" id="3_dnu8s"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="4_dnu8s"]
@@ -26,6 +25,28 @@ image = SubResource("Image_xq5fs")
 script = ExtResource("4_dnu8s")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
+[sub_resource type="Curve" id="Curve_kxo58"]
+_data = [Vector2(0, 0), 0.0, 10.6867, 0, 0, Vector2(0.251746, 1), 0.0, -2.29871, 0, 0, Vector2(1, 0), 0.110526, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xq5fs"]
+curve = SubResource("Curve_kxo58")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o0lq3"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(45, 0, 0)
+emission_shape = 3
+emission_box_extents = Vector3(8, 8, 0)
+angle_min = 45.0
+angle_max = 45.0
+spread = 15.0
+radial_velocity_min = -40.0
+radial_velocity_max = -40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 6.0
+alpha_curve = SubResource("CurveTexture_xq5fs")
+
 [node name="SpawnNest" type="Node2D"]
 script = ExtResource("1_g6lmg")
 metadata/_edit_horizontal_guides_ = [-50.0, -30.0, -10.0, 10.0, 30.0, 50.0, -70.0, 70.0]
@@ -39,35 +60,40 @@ collision_mask = 16
 rotation = 0.785398
 shape = SubResource("RectangleShape2D_82hb3")
 
-[node name="HealRay" parent="." instance=ExtResource("2_5pcos")]
-
 [node name="Render" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_vpgj0")
 scale = Vector2(40, 40)
 texture = SubResource("ImageTexture_jf3st")
 
-[node name="NestSlot" parent="." instance=ExtResource("2_baksq")]
-position = Vector2(-20, -40)
+[node name="SelectionParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_o0lq3")
 
-[node name="NestSlot2" parent="." instance=ExtResource("2_baksq")]
-position = Vector2(-40, -20)
+[node name="Slots" type="Node2D" parent="."]
 
-[node name="NestSlot3" parent="." instance=ExtResource("2_baksq")]
-position = Vector2(20, -40)
+[node name="Slot0" parent="Slots" instance=ExtResource("2_baksq")]
+position = Vector2(40, 20)
 
-[node name="NestSlot4" parent="." instance=ExtResource("2_baksq")]
-position = Vector2(40, -20)
-
-[node name="NestSlot5" parent="." instance=ExtResource("2_baksq")]
-position = Vector2(-40, 20)
-
-[node name="NestSlot6" parent="." instance=ExtResource("2_baksq")]
-position = Vector2(-20, 40)
-
-[node name="NestSlot7" parent="." instance=ExtResource("2_baksq")]
+[node name="Slot1" parent="Slots" instance=ExtResource("2_baksq")]
 position = Vector2(20, 40)
 
-[node name="NestSlot8" parent="." instance=ExtResource("2_baksq")]
-position = Vector2(40, 20)
+[node name="Slot2" parent="Slots" instance=ExtResource("2_baksq")]
+position = Vector2(-20, 40)
+
+[node name="Slot3" parent="Slots" instance=ExtResource("2_baksq")]
+position = Vector2(-40, 20)
+
+[node name="Slot4" parent="Slots" instance=ExtResource("2_baksq")]
+position = Vector2(-40, -20)
+
+[node name="Slot5" parent="Slots" instance=ExtResource("2_baksq")]
+position = Vector2(-20, -40)
+
+[node name="Slot6" parent="Slots" instance=ExtResource("2_baksq")]
+position = Vector2(20, -40)
+
+[node name="Slot7" parent="Slots" instance=ExtResource("2_baksq")]
+position = Vector2(40, -20)
 
 [connection signal="body_entered" from="HomeZone" to="." method="_on_home_zone_entered"]
