@@ -18,9 +18,11 @@ func _physics_process(delta: float) -> void:
 		if moving:
 			speed += 150. * delta
 			direction = direction.move_toward(point.direction_to(Micro.player.position), 3.*delta)
+			var distance1 := point.distance_squared_to(Micro.player.position);
 			point += direction * speed * delta
 			$Trail.add_point(point - global_position)
-			if point.distance_squared_to(Micro.player.position) < 80.:
+			var distance2 := point.distance_squared_to(Micro.player.position);
+			if distance2 < 80.0 and distance1 > distance2:
 				Micro.player.give_funds(amount)
 				moving = false
 		$Trail.remove_point(0)
