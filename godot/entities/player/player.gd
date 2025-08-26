@@ -152,7 +152,7 @@ func prepare_bullet() -> void:
 		bullet.shooter = self
 		bullet.angle_offset = i*PI/12 + randf_range(-1,1)*bullet_spread
 		bullet.aim(aim_input().angle())
-		bullet.distance = 20
+		bullet.distance = 20*bullet_size_mult
 		bullet.scale = Vector2(bullet_size_mult, bullet_size_mult)
 		Micro.world.get_node("Bullets").add_child(bullet)
 		prepared_bullets.append(bullet)
