@@ -44,6 +44,8 @@ func _physics_process(delta):
 		global_position += aim_vec * speed * delta
 	else:
 		global_position = get_aim_position()
+		if is_player:
+			$Sprite2D.modulate.a = clamp(((global_position - shooter.global_position)/20.).length_squared(), 0., 1.)
 
 func aim(angle: float):
 	aim_vec = Vector2.from_angle(angle + angle_offset)
