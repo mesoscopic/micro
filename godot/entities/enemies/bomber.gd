@@ -15,8 +15,9 @@ func _on_firing_cooldown_timeout() -> void:
 	bomb.origin = position.move_toward(Micro.player.position, 20)
 	Micro.world.get_node("Bullets").add_child(bomb)
 	bomb.fire_in(1.)
+	await Micro.wait(1.)
 	speed_multiplier = 1.
-	$FiringCooldown.start(3)
+	$FiringCooldown.start(2)
 
 func can_see_player() -> bool:
 	var query = PhysicsRayQueryParameters2D.create(global_position, Micro.player.position, 17, [Micro.player])
