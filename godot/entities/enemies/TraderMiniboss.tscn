@@ -100,12 +100,12 @@ speed = 0
 acceleration = 0
 deceleration = 0
 turn_length = 0
-fund_drop = 100
+fund_drop = 150
 fund_drop_randomization = 0.0
 despawn_distance = 0
 stagger_time = 0.0
-max_hp = 400
-hp = 400
+max_hp = 300
+hp = 300
 
 [node name="Render" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_3crh1")
