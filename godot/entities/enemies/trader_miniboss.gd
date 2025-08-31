@@ -112,7 +112,7 @@ func fire() -> void:
 					laser.rotation = get_angle_to(Micro.player.global_position) + i*PI/(8. if Micro.world.second_trader_miniboss else 6.)
 					laser.position = position
 					var space_state = get_world_2d().direct_space_state
-					var direction = Vector2.from_angle(laser.rotation) * 200. + global_position
+					var direction = Vector2.from_angle(laser.rotation) * 300. + global_position
 					var query = PhysicsRayQueryParameters2D.create(global_position, direction)
 					query.collision_mask = 17
 					query.exclude = [Micro.player]
@@ -121,7 +121,7 @@ func fire() -> void:
 					if result:
 						laser.length = global_position.distance_to(result.position)
 					else:
-						laser.length = 200.
+						laser.length = 300.
 					Micro.world.get_node("Bullets").add_child(laser)
 					lasers.append(laser)
 				await Micro.wait(.5+hp/float(max_hp))
@@ -151,8 +151,8 @@ func fire() -> void:
 					bullet.angle_offset = i*PI/8
 					bullet.aim(get_angle_to(Micro.player.global_position))
 					bullet.distance = 35
-					bullet.speed = 100.
-					bullet.acceleration = -10.-20.*hp/max_hp
+					bullet.speed = 150.
+					bullet.acceleration = -50.
 					bullet.home_rate = 0.5
 					bullet.lifetime = 3.
 					bullet.damage = 15
@@ -163,7 +163,7 @@ func fire() -> void:
 				await Micro.wait(.5)
 				if check_line_of_sight(): return
 				for bullet in prepared_bullets:
-					bullet.fire()
+					if bullet: bullet.fire()
 				prepared_bullets = []
 				$Attack.start(1.)
 			2:

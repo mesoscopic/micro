@@ -18,7 +18,7 @@ shader_parameter/health = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 shader_parameter/damaged = false
 
-[sub_resource type="Image" id="Image_e0lej"]
+[sub_resource type="Image" id="Image_hn53a"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -28,7 +28,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_uur07"]
-image = SubResource("Image_e0lej")
+image = SubResource("Image_hn53a")
 script = ExtResource("3_b1f70")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -93,7 +93,7 @@ alpha_curve = SubResource("CurveTexture_pbfcv")
 
 [node name="TraderMiniboss" type="CharacterBody2D" groups=["boss", "enemy"]]
 collision_layer = 270
-collision_mask = 258
+collision_mask = 2
 script = ExtResource("1_oj4li")
 shake_noise = SubResource("FastNoiseLite_hn53a")
 speed = 0
@@ -106,7 +106,6 @@ despawn_distance = 0
 stagger_time = 0.0
 max_hp = 400
 hp = 400
-metadata/_custom_type_script = "uid://oy7qpe47ti6v"
 
 [node name="Render" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_3crh1")
