@@ -12,6 +12,7 @@ func _ready() -> void:
 	$Rays.set_instance_shader_parameter("rays", split_number)
 	$Flash.set_instance_shader_parameter("rays", split_number)
 	$Rays.rotation = spin
+	$Flash.rotation = spin
 	$Bomb.position = origin - global_position
 	$Telegraph.rotate(get_angle_to(origin))
 	$Bomb.rotate(get_angle_to(origin))
@@ -34,7 +35,7 @@ func fire() -> void:
 		for angle in Vector3(PI/float(split_number), 2.*PI, 2.*PI/float(split_number)):
 			var bullet: Bullet = preload("res://bullets/EnemyBullet.tscn").instantiate()
 			bullet.position = position
-			bullet.velocity = Vector2.from_angle(angle-spin) * split_speed
+			bullet.velocity = Vector2.from_angle(angle+spin) * split_speed
 			bullet.damage = split_damage
 			bullet.lifetime = split_lifetime
 			add_sibling(bullet)

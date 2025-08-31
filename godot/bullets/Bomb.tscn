@@ -184,6 +184,7 @@ emitting = false
 amount = 1
 lifetime = 0.5
 one_shot = true
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_b2thq")
 
 [node name="Explosion" type="GPUParticles2D" parent="."]
