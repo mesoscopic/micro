@@ -155,12 +155,7 @@ func generate_world():
 			distance += 10
 		var location := biome_center_at(dir*distance)
 		place("trader_miniboss_arena", location, true)
-		var miniboss := preload("res://entities/tiles/EnemyPosition.tscn").instantiate()
-		miniboss.enemy = preload("res://entities/enemies/TraderMiniboss.tscn")
-		miniboss.spawn_radius = 140.
-		miniboss.hit_only = true
-		miniboss.require_close = true
-		miniboss.size = 50.
+		var miniboss := preload("res://entities/enemies/TraderMiniboss.tscn").instantiate()
 		miniboss.position = location * 20.
 		$Entities.add_child(miniboss)
 		place("anchor_room", Vector2i(Vector2(location).move_toward(Vector2.ZERO, 20).round()), true)

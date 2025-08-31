@@ -8,6 +8,7 @@ var aim_vec: Vector2
 var aim_angle: float
 var distance: float
 var speed: float
+var acceleration: float = 0.
 var lifetime: float
 var damage: int
 
@@ -42,6 +43,7 @@ func _physics_process(delta):
 	rotation = aim_angle - PI/2
 	if shot:
 		global_position += aim_vec * speed * delta
+		speed += acceleration * delta
 	else:
 		global_position = get_aim_position()
 		if is_player:

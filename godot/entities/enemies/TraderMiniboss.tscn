@@ -1,10 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://degw88c3u4obt"]
+[gd_scene load_steps=24 format=3 uid="uid://degw88c3u4obt"]
 
 [ext_resource type="Script" uid="uid://bd1nvuajonror" path="res://entities/enemies/trader_miniboss.gd" id="1_oj4li"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="3_3crh1"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_b1f70"]
 [ext_resource type="PackedScene" uid="uid://bmrdsgmlwoebu" path="res://fx/EnemyHurt.tscn" id="4_6dwnx"]
 [ext_resource type="Shader" uid="uid://ds1rxv51ltkrj" path="res://misc/shaders/enemy_ghost.gdshader" id="5_6dwnx"]
+[ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="7_e0lej"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hn53a"]
+noise_type = 0
+frequency = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3crh1"]
 resource_local_to_scene = true
@@ -13,7 +18,7 @@ shader_parameter/health = 1.0
 shader_parameter/velocity = Vector2(0, 0)
 shader_parameter/damaged = false
 
-[sub_resource type="Image" id="Image_6dwnx"]
+[sub_resource type="Image" id="Image_e0lej"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -23,12 +28,9 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_uur07"]
-image = SubResource("Image_6dwnx")
+image = SubResource("Image_e0lej")
 script = ExtResource("3_b1f70")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_wt047"]
-radius = 25.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hn53a"]
 shader = ExtResource("5_6dwnx")
@@ -55,17 +57,52 @@ scale_max = 100.0
 scale_curve = SubResource("CurveTexture_qqjxf")
 alpha_curve = SubResource("CurveTexture_jlvt4")
 
-[node name="TraderMiniboss" type="CharacterBody2D" groups=["enemy"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_wt047"]
+radius = 25.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mqcjo"]
+shader = ExtResource("7_e0lej")
+
+[sub_resource type="Curve" id="Curve_y383w"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.87812, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pbfcv"]
+curve = SubResource("Curve_y383w")
+
+[sub_resource type="Curve" id="Curve_xqhru"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1.99706), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fd84u"]
+curve = SubResource("Curve_xqhru")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y383w"]
+particle_flag_disable_z = true
+spread = 180.0
+radial_velocity_min = 200.0
+radial_velocity_max = 600.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 8.0
+scale_over_velocity_min = 1.0
+scale_over_velocity_max = 1.0
+scale_over_velocity_curve = SubResource("CurveTexture_fd84u")
+alpha_curve = SubResource("CurveTexture_pbfcv")
+
+[node name="TraderMiniboss" type="CharacterBody2D" groups=["boss", "enemy"]]
 collision_layer = 270
 collision_mask = 258
 script = ExtResource("1_oj4li")
+shake_noise = SubResource("FastNoiseLite_hn53a")
 speed = 0
 acceleration = 0
 deceleration = 0
 turn_length = 0
 fund_drop = 100
 fund_drop_randomization = 0.0
-despawn_distance = 240
+despawn_distance = 0
 stagger_time = 0.0
 max_hp = 400
 hp = 400
@@ -76,26 +113,29 @@ material = SubResource("ShaderMaterial_3crh1")
 scale = Vector2(50, 50)
 texture = SubResource("ImageTexture_uur07")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_wt047")
-
-[node name="Attack" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-autostart = true
-
-[node name="HurtEffect" parent="." instance=ExtResource("4_6dwnx")]
-
-[node name="ShieldEffect" type="GPUParticles2D" parent="."]
+[node name="AuraEffect" type="GPUParticles2D" parent="Render"]
 material = SubResource("ShaderMaterial_hn53a")
-emitting = false
+scale = Vector2(0.02, 0.02)
 amount = 16
 lifetime = 0.25
 process_material = SubResource("ParticleProcessMaterial_mqcjo")
 
-[node name="Shield" type="Timer" parent="."]
-wait_time = 10.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wt047")
+
+[node name="Attack" type="Timer" parent="."]
 one_shot = true
 
+[node name="HurtEffect" parent="." instance=ExtResource("4_6dwnx")]
+scale = Vector2(1.5, 1.5)
+
+[node name="ActivateParticles" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_mqcjo")
+emitting = false
+amount = 200
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_y383w")
+
 [connection signal="timeout" from="Attack" to="." method="fire"]
-[connection signal="timeout" from="Shield" to="." method="_on_shield_timeout"]

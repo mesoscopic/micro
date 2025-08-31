@@ -1,4 +1,4 @@
-extends Node2D
+class_name Spawner extends Node2D
 
 var spawn: PackedScene
 var target: Vector2

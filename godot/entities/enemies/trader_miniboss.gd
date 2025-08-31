@@ -6,6 +6,8 @@ const LASER = preload("res://bullets/Laser.tscn")
 const BOMB = preload("res://bullets/Bomb.tscn")
 const HOMING_BULLET = preload("res://bullets/HomingBullet.tscn")
 
+var active := false
+
 var shots: int
 var even_shot := false
 var prepared_bullets: Array[TelegraphedBullet] = []
@@ -13,6 +15,17 @@ var spiral_angle: float = 0.
 var lasers: Array[LaserBullet] = []
 var doing_homing_attack := false
 var special: int = 0
+
+@export var shake_noise: FastNoiseLite
+var shake_time := 0.
+
+func _hurt(_amount: int, _direction: float) -> void:
+	if !active:
+		hp = max_hp
+		if global_position.distance_squared_to(Micro.player.position) < 25600:
+			active = true
+			$Attack.start(0.25)
+			$ActivateParticles.restart()
 
 func _ready() -> void:
 	super()
@@ -30,43 +43,34 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	super(_delta)
-	for bullet in prepared_bullets:
-		bullet.aim(get_angle_to(Micro.player.global_position))
+	if active:
+		for bullet in prepared_bullets:
+			bullet.aim(get_angle_to(Micro.player.global_position))
 
-func spawn() -> void:
-	var summon = preload("res://bullets/SpawnerProjectile.tscn").instantiate()
-	summon.position = position
-	summon.target = Micro.player.global_position
-	summon.time = 3.
-	summon.spawn = preload("res://entities/enemies/Turret.tscn")
-	Micro.world.get_node("Bullets").add_child(summon)
+func _process(delta: float) -> void:
+	shake_time += delta
+	var shake := Vector2(shake_noise.get_noise_2d(shake_time, 0.), shake_noise.get_noise_2d(0., shake_time))
+	if active:
+		$Render.position = shake*(8.-5.*hp/max_hp)
+	else:
+		$Render.position = Vector2.ZERO
 
 func _die() -> void:
-	super()
-	for laser in lasers:
-		if laser: laser.stop()
-	Micro.world.second_trader_miniboss = true
-
-func do_despawn() -> void:
 	invincible = true
 	$Attack.stop()
+	active = false
+	$Render/AuraEffect.emitting = false
 	for laser in lasers:
 		if laser: laser.stop()
-	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.parallel().tween_property($Render.material, "shader_parameter/health", 1., 0.5)
-	await tween.finished
-	despawn.emit()
-	queue_free()
+	await Micro.wait(0.5)
+	Micro.world.second_trader_miniboss = true
+	super()
 
 func fire() -> void:
 	for bullet in prepared_bullets:
 		bullet.fire()
 	prepared_bullets = []
-	if doing_homing_attack:
-		doing_homing_attack = false
-		$Attack.start(1.)
-		return
-	elif shots > 0:
+	if shots > 0:
 		# Normal attack
 		shots -= 1
 		if even_shot:
@@ -94,88 +98,103 @@ func fire() -> void:
 				Micro.world.get_node("Bullets").add_child(bullet)
 				prepared_bullets.append(bullet)
 		even_shot = !even_shot
-		$Attack.start(.5)
+		$Attack.start(.25+hp/float(max_hp)/2.)
 	else:
 		# Special attack
 		match special:
 			0:
 				# lasers
-				if hp <= max_hp*0.5:
-					shots = Micro.world.random.randi_range(1,3)
-					for i in range(-2, 3):
-						var laser = LASER.instantiate()
-						laser.damage = 20
-						laser.lifetime = 1.
-						laser.rotation = get_angle_to(Micro.player.global_position) + i*PI/8
-						laser.position = position
-						laser.length = 200
-						Micro.world.get_node("Bullets").add_child(laser)
-						lasers.append(laser)
-					await Micro.wait(.5 if Micro.world.second_trader_miniboss else 1.)
-					for laser in lasers:
-						if laser: laser.fire()
-					lasers = []
-					$Attack.start(1.5)
-				else:
-					shots = Micro.world.random.randi_range(2,5)
+				shots = Micro.world.random.randi_range(1,3)
+				for i in range(-1, 2):
 					var laser = LASER.instantiate()
-					laser.damage = 20
+					laser.damage = 15
 					laser.lifetime = 1.
-					laser.rotation = get_angle_to(Micro.player.global_position)
+					laser.rotation = get_angle_to(Micro.player.global_position) + i*PI/(8. if Micro.world.second_trader_miniboss else 6.)
 					laser.position = position
-					laser.length = 200
+					var space_state = get_world_2d().direct_space_state
+					var direction = Vector2.from_angle(laser.rotation) * 200. + global_position
+					var query = PhysicsRayQueryParameters2D.create(global_position, direction)
+					query.collision_mask = 17
+					query.exclude = [Micro.player]
+					var result = space_state.intersect_ray(query)
+					
+					if result:
+						laser.length = global_position.distance_to(result.position)
+					else:
+						laser.length = 200.
 					Micro.world.get_node("Bullets").add_child(laser)
 					lasers.append(laser)
-					await Micro.wait(.5 if Micro.world.second_trader_miniboss else 1.)
+				await Micro.wait(.5+hp/float(max_hp))
+				if check_line_of_sight(): return
+				for laser in lasers:
 					if laser: laser.fire()
-					lasers = []
-					$Attack.start(1.)
+				lasers = []
+				$Attack.start(1.)
+			1 when Micro.world.second_trader_miniboss:
+				# surprises
+				shots = Micro.world.random.randi_range(4,6)
+				for i in range(3):
+					var bullet: Spawner = SPAWNER.instantiate()
+					bullet.position = global_position
+					bullet.spawn = preload("res://entities/enemies/Surprise.tscn")
+					bullet.target = global_position + Vector2(Micro.world.random.randf_range(-100, 100),Micro.world.random.randf_range(-100, 100))
+					bullet.time = 1.
+					Micro.world.get_node("Bullets").add_child(bullet)
+					await Micro.wait(hp/float(max_hp))
+				$Attack.start(1.5)
 			1:
 				# homing
 				shots = Micro.world.random.randi_range(4,6)
 				for i in range(-2,3):
 					var bullet: TelegraphedBullet = HOMING_BULLET.instantiate()
 					bullet.shooter = self
-					bullet.angle_offset = i*PI/6
+					bullet.angle_offset = i*PI/8
 					bullet.aim(get_angle_to(Micro.player.global_position))
 					bullet.distance = 35
-					bullet.speed = 50
+					bullet.speed = 100.
+					bullet.acceleration = -10.-20.*hp/max_hp
+					bullet.home_rate = 0.5
 					bullet.lifetime = 3.
 					bullet.damage = 15
 					bullet.scale = Vector2(1.5,1.5)
 					Micro.world.get_node("Bullets").add_child(bullet)
 					prepared_bullets.append(bullet)
 				doing_homing_attack = true
-				$Attack.start(.5)
+				await Micro.wait(.5)
+				if check_line_of_sight(): return
+				for bullet in prepared_bullets:
+					bullet.fire()
+				prepared_bullets = []
+				$Attack.start(1.)
 			2:
 				# bombs
-				if hp <= max_hp*0.5:
-					shots = (Micro.world.random.randi_range(2,4) if Micro.world.second_trader_miniboss else Micro.world.random.randi_range(4,6))
-					for i in range(0,4):
-						var bomb: BombBullet = BOMB.instantiate()
-						var aim := Vector2.from_angle(PI/2.*i)
-						bomb.position = position + aim*140.
-						bomb.origin = global_position + aim*35.
-						bomb.spin = randf_range(0.,2.*PI)
-						bomb.split_speed = 150.
-						bomb.split_lifetime = 1.5
-						bomb.fire_in(1. if Micro.world.second_trader_miniboss else 1.5)
-						Micro.world.get_node("Bullets").add_child(bomb)
-					$Attack.start(1.)
-				else:
-					shots = Micro.world.random.randi_range(2,3)
-					for i in 4:
-						var bomb: BombBullet = BOMB.instantiate()
-						bomb.position = Micro.player.position
-						bomb.origin = global_position.move_toward(Micro.player.position, 35)
-						bomb.split_number = 6 if Micro.world.second_trader_miniboss else 4
-						bomb.spin = randf_range(0., 2.*PI)
-						bomb.fire_in(1.)
-						Micro.world.get_node("Bullets").add_child(bomb)
-						await Micro.wait(.5)
-					$Attack.start(1.)
+				shots = Micro.world.random.randi_range(2,3)
+				for i in 4:
+					if check_line_of_sight(): return
+					var bomb: BombBullet = BOMB.instantiate()
+					bomb.position = Micro.player.position
+					bomb.origin = global_position.move_toward(Micro.player.position, 35)
+					bomb.split_number = 6 if Micro.world.second_trader_miniboss else 4
+					bomb.spin = randf_range(0., 2.*PI)
+					bomb.fire_in(.5+hp/float(max_hp))
+					Micro.world.get_node("Bullets").add_child(bomb)
+					await Micro.wait(.5)
+				$Attack.start(.5+hp/float(max_hp))
 		special = (special + 1) % 3
+	check_line_of_sight()
 
-func _on_shield_timeout() -> void:
-	$ShieldEffect.emitting = false
-	invincible = false
+func check_line_of_sight() -> bool:
+	var query = PhysicsRayQueryParameters2D.create(global_position, Micro.player.position, 17)
+	var result := get_world_2d().direct_space_state.intersect_ray(query)
+	if !result.is_empty() and result.collider != Micro.player:
+		$Attack.stop()
+		active = false
+		hp = max_hp
+		for laser in lasers:
+			if laser: laser.stop()
+		for bullet in prepared_bullets:
+			if bullet: bullet._on_expire()
+		prepared_bullets = []
+		lasers = []
+		return true
+	return false
