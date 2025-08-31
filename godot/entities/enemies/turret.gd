@@ -45,7 +45,7 @@ func _on_firing_cooldown_timeout() -> void:
 	await Micro.wait(0.5)
 	aiming = false
 	await Micro.wait(0.5)
-	laser.fire()
+	laser.fire(.5)
 	await Micro.wait(1.)
 	speed_multiplier = 1.
 	$FiringCooldown.start(1.)

@@ -21,15 +21,15 @@ func _physics_process(_delta: float) -> void:
 		if body is Damageable and global_position.distance_to(body.global_position) < damage_length*length*scale.x:
 			body.damage(damage, false, rotation)
 
-func fire() -> void:
+func fire(extend_time: float = 0.25) -> void:
 	var tween := get_tree().create_tween()
-	tween.tween_property(self, "damage_length", 1., 0.25)
-	tween.parallel().tween_property($Laser, "instance_shader_parameters/activate", 1.2, 0.25)
+	tween.tween_property(self, "damage_length", 1., extend_time)
+	tween.parallel().tween_property($Laser, "instance_shader_parameters/activate", 1.2, extend_time)
 	$Lifetime.start(lifetime)
 
 func stop() -> void:
 	$Lifetime.stop()
 	var tween := get_tree().create_tween()
-	tween.tween_property(self, "damage_length", 0., 0.25)
-	tween.parallel().tween_property($Laser, "instance_shader_parameters/disappear", 1.2, 0.25)
+	tween.tween_property(self, "damage_length", 0., 0.5)
+	tween.parallel().tween_property($Laser, "instance_shader_parameters/disappear", 1.2, 0.5)
 	tween.tween_callback(queue_free)
