@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://degw88c3u4obt"]
+[gd_scene load_steps=26 format=3 uid="uid://degw88c3u4obt"]
 
 [ext_resource type="Script" uid="uid://bd1nvuajonror" path="res://entities/enemies/trader_miniboss.gd" id="1_oj4li"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="3_3crh1"]
@@ -70,6 +70,13 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_pbfcv"]
 curve = SubResource("Curve_y383w")
 
+[sub_resource type="Curve" id="Curve_hn53a"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_e0lej"]
+curve = SubResource("Curve_hn53a")
+
 [sub_resource type="Curve" id="Curve_xqhru"]
 _limits = [0.0, 3.0, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1.99706), 0.0, 0.0, 0, 0]
@@ -83,6 +90,7 @@ particle_flag_disable_z = true
 spread = 180.0
 radial_velocity_min = 200.0
 radial_velocity_max = 600.0
+radial_velocity_curve = SubResource("CurveTexture_e0lej")
 gravity = Vector3(0, 0, 0)
 scale_min = 4.0
 scale_max = 8.0
@@ -135,6 +143,7 @@ amount = 200
 lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
+visibility_rect = Rect2(-300, -300, 600, 600)
 process_material = SubResource("ParticleProcessMaterial_y383w")
 
 [connection signal="timeout" from="Attack" to="." method="fire"]

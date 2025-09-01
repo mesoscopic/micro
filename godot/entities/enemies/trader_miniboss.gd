@@ -22,7 +22,9 @@ var shake_time := 0.
 func _hurt(_amount: int, _direction: float) -> void:
 	if !active:
 		hp = max_hp
-		if global_position.distance_squared_to(Micro.player.position) < 25600:
+		var query = PhysicsRayQueryParameters2D.create(global_position, Micro.player.position, 17)
+		var result := get_world_2d().direct_space_state.intersect_ray(query)
+		if result.is_empty() or result.collider == Micro.player:
 			active = true
 			$Attack.start(0.25)
 			$ActivateParticles.restart()
