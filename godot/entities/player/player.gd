@@ -19,11 +19,13 @@ var bullet_spread: float = 0.
 var evasion_mult: float = 1.
 var bullet_velocity_mult: float = 1.
 var bullet_size_mult: float = 1.
+var dash_power: float = 1.
+var dash_damage: int = 20
 
 var dash_direction := Vector2.ZERO
 var aim_direction := Vector2.RIGHT
 
-@export var funds: int = 0
+@export var funds: int = 9999
 var trading: bool = false
 var tolls: Array[Toll] = []
 var chosen_toll: Toll
@@ -72,9 +74,9 @@ func _physics_process(delta):
 			end_dash()
 			ultra = true
 		for bullet in prepared_bullets:
-			bullet.speed = 120.*(4.0 if ultra else 1.0) * bullet_velocity_mult
+			bullet.speed = 120.*(4.0*dash_power if ultra else 1.0) * bullet_velocity_mult
 			bullet.lifetime = (.25 if ultra else 1.5) * bullet_lifetime_mult
-			bullet.damage = ceil(10*bullet_damage_mult) if dash_direction == Vector2.ZERO else ceil(15*bullet_damage_mult)
+			bullet.damage = ceil(10*bullet_damage_mult) if dash_direction == Vector2.ZERO else ceil(10*(dash_power+.5)*bullet_damage_mult)
 			bullet.fire()
 		prepared_bullets = []
 		$ShootCooldown.start(shoot_cooldown*shoot_cooldown_mult)
@@ -165,10 +167,10 @@ func reset_bullets():
 
 func _on_dash_hit(body: Node2D) -> void:
 	if body is Damageable:
-		body.damage(20, false, dash_direction.angle())
+		body.damage(dash_damage, true, dash_direction.angle())
 
 func _on_dash_end() -> void:
-	velocity = dash_direction * max_speed
+	velocity = dash_direction.normalized() * max_speed
 	end_dash()
 
 func end_dash() -> void:
@@ -212,7 +214,7 @@ func start_dash(direction: Vector2) -> void:
 	$DashDuration.start()
 	$DashCooldown.start()
 	$Afterimage.emitting = true
-	dash_direction = direction
+	dash_direction = direction * dash_power
 	$Dashline.rotation = dash_direction.angle()
 	$Dashline.emitting = true
 	Micro.rumble(false, .15)

@@ -106,6 +106,7 @@ func refresh_item() -> void:
 	if MultishotUpgrade.available(): weights.add_item(MultishotUpgrade, 1)
 	#weights.add_item(RecklessnessUpgrade, 3)
 	if EvasionUpgrade.available(): weights.add_item(EvasionUpgrade, 2)
+	if ForceUpgrade.available(): weights.add_item(ForceUpgrade, 1)
 	weights.add_item(VolumeUpgrade, 1)
 	weights.add_item(VitalityUpgrade, 2)
 	item = Micro.roll(weights).new()
