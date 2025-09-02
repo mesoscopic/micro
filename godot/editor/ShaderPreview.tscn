@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://by05sm0h6q6d0"]
 
-[ext_resource type="Shader" uid="uid://d15uwy7o3ky5n" path="res://entities/player/upgrades/force.gdshader" id="1_40mjc"]
+[ext_resource type="Shader" uid="uid://elkp4cyhiyk1" path="res://entities/player/upgrades/evasion.gdshader" id="1_40mjc"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_mulxe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bn4b0"]
