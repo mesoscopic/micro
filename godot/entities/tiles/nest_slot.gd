@@ -10,7 +10,7 @@ func put_upgrade(new_upgrade: Upgrade) -> void:
 	upgrade.enable()
 	Upgrade.add(upgrade.title)
 	$Render.material = new_upgrade.render
-	$PutParticles.emitting = true
+	$PutParticles.restart()
 	Micro.world.upgrade_purchased.emit()
 
 func select() -> void:

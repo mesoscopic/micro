@@ -25,7 +25,7 @@ var dash_damage: int = 20
 var dash_direction := Vector2.ZERO
 var aim_direction := Vector2.RIGHT
 
-@export var funds: int = 9999
+@export var funds: int = 0
 var trading: bool = false
 var tolls: Array[Toll] = []
 var chosen_toll: Toll

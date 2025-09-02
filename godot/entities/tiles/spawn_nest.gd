@@ -22,6 +22,7 @@ func _process(_delta) -> void:
 func prepare_upgrade(item: Upgrade):
 	await Micro.wait(0.5)
 	purchased_upgrade = item
+	selected_slot = $Slots.get_child(floor(aim_input()/(PI/4.)))
 	$SelectionParticles.emitting = true
 
 func _on_home_zone_entered(_body: Node2D) -> void:
