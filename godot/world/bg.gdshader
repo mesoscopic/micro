@@ -6,6 +6,7 @@ render_mode skip_vertex_transform;
 #include "res://lib/shader/squaresdf.gdshaderinc"
 #include "res://lib/shader/sdfutil.gdshaderinc"
 #include "res://lib/shader/simplexnoise.gdshaderinc"
+#include "res://lib/shader/smoothmin.gdshaderinc"
 
 uniform float alpha_mult = 1.0;
 
@@ -64,7 +65,7 @@ void fragment() {
 		vec2 circles = mod(UV+TIME/vec2(1000., 2000.), 0.0025)*400.-.5;
 		vec2 diamonds = mod(UV-TIME/1200., 0.0025)*400.-.5;
 		vec2 squares = mod(UV-TIME/vec2(-1000., 600.), 0.002)*500.-.5;
-		COLOR += vec4(1.,1.,1.,0.05*default_effect*stroke(min(length(circles),min(abs(diamonds.x)+abs(diamonds.y), max(abs(squares.x), abs(squares.y)))), 0.3, 0.05));
+		COLOR += vec4(1.,1.,1.,0.05*default_effect*stroke(smin(length(circles),smin(abs(diamonds.x)+abs(diamonds.y), max(abs(squares.x), abs(squares.y)), 0.03), 0.03), 0.3, 0.05));
 	}
 	COLOR.a *= alpha_mult;
 }
