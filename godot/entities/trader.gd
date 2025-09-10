@@ -104,7 +104,7 @@ func _on_collect_area_entered(body: Node2D) -> void:
 func refresh_item() -> void:
 	var weights = RollWeights.new()
 	if MultishotUpgrade.available(): weights.add_item(MultishotUpgrade, 1)
-	#weights.add_item(RecklessnessUpgrade, 3)
+	if RecklessnessUpgrade.available(): weights.add_item(RecklessnessUpgrade, 1)
 	if EvasionUpgrade.available(): weights.add_item(EvasionUpgrade, 2)
 	if ForceUpgrade.available(): weights.add_item(ForceUpgrade, 1)
 	weights.add_item(VolumeUpgrade, 1)

@@ -13,7 +13,6 @@ var shoot_cooldown = 0.5
 
 var multishot: int = 0
 var bullet_damage_mult: float = 1.
-var shoot_cooldown_mult: float = 1.
 var bullet_lifetime_mult: float = 1.
 var bullet_spread: float = 0.
 var evasion_mult: float = 1.
@@ -79,7 +78,7 @@ func _physics_process(delta):
 			bullet.damage = ceil(10*bullet_damage_mult) if dash_direction == Vector2.ZERO else ceil(10*(dash_power+.5)*bullet_damage_mult)
 			bullet.fire()
 		prepared_bullets = []
-		$ShootCooldown.start(shoot_cooldown*shoot_cooldown_mult)
+		$ShootCooldown.start(shoot_cooldown)
 	
 	if Input.is_action_just_pressed("dash") and $DashCooldown.is_stopped():
 		start_dash(aim_input())
@@ -163,7 +162,7 @@ func reset_bullets():
 	for bullet in prepared_bullets:
 		bullet._on_expire()
 	prepared_bullets = []
-	$ShootCooldown.start(shoot_cooldown*shoot_cooldown_mult)
+	$ShootCooldown.start(shoot_cooldown)
 
 func _on_dash_hit(body: Node2D) -> void:
 	if body is Damageable:

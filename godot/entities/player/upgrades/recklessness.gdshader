@@ -1,15 +1,14 @@
 shader_type canvas_item;
 
 #include "res://lib/shader/sdfutil.gdshaderinc"
-#include "res://lib/shader/linesdf.gdshaderinc"
 
 void fragment() {
-	float circle = length(UV - 0.5) * 2.;
-	float line1 = lineSDF(UV, vec2(0.5, 0.5), vec2(0.716506, 0.375));
-	float line2 = lineSDF(UV, vec2(0.5, 0.5), vec2(0.333333, 0.211325));
-	float lines = min(line1, line2);
-	float gray1 = lineSDF(UV, vec2(0.5, 0.5), vec2(0.676777, 0.323223));
-	float gray2 = lineSDF(UV, vec2(0.5, 0.5), vec2(0.413726, 0.178025));
-	float grays = min(gray1, gray2);
-	COLOR.a *= clamp(stroke(circle, 0.9, 0.2)/1.5 + stroke(lines, 0., 0.1) + stroke(grays, 0.,0.1)/2., 0., 1.);
+	vec2 uv = 2.*(UV - 0.5);
+	float d1 = abs(uv.x-0.4) + abs(uv.y-0.4);
+	float d2 = abs(uv.x) + abs(uv.y-0.565685);
+	float d3 = abs(uv.x+0.4) + abs(uv.y-0.4);
+	float c1 = length(uv + vec2(.4,.4));
+	float c2 = length(uv + vec2(0.,.565685));
+	float c3 = length(uv + vec2(-.4,.4));
+	COLOR.a *= max(fill(min(d1, c1), 0.4), max(fill(min(d2, c2), 0.35)/1.5, fill(min(d3, c3), 0.3)/2.));
 }
