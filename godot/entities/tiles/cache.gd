@@ -36,25 +36,25 @@ func do_reward(reward: String) -> void:
 	if reward == "funds":
 		for i in randi_range(2, 5):
 			var coin := fund_coin.instantiate()
-			coin.position = position
+			coin.position = global_position
 			coin.amount = 1
 			coin.delay = randf_range(0.15, 0.4)
 			Micro.world.get_node("Entities").add_child(coin)
 	elif reward == "big_funds":
 		for i in randi_range(5, 12):
 			var coin := fund_coin.instantiate()
-			coin.position = position
+			coin.position = global_position
 			coin.amount = 2
 			coin.delay = randf_range(0.15, 0.4)
 			Micro.world.get_node("Entities").add_child(coin)
 	elif reward == "heal":
 		for i in randi_range(3, 6):
 			var orb := heal_orb.instantiate()
-			orb.position = position
+			orb.position = global_position
 			orb.distance = randf_range(20.,50.)
 			Micro.world.get_node("Entities").add_child(orb)
 	elif reward == "surprise":
 		var enemy := surprise.instantiate()
-		enemy.position = position
+		enemy.position = global_position
 		await Micro.wait(0.25)
 		Micro.world.get_node("Entities").call_deferred("add_child", enemy)

@@ -2,9 +2,9 @@ shader_type canvas_item;
 
 #include "res://lib/shader/sdfutil.gdshaderinc"
 
-uniform float health = 1.0;
-uniform vec2 velocity = vec2(0.0);
-uniform bool damaged = false;
+instance uniform float health = 1.0;
+instance uniform vec2 velocity = vec2(0.0);
+instance uniform bool damaged = false;
 
 void fragment() {
 	float visual_health = health;

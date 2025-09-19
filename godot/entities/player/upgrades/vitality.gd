@@ -7,8 +7,8 @@ static func get_title() -> String:
 static func get_description() -> String:
 	return "+20% health"
 
-static func get_shader() -> Shader:
-	return preload("res://entities/player/upgrades/vitality.gdshader")
+static func get_shader() -> ShaderMaterial:
+	return preload("res://entities/player/upgrades/vitality.res")
 
 func get_cost(count: int) -> int:
 	return Micro.world.random.randi_range(45,55) + 25 * count

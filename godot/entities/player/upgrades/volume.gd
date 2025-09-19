@@ -7,8 +7,8 @@ static func get_title() -> String:
 static func get_description() -> String:
 	return "Enlarge bullets, making them deal 30% more damage"
 
-static func get_shader() -> Shader:
-	return preload("res://entities/player/upgrades/volume.gdshader")
+static func get_shader() -> ShaderMaterial:
+	return preload("res://entities/player/upgrades/volume.res")
 
 func get_cost(count: int) -> int:
 	return Micro.world.random.randi_range(60, 75) + 40 * count

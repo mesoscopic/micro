@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
-uniform float open_anim = 0.;
-uniform float burn_anim = 0.;
+instance uniform float open_anim = 0.;
+instance uniform float burn_anim = 0.;
 
 uniform sampler2D noise;
 

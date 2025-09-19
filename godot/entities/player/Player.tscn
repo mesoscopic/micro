@@ -11,10 +11,6 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7lms1"]
 shader = ExtResource("4_0t1y4")
-shader_parameter/health = 1.0
-shader_parameter/velocity = Vector2(0, 0)
-shader_parameter/can_dash = true
-shader_parameter/damaged = false
 
 [sub_resource type="Image" id="Image_rl6fg"]
 data = {

@@ -14,9 +14,6 @@ frequency = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3crh1"]
 resource_local_to_scene = true
 shader = ExtResource("3_3crh1")
-shader_parameter/health = 1.0
-shader_parameter/velocity = Vector2(0, 0)
-shader_parameter/damaged = false
 
 [sub_resource type="Image" id="Image_hn53a"]
 data = {

@@ -1,0 +1,149 @@
+[gd_scene load_steps=26 format=3 uid="uid://b8pmrbiipjcw"]
+
+[ext_resource type="Script" uid="uid://uwuf3jgxovlg" path="res://entities/tiles/mine.gd" id="1_3o7ls"]
+[ext_resource type="Shader" uid="uid://c0f5rl4psb3j3" path="res://entities/tiles/mine.gdshader" id="1_tdar8"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_3o7ls"]
+[ext_resource type="Shader" uid="uid://cvs7hsg1qidb4" path="res://misc/shaders/ray_sparkle.gdshader" id="4_4rrc6"]
+[ext_resource type="Shader" uid="uid://dovasowx0gp6e" path="res://misc/shaders/hex_particle.gdshader" id="5_euatk"]
+[ext_resource type="Shader" uid="uid://4aa430585dfx" path="res://misc/shaders/hex_outline.gdshader" id="6_euatk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4rrc6"]
+shader = ExtResource("1_tdar8")
+
+[sub_resource type="Image" id="Image_euatk"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_euatk"]
+image = SubResource("Image_euatk")
+script = ExtResource("2_3o7ls")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5efec"]
+shader = ExtResource("4_4rrc6")
+
+[sub_resource type="Curve" id="Curve_euatk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5t6lw"]
+curve = SubResource("Curve_euatk")
+
+[sub_resource type="Curve" id="Curve_8ov3f"]
+_data = [Vector2(0, 0), 0.0, 5.30412, 0, 0, Vector2(0.473002, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_k1wgr"]
+curve = SubResource("Curve_8ov3f")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i2vsw"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 120.0
+scale_max = 120.0
+scale_curve = SubResource("CurveTexture_k1wgr")
+alpha_curve = SubResource("CurveTexture_5t6lw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_euatk"]
+shader = ExtResource("5_euatk")
+
+[sub_resource type="Curve" id="Curve_i2vsw"]
+_data = [Vector2(0.499257, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -5.79131, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_r4fl3"]
+curve = SubResource("Curve_i2vsw")
+
+[sub_resource type="Curve" id="Curve_7a1y7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.95827, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wfpl4"]
+curve = SubResource("Curve_7a1y7")
+
+[sub_resource type="Curve" id="Curve_7rtq6"]
+_data = [Vector2(0, 0), 0.0, 6.34692, 0, 0, Vector2(0.5, 1), 0.182132, 0.0, 0, 0, Vector2(1, 0.5), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_c7ysa"]
+curve = SubResource("Curve_7rtq6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4rrc6"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 25.0
+emission_ring_inner_radius = 10.0
+emission_ring_cone_angle = 90.0
+radial_velocity_min = -50.0
+radial_velocity_max = -50.0
+radial_velocity_curve = SubResource("CurveTexture_wfpl4")
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 8.0
+scale_curve = SubResource("CurveTexture_c7ysa")
+alpha_curve = SubResource("CurveTexture_r4fl3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ov3f"]
+shader = ExtResource("6_euatk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r4fl3"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 80.0
+scale_max = 80.0
+scale_curve = SubResource("CurveTexture_k1wgr")
+alpha_curve = SubResource("CurveTexture_5t6lw")
+
+[node name="Mine" type="CharacterBody2D"]
+collision_layer = 24
+collision_mask = 6
+script = ExtResource("1_3o7ls")
+invulnerability_time = 0.0
+deplete_hp = false
+
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_4rrc6")
+scale = Vector2(24, 24)
+texture = SubResource("ImageTexture_euatk")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -11, 9.5, -5.5, 9.5, 5.5, 0, 11, -9.5, 5.5, -9.5, -5.5)
+
+[node name="Recharge" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Flash" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_5efec")
+instance_shader_parameters/rays = 6
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_i2vsw")
+
+[node name="Charging" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_euatk")
+emitting = false
+amount = 12
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_4rrc6")
+
+[node name="Charged" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_8ov3f")
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+fixed_fps = 0
+process_material = SubResource("ParticleProcessMaterial_r4fl3")
+
+[connection signal="timeout" from="Recharge" to="." method="_on_recharge_timeout"]

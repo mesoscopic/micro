@@ -7,8 +7,8 @@ static func get_title() -> String:
 static func get_description() -> String:
 	return "Shoot 20% faster, but lose 50% invincibility time"
 
-static func get_shader() -> Shader:
-	return preload("res://entities/player/upgrades/recklessness.gdshader")
+static func get_shader() -> ShaderMaterial:
+	return preload("res://entities/player/upgrades/recklessness.res")
 
 func get_cost(count: int) -> int:
 	return Micro.world.random.randi_range(80, 90) + 30*count

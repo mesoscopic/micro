@@ -37,7 +37,6 @@ func _ready():
 	hurt.connect(_hurt)
 	die.connect(_die)
 	Micro.player = self
-	$FundsDisplay/HBoxContainer/Label.text = "%s" % funds
 
 func _physics_process(delta):
 	tick()
@@ -62,8 +61,8 @@ func _physics_process(delta):
 			velocity = -dash_direction * max_speed * 2.
 			end_dash()
 	
-	$Render.material.set("shader_parameter/velocity", (velocity / max(max_speed, velocity.length())))
-	$Render.material.set("shader_parameter/can_dash", $DashCooldown.is_stopped())
+	$Render.set_instance_shader_parameter("velocity", (velocity / max(max_speed, velocity.length())))
+	$Render.set_instance_shader_parameter("can_dash", $DashCooldown.is_stopped())
 	
 	if Input.is_action_pressed("shoot") and len(prepared_bullets) > 0:
 		var ultra := false

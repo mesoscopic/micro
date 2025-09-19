@@ -11,7 +11,7 @@ size = Vector2(140, 140)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vpgj0"]
 shader = ExtResource("3_dnu8s")
 
-[sub_resource type="Image" id="Image_xq5fs"]
+[sub_resource type="Image" id="Image_kxo58"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -21,7 +21,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_jf3st"]
-image = SubResource("Image_xq5fs")
+image = SubResource("Image_kxo58")
 script = ExtResource("4_dnu8s")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 

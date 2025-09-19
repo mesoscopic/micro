@@ -8,8 +8,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qwbhg"]
 resource_local_to_scene = true
 shader = ExtResource("2_xgfmd")
-shader_parameter/open_anim = 0.0
-shader_parameter/burn_anim = 0.0
 
 [sub_resource type="Image" id="Image_3t0xa"]
 data = {
@@ -54,7 +52,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Render:material:shader_parameter/open_anim")
+tracks/0/path = NodePath("Render:instance_shader_parameters/open_anim")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -66,7 +64,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Render:material:shader_parameter/burn_anim")
+tracks/1/path = NodePath("Render:instance_shader_parameters/burn_anim")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -82,7 +80,7 @@ length = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Render:material:shader_parameter/burn_anim")
+tracks/0/path = NodePath("Render:instance_shader_parameters/burn_anim")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -98,7 +96,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Render:material:shader_parameter/open_anim")
+tracks/0/path = NodePath("Render:instance_shader_parameters/open_anim")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -119,9 +117,12 @@ _data = {
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_xgfmd")
+deplete_hp = false
 
 [node name="Render" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_qwbhg")
+instance_shader_parameters/burn_anim = 0.0
+instance_shader_parameters/open_anim = 0.0
 scale = Vector2(20, 20)
 texture = SubResource("ImageTexture_pky5l")
 

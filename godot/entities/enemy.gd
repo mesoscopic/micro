@@ -74,7 +74,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity = velocity.move_toward((path_target - global_position).normalized() * speed * speed_multiplier, acceleration * delta)
 	move_and_slide()
-	$Render.material.set("shader_parameter/velocity", velocity / max(speed if speed > 0 else 1, velocity.length()))
+	$Render.set_instance_shader_parameter("velocity", velocity / max(speed if speed > 0 else 1, velocity.length()))
 
 func position_target(target: Vector2, avoid_start: bool) -> Vector2:
 	if check(target):

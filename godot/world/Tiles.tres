@@ -1,9 +1,10 @@
-[gd_resource type="TileSet" load_steps=13 format=3 uid="uid://cr8mn87yb0vyh"]
+[gd_resource type="TileSet" load_steps=14 format=3 uid="uid://cr8mn87yb0vyh"]
 
 [ext_resource type="Shader" uid="uid://da7cs348tnx37" path="res://world/tiles/wall.gdshader" id="1_undnp"]
 [ext_resource type="PackedScene" uid="uid://c04qdfehiu2m5" path="res://entities/tiles/Cache.tscn" id="2_4ob88"]
 [ext_resource type="Shader" uid="uid://b8r1ahopsg2rs" path="res://world/tiles/gate.gdshader" id="2_c6giu"]
 [ext_resource type="PackedScene" uid="uid://crgc4i8l7fixw" path="res://entities/tiles/ReturnAnchor.tscn" id="4_c6giu"]
+[ext_resource type="PackedScene" uid="uid://b8pmrbiipjcw" path="res://entities/tiles/Mine.tscn" id="4_x4yhs"]
 [ext_resource type="PackedScene" uid="uid://b6smc1rpaeugb" path="res://entities/tiles/Light.tscn" id="5_clx0c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c0d7e"]
@@ -38,6 +39,7 @@ use_texture_padding = false
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_i4b1j"]
 resource_name = "Destructibles"
 scenes/1/scene = ExtResource("2_4ob88")
+scenes/2/scene = ExtResource("4_x4yhs")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_clx0c"]
 resource_name = "Other"
