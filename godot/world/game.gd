@@ -12,6 +12,7 @@ enum Biome {
 	LANDING,
 	DEFAULT,
 	PEACE,
+	MINEFIELD,
 	EMPTINESS
 }
 
@@ -35,6 +36,9 @@ func world_enemy(biome: Biome, distance: int) -> Enemy:
 				enemies.add_item(preload("res://entities/enemies/Bomber.tscn"), 1)
 			if distance >= 120:
 				enemies.add_item(preload("res://entities/enemies/Surpriser.tscn"), 1)
+		Biome.MINEFIELD:
+			enemies.add_item(preload("res://entities/enemies/MultiShooter.tscn"), 3)
+			enemies.add_item(preload("res://entities/enemies/Bomber.tscn"), 3)
 	return Micro.roll(enemies).instantiate()
 
 func spawn_cap() -> int:
@@ -84,8 +88,10 @@ func _physics_process(_delta: float) -> void:
 				change_bg("peace")
 			Biome.LANDING:
 				change_bg("landing")
-			_:
+			Biome.DEFAULT:
 				change_bg("default")
+			_:
+				change_bg("placeholder")
 	
 	Micro.player.get_node("Camera/GlobalParticles/Peace").emitting = (current_biome == Biome.PEACE)
 
@@ -172,6 +178,15 @@ func generate_world():
 		trader.wander_range = 70.
 		trader.wander_distance = 60.
 		$Entities.add_child(trader)
+	await Micro.worldgen_status("Forming minefield...")
+	for distance in range(128, 512, 64):
+		var initial_angle := random.randf_range(0., 2.*PI)
+		var success := false
+		for angle in Vector3(initial_angle, initial_angle+2.*PI, PI/16.):
+			if attempt_decide_biome(Vector2i(Vector2.from_angle(angle) * distance), Biome.MINEFIELD):
+				success = true
+				break
+		if success: break
 	await Micro.worldgen_status("Scattering features...")
 	var disks := VariablePoissonDiskSampler2D.new(random, Vector2(1000, 1000), 30)
 	disks.generate(
@@ -181,6 +196,8 @@ func generate_world():
 				Biome.LANDING: return 6
 				Biome.DEFAULT:
 					return 25 - biome_edgeness_at(pos)*15
+				Biome.MINEFIELD:
+					return random.randi_range(5, 10)
 				_: return 10
 	, 5, 30)
 	await Micro.worldgen_status("Placing features...")
@@ -202,6 +219,11 @@ func generate_world():
 					features.add_item("obstacles/block", 1)
 					features.add_item("obstacles/cross", 1)
 					features.add_item("anchor_room", 1)
+				place("%s" % Micro.roll(features), tile)
+			Biome.MINEFIELD:
+				var features := RollWeights.new()
+				features.add_item("mine", 5)
+				features.add_item("cache", 3)
 				place("%s" % Micro.roll(features), tile)
 
 func place(id: String, pos: Vector2i, force := false):
@@ -225,6 +247,13 @@ func attempt_decide_biome_for_center_structure(tile: Vector2i, biome: Biome, mar
 	if (abs(center.x) + abs(center.y) <= 80+margin) or (abs(center.x) + abs(center.y)) >= 512-margin:
 		return false
 	# Don't place it here if there's already a biome
+	if biomes.has(center): return false
+	biomes.set(center, biome)
+	return true
+
+func attempt_decide_biome(tile: Vector2i, biome: Biome) -> bool:
+	var center := biome_center_at(tile)
+	# In this case, we don't care if the center is too close or far from spawn
 	if biomes.has(center): return false
 	biomes.set(center, biome)
 	return true

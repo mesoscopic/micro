@@ -41,7 +41,7 @@ func _input(event):
 	elif event.is_action_pressed("debug_print"):
 		print("\n== BREAK ==")
 	elif event.is_action_pressed("debug_tp"):
-		Micro.player.global_position = get_tree().get_first_node_in_group("boss").global_position
+		Micro.player.global_position = Micro.world.biomes.find_key(Micro.world.Biome.MINEFIELD) * 20. #get_tree().get_first_node_in_group("boss").global_position
 
 func settings():
 	var settings_menu := preload("res://ui/SettingsMenu.tscn").instantiate()
