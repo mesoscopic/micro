@@ -197,7 +197,7 @@ func generate_world():
 				Biome.DEFAULT:
 					return 25 - biome_edgeness_at(pos)*15
 				Biome.MINEFIELD:
-					return random.randi_range(5, 10)
+					return 5
 				_: return 10
 	, 5, 30)
 	await Micro.worldgen_status("Placing features...")
@@ -223,7 +223,7 @@ func generate_world():
 			Biome.MINEFIELD:
 				var features := RollWeights.new()
 				features.add_item("mine", 5)
-				features.add_item("cache", 3)
+				features.add_item("mine_caches", 3)
 				place("%s" % Micro.roll(features), tile)
 
 func place(id: String, pos: Vector2i, force := false):
