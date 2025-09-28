@@ -38,15 +38,15 @@ void fragment() {
 			vec2 st = division*mod(UV + CAMERA/200.*float(i), vec2(1./division)) - vec2(0.5);
 			total += smoothstep(.5, .5 + .02*float(i), abs(st.x) + abs(st.y));
 		}
-		COLOR += vec4(1.,1.,1.,0.06*mod(total, 1.))*landing_effect;
+		COLOR += vec4(1.,1.,1.,mod(total, 1.))*landing_effect;
 	}
 	if(placeholder_effect>0.){
 		float c = 0.0;
 		if(sin(800. * PI * (UV.x) - 0.5 * PI) > 0.99){
-			c = 0.05;
+			c = 1.;
 		}
 		if(sin(800. * PI * (UV.y) - 0.5 * PI) > 0.99){
-			c = 0.05;
+			c = 1.;
 		}
 		COLOR += vec4(1.,1.,1.,c)*placeholder_effect;
 	}
@@ -62,13 +62,13 @@ void fragment() {
 			st = 2.*mod(st, vec2(0.5));
 		}
 		float d = squareSDF(st);
-		COLOR += vec4(1., 1., 1., (.05+0.025*sin(PI*(TIME/5.+layer)))*stroke(d, .8, 0.1+0.05*sin(PI*(TIME/5.+layer))))*peace_effect;
+		COLOR += vec4(1., 1., 1., (.7+0.3*sin(PI*(TIME/5.+layer)))*stroke(d, .8, 0.1+0.05*sin(PI*(TIME/5.+layer))))*peace_effect;
 	}
 	if(default_effect>0.){
 		vec2 circles = mod(UV+TIME/vec2(1000., 2000.), 0.0025)*400.-.5;
 		vec2 diamonds = mod(UV-TIME/1200., 0.0025)*400.-.5;
 		vec2 squares = mod(UV-TIME/vec2(-1000., 600.), 0.002)*500.-.5;
-		COLOR += vec4(1.,1.,1.,0.05*default_effect*stroke(smin(length(circles),smin(abs(diamonds.x)+abs(diamonds.y), max(abs(squares.x), abs(squares.y)), 0.03), 0.03), 0.3, 0.05));
+		COLOR += vec4(1.,1.,1.,default_effect*stroke(smin(length(circles),smin(abs(diamonds.x)+abs(diamonds.y), max(abs(squares.x), abs(squares.y)), 0.03), 0.03), 0.3, 0.05));
 	}
 	if(minefield_effect>0.){
 		// Adapted from https://www.shadertoy.com/view/fsdcz7
@@ -98,7 +98,7 @@ void fragment() {
 			if(i > 2 && random(id + .22)<.2) break;
 			p -= TIME/32.;
 		}
-		COLOR += vec4(1.,1.,1.,0.025*minefield_effect*stroke(d, 0., 0.05)+0.025*minefield_effect*stroke(d, 0., 0.01));
+		COLOR += vec4(1.,1.,1.,0.5*minefield_effect*stroke(d, 0., 0.05)+0.5*minefield_effect*stroke(d, 0., 0.01));
 	}
 	COLOR.a *= alpha_mult;
 }

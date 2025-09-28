@@ -61,3 +61,5 @@ func setting_hook(id: String, value: int) -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if value == 1 else DisplayServer.WINDOW_MODE_WINDOWED)
 		"vsync":
 			DisplayServer.window_set_vsync_mode(value)
+		"bg_alpha_percent":
+			if Micro.world: Micro.world.set_bg_opacity(value/100.);

@@ -136,6 +136,12 @@ func change_bg(new_effect: String):
 		else:
 			tween.parallel().tween_property($Background.material, "shader_parameter/%s_effect" % effect, 0., 1.)
 
+func set_bg_opacity(alpha: float):
+	$Background.material.set("shader_parameter/alpha_mult", alpha)
+
+func _ready() -> void:
+	set_bg_opacity(Micro.get_setting("bg_alpha_percent")/100.)
+
 # --------------
 # World gen code
 # --------------

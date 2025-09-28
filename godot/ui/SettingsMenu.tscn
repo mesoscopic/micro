@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2txisf020wo6"]
+[gd_scene load_steps=6 format=3 uid="uid://d2txisf020wo6"]
 
 [ext_resource type="Script" uid="uid://jetecqpkhaqa" path="res://ui/settings_menu.gd" id="1_7nnky"]
 [ext_resource type="PackedScene" uid="uid://ctn2krbcs71xh" path="res://ui/settings/SettingButton.tscn" id="1_oqkcn"]
 [ext_resource type="PackedScene" uid="uid://dmgimpw0u3pvn" path="res://ui/settings/SettingSection.tscn" id="3_rd3qm"]
+[ext_resource type="PackedScene" uid="uid://o7x8yw1x0qgp" path="res://ui/settings/SettingRange.tscn" id="4_1j15u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4npji"]
 bg_color = Color(0, 0, 0, 1)
@@ -83,6 +84,15 @@ setting_name = "Reduce Flashing"
 setting_id = "photosensitive_mode"
 choices = Array[String](["No", "Yes"])
 description = "If Yes, certain visual effects are simplified or disabled to reduce flashing on screen."
+
+[node name="BGOpacity" parent="Panel/Margin/MainBox/Options" instance=ExtResource("4_1j15u")]
+layout_mode = 2
+setting_name = "Background Opacity"
+setting_id = "bg_alpha_percent"
+max_bound = 25
+unit = "%"
+description = "The opacity of area backgrounds.
+Higher opacity makes the backgrounds more visible but reduces contrast with foreground."
 
 [node name="Controller" parent="Panel/Margin/MainBox/Options" instance=ExtResource("3_rd3qm")]
 layout_mode = 2

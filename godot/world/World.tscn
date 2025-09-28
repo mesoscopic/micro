@@ -47,7 +47,7 @@ alpha_curve = SubResource("CurveTexture_crsqw")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i4b1j"]
 shader = ExtResource("1_gia2e")
-shader_parameter/alpha_mult = 1.0
+shader_parameter/alpha_mult = 0.05
 shader_parameter/landing_effect = 1.0
 shader_parameter/placeholder_effect = 0.0
 shader_parameter/peace_effect = 0.0
