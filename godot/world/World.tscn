@@ -20,14 +20,14 @@ shader_parameter/JITTER = 1.0
 _data = [Vector2(0, 0), 0.0, 6.42857, 0, 0, Vector2(0.486667, 1), 0.0, -3.64992, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_wpbas"]
+[sub_resource type="CurveTexture" id="CurveTexture_crsqw"]
 curve = SubResource("Curve_1imk8")
 
 [sub_resource type="Curve" id="Curve_f5g5g"]
 _data = [Vector2(0.52, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.42858, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_7rexb"]
+[sub_resource type="CurveTexture" id="CurveTexture_8mymi"]
 curve = SubResource("Curve_f5g5g")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2nmfm"]
@@ -41,9 +41,9 @@ radial_accel_min = 0.999998
 radial_accel_max = 25.0
 scale_min = 2.0
 scale_max = 6.0
-scale_curve = SubResource("CurveTexture_7rexb")
+scale_curve = SubResource("CurveTexture_8mymi")
 color = Color(1, 1, 1, 0.313726)
-alpha_curve = SubResource("CurveTexture_wpbas")
+alpha_curve = SubResource("CurveTexture_crsqw")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i4b1j"]
 shader = ExtResource("1_gia2e")
@@ -52,6 +52,7 @@ shader_parameter/landing_effect = 1.0
 shader_parameter/placeholder_effect = 0.0
 shader_parameter/peace_effect = 0.0
 shader_parameter/default_effect = 0.0
+shader_parameter/minefield_effect = 0.0
 
 [sub_resource type="Image" id="Image_crsqw"]
 data = {
@@ -73,7 +74,7 @@ frequency = 0.02
 fractal_octaves = 2
 fractal_lacunarity = 5.0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c0d7e"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gqh78"]
 width = 600
 height = 1
 seamless = true
@@ -84,12 +85,12 @@ metadata/_custom_type_script = "uid://by5pvpniu1o1d"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nrtoj"]
 shader = ExtResource("4_7c4bj")
-shader_parameter/noise = SubResource("NoiseTexture2D_c0d7e")
+shader_parameter/noise = SubResource("NoiseTexture2D_gqh78")
 
-[sub_resource type="Gradient" id="Gradient_7c4bj"]
+[sub_resource type="Gradient" id="Gradient_qpjny"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nrtoj"]
-gradient = SubResource("Gradient_7c4bj")
+gradient = SubResource("Gradient_qpjny")
 width = 1
 height = 256
 fill_to = Vector2(0, 1)

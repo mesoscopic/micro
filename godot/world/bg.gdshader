@@ -7,6 +7,8 @@ render_mode skip_vertex_transform;
 #include "res://lib/shader/sdfutil.gdshaderinc"
 #include "res://lib/shader/simplexnoise.gdshaderinc"
 #include "res://lib/shader/smoothmin.gdshaderinc"
+#include "res://lib/shader/hexsdf.gdshaderinc"
+#include "res://lib/shader/rotate.gdshaderinc"
 
 uniform float alpha_mult = 1.0;
 
@@ -14,6 +16,7 @@ uniform float landing_effect: hint_range(0,1);
 uniform float placeholder_effect: hint_range(0,1);
 uniform float peace_effect: hint_range(0,1);
 uniform float default_effect: hint_range(0,1);
+uniform float minefield_effect: hint_range(0,1);
 
 varying vec2 CAMERA;
 
@@ -66,6 +69,36 @@ void fragment() {
 		vec2 diamonds = mod(UV-TIME/1200., 0.0025)*400.-.5;
 		vec2 squares = mod(UV-TIME/vec2(-1000., 600.), 0.002)*500.-.5;
 		COLOR += vec4(1.,1.,1.,0.05*default_effect*stroke(smin(length(circles),smin(abs(diamonds.x)+abs(diamonds.y), max(abs(squares.x), abs(squares.y)), 0.03), 0.03), 0.3, 0.05));
+	}
+	if(minefield_effect>0.){
+		// Adapted from https://www.shadertoy.com/view/fsdcz7
+		vec2 p = UV*100. - TIME/16.;
+		float d = -1e5;
+		vec2 id = vec2(0);
+		float sc = 1.;
+		vec2 s = vec2(1., 1.7320508);
+		for(int i = 0; i < 5; i++) {
+			vec2 ip;
+			vec4 hC = floor(vec4(p/s, p/s - vec2(.5, 1.7320508/3.))) + .5;
+			vec4 h = vec4(p - hC.xy*s, p - (hC.zw + .5)*s);
+			if (dot(h.xy, h.xy)<dot(h.zw, h.zw)) {
+				p = h.xy;
+				ip = hC.xy;
+			} else {
+				p = h.zw;
+				ip = hC.zw;
+			}
+			d = max(d, hexSDF(p) - .5/sc);
+
+			sc *= 1.4;
+			s /= 1.4;
+			id += ip/sc;
+			p = rotate(p, (random(id + .05) - .5)*6.2831, vec2(0.));
+			p -= vec2(random(id+.13),random(id+.04))/sc*.75;
+			if(i > 2 && random(id + .22)<.2) break;
+			p -= TIME/32.;
+		}
+		COLOR += vec4(1.,1.,1.,0.025*minefield_effect*stroke(d, 0., 0.05)+0.025*minefield_effect*stroke(d, 0., 0.01));
 	}
 	COLOR.a *= alpha_mult;
 }
