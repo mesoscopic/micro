@@ -27,6 +27,7 @@ b = Vector2(1, 0)
 [node name="Laser" type="Area2D"]
 collision_layer = 0
 collision_mask = 16
+input_pickable = false
 script = ExtResource("1_abvod")
 
 [node name="Lifetime" type="Timer" parent="."]

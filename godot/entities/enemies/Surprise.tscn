@@ -9,9 +9,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ml7jd"]
 resource_local_to_scene = true
 shader = ExtResource("3_oeqg6")
-shader_parameter/health = 1.0
-shader_parameter/velocity = Vector2(0, 0)
-shader_parameter/damaged = false
 
 [sub_resource type="Image" id="Image_cdy31"]
 data = {
@@ -89,6 +86,7 @@ shape = SubResource("CircleShape2D_kb0u7")
 [node name="Attack" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 16
+input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
 shape = SubResource("CircleShape2D_oeqg6")

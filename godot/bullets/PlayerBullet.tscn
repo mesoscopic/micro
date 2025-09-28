@@ -87,6 +87,7 @@ alpha_curve = SubResource("CurveTexture_foti4")
 process_physics_priority = 1
 collision_layer = 2
 collision_mask = 9
+input_pickable = false
 monitoring = false
 monitorable = false
 script = ExtResource("1_gex5j")
