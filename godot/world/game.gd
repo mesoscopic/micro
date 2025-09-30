@@ -187,14 +187,11 @@ func generate_world():
 		trader.wander_distance = 60.
 		$Entities.add_child(trader)
 	await Micro.worldgen_status("Forming minefield...")
-	for distance in range(128, 512, 64):
+	for distance in [128, 192, 256, 320]:
 		var initial_angle := random.randf_range(0., 2.*PI)
-		var success := false
 		for angle in Vector3(initial_angle, initial_angle+2.*PI, PI/16.):
 			if attempt_decide_biome(Vector2i(Vector2.from_angle(angle) * distance), Biome.MINEFIELD):
-				success = true
 				break
-		if success: break
 	await Micro.worldgen_status("Scattering features...")
 	var disks := VariablePoissonDiskSampler2D.new(random, Vector2(1000, 1000), 30)
 	disks.generate(
