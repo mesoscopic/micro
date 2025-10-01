@@ -119,3 +119,8 @@ func do_despawn():
 	# Since a lot of enemies that spawn will wander away from the player, this increases the likelihood of the player running into an enemy
 	if randi_range(1,2) == 1: Micro.world.spawn_attempt()
 	queue_free()
+
+func can_see_player() -> bool:
+	var query = PhysicsRayQueryParameters2D.create(global_position, Micro.player.position, 17, [Micro.player])
+	var result = get_world_2d().direct_space_state.intersect_ray(query)
+	return result.is_empty()

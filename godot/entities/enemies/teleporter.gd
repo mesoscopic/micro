@@ -8,7 +8,9 @@ func _ready():
 	super()
 
 func _on_firing_cooldown_timeout() -> void:
-	if position.distance_squared_to(Micro.player.position) > 57600: $FiringCooldown.start(1.)
+	if position.distance_squared_to(Micro.player.position) > 57600:
+		$FiringCooldown.start(1.)
+		return
 	for bullet in prepared_bullets:
 		bullet.speed = 100.
 		bullet.lifetime = 3.

@@ -18,8 +18,3 @@ func _on_firing_cooldown_timeout() -> void:
 	await Micro.wait(1.)
 	speed_multiplier = 1.
 	$FiringCooldown.start(2)
-
-func can_see_player() -> bool:
-	var query = PhysicsRayQueryParameters2D.create(global_position, Micro.player.position, 17, [Micro.player])
-	var result = get_world_2d().direct_space_state.intersect_ray(query)
-	return result.is_empty()
