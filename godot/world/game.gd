@@ -107,8 +107,6 @@ signal purchase_upgrade(item: Upgrade)
 @warning_ignore("unused_signal")
 signal upgrade_purchased
 
-var houses: Array[Vector2i] = [Vector2i(0,15),Vector2i(15,0),Vector2i(0,-15),Vector2i(-15,0)]
-
 func tile_at(pos: Vector2) -> Vector2i:
 	return round(pos / 20.)
 
@@ -173,14 +171,12 @@ func generate_world():
 		miniboss.position = location * 20.
 		$Entities.add_child(miniboss)
 		place("anchor_room", Vector2i(Vector2(location).move_toward(Vector2.ZERO, 20).round()), true)
-		var magnitude := int(location.length()) - 30
-		while magnitude > 50:
-			magnitude -= random.randi_range(15,20)
-			place("guiding_light", Vector2i((Vector2(location).normalized()*magnitude).round()), true)
-		var trader_location := Vector2i((Vector2(location).normalized()*40).round())
-		place("small_house", trader_location, true)
-		place("guiding_light", Vector2i((Vector2(location).normalized()*25).round()), false)
-		
+		var magnitude := 15
+		while magnitude < int(location.length()) - 25:
+			place("guiding_light", Vector2i((Vector2(location).normalized()*magnitude).round()))
+			magnitude += random.randi_range(10,15)
+		var trader_location := Vector2i((Vector2(location).normalized()*30).round())
+		place("small_house", trader_location, true)		
 		var trader := preload("res://entities/Trader.tscn").instantiate()
 		trader.position = trader_location * 20.
 		trader.wander_range = 70.
