@@ -166,6 +166,12 @@ func reset_bullets():
 func _on_dash_hit(body: Node2D) -> void:
 	if body is Damageable:
 		body.damage(dash_damage, true, dash_direction.angle())
+		$RedirectFlash.emit_particle(Transform2D.IDENTITY, Vector2.ZERO, Color.WHITE, Color.WHITE, 0)
+		await Micro.freeze(.05)
+		for i in 20:
+			$RedirectBurst.emit_particle(Transform2D.IDENTITY, Vector2.ZERO, Color.WHITE, Color.WHITE, 0)
+		dash_direction = dash_direction.length() * aim_input() * 1.2
+		$DashDuration.start(.1)
 
 func _on_dash_end() -> void:
 	velocity = dash_direction.normalized() * max_speed

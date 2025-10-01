@@ -5,7 +5,7 @@ extends Node
 var menu: Node
 var player: Player
 var world: World
-var debug_paused := false
+var frozen := false
 
 var config: ConfigFile
 var settings_defaults: Dictionary[String, int] = {
@@ -36,9 +36,9 @@ func _input(event):
 	if event.is_action_pressed("debug_overlay"):
 		var overlay: Control = get_tree().current_scene.get_node("UI/DebugOverlay")
 		overlay.visible = !overlay.visible
-	elif event.is_action_pressed("debug_pause") and debug_paused == get_tree().paused:
-		debug_paused = !(get_tree().paused)
-		get_tree().paused = debug_paused
+	elif event.is_action_pressed("debug_pause") and frozen == get_tree().paused:
+		frozen = !(get_tree().paused)
+		get_tree().paused = frozen
 	elif event.is_action_pressed("debug_print"):
 		print("\n== BREAK ==")
 	elif event.is_action_pressed("debug_tp"):
@@ -52,6 +52,15 @@ func settings():
 
 func wait(time: float, override_time: bool = false):
 	await get_tree().create_timer(time, override_time, false, override_time).timeout
+
+func freeze(time: float):
+	if frozen: return
+	frozen = true
+	get_tree().paused = true
+	await wait(time, true)
+	if frozen == get_tree().paused:
+		frozen = false
+		get_tree().paused = false
 
 func worldgen_status(status: String) -> void:
 	print(status)
