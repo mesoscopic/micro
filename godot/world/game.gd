@@ -58,6 +58,7 @@ func spawn_attempt() -> void:
 	# If you're closer to spawn, enemies will tend to come from the opposite direction to spawn.
 	var angle_randomization = distance / 60.
 	var tile: Vector2 = (player_pos + Vector2.from_angle(player_pos.angle_to_point(Vector2.ZERO)+PI+randf_range(-angle_randomization,angle_randomization)) * 20.)
+	if $Structures/NewTiles.get_cell_source_id(tile) > -1: return
 	var enemy: Enemy
 	var biome = get_biome(tile)
 	if biome == Biome.EMPTINESS:
