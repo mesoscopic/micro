@@ -14,7 +14,7 @@ func _on_firing_cooldown_timeout() -> void:
 	for bullet in prepared_bullets:
 		bullet.speed = 100.
 		bullet.lifetime = 3.
-		bullet.damage = 10
+		bullet.damage = 20
 		bullet.fire()
 	prepared_bullets = []
 	for i in range(-2,3):
@@ -46,7 +46,7 @@ func _hurt(amount: int, direction: float) -> void:
 		bullet.global_position = global_position
 		bullet.velocity = Vector2.from_angle(angle) * 100.
 		bullet.lifetime = 3.
-		bullet.damage = 7
+		bullet.damage = 15
 		bullet.scale = Vector2(0.8,0.8)
 		Micro.world.get_node("Bullets").add_child(bullet)
 

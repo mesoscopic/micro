@@ -6,5 +6,5 @@ func _ready():
 
 func _on_attack_body_entered(body: Node2D) -> void:
 	if body is Damageable:
-		body.damage(25)
+		body.damage(40)
 		damage(20)

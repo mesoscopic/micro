@@ -12,7 +12,7 @@ func _on_firing_cooldown_timeout() -> void:
 	if prepared_bullet:
 		prepared_bullet.speed = 120.
 		prepared_bullet.lifetime = 3.
-		prepared_bullet.damage = 8
+		prepared_bullet.damage = 15
 		prepared_bullet.fire()
 	
 	var bullet: TelegraphedBullet = BULLET.instantiate()

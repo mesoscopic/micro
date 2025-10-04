@@ -84,7 +84,7 @@ func fire() -> void:
 				bullet.distance = 35
 				bullet.speed = 100
 				bullet.lifetime = 2.
-				bullet.damage = 10
+				bullet.damage = 15
 				Micro.world.get_node("Bullets").add_child(bullet)
 				prepared_bullets.append(bullet)
 		else:
@@ -96,7 +96,7 @@ func fire() -> void:
 				bullet.distance = 35
 				bullet.speed = 100
 				bullet.lifetime = 2.
-				bullet.damage = 10
+				bullet.damage = 15
 				Micro.world.get_node("Bullets").add_child(bullet)
 				prepared_bullets.append(bullet)
 		even_shot = !even_shot
@@ -109,7 +109,7 @@ func fire() -> void:
 				shots = Micro.world.random.randi_range(1,3)
 				for i in range(-1, 2):
 					var laser = LASER.instantiate()
-					laser.damage = 15
+					laser.damage = 25
 					laser.lifetime = 1.
 					laser.rotation = get_angle_to(Micro.player.global_position) + i*PI/(8. if Micro.world.second_trader_miniboss else 6.)
 					laser.position = position
@@ -157,7 +157,7 @@ func fire() -> void:
 					bullet.acceleration = -50.
 					bullet.home_rate = 0.5
 					bullet.lifetime = 3.
-					bullet.damage = 15
+					bullet.damage = 25
 					bullet.scale = Vector2(1.5,1.5)
 					Micro.world.get_node("Bullets").add_child(bullet)
 					prepared_bullets.append(bullet)

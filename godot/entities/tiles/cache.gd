@@ -48,7 +48,7 @@ func do_reward(reward: String) -> void:
 			coin.delay = randf_range(0.15, 0.4)
 			Micro.world.get_node("Entities").add_child(coin)
 	elif reward == "heal":
-		for i in randi_range(3, 6):
+		for i in randi_range(4, 8):
 			var orb := heal_orb.instantiate()
 			orb.position = global_position
 			orb.distance = randf_range(20.,50.)

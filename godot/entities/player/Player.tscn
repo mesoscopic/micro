@@ -14,7 +14,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7lms1"]
 shader = ExtResource("4_0t1y4")
 
-[sub_resource type="Image" id="Image_rl6fg"]
+[sub_resource type="Image" id="Image_ak4un"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -24,7 +24,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_mqro2"]
-image = SubResource("Image_rl6fg")
+image = SubResource("Image_ak4un")
 script = ExtResource("4_oihyf")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -553,7 +553,7 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 trail_enabled = true
-trail_lifetime = 0.09999999999999999
+trail_lifetime = 0.1
 trail_sections = 4
 process_material = SubResource("ParticleProcessMaterial_aubru")
 

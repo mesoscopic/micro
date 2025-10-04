@@ -2,11 +2,11 @@ class_name BombBullet extends Node2D
 
 @export var split_number: int = 8
 @export var split_speed: float = 100.
-@export var split_damage: int = 10
+@export var split_damage: int = 20
 @export var split_lifetime: float = 2.
 @export var origin: Vector2
 @export var spin: float = 0.
-@export var explosion_damage: int = 15
+@export var explosion_damage: int = 30
 
 func _ready() -> void:
 	$Rays.set_instance_shader_parameter("rays", split_number)

@@ -8,9 +8,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cduuy"]
 resource_local_to_scene = true
 shader = ExtResource("2_j4vdi")
-shader_parameter/health = 1.0
-shader_parameter/velocity = Vector2(0, 0)
-shader_parameter/damaged = false
 
 [sub_resource type="Image" id="Image_enisn"]
 data = {

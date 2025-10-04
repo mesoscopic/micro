@@ -18,7 +18,7 @@ func _hurt(_amount, _direction):
 		var bullet: MineBullet = preload("res://bullets/MineBullet.tscn").instantiate()
 		bullet.velocity = Vector2.from_angle(angle) * 150
 		bullet.position = global_position
-		bullet.damage = 10
+		bullet.damage = 20
 		bullet.lifetime = 2
 		Micro.world.get_node("Bullets").call_deferred("add_child", bullet)
 

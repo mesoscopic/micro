@@ -12,7 +12,7 @@ func _on_firing_cooldown_timeout() -> void:
 	if prepared_bullet:
 		prepared_bullet.speed = 100.
 		prepared_bullet.lifetime = 5.
-		prepared_bullet.damage = 10
+		prepared_bullet.damage = 20
 		prepared_bullet.fire()
 		prepared_bullet = null
 		speed_multiplier = 0.3
