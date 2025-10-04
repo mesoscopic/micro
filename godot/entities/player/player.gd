@@ -216,7 +216,7 @@ func aim_input() -> Vector2:
 func start_dash(direction: Vector2) -> void:
 	invincible = true
 	$DashArea.monitoring = true
-	$DashDuration.start()
+	$DashDuration.start(1.5)
 	$DashCooldown.start()
 	$Afterimage.emitting = true
 	dash_direction = direction * dash_power
