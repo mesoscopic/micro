@@ -107,7 +107,7 @@ func refresh_item() -> void:
 	if EvasionUpgrade.available(): weights.add_item(EvasionUpgrade, 2)
 	if ForceUpgrade.available(): weights.add_item(ForceUpgrade, 1)
 	weights.add_item(VolumeUpgrade, 1)
-	weights.add_item(VitalityUpgrade, 2)
+	if VitalityUpgrade.available(): weights.add_item(VitalityUpgrade, 1)
 	item = Micro.roll(weights).new()
 	$Toll.set_for_upgrade(item)
 

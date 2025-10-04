@@ -20,6 +20,7 @@ var bullet_velocity_mult: float = 1.
 var bullet_size_mult: float = 1.
 var dash_power: float = 1.
 var dash_damage: int = 20
+var vitality: bool = false
 
 var dash_direction := Vector2.ZERO
 var aim_direction := Vector2.RIGHT

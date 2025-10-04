@@ -43,11 +43,19 @@ func new_target() -> void:
 
 func _die():
 	var anim = DEATH_ANIMATION.instantiate()
-	anim.fund_drop = fund_drop + fund_drop*fund_drop_randomization*randf_range(-1.,1.)
+	anim.fund_drop = fund_drop + fund_drop*fund_drop_randomization*Micro.world.random.randf_range(-1.,1.)
 	anim.enemy_scale = $Render.scale.x
 	anim.position = position
 	anim.extra_reward = extra_reward
 	add_sibling(anim)
+	if Micro.player.vitality:
+		for i in floor(max_hp/25.):
+			if Micro.world.random.randf() < 0.5:
+				for j in randi_range(2, 5):
+					var orb := preload("res://misc/effects/HealOrb.tscn").instantiate()
+					orb.position = global_position
+					orb.distance = randf_range(20.,50.)
+					add_sibling(orb)
 	if is_boss:
 		Micro.world.bosses_active -= 1
 	queue_free()

@@ -6,23 +6,6 @@
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_xbttu"]
 [ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://misc/shaders/funds.gdshader" id="4_xbttu"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2nhur"]
-shader = ExtResource("3_xb5g8")
-
-[sub_resource type="Image" id="Image_xbttu"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_yor8o"]
-image = SubResource("Image_xbttu")
-script = ExtResource("3_xbttu")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yor8o"]
 shader = ExtResource("4_xbttu")
 
@@ -77,12 +60,25 @@ scale_min = 2.0
 scale_max = 4.0
 alpha_curve = SubResource("CurveTexture_yolx1")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2nhur"]
+shader = ExtResource("3_xb5g8")
+
+[sub_resource type="Image" id="Image_xbttu"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_yor8o"]
+image = SubResource("Image_xbttu")
+script = ExtResource("3_xbttu")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
 [node name="EnemyDeathAnimation" type="Node2D"]
 script = ExtResource("1_xb5g8")
-
-[node name="Render" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_2nhur")
-texture = SubResource("ImageTexture_yor8o")
 
 [node name="FundParticles" type="GPUParticles2D" parent="."]
 material = SubResource("ShaderMaterial_yor8o")
@@ -94,6 +90,10 @@ material = SubResource("ShaderMaterial_sxsfr")
 amount = 50
 lifetime = 0.75
 process_material = SubResource("ParticleProcessMaterial_j114o")
+
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_2nhur")
+texture = SubResource("ImageTexture_yor8o")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
