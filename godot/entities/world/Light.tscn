@@ -1,8 +1,8 @@
 [gd_scene load_steps=25 format=3 uid="uid://b6smc1rpaeugb"]
 
-[ext_resource type="Shader" uid="uid://ci5ovcam7o22p" path="res://entities/tiles/light.gdshader" id="1_0fpnf"]
-[ext_resource type="Script" uid="uid://bw5172ki2lflb" path="res://entities/tiles/light.gd" id="1_0sgbh"]
-[ext_resource type="Shader" uid="uid://cs7vq0v8l44qx" path="res://entities/tiles/light_clouds.gdshader" id="1_yopc8"]
+[ext_resource type="Shader" uid="uid://ci5ovcam7o22p" path="res://entities/world/light.gdshader" id="1_0fpnf"]
+[ext_resource type="Script" uid="uid://bw5172ki2lflb" path="res://entities/world/light.gd" id="1_0sgbh"]
+[ext_resource type="Shader" uid="uid://cs7vq0v8l44qx" path="res://entities/world/light_clouds.gdshader" id="1_yopc8"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_yopc8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xut0m"]

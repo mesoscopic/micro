@@ -1,7 +1,7 @@
 [gd_scene load_steps=24 format=4 uid="uid://qujhsvriffxk"]
 
 [ext_resource type="Shader" uid="uid://0vacnrh74wjb" path="res://world/bg.gdshader" id="1_gia2e"]
-[ext_resource type="PackedScene" uid="uid://cas1ebkgs1kfw" path="res://entities/tiles/SpawnNest.tscn" id="1_kopsk"]
+[ext_resource type="PackedScene" uid="uid://cas1ebkgs1kfw" path="res://entities/world/SpawnNest.tscn" id="1_kopsk"]
 [ext_resource type="Script" uid="uid://ce6jxw7xe1a86" path="res://world/game.gd" id="1_ndgmm"]
 [ext_resource type="PackedScene" uid="uid://b14dvx67drebc" path="res://entities/player/Player.tscn" id="1_yrunw"]
 [ext_resource type="Shader" uid="uid://cxjhjvndfeyuk" path="res://misc/logic/biomes.gdshader" id="2_h1bdy"]

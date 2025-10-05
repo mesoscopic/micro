@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://cas1ebkgs1kfw"]
 
-[ext_resource type="Script" uid="uid://8mysmbmddama" path="res://entities/tiles/spawn_nest.gd" id="1_g6lmg"]
-[ext_resource type="PackedScene" uid="uid://cshcf4y2ntrp5" path="res://entities/tiles/NestSlot.tscn" id="2_baksq"]
+[ext_resource type="Script" uid="uid://8mysmbmddama" path="res://entities/world/spawn_nest.gd" id="1_g6lmg"]
+[ext_resource type="PackedScene" uid="uid://cshcf4y2ntrp5" path="res://entities/world/NestSlot.tscn" id="2_baksq"]
 [ext_resource type="Shader" uid="uid://cjhdxgx78hiya" path="res://misc/shaders/dash_ghost.gdshader" id="3_dnu8s"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="4_dnu8s"]
 

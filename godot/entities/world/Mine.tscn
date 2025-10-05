@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://b8pmrbiipjcw"]
 
-[ext_resource type="Script" uid="uid://uwuf3jgxovlg" path="res://entities/tiles/mine.gd" id="1_3o7ls"]
-[ext_resource type="Shader" uid="uid://pt43kt15p8bg" path="res://entities/tiles/mine.gdshader" id="1_tdar8"]
+[ext_resource type="Script" uid="uid://uwuf3jgxovlg" path="res://entities/world/mine.gd" id="1_3o7ls"]
+[ext_resource type="Shader" uid="uid://pt43kt15p8bg" path="res://entities/world/mine.gdshader" id="1_tdar8"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_3o7ls"]
 [ext_resource type="Shader" uid="uid://cvs7hsg1qidb4" path="res://misc/shaders/ray_sparkle.gdshader" id="4_4rrc6"]
 [ext_resource type="Shader" uid="uid://dovasowx0gp6e" path="res://misc/shaders/hex_particle.gdshader" id="5_euatk"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=3 uid="uid://crgc4i8l7fixw"]
 
-[ext_resource type="Script" uid="uid://71gemlmplsmg" path="res://entities/tiles/return_anchor.gd" id="1_3rb1k"]
-[ext_resource type="Shader" uid="uid://cl4tmvo4r3y2u" path="res://entities/tiles/portal.gdshader" id="1_tvuwn"]
+[ext_resource type="Script" uid="uid://71gemlmplsmg" path="res://entities/world/return_anchor.gd" id="1_3rb1k"]
+[ext_resource type="Shader" uid="uid://cl4tmvo4r3y2u" path="res://entities/world/portal.gdshader" id="1_tvuwn"]
 [ext_resource type="PackedScene" uid="uid://ceq78x2nlo2eh" path="res://entities/Toll.tscn" id="2_31usi"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_kfqnq"]
 [ext_resource type="Shader" uid="uid://cjhdxgx78hiya" path="res://misc/shaders/dash_ghost.gdshader" id="3_kfqnq"]

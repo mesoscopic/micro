@@ -1,0 +1,193 @@
+[gd_scene load_steps=29 format=3 uid="uid://dg680stjdtlbv"]
+
+[ext_resource type="Shader" uid="uid://dby1fhvlh2gjy" path="res://misc/shaders/square_pulse.gdshader" id="1_5fnnh"]
+[ext_resource type="Script" uid="uid://cbtae3s8r3f63" path="res://entities/world/health_up.gd" id="1_m4qs3"]
+[ext_resource type="Shader" uid="uid://cjsixrrxcu8rt" path="res://misc/effects/heal_orb.gdshader" id="2_nflxv"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_xngy6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m4qs3"]
+shader = ExtResource("2_nflxv")
+
+[sub_resource type="Image" id="Image_yq7ae"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_wsuqa"]
+image = SubResource("Image_yq7ae")
+script = ExtResource("3_xngy6")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="Curve" id="Curve_5fnnh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nflxv"]
+curve = SubResource("Curve_5fnnh")
+
+[sub_resource type="Curve" id="Curve_m4qs3"]
+_data = [Vector2(0, 0), 0.0, 12.13793, 0, 0, Vector2(0.25121412, 1), 0.0, 0.18738239, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_yq7ae"]
+curve = SubResource("Curve_m4qs3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5fnnh"]
+particle_flag_disable_z = true
+angle_min = 45.00001
+angle_max = 45.00001
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 49.999996
+linear_accel_max = 99.99999
+scale_min = 5.0
+scale_max = 15.0
+scale_curve = SubResource("CurveTexture_yq7ae")
+alpha_curve = SubResource("CurveTexture_nflxv")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nflxv"]
+shader = ExtResource("1_5fnnh")
+
+[sub_resource type="Curve" id="Curve_xngy6"]
+_data = [Vector2(0, 1), 0.0, -1.8626856, 0, 0, Vector2(1, 0), 0.10394902, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_m4qs3"]
+curve = SubResource("Curve_xngy6")
+
+[sub_resource type="Curve" id="Curve_yq7ae"]
+_data = [Vector2(0, 0), 0.0, 2.270121, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wsuqa"]
+curve = SubResource("Curve_yq7ae")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v2j6r"]
+particle_flag_disable_z = true
+angle_min = 45.00001
+angle_max = 45.00001
+gravity = Vector3(0, 0, 0)
+scale_min = 200.0
+scale_max = 200.0
+scale_curve = SubResource("CurveTexture_wsuqa")
+alpha_curve = SubResource("CurveTexture_m4qs3")
+
+[sub_resource type="Curve" id="Curve_wsuqa"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_v2j6r"]
+curve = SubResource("Curve_wsuqa")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pag18"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 80.0
+emission_ring_inner_radius = 50.0
+emission_ring_cone_angle = 90.0
+angle_min = 45.00001
+angle_max = 45.00001
+radial_velocity_min = -200.00002
+radial_velocity_max = -200.00002
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_v2j6r")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xngy6"]
+size = Vector2(10, 10)
+
+[sub_resource type="Curve" id="Curve_v2j6r"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.3247023, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pag18"]
+curve = SubResource("Curve_v2j6r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u01kl"]
+particle_flag_disable_z = true
+angle_min = 45.00001
+angle_max = 45.00001
+spread = 180.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 6.0
+alpha_curve = SubResource("CurveTexture_pag18")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yq7ae"]
+shader = ExtResource("1_5fnnh")
+
+[sub_resource type="Image" id="Image_wsuqa"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_v2j6r"]
+image = SubResource("Image_wsuqa")
+script = ExtResource("3_xngy6")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[node name="HealthUp" type="Node2D"]
+script = ExtResource("1_m4qs3")
+
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_m4qs3")
+scale = Vector2(30, 30)
+texture = SubResource("ImageTexture_wsuqa")
+
+[node name="Health" type="GPUParticles2D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_5fnnh")
+
+[node name="Pulse" type="GPUParticles2D" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_nflxv")
+amount = 2
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_v2j6r")
+
+[node name="Absorb" type="GPUParticles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 40
+lifetime = 0.25
+trail_lifetime = 1.0
+process_material = SubResource("ParticleProcessMaterial_pag18")
+
+[node name="Pickup" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup"]
+shape = SubResource("RectangleShape2D_xngy6")
+
+[node name="Burst" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 200
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+process_material = SubResource("ParticleProcessMaterial_u01kl")
+
+[node name="FinalPulse" type="Sprite2D" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_yq7ae")
+rotation = 0.7853982
+texture = SubResource("ImageTexture_v2j6r")
+
+[connection signal="body_entered" from="Pickup" to="." method="_on_pickup_body_entered"]
