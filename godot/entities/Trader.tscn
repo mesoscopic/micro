@@ -129,6 +129,9 @@ amount = 16
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_6saqy")
 
+[node name="Pause" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="chosen" from="Toll" to="." method="_on_toll_chosen"]
 [connection signal="enter_range" from="Toll" to="." method="_on_toll_enter_range"]
 [connection signal="leave_range" from="Toll" to="." method="_on_toll_leave_range"]

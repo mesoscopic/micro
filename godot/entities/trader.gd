@@ -14,6 +14,7 @@ var deceleration := 600.
 var wander_origin := Vector2.ZERO
 var wander_distance := 80.
 var wander_range := 240.
+var comfort_range := 100.
 var path_target: Vector2
 var last_direction: Vector2 = Vector2.ZERO
 var first_frame := true
@@ -24,9 +25,9 @@ var item: Upgrade
 func should_stop() -> bool:
 	match state:
 		TraderState.WILD:
-			return false
+			return !$Pause.is_stopped()
 		TraderState.COLLECTED:
-			return trading
+			return trading or !$Pause.is_stopped()
 		_:
 			return true
 
@@ -39,7 +40,7 @@ func init_state(new_state: TraderState) -> void:
 		TraderState.COLLECTED:
 			if state == TraderState.COLLECTING:
 				wander_range = 200.
-				wander_distance = 80.
+				wander_distance = 50.
 			Micro.world.refresh_trades.connect(refresh_item)
 			state = new_state
 			$Toll.enabled = true
@@ -55,7 +56,7 @@ func _physics_process(delta: float) -> void:
 		return
 	if should_stop():
 		velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta / 4.)
-	elif global_position.distance_squared_to(path_target) < 100:
+	elif global_position.distance_squared_to(path_target) < 16:
 		velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
 		wander()
 	else:
@@ -64,6 +65,9 @@ func _physics_process(delta: float) -> void:
 	$Render.set_instance_shader_parameter("velocity", (velocity / max(speed, velocity.length())))
 
 func wander() -> void:
+	if (global_position - wander_origin).length_squared() < comfort_range**2 and randf() < 0.5:
+		$Pause.start(.75)
+		return
 	var new_target: Vector2 = Vector2.from_angle(PI/2. * randi_range(0,3)) * randf_range(wander_distance/2., wander_distance)
 	while check(new_target):
 		new_target = Vector2.from_angle(PI/2. * randi_range(0,3)) * randf_range(wander_distance/2., wander_distance)
@@ -87,7 +91,7 @@ func collect() -> void:
 	var charge_anim = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO).tween_property(self, "position", position+position.normalized()*60., 1.)
 	await charge_anim.finished
 	$SpeedParticles.emitting = true
-	var move_anim = create_tween().tween_property(self, "position", position.normalized()*80, (position.length()-80)/500.)
+	var move_anim = create_tween().tween_property(self, "position", position.normalized()*50, (position.length()-80)/500.)
 	await move_anim.finished
 	$SpeedParticles.emitting = false
 	wander_origin = Vector2.ZERO
