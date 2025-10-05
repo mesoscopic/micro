@@ -3,9 +3,13 @@ extends Damageable
 class_name Player
 
 const BULLET = preload("res://bullets/PlayerBullet.tscn")
-
-var movement_disabled := false
 var max_speed = 60
+var movement_disabled := false:
+	set(d):
+		if d:
+			end_dash()
+			velocity = velocity.limit_length(max_speed)
+		movement_disabled = d
 
 var acceleration = 300
 var deceleration = 400
@@ -41,7 +45,6 @@ func _ready():
 
 func _physics_process(delta):
 	tick()
-	if movement_disabled: return
 	var direction = motion_input()
 	for bullet in prepared_bullets:
 		bullet.aim(aim_input().angle())
@@ -65,7 +68,7 @@ func _physics_process(delta):
 	$Render.set_instance_shader_parameter("velocity", (velocity / max(max_speed, velocity.length())))
 	$Render.set_instance_shader_parameter("can_dash", $DashCooldown.is_stopped())
 	
-	if Input.is_action_pressed("shoot") and len(prepared_bullets) > 0:
+	if !movement_disabled and Input.is_action_pressed("shoot") and len(prepared_bullets) > 0:
 		var ultra := false
 		if dash_direction != Vector2.ZERO:
 			Micro.rumble(true, .15)
@@ -80,7 +83,7 @@ func _physics_process(delta):
 		prepared_bullets = []
 		$ShootCooldown.start(shoot_cooldown)
 	
-	if Input.is_action_just_pressed("dash") and $DashCooldown.is_stopped():
+	if !movement_disabled and Input.is_action_just_pressed("dash") and $DashCooldown.is_stopped():
 		start_dash(aim_input())
 		
 	if trading:
@@ -124,9 +127,10 @@ func _die():
 	get_tree().current_scene._on_death()
 
 func _input(event: InputEvent) -> void:
+	if movement_disabled: return
 	if event is InputEventMouseMotion:
 		aim_direction = get_local_mouse_position().normalized()
-	if !movement_disabled and trading and event.is_action_pressed("ui_accept"):
+	if trading and event.is_action_pressed("ui_accept"):
 		Micro.attempt_payment(chosen_toll)
 
 func give_funds(amount: int) -> void:
@@ -190,6 +194,7 @@ func _on_dash_cooldown_timeout() -> void:
 	$DashRestore.emitting = true
 
 func motion_input() -> Vector2:
+	if movement_disabled: return Vector2.ZERO
 	var swap := bool(Micro.get_setting("swap_joysticks"))
 	var joy_vector := Input.get_vector(
 		"aim_left" if swap else "move_left_joy",
@@ -203,6 +208,7 @@ func motion_input() -> Vector2:
 		return joy_vector.normalized()
 
 func aim_input() -> Vector2:
+	if movement_disabled: return aim_direction
 	var swap := bool(Micro.get_setting("swap_joysticks"))
 	var joy_vector := Input.get_vector(
 		"move_left_joy" if swap else "aim_left",
@@ -216,7 +222,7 @@ func aim_input() -> Vector2:
 func start_dash(direction: Vector2) -> void:
 	invincible = true
 	$DashArea.monitoring = true
-	$DashDuration.start(1.5)
+	$DashDuration.start(.15)
 	$DashCooldown.start()
 	$Afterimage.emitting = true
 	dash_direction = direction * dash_power
