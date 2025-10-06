@@ -12,7 +12,7 @@ var speed := 30
 var acceleration := 300.
 var deceleration := 600.
 var wander_origin := Vector2.ZERO
-var wander_distance := 80.
+var wander_distance := 50.
 var wander_range := 240.
 var comfort_range := 100.
 var path_target: Vector2
