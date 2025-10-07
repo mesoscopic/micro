@@ -183,11 +183,12 @@ func generate_world():
 		trader.wander_range = 70.
 		trader.wander_distance = 60.
 		$Entities.add_child(trader)
-	await Micro.worldgen_status("Forming minefield...")
+	await Micro.worldgen_status("Forming minefields...")
 	for distance in [128, 192, 256, 320]:
 		var initial_angle := random.randf_range(0., 2.*PI)
 		for angle in Vector3(initial_angle, initial_angle+2.*PI, PI/16.):
-			if attempt_decide_biome(Vector2i(Vector2.from_angle(angle) * distance), Biome.MINEFIELD):
+			if attempt_decide_biome_for_center_structure(Vector2i(Vector2.from_angle(angle) * distance), Biome.MINEFIELD, 5):
+				place("health_up", biome_center_at(Vector2i(Vector2.from_angle(angle) * distance)), true)
 				break
 	await Micro.worldgen_status("Scattering features...")
 	var disks := VariablePoissonDiskSampler2D.new(random, Vector2(1000, 1000), 30)
