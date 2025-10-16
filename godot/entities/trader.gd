@@ -14,7 +14,6 @@ var deceleration := 600.
 var wander_origin := Vector2.ZERO
 var wander_distance := 50.
 var wander_range := 240.
-var comfort_range := 100.
 var path_target: Vector2
 var last_direction: Vector2 = Vector2.ZERO
 var first_frame := true
@@ -39,7 +38,7 @@ func init_state(new_state: TraderState) -> void:
 			wander()
 		TraderState.COLLECTED:
 			if state == TraderState.COLLECTING:
-				wander_range = 200.
+				wander_range = 160.
 				wander_distance = 50.
 			Micro.world.refresh_trades.connect(refresh_item)
 			state = new_state
@@ -61,15 +60,16 @@ func _physics_process(delta: float) -> void:
 		wander()
 	else:
 		velocity = velocity.move_toward((path_target - global_position).normalized() * speed, acceleration * delta)
-	move_and_slide()
+	if move_and_slide():
+		wander()
 	$Render.set_instance_shader_parameter("velocity", (velocity / max(speed, velocity.length())))
 
 func wander() -> void:
-	if (global_position - wander_origin).length_squared() < comfort_range**2 and randf() < 0.5:
-		$Pause.start(.75)
-		return
 	var new_target: Vector2 = Vector2.from_angle(PI/2. * randi_range(0,3)) * randf_range(wander_distance/2., wander_distance)
 	while check(new_target):
+		if Micro.world.random.randf() < 0.3:
+			$Pause.start(.5)
+			return
 		new_target = Vector2.from_angle(PI/2. * randi_range(0,3)) * randf_range(wander_distance/2., wander_distance)
 	path_target = global_position + new_target
 	last_direction = new_target.normalized()

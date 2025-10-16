@@ -87,7 +87,9 @@ scale_max = 2.5
 alpha_curve = SubResource("CurveTexture_yvvdr")
 
 [node name="Trader" type="CharacterBody2D"]
-collision_layer = 0
+collision_layer = 256
+collision_mask = 257
+motion_mode = 1
 script = ExtResource("1_qhhoa")
 
 [node name="Render" type="Sprite2D" parent="."]

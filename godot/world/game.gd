@@ -177,7 +177,7 @@ func generate_world():
 			place("guiding_light", Vector2i((Vector2(location).normalized()*magnitude).round()))
 			magnitude += random.randi_range(10,15)
 		var trader_location := Vector2i((Vector2(location).normalized()*30).round())
-		place("small_house", trader_location, true)		
+		place("small_house", trader_location, true)
 		var trader := preload("res://entities/Trader.tscn").instantiate()
 		trader.position = trader_location * 20.
 		trader.wander_range = 70.

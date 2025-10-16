@@ -186,7 +186,7 @@ ui_range_decrease={
 2d_physics/layer_3="Things the player should collide with (enemy bullets)"
 2d_physics/layer_4="Things player bullets should collide with (enemies)"
 2d_physics/layer_5="Things enemy bullets should collide with (players)"
-2d_physics/layer_9="Enemy avoidance"
+2d_physics/layer_9="Entity avoidance"
 
 [physics]
 
