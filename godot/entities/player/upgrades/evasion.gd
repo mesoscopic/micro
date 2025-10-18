@@ -5,7 +5,7 @@ static func get_title() -> String:
 	return "Evasion"
 
 static func get_description() -> String:
-	return "Move 25% faster when not shooting\nFaster acceleration and deceleration"
+	return "Move 50% faster while recovering from being hit"
 
 static func get_shader() -> ShaderMaterial:
 	return preload("res://entities/player/upgrades/evasion.res")
@@ -17,11 +17,7 @@ static func available() -> bool:
 	return get_count(get_title()) < 2
 
 func enable() -> void:
-	Micro.player.evasion_mult *= 1.25
-	Micro.player.acceleration *= 1.25
-	Micro.player.deceleration *= 1.25
+	Micro.player.evasion_mult *= 1.5
 
 func disable() -> void:
-	Micro.player.evasion_mult /= 1.25
-	Micro.player.acceleration /= 1.25
-	Micro.player.deceleration /= 1.25
+	Micro.player.evasion_mult /= 1.5

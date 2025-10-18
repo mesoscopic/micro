@@ -52,9 +52,9 @@ func _physics_process(delta):
 		velocity = dash_direction * max_speed * 10
 	else:
 		if direction != Vector2.ZERO:
-			velocity = velocity.move_toward(direction * max_speed * (evasion_mult if $ShootCooldown.is_stopped() else 1.), acceleration * delta)
+			velocity = velocity.move_toward(direction * max_speed * (evasion_mult if !$Evasion.is_stopped() else 1.), acceleration * (evasion_mult if !$Evasion.is_stopped() else 1.) * delta)
 		else:
-			velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
+			velocity = velocity.move_toward(Vector2.ZERO, deceleration * (evasion_mult if !$Evasion.is_stopped() else 1.) * delta)
 	move_and_slide()
 	
 	# Bounce if you collided while dashing
@@ -108,6 +108,7 @@ func _physics_process(delta):
 func _hurt(amount: int, direction: float):
 	Micro.rumble(true, .2)
 	$HurtEffect.hurt(amount, direction)
+	if evasion_mult > 0: $Evasion.start()
 	if !Micro.get_setting("photosensitive_mode"): $Camera.hurt(clamp(float(amount)/float(hp), 0., 1.))
 
 func _die():

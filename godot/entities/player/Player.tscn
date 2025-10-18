@@ -576,6 +576,10 @@ one_shot = true
 [node name="DashCooldown" type="Timer" parent="."]
 one_shot = true
 
+[node name="Evasion" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
 [connection signal="timeout" from="ShootCooldown" to="." method="prepare_bullet"]
 [connection signal="body_entered" from="DashArea" to="." method="_on_dash_hit"]
 [connection signal="timeout" from="DashDuration" to="." method="_on_dash_end"]
