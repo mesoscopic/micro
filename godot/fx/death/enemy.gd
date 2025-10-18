@@ -1,4 +1,4 @@
-extends Node2D
+class_name EnemyDeath extends Node2D
 
 @export var fund_drop: int = 0
 @export var enemy_scale := 20.

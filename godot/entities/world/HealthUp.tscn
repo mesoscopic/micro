@@ -8,7 +8,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m4qs3"]
 shader = ExtResource("2_nflxv")
 
-[sub_resource type="Image" id="Image_yq7ae"]
+[sub_resource type="Image" id="Image_m4qs3"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -18,7 +18,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_wsuqa"]
-image = SubResource("Image_yq7ae")
+image = SubResource("Image_m4qs3")
 script = ExtResource("3_xngy6")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -126,7 +126,7 @@ alpha_curve = SubResource("CurveTexture_pag18")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yq7ae"]
 shader = ExtResource("1_5fnnh")
 
-[sub_resource type="Image" id="Image_wsuqa"]
+[sub_resource type="Image" id="Image_yq7ae"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -136,7 +136,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_v2j6r"]
-image = SubResource("Image_wsuqa")
+image = SubResource("Image_yq7ae")
 script = ExtResource("3_xngy6")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 

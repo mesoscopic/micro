@@ -20,7 +20,7 @@ var stagger: float = 0.
 @export var is_void: bool = false
 var extra_reward: Callable
 
-var DEATH_ANIMATION := preload("res://fx/death/Enemy.tscn")
+@export var DEATH_ANIMATION := preload("res://fx/death/Enemy.tscn")
 
 signal despawn
 

@@ -1,0 +1,160 @@
+[gd_scene load_steps=31 format=3 uid="uid://gcdt0wv5ke0r"]
+
+[ext_resource type="Script" uid="uid://ccwy1we44q081" path="res://fx/death/miniboss.gd" id="1_edv21"]
+[ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://misc/shaders/funds.gdshader" id="2_jbovx"]
+[ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="3_88njf"]
+[ext_resource type="Shader" uid="uid://ds1rxv51ltkrj" path="res://misc/shaders/enemy_ghost.gdshader" id="4_pcl4h"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="5_d8t0r"]
+[ext_resource type="Shader" uid="uid://vrqo8s1gcu2" path="res://misc/shaders/circle_pulse.gdshader" id="6_jbovx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yor8o"]
+shader = ExtResource("2_jbovx")
+
+[sub_resource type="Curve" id="Curve_edv21"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.210419, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_jbovx"]
+curve = SubResource("Curve_edv21")
+
+[sub_resource type="Curve" id="Curve_88njf"]
+_data = [Vector2(0, 0.499561), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pcl4h"]
+curve = SubResource("Curve_88njf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d8t0r"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_pcl4h")
+alpha_curve = SubResource("CurveTexture_jbovx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sxsfr"]
+shader = ExtResource("3_88njf")
+
+[sub_resource type="Curve" id="Curve_nsxga"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rrxlq"]
+curve = SubResource("Curve_nsxga")
+
+[sub_resource type="Curve" id="Curve_5ydv5"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vc4ea"]
+curve = SubResource("Curve_5ydv5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tswoh"]
+particle_flag_disable_z = true
+radial_velocity_min = 99.99998
+radial_velocity_max = 149.99997
+gravity = Vector3(0, 0, 0)
+radial_accel_curve = SubResource("CurveTexture_vc4ea")
+scale_min = 4.0
+scale_max = 8.0
+alpha_curve = SubResource("CurveTexture_rrxlq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2nhur"]
+shader = ExtResource("4_pcl4h")
+
+[sub_resource type="Image" id="Image_edv21"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_yor8o"]
+image = SubResource("Image_edv21")
+script = ExtResource("5_d8t0r")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_edv21"]
+shader = ExtResource("4_pcl4h")
+
+[sub_resource type="Curve" id="Curve_jbovx"]
+_data = [Vector2(0, 1), 0.0, -1.99518, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_88njf"]
+curve = SubResource("Curve_jbovx")
+
+[sub_resource type="Curve" id="Curve_pcl4h"]
+_data = [Vector2(0, 0), 0.0, 9.64944, 0, 0, Vector2(0.150442, 0.910112), 1.15424, 0.338577, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_d8t0r"]
+curve = SubResource("Curve_pcl4h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nsxga"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 80.0
+scale_max = 200.0
+scale_curve = SubResource("CurveTexture_d8t0r")
+alpha_curve = SubResource("CurveTexture_88njf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_88njf"]
+shader = ExtResource("6_jbovx")
+
+[sub_resource type="Image" id="Image_pcl4h"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_d8t0r"]
+image = SubResource("Image_pcl4h")
+script = ExtResource("5_d8t0r")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[node name="MinibossDeathAnimation" type="Node2D"]
+script = ExtResource("1_edv21")
+
+[node name="FundParticles" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_yor8o")
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_d8t0r")
+
+[node name="ExplosionParticles" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_sxsfr")
+amount = 75
+lifetime = 0.75
+process_material = SubResource("ParticleProcessMaterial_tswoh")
+
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_2nhur")
+texture = SubResource("ImageTexture_yor8o")
+
+[node name="Boom" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_edv21")
+emitting = false
+amount = 4
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_nsxga")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="FinalPulse" type="Sprite2D" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_88njf")
+texture = SubResource("ImageTexture_d8t0r")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
