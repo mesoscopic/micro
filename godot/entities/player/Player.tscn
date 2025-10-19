@@ -340,17 +340,18 @@ curve = SubResource("Curve_mq27t")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kwk8g"]
 particle_flag_disable_z = true
 emission_shape = 3
-emission_box_extents = Vector3(0, 10, 0)
+emission_box_extents = Vector3(5, 5, 0)
 angle_min = 45.0
 angle_max = 45.0
 direction = Vector3(-1, 0, 0)
-spread = 10.0
+spread = 0.0
 initial_velocity_min = 10.0
 initial_velocity_max = 40.0
 gravity = Vector3(0, 0, 0)
 damping_min = 5.0
 damping_max = 15.0
-scale_max = 3.0
+scale_min = 2.0
+scale_max = 6.0
 alpha_curve = SubResource("CurveTexture_cmitb")
 
 [sub_resource type="Curve" id="Curve_2a181"]
@@ -381,8 +382,7 @@ radial_velocity_min = 30.0
 radial_velocity_max = 70.0
 radial_velocity_curve = SubResource("CurveTexture_heyqt")
 gravity = Vector3(0, 0, 0)
-scale_min = 0.5
-scale_max = 1.25
+scale_max = 3.0
 alpha_curve = SubResource("CurveTexture_t7qaw")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ak4un"]
@@ -525,12 +525,12 @@ process_material = SubResource("ParticleProcessMaterial_2rv2u")
 
 [node name="Dashline" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 128
+amount = 80
 process_material = SubResource("ParticleProcessMaterial_kwk8g")
 
 [node name="DashRestore" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 20
+amount = 15
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
