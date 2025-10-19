@@ -8,9 +8,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u77d8"]
 resource_local_to_scene = true
 shader = ExtResource("2_tasor")
-shader_parameter/health = 1.0
-shader_parameter/velocity = Vector2(0, 0)
-shader_parameter/damaged = false
 
 [sub_resource type="Image" id="Image_a3qqo"]
 data = {
@@ -32,7 +29,7 @@ metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 collision_layer = 264
 collision_mask = 259
 script = ExtResource("1_a3qqo")
-fund_drop = 8
+fund_drop = 4
 fund_drop_randomization = 0.5
 max_hp = 60
 hp = 60

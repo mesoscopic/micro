@@ -16,7 +16,7 @@ frequency = 1.0
 resource_local_to_scene = true
 shader = ExtResource("3_3crh1")
 
-[sub_resource type="Image" id="Image_xfqrn"]
+[sub_resource type="Image" id="Image_e0lej"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -26,7 +26,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_uur07"]
-image = SubResource("Image_xfqrn")
+image = SubResource("Image_e0lej")
 script = ExtResource("3_b1f70")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -108,6 +108,7 @@ deceleration = 0
 turn_length = 0
 fund_drop = 150
 fund_drop_randomization = 0.0
+orb_drop = 10
 despawn_distance = 0
 stagger_time = 0.0
 DEATH_ANIMATION = ExtResource("2_e0lej")

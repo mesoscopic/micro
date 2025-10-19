@@ -9,8 +9,14 @@ func _ready():
 		coin.delay = randf_range(0., 0.25)
 		add_sibling(coin)
 		fund_drop -= ceil(fund_drop/8.)
-		await Micro.wait(0.1)
+	await Micro.wait(0.25)
 	$FundParticles.emitting = false
+	while orb_drop > 0:
+		var orb := heal_orb.instantiate()
+		orb.position = global_position
+		orb.distance = randf_range(20.,50.)
+		add_sibling(orb)
+		orb_drop -= 1
 	$ExplosionParticles.emitting = false
 	$Render.hide()
 	$Boom.restart()

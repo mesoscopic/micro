@@ -8,9 +8,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_acjqs"]
 resource_local_to_scene = true
 shader = ExtResource("2_3bveo")
-shader_parameter/health = 1.0
-shader_parameter/velocity = Vector2(0, 0)
-shader_parameter/damaged = false
 
 [sub_resource type="Image" id="Image_je7qo"]
 data = {
@@ -34,7 +31,8 @@ collision_layer = 264
 collision_mask = 259
 script = ExtResource("1_je7qo")
 speed = 20
-fund_drop = 50
+fund_drop = 30
+orb_drop = 30
 stagger_time = 1.0
 is_void = true
 metadata/_custom_type_script = "uid://dqvwuq4r2ul6q"

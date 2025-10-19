@@ -8,9 +8,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cduuy"]
 resource_local_to_scene = true
 shader = ExtResource("3_cduuy")
-shader_parameter/health = 1.0
-shader_parameter/velocity = Vector2(0, 0)
-shader_parameter/damaged = false
 
 [sub_resource type="Image" id="Image_e7smu"]
 data = {
@@ -36,7 +33,7 @@ script = ExtResource("1_n7j26")
 speed = 80
 acceleration = 200
 deceleration = 1000
-fund_drop = 25
+fund_drop = 10
 fund_drop_randomization = 0.3
 stagger_time = 0.0
 max_hp = 50

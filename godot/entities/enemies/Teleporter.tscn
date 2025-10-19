@@ -9,9 +9,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_up14l"]
 resource_local_to_scene = true
 shader = ExtResource("3_up14l")
-shader_parameter/health = 1.0
-shader_parameter/velocity = Vector2(0, 0)
-shader_parameter/damaged = false
 
 [sub_resource type="Image" id="Image_meybd"]
 data = {
@@ -62,7 +59,7 @@ collision_layer = 264
 collision_mask = 259
 script = ExtResource("1_0c61a")
 acceleration = 200
-fund_drop = 30
+fund_drop = 20
 stagger_time = 0.2
 max_hp = 50
 hp = 50

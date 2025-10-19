@@ -8,9 +8,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r3cxs"]
 resource_local_to_scene = true
 shader = ExtResource("4_dbf1b")
-shader_parameter/health = 1.0
-shader_parameter/velocity = Vector2(0, 0)
-shader_parameter/damaged = false
 
 [sub_resource type="Image" id="Image_uxfb5"]
 data = {
@@ -36,7 +33,8 @@ script = ExtResource("1_8s0w8")
 speed = 80
 acceleration = 200
 deceleration = 800
-fund_drop = 30
+fund_drop = 25
+orb_drop = 6
 max_hp = 70
 hp = 70
 

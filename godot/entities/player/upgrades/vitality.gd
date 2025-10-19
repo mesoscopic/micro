@@ -5,7 +5,7 @@ static func get_title() -> String:
 	return "Vitality"
 
 static func get_description() -> String:
-	return "Enemies may drop healing orbs"
+	return "(TODO)"
 
 static func get_shader() -> ShaderMaterial:
 	return preload("res://entities/player/upgrades/vitality.res")
@@ -17,7 +17,7 @@ func get_cost(_count: int) -> int:
 	return Micro.world.random.randi_range(75,100)
 
 func enable() -> void:
-	Micro.player.vitality = true
+	pass
 
 func disable() -> void:
-	Micro.player.vitality = false
+	pass

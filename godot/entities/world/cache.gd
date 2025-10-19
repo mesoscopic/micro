@@ -21,7 +21,7 @@ func _hurt(_amount: int, _direction: float) -> void:
 			weights.add_item("funds", 1)
 		_:
 			weights.add_item("funds", 19)
-			if Micro.player.hp < Micro.player.max_hp: weights.add_item("heal", 10)
+			if Micro.player.hp < Micro.player.max_hp/2.: weights.add_item("heal", 10)
 			weights.add_item("surprise", 1)
 			if Micro.world.taxicab(global_position)/20. > 256:
 				weights.add_item("big_funds", 2)

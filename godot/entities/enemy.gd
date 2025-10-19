@@ -12,6 +12,7 @@ var starting_position: Vector2
 var can_set_start: bool = true
 @export var fund_drop: int = 0
 @export var fund_drop_randomization: float = 0.1
+@export var orb_drop: int = 0
 @export var despawn_distance := 500
 @onready var despawn_distance_squared: float = despawn_distance**2
 @export var stagger_time: float = 0.1
@@ -44,18 +45,11 @@ func new_target() -> void:
 func _die():
 	var anim = DEATH_ANIMATION.instantiate()
 	anim.fund_drop = fund_drop + fund_drop*fund_drop_randomization*Micro.world.random.randf_range(-1.,1.)
+	anim.orb_drop = orb_drop + orb_drop*Micro.world.random.randf()
 	anim.enemy_scale = $Render.scale.x
 	anim.position = position
 	anim.extra_reward = extra_reward
 	add_sibling(anim)
-	if Micro.player.vitality:
-		for i in floor(max_hp/25.):
-			if Micro.world.random.randf() < 0.5:
-				for j in randi_range(2, 5):
-					var orb := preload("res://misc/effects/HealOrb.tscn").instantiate()
-					orb.position = global_position
-					orb.distance = randf_range(20.,50.)
-					add_sibling(orb)
 	if is_boss:
 		Micro.world.bosses_active -= 1
 	queue_free()

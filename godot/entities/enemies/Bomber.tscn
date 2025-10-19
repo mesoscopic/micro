@@ -33,7 +33,7 @@ script = ExtResource("1_enisn")
 speed = 100
 acceleration = 200
 deceleration = 1000
-fund_drop = 30
+fund_drop = 15
 max_hp = 60
 hp = 60
 
