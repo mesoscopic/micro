@@ -94,6 +94,7 @@ func collect() -> void:
 	var move_anim = create_tween().tween_property(self, "position", position.normalized()*50, (position.length()-80)/500.)
 	await move_anim.finished
 	$SpeedParticles.emitting = false
+	$CollectFlash.restart()
 	wander_origin = Vector2.ZERO
 	init_state(TraderState.COLLECTED)
 	if !$OnScreenDetector.is_on_screen():

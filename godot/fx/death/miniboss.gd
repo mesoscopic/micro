@@ -11,7 +11,6 @@ func _ready():
 		fund_drop -= ceil(fund_drop/8.)
 		await Micro.wait(0.1)
 	$FundParticles.emitting = false
-	if extra_reward: await extra_reward.call(global_position)
 	$ExplosionParticles.emitting = false
 	$Render.hide()
 	$Boom.restart()
@@ -22,5 +21,6 @@ func _ready():
 		var tween = get_tree().create_tween()
 		tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC).tween_property($FinalPulse, "scale", Vector2(1000, 1000), .5)
 		tween.parallel().tween_property($FinalPulse, "modulate", Color.TRANSPARENT, .5)
+	if extra_reward: await extra_reward.call(global_position)
 	await Micro.wait(2.)
 	queue_free()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://cjt7tm6d5ow8j"]
+[gd_scene load_steps=28 format=3 uid="uid://cjt7tm6d5ow8j"]
 
 [ext_resource type="Shader" uid="uid://cs7iamvps60cm" path="res://entities/trader.gdshader" id="1_2l6qv"]
 [ext_resource type="Script" uid="uid://bgi51q1qpnvci" path="res://entities/trader.gd" id="1_qhhoa"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_qhhoa"]
 [ext_resource type="PackedScene" uid="uid://ceq78x2nlo2eh" path="res://entities/Toll.tscn" id="4_6saqy"]
+[ext_resource type="Shader" uid="uid://dby1fhvlh2gjy" path="res://misc/shaders/square_pulse.gdshader" id="5_8tu8e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6saqy"]
 shader = ExtResource("1_2l6qv")
@@ -69,6 +70,31 @@ scale_min = 5.0
 scale_max = 8.0
 alpha_curve = SubResource("CurveTexture_1rox6")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kem3a"]
+shader = ExtResource("5_8tu8e")
+
+[sub_resource type="Curve" id="Curve_bki2m"]
+_data = [Vector2(0, 1), 0.0, -2.713414, 0, 0, Vector2(1, 0), 0.019150378, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vhato"]
+curve = SubResource("Curve_bki2m")
+
+[sub_resource type="Curve" id="Curve_jvihi"]
+_data = [Vector2(0, 0), 0.0, 4.549224, 0, 0, Vector2(0.7031778, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nbl37"]
+curve = SubResource("Curve_jvihi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d3s2c"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 150.0
+scale_max = 150.0
+scale_curve = SubResource("CurveTexture_nbl37")
+alpha_curve = SubResource("CurveTexture_vhato")
+
 [sub_resource type="Curve" id="Curve_qhhoa"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -125,6 +151,14 @@ emitting = false
 amount = 80
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_qhhoa")
+
+[node name="CollectFlash" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_kem3a")
+emitting = false
+amount = 1
+lifetime = 0.25
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_d3s2c")
 
 [node name="HappyParticles" type="GPUParticles2D" parent="."]
 emitting = false
