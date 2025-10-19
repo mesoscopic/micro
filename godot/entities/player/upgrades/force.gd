@@ -5,7 +5,7 @@ static func get_title() -> String:
 	return "Force"
 
 static func get_description() -> String:
-	return "Dash faster, dealing more damage"
+	return "Dash faster, dealing +50% damage"
 
 static func get_shader() -> ShaderMaterial:
 	return preload("res://entities/player/upgrades/force.res")

@@ -5,7 +5,7 @@ static func get_title() -> String:
 	return "Multishot"
 
 static func get_description() -> String:
-	return "+2 bullets every shot"
+	return "Fire +2 bullets every shot"
 
 static func get_shader() -> ShaderMaterial:
 	return preload("res://entities/player/upgrades/multishot.res")

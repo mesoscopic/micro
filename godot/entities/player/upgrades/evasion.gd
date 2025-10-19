@@ -5,7 +5,7 @@ static func get_title() -> String:
 	return "Evasion"
 
 static func get_description() -> String:
-	return "Move 50% faster while recovering from being hit"
+	return "Move 50% faster after being hit"
 
 static func get_shader() -> ShaderMaterial:
 	return preload("res://entities/player/upgrades/evasion.res")
