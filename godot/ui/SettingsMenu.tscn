@@ -118,16 +118,16 @@ If Reduced, the controller will rumble slightly when taking damage or recoil.
 
 If Off, the controller will not rumble."
 
-[node name="Misc" parent="Panel/Margin/MainBox/Options" instance=ExtResource("3_rd3qm")]
+[node name="Experimental" parent="Panel/Margin/MainBox/Options" instance=ExtResource("3_rd3qm")]
 layout_mode = 2
-title = "MISC"
+title = "EXPERIMENTAL"
 
-[node name="SettingButton" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
+[node name="RunTimer" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
 layout_mode = 2
-setting_name = "Speedrun Timer"
+setting_name = "Run Timer"
 setting_id = "speedrun"
 choices = Array[String](["Off", "On"])
-description = "Adds a speedrun timer at the top of the screen."
+description = "(Experimental. Added at someone's request and not very good right now.) Adds a run timer at the top of the screen."
 
 [node name="Info" type="VBoxContainer" parent="Panel/Margin/MainBox"]
 layout_mode = 2

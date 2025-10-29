@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://cktmmodlmlnm3"]
 
-[ext_resource type="Script" uid="uid://duftrg5478yk6" path="res://ui/speedrun_timer.gd" id="1_yqcma"]
+[ext_resource type="Script" uid="uid://duftrg5478yk6" path="res://ui/run_timer.gd" id="1_yqcma"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ln108"]
 font_size = 30
 
-[node name="SpeedrunTimer" type="Control"]
+[node name="RunTimer" type="Control"]
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5

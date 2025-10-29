@@ -32,13 +32,13 @@ func _on_start_run():
 	$Game.add_child(world)
 	await world.generate_world()
 	print("Worldgen finished in %s microseconds" % (Time.get_ticks_usec()-start_time))
-	$UI/SpeedrunTimer.start_time = Time.get_ticks_msec()
-	$UI/SpeedrunTimer.end_time = -1
+	$UI/RunTimer.start_time = Time.get_ticks_msec()
+	$UI/RunTimer.end_time = -1
 	await Micro.screen_wipe_in()
 	in_game = true
 
 func _on_death():
-	$UI/SpeedrunTimer.end_time = Time.get_ticks_msec()
+	$UI/RunTimer.end_time = Time.get_ticks_msec()
 	Micro.world.free()
 	Micro.world = null
 	in_game = false
@@ -67,4 +67,4 @@ func setting_hook(id: String, value: int) -> void:
 		"bg_alpha_percent":
 			if Micro.world: Micro.world.set_bg_opacity(value/100.);
 		"speedrun":
-			$UI/SpeedrunTimer.visible = value
+			$UI/RunTimer.visible = value
