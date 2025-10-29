@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cktmmodlmlnm3"]
+
+[ext_resource type="Script" uid="uid://duftrg5478yk6" path="res://ui/speedrun_timer.gd" id="1_yqcma"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ln108"]
+font_size = 30
+
+[node name="SpeedrunTimer" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+script = ExtResource("1_yqcma")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -85.0
+offset_right = 85.0
+offset_bottom = 35.0
+grow_horizontal = 2
+label_settings = SubResource("LabelSettings_ln108")
+horizontal_alignment = 1

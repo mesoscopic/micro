@@ -9,7 +9,7 @@ var in_game: bool = false
 const START_MENU = preload("res://ui/StartRun.tscn")
 
 func _ready():
-	for setting in ["fullscreen", "vsync"]:
+	for setting in ["fullscreen", "vsync", "speedrun"]:
 		setting_hook(setting, Micro.get_setting(setting))
 
 func _process(_delta):
@@ -32,10 +32,13 @@ func _on_start_run():
 	$Game.add_child(world)
 	await world.generate_world()
 	print("Worldgen finished in %s microseconds" % (Time.get_ticks_usec()-start_time))
+	$UI/SpeedrunTimer.start_time = Time.get_ticks_msec()
+	$UI/SpeedrunTimer.end_time = -1
 	await Micro.screen_wipe_in()
 	in_game = true
 
 func _on_death():
+	$UI/SpeedrunTimer.end_time = Time.get_ticks_msec()
 	Micro.world.free()
 	Micro.world = null
 	in_game = false
@@ -63,3 +66,5 @@ func setting_hook(id: String, value: int) -> void:
 			DisplayServer.window_set_vsync_mode(value)
 		"bg_alpha_percent":
 			if Micro.world: Micro.world.set_bg_opacity(value/100.);
+		"speedrun":
+			$UI/SpeedrunTimer.visible = value

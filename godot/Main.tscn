@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3ruxmindyv4y"]
+[gd_scene load_steps=12 format=3 uid="uid://b3ruxmindyv4y"]
 
 [ext_resource type="PackedScene" uid="uid://ba8r52rcgnydu" path="res://ui/Splash.tscn" id="1_ijsoa"]
 [ext_resource type="Script" uid="uid://d1jr2f50q66j1" path="res://main.gd" id="1_j1yuf"]
 [ext_resource type="PackedScene" uid="uid://dy06d53ihw0wa" path="res://ui/TradeOverlay.tscn" id="3_fos0i"]
 [ext_resource type="Shader" uid="uid://ok6qa4hqtubc" path="res://ui/wipe.gdshader" id="4_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://cktmmodlmlnm3" path="res://ui/SpeedrunTimer.tscn" id="5_3dxm6"]
 [ext_resource type="PackedScene" uid="uid://b3eu3aqi46l3u" path="res://ui/DebugOverlay.tscn" id="6_hkwgg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fos0i"]
@@ -160,6 +161,9 @@ process_mode = 1
 [node name="TradeOverlay" parent="UI" instance=ExtResource("3_fos0i")]
 
 [node name="DebugOverlay" parent="UI" instance=ExtResource("6_hkwgg")]
+visible = false
+
+[node name="SpeedrunTimer" parent="UI" instance=ExtResource("5_3dxm6")]
 visible = false
 
 [node name="MouseInputEater" type="Control" parent="UI"]

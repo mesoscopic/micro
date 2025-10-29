@@ -14,7 +14,8 @@ var settings_defaults: Dictionary[String, int] = {
 	"vsync": 1,
 	"swap_joysticks": 0,
 	"rumble": 2,
-	"bg_alpha_percent": 5
+	"bg_alpha_percent": 5,
+	"speedrun": 0
 }
 
 func _ready() -> void:
