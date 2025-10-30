@@ -97,7 +97,7 @@ scale_over_velocity_max = 1.0
 scale_over_velocity_curve = SubResource("CurveTexture_fd84u")
 alpha_curve = SubResource("CurveTexture_pbfcv")
 
-[node name="TraderMiniboss" type="CharacterBody2D" groups=["boss", "enemy"]]
+[node name="TraderMiniboss" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 270
 collision_mask = 2
 script = ExtResource("1_oj4li")

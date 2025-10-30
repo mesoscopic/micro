@@ -38,7 +38,7 @@ func _hurt(amount: int, direction: float) -> void:
 	await Micro.wait(0.25)
 	invincible = false
 	global_position = Micro.player.position + Vector2.from_angle(randf_range(0, 2*PI))*randf_range(100.,200.)
-	while !can_teleport_to(global_position):
+	while !Micro.world.can_enemy_fit(global_position, $CollisionShape2D.shape.radius):
 		global_position = Micro.player.position + Vector2.from_angle(randf_range(0, 2*PI))*randf_range(100.,200.)
 	for i in range(0,12):
 		var angle = PI/6.*i
@@ -49,16 +49,6 @@ func _hurt(amount: int, direction: float) -> void:
 		bullet.damage = 15
 		bullet.scale = Vector2(0.8,0.8)
 		Micro.world.get_node("Bullets").add_child(bullet)
-
-func can_teleport_to(location: Vector2) -> bool:
-	var query = PhysicsShapeQueryParameters2D.new()
-	var transformation = global_transform
-	transformation.origin = location
-	query.set_transform(global_transform)
-	query.set_shape($CollisionShape2D.shape)
-	var space_state = get_world_2d().get_direct_space_state()
-	var result = space_state.get_rest_info(query)
-	return result.is_empty()
 
 func _physics_process(delta: float) -> void:
 	super(delta)

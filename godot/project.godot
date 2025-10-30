@@ -32,6 +32,7 @@ window/stretch/mode="canvas_items"
 
 enemy="Enemies"
 boss=""
+miniboss=""
 
 [gui]
 

@@ -5,7 +5,6 @@ class_name World
 var random: RandomNumberGenerator = RandomNumberGenerator.new()
 var world_seed: int = randi()
 
-var bosses_active: int = 0
 var second_trader_miniboss := false
 
 enum Biome {
@@ -34,7 +33,7 @@ func world_enemy(biome: Biome, distance: int) -> Enemy:
 				enemies.add_item(preload("res://entities/enemies/MultiShooter.tscn"), 2)
 				enemies.add_item(preload("res://entities/enemies/Teleporter.tscn"), 1)
 				enemies.add_item(preload("res://entities/enemies/Bomber.tscn"), 1)
-			if distance >= 120:
+			if distance >= 120 and get_tree().get_node_count_in_group("miniboss") == 0:
 				enemies.add_item(preload("res://entities/enemies/Surpriser.tscn"), 1)
 		Biome.MINEFIELD:
 			enemies.add_item(preload("res://entities/enemies/MultiShooter.tscn"), 3)
@@ -46,7 +45,7 @@ func spawn_cap() -> int:
 	return 1 + ceil(float(distance)/64.)
 
 func spawn_attempt() -> void:
-	if bosses_active > 0 or current_biome == Biome.PEACE or world_enemies >= spawn_cap(): return
+	if current_biome == Biome.PEACE or world_enemies >= spawn_cap(): return
 	var player_pos: Vector2 = tile_at(Micro.player.position)
 	var distance: int = int(taxicab(player_pos))
 	
@@ -57,7 +56,7 @@ func spawn_attempt() -> void:
 	# Spawn the enemy 20 tiles away from the player.
 	# If you're closer to spawn, enemies will tend to come from the opposite direction to spawn.
 	var angle_randomization = distance / 60.
-	var tile: Vector2 = (player_pos + Vector2.from_angle(player_pos.angle_to_point(Vector2.ZERO)+PI+randf_range(-angle_randomization,angle_randomization)) * 20.)
+	var tile: Vector2i = (player_pos + Vector2.from_angle(player_pos.angle_to_point(Vector2.ZERO)+PI+randf_range(-angle_randomization,angle_randomization)) * 20.)
 	if $Structures/NewTiles.get_cell_source_id(tile) > -1: return
 	var enemy: Enemy
 	var biome = get_biome(tile)
@@ -100,6 +99,18 @@ func _physics_process(_delta: float) -> void:
 
 func _on_emptiness_damage_timeout() -> void:
 	Micro.player.damage(1, true)
+
+func can_enemy_fit(location: Vector2, radius: float) -> bool:
+	if $Structures/NewTiles.get_cell_source_id(location/20) > -1: return false
+	var query := PhysicsShapeQueryParameters2D.new()
+	var transformation := Transform2D(0., location*20.)
+	query.set_transform(transformation)
+	var shape := CircleShape2D.new()
+	shape.radius = radius
+	query.set_shape(shape)
+	var space_state := get_world_2d().get_direct_space_state()
+	var result := space_state.get_rest_info(query)
+	return result.is_empty()
 
 @warning_ignore("unused_signal")
 signal refresh_trades
