@@ -24,9 +24,11 @@ var bullet_velocity_mult: float = 1.
 var bullet_size_mult: float = 1.
 var dash_power: float = 1.
 var dash_damage: int = 20
+var regen_rate: float = 0.
 
 var dash_direction := Vector2.ZERO
 var aim_direction := Vector2.RIGHT
+var regen_time := 0.
 
 @export var funds: int = 0
 var trading: bool = false
@@ -63,6 +65,13 @@ func _physics_process(delta):
 			Micro.rumble(true, .10)
 			velocity = -dash_direction * max_speed * 2.
 			end_dash()
+	
+	if regen_rate > 0:
+		regen_time += delta
+		while regen_time > 1/regen_rate:
+			heal(1)
+			regen_time -= 1/regen_rate
+		
 	
 	$Render.set_instance_shader_parameter("velocity", (velocity / max(max_speed, velocity.length())))
 	$Render.set_instance_shader_parameter("can_dash", $DashCooldown.is_stopped())
