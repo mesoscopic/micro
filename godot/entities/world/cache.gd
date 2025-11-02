@@ -27,10 +27,10 @@ func _hurt(_amount: int, _direction: float) -> void:
 				weights.add_item("big_funds", 2)
 				weights.add_item("surprise", 2)
 	do_reward(Micro.roll(weights))
-	await Micro.wait(1.5)
-	$Animations.play("burn")
-	await Micro.wait(0.5)
-	queue_free()
+	#await Micro.wait(1.5)
+	#$Animations.play("burn")
+	#await Micro.wait(0.5)
+	#queue_free()
 
 func do_reward(reward: String) -> void:
 	if reward == "funds":
