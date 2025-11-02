@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c04qdfehiu2m5"]
+[gd_scene load_steps=13 format=3 uid="uid://c04qdfehiu2m5"]
 
 [ext_resource type="Script" uid="uid://cx3peo4tlvbg2" path="res://entities/world/cache.gd" id="1_xgfmd"]
 [ext_resource type="Shader" uid="uid://ds33o6ingsxg6" path="res://entities/world/cache.gdshader" id="2_xgfmd"]
@@ -47,43 +47,6 @@ alpha_curve = SubResource("CurveTexture_urixb")
 [sub_resource type="CircleShape2D" id="CircleShape2D_40rxh"]
 radius = 7.0
 
-[sub_resource type="Animation" id="Animation_7011x"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Render:instance_shader_parameters/open_anim")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_xgfmd"]
-resource_name = "open"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Render:instance_shader_parameters/open_anim")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.466667),
-"transitions": PackedFloat32Array(0.5, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qwbhg"]
-_data = {
-&"RESET": SubResource("Animation_7011x"),
-&"open": SubResource("Animation_xgfmd")
-}
-
 [node name="Cache" type="CharacterBody2D"]
 collision_layer = 8
 collision_mask = 2
@@ -91,8 +54,8 @@ script = ExtResource("1_xgfmd")
 deplete_hp = false
 
 [node name="Render" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
 material = SubResource("ShaderMaterial_qwbhg")
-instance_shader_parameters/open_anim = 0.0
 scale = Vector2(20, 20)
 texture = SubResource("ImageTexture_pky5l")
 
@@ -106,10 +69,5 @@ process_material = SubResource("ParticleProcessMaterial_7i383")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_40rxh")
-
-[node name="Animations" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_qwbhg")
-}
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]

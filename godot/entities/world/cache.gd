@@ -14,7 +14,7 @@ func _hurt(_amount: int, _direction: float) -> void:
 	$VisibleOnScreenEnabler2D.queue_free()
 	$OpenParticles.emitting = true
 	$CollisionShape2D.set_deferred("disabled", true)
-	$Animations.play("open")
+	get_tree().create_tween().tween_property($Render, "self_modulate", Color.WHITE, 0.5)
 	var weights = RollWeights.new()
 	match Micro.world.get_biome(Micro.world.tile_at(global_position)):
 		Micro.world.Biome.LANDING:

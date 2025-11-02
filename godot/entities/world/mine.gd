@@ -10,7 +10,7 @@ func _physics_process(_delta):
 func _hurt(_amount, _direction):
 	$Flash.restart()
 	invincible = true
-	$Render.set_instance_shader_parameter("recharging", true)
+	$Render.self_modulate.a = 0.
 	$Charging.emitting = true
 	$Recharge.start()
 	
@@ -24,6 +24,6 @@ func _hurt(_amount, _direction):
 
 func _on_recharge_timeout() -> void:
 	invincible = false
-	$Render.set_instance_shader_parameter("recharging", false)
+	$Render.self_modulate.a = 1.
 	$Charging.emitting = false
 	$Charged.restart()

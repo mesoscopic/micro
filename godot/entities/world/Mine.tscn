@@ -10,7 +10,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4rrc6"]
 shader = ExtResource("1_tdar8")
 
-[sub_resource type="Image" id="Image_euatk"]
+[sub_resource type="Image" id="Image_a1d2u"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -20,7 +20,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_euatk"]
-image = SubResource("Image_euatk")
+image = SubResource("Image_a1d2u")
 script = ExtResource("2_3o7ls")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -110,7 +110,6 @@ deplete_hp = false
 
 [node name="Render" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_4rrc6")
-instance_shader_parameters/recharging = false
 scale = Vector2(24, 24)
 texture = SubResource("ImageTexture_euatk")
 
