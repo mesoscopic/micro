@@ -1,6 +1,7 @@
 extends Node2D
 
 func _ready() -> void:
+	$Guide.rotation = global_position.angle()
 	$Clouds.set_instance_shader_parameter("angle", -global_position.normalized())
 
 func activate(body: Node2D) -> void:
@@ -8,5 +9,6 @@ func activate(body: Node2D) -> void:
 	$Activate.restart()
 	$Render.modulate = Color.WHITE
 	$Illumination.emitting = true
+	$Guide.emitting = true
 	get_tree().create_tween().tween_property($Clouds, "modulate", Color.WHITE, 1.)
 	$Detection.queue_free()

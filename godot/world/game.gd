@@ -183,7 +183,7 @@ func generate_world():
 		miniboss.position = location * 20.
 		$Entities.add_child(miniboss)
 		place("anchor_room", Vector2i(Vector2(location).move_toward(Vector2.ZERO, 20).round()), true)
-		var magnitude := 15
+		var magnitude := 12
 		while magnitude < int(location.length()) - 25:
 			place("guiding_light", Vector2i((Vector2(location).normalized()*magnitude).round()))
 			magnitude += random.randi_range(10,15)

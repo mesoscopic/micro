@@ -1,9 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://b6smc1rpaeugb"]
+[gd_scene load_steps=29 format=3 uid="uid://b6smc1rpaeugb"]
 
 [ext_resource type="Shader" uid="uid://ci5ovcam7o22p" path="res://entities/world/light.gdshader" id="1_0fpnf"]
 [ext_resource type="Script" uid="uid://bw5172ki2lflb" path="res://entities/world/light.gd" id="1_0sgbh"]
 [ext_resource type="Shader" uid="uid://cs7vq0v8l44qx" path="res://entities/world/light_clouds.gdshader" id="1_yopc8"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_yopc8"]
+[ext_resource type="PackedScene" uid="uid://by0txtbwl43n8" path="res://fx/BlurAura.tscn" id="5_by7lc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xut0m"]
 radius = 80.0
@@ -11,7 +12,7 @@ radius = 80.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xut0m"]
 shader = ExtResource("1_yopc8")
 
-[sub_resource type="Image" id="Image_3ms5l"]
+[sub_resource type="Image" id="Image_by7lc"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -21,7 +22,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_dhktf"]
-image = SubResource("Image_3ms5l")
+image = SubResource("Image_by7lc")
 script = ExtResource("2_yopc8")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -61,6 +62,28 @@ scale_max = 10.0
 scale_curve = SubResource("CurveTexture_k1qer")
 alpha_curve = SubResource("CurveTexture_d11t0")
 
+[sub_resource type="Curve" id="Curve_3ms5l"]
+_data = [Vector2(0, 0), 0.0, 3.9683356, 0, 0, Vector2(0.25, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.49663, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_by7lc"]
+curve = SubResource("Curve_3ms5l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7vrrx"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(-30, 0, 0)
+emission_shape = 1
+emission_sphere_radius = 70.0
+angle_min = 45.00001
+angle_max = 45.00001
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 6.0
+alpha_curve = SubResource("CurveTexture_by7lc")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yopc8"]
 shader = ExtResource("1_0fpnf")
 
@@ -89,7 +112,7 @@ alpha_curve = SubResource("CurveTexture_dhktf")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0sgbh"]
 shader = ExtResource("1_0fpnf")
 
-[sub_resource type="Image" id="Image_by7lc"]
+[sub_resource type="Image" id="Image_7vrrx"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -99,7 +122,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_15mwo"]
-image = SubResource("Image_by7lc")
+image = SubResource("Image_7vrrx")
 script = ExtResource("2_yopc8")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -115,9 +138,10 @@ shape = SubResource("CircleShape2D_xut0m")
 
 [node name="Clouds" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
+z_index = 1
 material = SubResource("ShaderMaterial_xut0m")
 instance_shader_parameters/angle = Vector2(0, 0)
-scale = Vector2(120, 120)
+scale = Vector2(200, 200)
 texture = SubResource("ImageTexture_dhktf")
 
 [node name="Activate" type="GPUParticles2D" parent="."]
@@ -126,6 +150,12 @@ amount = 50
 one_shot = true
 explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_15mwo")
+
+[node name="Guide" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_7vrrx")
 
 [node name="Illumination" type="GPUParticles2D" parent="."]
 material = SubResource("ShaderMaterial_yopc8")
@@ -138,5 +168,8 @@ modulate = Color(1, 1, 1, 0.5)
 material = SubResource("ShaderMaterial_0sgbh")
 scale = Vector2(20, 20)
 texture = SubResource("ImageTexture_15mwo")
+
+[node name="BlurAura" parent="." instance=ExtResource("5_by7lc")]
+scale = Vector2(200, 200)
 
 [connection signal="body_entered" from="Detection" to="." method="activate"]
