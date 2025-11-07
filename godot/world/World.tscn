@@ -98,7 +98,6 @@ fill_to = Vector2(0, 1)
 script = ExtResource("1_ndgmm")
 
 [node name="BiomeMap" type="SubViewport" parent="."]
-size = Vector2i(1024, 1024)
 render_target_update_mode = 0
 
 [node name="ColorRect" type="ColorRect" parent="BiomeMap"]
@@ -118,7 +117,7 @@ process_material = SubResource("ParticleProcessMaterial_2nmfm")
 
 [node name="Background" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_i4b1j")
-scale = Vector2(20450, 20450)
+scale = Vector2(10225, 10225)
 texture = SubResource("ImageTexture_o1tcx")
 
 [node name="WorldEnemySpawnAttempt" type="Timer" parent="."]
@@ -127,7 +126,7 @@ autostart = true
 
 [node name="EmptinessBorder" type="Line2D" parent="."]
 material = SubResource("ShaderMaterial_nrtoj")
-points = PackedVector2Array(10240, 0, 0, 10240, -10240, 0, 0, -10240)
+points = PackedVector2Array(5120, 0, 0, 5120, -5120, 0, 0, -5120)
 closed = true
 width = 40.0
 texture = SubResource("GradientTexture2D_nrtoj")

@@ -3,7 +3,7 @@ shader_type canvas_item;
 uniform int seed;
 
 // noise parameters
-uniform float FREQUENCY = 10.;
+uniform float FREQUENCY = 8.;
 uniform float JITTER = 1.;
 
 const int PRIME_X = 501125321;

@@ -15,6 +15,14 @@ enum Biome {
 	EMPTINESS
 }
 
+const biome_debug_colors: Dictionary[Biome, Color] = {
+	Biome.LANDING: Color(0.063, 0.063, 0.42, 1.0),
+	Biome.DEFAULT: Color(0.033, 0.22, 0.186, 1.0),
+	Biome.PEACE: Color(0.23, 0.034, 0.142, 1.0),
+	Biome.MINEFIELD: Color(0.21, 0.0, 0.0, 1.0),
+	Biome.EMPTINESS: Color.BLACK
+}
+
 var current_biome: Biome = Biome.LANDING
 var biome_map: Image
 var biomes: Dictionary[Vector2i, Biome] = {}
@@ -29,7 +37,7 @@ func world_enemy(biome: Biome, distance: int) -> Enemy:
 		Biome.DEFAULT:
 			enemies.add_item(preload("res://entities/enemies/SpreadShooter.tscn"), 4)
 			enemies.add_item(preload("res://entities/enemies/Turret.tscn"), 4)
-			if distance >= 100:
+			if distance >= 80:
 				enemies.add_item(preload("res://entities/enemies/MultiShooter.tscn"), 2)
 				enemies.add_item(preload("res://entities/enemies/Teleporter.tscn"), 1)
 				enemies.add_item(preload("res://entities/enemies/Bomber.tscn"), 1)
@@ -42,20 +50,20 @@ func world_enemy(biome: Biome, distance: int) -> Enemy:
 
 func spawn_cap() -> int:
 	var distance := int(taxicab(tile_at(Micro.player.position)))
-	return 1 + ceil(float(distance)/64.)
+	return 1 + ceil(float(distance)/32.)
 
 func spawn_attempt() -> void:
 	if current_biome == Biome.PEACE or world_enemies >= spawn_cap(): return
 	var player_pos: Vector2 = tile_at(Micro.player.position)
 	var distance: int = int(taxicab(player_pos))
 	
-	if distance < 30: return
-	elif distance < 200 and randi_range(1,2) != 1: return
+	if distance < 32: return
+	elif distance < 128 and randi_range(1,2) != 1: return
 	# Otherwise, spawn is guaranteed
 	
 	# Spawn the enemy 20 tiles away from the player.
 	# If you're closer to spawn, enemies will tend to come from the opposite direction to spawn.
-	var angle_randomization = distance / 60.
+	var angle_randomization = distance / 80.
 	var tile: Vector2i = (player_pos + Vector2.from_angle(player_pos.angle_to_point(Vector2.ZERO)+PI+randf_range(-angle_randomization,angle_randomization)) * 20.)
 	if $Structures/NewTiles.get_cell_source_id(tile) > -1: return
 	var enemy: Enemy
@@ -127,9 +135,9 @@ func taxicab(pos: Vector2) -> float:
 
 func get_biome(pos: Vector2i) -> Biome:
 	var taxicab_distance: int = int(taxicab(pos))
-	if taxicab_distance <= 64:
+	if taxicab_distance <= 48:
 		return Biome.LANDING
-	elif taxicab_distance >= 512:
+	elif taxicab_distance >= 256:
 		return Biome.EMPTINESS
 	else:
 		var center := biome_center_at(pos)
@@ -163,9 +171,6 @@ func generate_world():
 	var biome_texture: ViewportTexture = $BiomeMap.get_texture()
 	await RenderingServer.frame_post_draw
 	biome_map = biome_texture.get_image()
-	if Micro.get_config("debug", "save_biome_map", false):
-		ResourceSaver.save(ImageTexture.create_from_image(biome_map), "user://biome_map.png")
-		print("Saved biome map to user folder.")
 	await Micro.worldgen_status("Placing traders...")
 	var starting_traders_to_place := 2
 	var opportunities := 4
@@ -195,14 +200,14 @@ func generate_world():
 		trader.wander_distance = 60.
 		$Entities.add_child(trader)
 	await Micro.worldgen_status("Forming minefields...")
-	for distance in [128, 192, 256, 320]:
+	for distance in [64, 96, 128, 160]:
 		var initial_angle := random.randf_range(0., 2.*PI)
 		for angle in Vector3(initial_angle, initial_angle+2.*PI, PI/16.):
 			if attempt_decide_biome_for_center_structure(Vector2i(Vector2.from_angle(angle) * distance), Biome.MINEFIELD, 5):
 				place("health_up", biome_center_at(Vector2i(Vector2.from_angle(angle) * distance)), true)
 				break
 	await Micro.worldgen_status("Scattering features...")
-	var disks := VariablePoissonDiskSampler2D.new(random, Vector2(1000, 1000), 30)
+	var disks := VariablePoissonDiskSampler2D.new(random, Vector2(500, 500), 30)
 	disks.generate(
 		func (pos):
 			match get_biome(pos):
@@ -216,7 +221,7 @@ func generate_world():
 	, 5, 30)
 	await Micro.worldgen_status("Placing features...")
 	for pos in disks.samples:
-		var tile := Vector2i(pos - Vector2(500, 500))
+		var tile := Vector2i(pos - Vector2(250, 250))
 		if abs(tile.x) + abs(tile.y) > 510:
 			continue
 		if $Structures/NewTiles.get_cell_source_id(tile) > -1:
@@ -239,6 +244,17 @@ func generate_world():
 				features.add_item("mine", 5)
 				features.add_item("mine_caches", 3)
 				place("%s" % Micro.roll(features), tile)
+	if Micro.get_config("debug", "save_debug_map", false):
+		await Micro.worldgen_status("Saving debug map...")
+		var map := Image.create_empty(512, 512, false, Image.FORMAT_RGB8)
+		for x in 512:
+			for y in 512:
+				if $Structures/NewTiles.get_cell_source_id(Vector2i(x-256, y-256)) > -1:
+					map.set_pixel(x, y, Color.WHITE)
+				else:
+					map.set_pixel(x, y, biome_debug_colors.get(get_biome(Vector2i(x-256, y-256))));
+		ResourceSaver.save(ImageTexture.create_from_image(map), "user://debug_map.png")
+		print("Saved debug map to user folder.")
 
 func place(id: String, pos: Vector2i, force := false):
 	var pattern: TileMapPattern = load("res://world/patterns/%s.tres" % id)
@@ -258,7 +274,7 @@ func place(id: String, pos: Vector2i, force := false):
 func attempt_decide_biome_for_center_structure(tile: Vector2i, biome: Biome, margin: int) -> bool:
 	var center := biome_center_at(tile)
 	# We'll be placing a structure at the center, so we can't have it be too close to spawn or the Emptiness
-	if (abs(center.x) + abs(center.y) <= 80+margin) or (abs(center.x) + abs(center.y)) >= 512-margin:
+	if (abs(center.x) + abs(center.y) <= 60+margin) or (abs(center.x) + abs(center.y)) >= 256-margin:
 		return false
 	# Don't place it here if there's already a biome
 	if biomes.has(center): return false
@@ -273,9 +289,9 @@ func attempt_decide_biome(tile: Vector2i, biome: Biome) -> bool:
 	return true
 
 func biome_center_at(tile: Vector2i) -> Vector2i:
-	var color := biome_map.get_pixel(tile.x + 512, tile.y + 512)
-	var uv: Vector2i = Vector2(color.r, color.g) * 1024
-	return uv - Vector2i(512,512)
+	var color := biome_map.get_pixel(tile.x + 256, tile.y + 256)
+	var uv: Vector2i = Vector2(color.r, color.g) * 512
+	return uv - Vector2i(256,256)
 
 func biome_edgeness_at(tile: Vector2i) -> float:
-	return biome_map.get_pixel(tile.x + 512, tile.y + 512).b
+	return biome_map.get_pixel(tile.x + 256, tile.y + 256).b

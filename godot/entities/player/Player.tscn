@@ -439,6 +439,7 @@ collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_1im8n")
 invulnerability_time = 1.0
+deplete_hp = false
 
 [node name="Camera" parent="." instance=ExtResource("2_nkqiv")]
 
