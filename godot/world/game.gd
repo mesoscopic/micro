@@ -175,7 +175,7 @@ func generate_world():
 	await Micro.worldgen_status("Placing traders...")
 	var starting_traders_to_place := 2
 	var opportunities := 4
-	for dir in [Vector2i(1,1),Vector2i(1,-1),Vector2i(-1,-1),Vector2i(-1,1)]:
+	for dir in [Vector2i(1,0),Vector2i(0,1),Vector2i(-1,0),Vector2i(0,-1)]:
 		opportunities -= 1
 		if starting_traders_to_place == 0 or (random.randi_range(0,1)==1 and opportunities >= starting_traders_to_place):
 			continue
