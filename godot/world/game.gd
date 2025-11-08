@@ -261,7 +261,7 @@ func place(id: String, pos: Vector2i, force := false):
 	var origin := pos-pattern.get_size()/2
 	if !force:
 		for cell in pattern.get_used_cells():
-			if $Structures/NewTiles.get_cell_source_id(origin + cell) > -1:
+			if taxicab(origin+cell)>=256 or $Structures/NewTiles.get_cell_source_id(origin + cell) > -1:
 				return
 	for cell in pattern.get_used_cells():
 		$Structures/NewTiles.set_cell(origin + cell,
