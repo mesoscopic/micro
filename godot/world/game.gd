@@ -108,7 +108,8 @@ func _physics_process(_delta: float) -> void:
 func _on_emptiness_damage_timeout() -> void:
 	Micro.player.damage(1, true)
 
-func can_enemy_fit(location: Vector2, radius: float) -> bool:
+func can_enemy_fit(location: Vector2, radius: float, is_void: bool = false) -> bool:
+	if is_void != bool(abs(location.x) + abs(location.y) > 5120.): return false
 	if $Structures/NewTiles.get_cell_source_id(location/20) > -1: return false
 	var query := PhysicsShapeQueryParameters2D.new()
 	var transformation := Transform2D(0., location*20.)

@@ -8,3 +8,5 @@ func _update_amounts() -> void:
 		$Spores.amount_ratio = 0.8**(0.02*(spawn_distance-30))
 		$Spores.rotation = get_angle_to(Vector2.ZERO)
 		$Spores.emitting = true
+	
+	$Emptiness.rotation = global_position.angle()

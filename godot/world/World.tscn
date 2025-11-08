@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://qujhsvriffxk"]
+[gd_scene load_steps=28 format=4 uid="uid://qujhsvriffxk"]
 
 [ext_resource type="Shader" uid="uid://0vacnrh74wjb" path="res://world/bg.gdshader" id="1_gia2e"]
 [ext_resource type="PackedScene" uid="uid://cas1ebkgs1kfw" path="res://entities/world/SpawnNest.tscn" id="1_kopsk"]
@@ -94,6 +94,22 @@ width = 1
 height = 256
 fill_to = Vector2(0, 1)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_crsqw"]
+a = Vector2(5120, 0)
+b = Vector2(0, 5120)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_8mymi"]
+a = Vector2(0, 5120)
+b = Vector2(-5120, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0n6y5"]
+a = Vector2(-5120, 0)
+b = Vector2(0, -5120)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_gqh78"]
+a = Vector2(0, -5120)
+b = Vector2(5120, 0)
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_ndgmm")
 
@@ -124,15 +140,6 @@ texture = SubResource("ImageTexture_o1tcx")
 wait_time = 3.0
 autostart = true
 
-[node name="EmptinessBorder" type="Line2D" parent="."]
-material = SubResource("ShaderMaterial_nrtoj")
-points = PackedVector2Array(5120, 0, 0, 5120, -5120, 0, 0, -5120)
-closed = true
-width = 40.0
-texture = SubResource("GradientTexture2D_nrtoj")
-texture_mode = 2
-antialiased = true
-
 [node name="EmptinessDamage" type="Timer" parent="."]
 wait_time = 0.1
 
@@ -150,6 +157,31 @@ tile_set = ExtResource("7_8mymi")
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("1_yrunw")]
+
+[node name="EmptinessBorder" type="StaticBody2D" parent="."]
+collision_layer = 26
+collision_mask = 0
+
+[node name="Render" type="Line2D" parent="EmptinessBorder"]
+material = SubResource("ShaderMaterial_nrtoj")
+points = PackedVector2Array(5120, 0, 0, 5120, -5120, 0, 0, -5120)
+closed = true
+width = 40.0
+texture = SubResource("GradientTexture2D_nrtoj")
+texture_mode = 2
+antialiased = true
+
+[node name="Line1" type="CollisionShape2D" parent="EmptinessBorder"]
+shape = SubResource("SegmentShape2D_crsqw")
+
+[node name="Line2" type="CollisionShape2D" parent="EmptinessBorder"]
+shape = SubResource("SegmentShape2D_8mymi")
+
+[node name="Line3" type="CollisionShape2D" parent="EmptinessBorder"]
+shape = SubResource("SegmentShape2D_0n6y5")
+
+[node name="Line4" type="CollisionShape2D" parent="EmptinessBorder"]
+shape = SubResource("SegmentShape2D_gqh78")
 
 [connection signal="timeout" from="WorldEnemySpawnAttempt" to="." method="spawn_attempt"]
 [connection signal="timeout" from="EmptinessDamage" to="." method="_on_emptiness_damage_timeout"]

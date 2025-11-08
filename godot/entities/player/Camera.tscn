@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://wwjxod2at3t3"]
+[gd_scene load_steps=21 format=3 uid="uid://wwjxod2at3t3"]
 
 [ext_resource type="Script" uid="uid://chy20mxivcjvj" path="res://misc/logic/global_particles.gd" id="1_14tc0"]
 [ext_resource type="Script" uid="uid://dy4qevtbawxhk" path="res://entities/player/camera.gd" id="1_u8pla"]
@@ -38,6 +38,12 @@ alpha_curve = SubResource("CurveTexture_rqo8m")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ebv5w"]
 shader = ExtResource("3_0so2l")
 
+[sub_resource type="Gradient" id="Gradient_ryo3p"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_no8h0"]
+gradient = SubResource("Gradient_ryo3p")
+
 [sub_resource type="Curve" id="Curve_diili"]
 _data = [Vector2(0.503094, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -47,15 +53,17 @@ curve = SubResource("Curve_diili")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7j4ev"]
 particle_flag_disable_z = true
-emission_shape_offset = Vector3(-288, 0, 0)
+emission_shape_offset = Vector3(288, 0, 0)
 emission_shape = 3
 emission_box_extents = Vector3(288, 162, 1)
+direction = Vector3(-1, 0, 0)
 initial_velocity_min = 2000.0
 initial_velocity_max = 2000.0
 gravity = Vector3(0, 0, 0)
 scale_min = 2.0
 scale_max = 6.0
 scale_curve = SubResource("CurveTexture_5udrv")
+color_initial_ramp = SubResource("GradientTexture1D_no8h0")
 turbulence_enabled = true
 turbulence_noise_strength = 0.5
 
@@ -102,7 +110,7 @@ process_material = SubResource("ParticleProcessMaterial_gbpsr")
 [node name="Emptiness" type="GPUParticles2D" parent="GlobalParticles"]
 material = SubResource("ShaderMaterial_ebv5w")
 emitting = false
-amount = 20
+amount = 50
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_7j4ev")
 
