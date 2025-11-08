@@ -121,7 +121,7 @@ scale = Vector2(10225, 10225)
 texture = SubResource("ImageTexture_o1tcx")
 
 [node name="WorldEnemySpawnAttempt" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 3.0
 autostart = true
 
 [node name="EmptinessBorder" type="Line2D" parent="."]
