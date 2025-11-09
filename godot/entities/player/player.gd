@@ -200,7 +200,8 @@ func end_dash() -> void:
 	dash_direction = Vector2.ZERO
 
 func _on_dash_cooldown_timeout() -> void:
-	$DashRestore.emitting = true
+	$DashRestore.restart()
+	$DashRecharge.restart()
 
 func motion_input() -> Vector2:
 	if movement_disabled: return Vector2.ZERO

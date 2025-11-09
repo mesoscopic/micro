@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://b14dvx67drebc"]
+[gd_scene load_steps=69 format=3 uid="uid://b14dvx67drebc"]
 
 [ext_resource type="Script" uid="uid://de3rlx01ibq3d" path="res://entities/player/player.gd" id="1_1im8n"]
 [ext_resource type="PackedScene" uid="uid://wwjxod2at3t3" path="res://entities/player/Camera.tscn" id="2_nkqiv"]
@@ -378,12 +378,38 @@ emission_ring_inner_radius = 3.0
 emission_ring_cone_angle = 90.0
 angle_min = 45.0
 angle_max = 45.0
-radial_velocity_min = 30.0
-radial_velocity_max = 70.0
+radial_velocity_min = 59.999977
+radial_velocity_max = 139.99997
 radial_velocity_curve = SubResource("CurveTexture_heyqt")
 gravity = Vector3(0, 0, 0)
-scale_max = 3.0
+scale_min = 2.0
+scale_max = 5.0
 alpha_curve = SubResource("CurveTexture_t7qaw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2rv2u"]
+shader = ExtResource("8_m6phi")
+
+[sub_resource type="Curve" id="Curve_ax5yc"]
+_data = [Vector2(0, 1), 0.0, -1.5964042, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j531f"]
+curve = SubResource("Curve_ax5yc")
+
+[sub_resource type="Curve" id="Curve_npcl8"]
+_data = [Vector2(1e-05, 0), 0.0, 2.8064396, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4fbvh"]
+curve = SubResource("Curve_npcl8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d168t"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 120.0
+scale_max = 120.0
+scale_curve = SubResource("CurveTexture_4fbvh")
+alpha_curve = SubResource("CurveTexture_j531f")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ak4un"]
 shader = ExtResource("9_q57vx")
@@ -530,11 +556,22 @@ process_material = SubResource("ParticleProcessMaterial_kwk8g")
 
 [node name="DashRestore" type="GPUParticles2D" parent="."]
 emitting = false
-amount = 15
+amount = 32
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_ax5yc")
+
+[node name="DashRecharge" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_2rv2u")
+emitting = false
+amount = 1
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_d168t")
 
 [node name="RedirectFlash" type="GPUParticles2D" parent="."]
 material = SubResource("ShaderMaterial_ak4un")
