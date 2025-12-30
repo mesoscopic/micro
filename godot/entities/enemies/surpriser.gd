@@ -7,11 +7,11 @@ func _on_firing_cooldown_timeout() -> void:
 	var target = global_position+Vector2.from_angle(get_angle_to(Micro.player.position) + randf_range(-PI/2, PI/2))*100.
 	while !Micro.world.can_enemy_fit(target, 10):
 		target = global_position+Vector2.from_angle(get_angle_to(Micro.player.position) + randf_range(-PI/2, PI/2))*100.
-	var summon = preload("res://bullets/SpawnerProjectile.tscn").instantiate()
+	var summon = Micro.new(&"micro:bullet_spwaner")
 	summon.position = position
 	summon.target = target
 	summon.time = 2.
-	summon.spawn = preload("res://entities/enemies/Surprise.tscn")
+	summon.spawn = &"micro:enemy_surprise"
 	Micro.world.get_node("Bullets").add_child(summon)
 	$FiringCooldown.start(5.)
 	invincible = true

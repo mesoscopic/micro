@@ -33,7 +33,7 @@ func fire() -> void:
 			Micro.player.damage(explosion_damage, false, Micro.player.get_angle_to(global_position))
 		# never would i have come up with making Vector3 the float equivalent of range. like, what?
 		for angle in Vector3(PI/float(split_number), 2.*PI, 2.*PI/float(split_number)):
-			var bullet: Bullet = preload("res://bullets/EnemyBullet.tscn").instantiate()
+			var bullet: Bullet = Micro.new(&"micro:bullet")
 			bullet.position = position
 			bullet.velocity = Vector2.from_angle(angle+spin) * split_speed
 			bullet.damage = split_damage

@@ -17,7 +17,7 @@ func _on_firing_cooldown_timeout() -> void:
 		prepared_bullet = null
 		speed_multiplier = 0.3
 	else:
-		prepared_bullet = preload("res://bullets/TelegraphedBullet.tscn").instantiate()
+		prepared_bullet = Micro.new(&"micro:bullet_telegraphed")
 		prepared_bullet.shooter = self
 		prepared_bullet.aim(get_angle_to(Micro.player.global_position))
 		prepared_bullet.distance = 20

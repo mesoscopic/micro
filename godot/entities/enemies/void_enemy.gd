@@ -17,7 +17,7 @@ func _on_firing_cooldown_timeout() -> void:
 	round_2 = []
 	var r := Micro.world.random.randf_range(0., 2.*PI)
 	for i in range(0,4):
-		var bullet: TelegraphedBullet = preload("res://bullets/TelegraphedBullet.tscn").instantiate()
+		var bullet: TelegraphedBullet = Micro.new(&"micro:bullet_telegraphed")
 		bullet.shooter = self
 		bullet.angle_offset = r + i*PI/2
 		bullet.aim(get_angle_to(Micro.player.position))

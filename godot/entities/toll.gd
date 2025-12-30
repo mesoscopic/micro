@@ -1,7 +1,5 @@
 class_name Toll extends Node2D
 
-const TRADE_COIN = preload("res://misc/effects/TradeCoin.tscn")
-
 @export var cost: int = 0
 @export var title := ""
 @export var description := ""

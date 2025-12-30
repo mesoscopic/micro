@@ -15,7 +15,7 @@ func _hurt(_amount, _direction):
 	$Recharge.start()
 	
 	for angle in Vector3(PI/float(6), 2.*PI, 2.*PI/float(6)):
-		var bullet: MineBullet = preload("res://bullets/MineBullet.tscn").instantiate()
+		var bullet: MineBullet = Micro.new(&"micro:bullet_mine")
 		bullet.velocity = Vector2.from_angle(angle) * 150
 		bullet.position = global_position
 		bullet.damage = 20

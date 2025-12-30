@@ -9,7 +9,7 @@ func _on_firing_cooldown_timeout() -> void:
 		return
 	speed_multiplier = 0.
 	velocity = Vector2.ZERO
-	var bomb: BombBullet = preload("res://bullets/Bomb.tscn").instantiate()
+	var bomb: BombBullet = Micro.new(&"micro:bullet_bomb")
 	bomb.position = Micro.player.position
 	bomb.split_number = 8
 	bomb.origin = position.move_toward(Micro.player.position, 20)

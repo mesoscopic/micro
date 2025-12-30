@@ -131,10 +131,30 @@ func rumble(important: bool, time: float) -> void:
 	elif get_setting("rumble") == 1: return
 	else: Input.start_joy_vibration(joy, 1.0, 0.0, time)
 
+# 
 var scenes: Dictionary[StringName, PackedScene] = {}
 
 func load_scenes() -> void:
 	scenes[&"micro:fund_coin"] = load("uid://bwsl01caneedv")
+	scenes[&"micro:heal_orb"] = load("uid://degva33wjvowa")
+	scenes[&"micro:bullet"] = load("uid://v7mv45nprvqq")
+	scenes[&"micro:bullet_telegraphed"] = load("uid://bdgbhm7jvt6n2")
+	scenes[&"micro:player_bullet"] = load("uid://dnrcdtyawedjb")
+	scenes[&"micro:bullet_spawner"] = load("uid://tv3xkxmljps6")
+	scenes[&"micro:bullet_laser"] = load("uid://clpbwn742hbdn")
+	scenes[&"micro:bullet_homing"] = load("uid://by8vbrl6i7h4x")
+	scenes[&"micro:bullet_bomb"] = load("uid://bbs436j75kwf1")
+	scenes[&"micro:trader"] = load("uid://cjt7tm6d5ow8j")
+	scenes[&"micro:enemy_surprise"] = load("uid://5r4rapdj3ft")
+	scenes[&"micro:enemy_tutorial"] = load("uid://c6om7rrvf38gu")
+	scenes[&"micro:enemy_spread_shooter"] = load("uid://b46bcw3s1yhbg")
+	scenes[&"micro:enemy_multi_shooter"] = load("uid://ij3bdhvutjdc")
+	scenes[&"micro:enemy_turret"] = load("uid://c0qyylco7xgk4")
+	scenes[&"micro:enemy_bomber"] = load("uid://dbm44iqln8ku")
+	scenes[&"micro:enemy_teleporter"] = load("uid://cr70dq40ddv00")
+	scenes[&"micro:enemy_surpriser"] = load("uid://da4uam7bgmyfs")
+	scenes[&"micro:enemy_trader_miniboss"] = load("uid://degw88c3u4obt")
+	scenes[&"micro:enemy_void"] = load("uid://b8xv4bx33kxeg")
 
 func new(id: StringName) -> Node:
 	return scenes[id].instantiate()

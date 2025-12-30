@@ -1,11 +1,5 @@
 extends Enemy
 
-const BULLET = preload("res://bullets/TelegraphedBullet.tscn")
-const SPAWNER = preload("res://bullets/SpawnerProjectile.tscn")
-const LASER = preload("res://bullets/Laser.tscn")
-const BOMB = preload("res://bullets/Bomb.tscn")
-const HOMING_BULLET = preload("res://bullets/HomingBullet.tscn")
-
 var active := false
 
 var shots: int
@@ -32,7 +26,7 @@ func _hurt(_amount: int, _direction: float) -> void:
 func _ready() -> void:
 	super()
 	extra_reward = func(pos):
-		var trader = preload("res://entities/Trader.tscn").instantiate()
+		var trader = Micro.new(&"micro:trader")
 		trader.position = pos
 		Micro.world.get_node("Entities").call_deferred("add_child", trader)
 		trader.collect()
@@ -77,7 +71,7 @@ func fire() -> void:
 		shots -= 1
 		if even_shot:
 			for i in range(-3,3):
-				var bullet: TelegraphedBullet = BULLET.instantiate()
+				var bullet: TelegraphedBullet = Micro.new(&"micro:bullet_telegraphed")
 				bullet.shooter = self
 				bullet.angle_offset = i*PI/9 + PI/18
 				bullet.aim(get_angle_to(Micro.player.global_position))
@@ -89,7 +83,7 @@ func fire() -> void:
 				prepared_bullets.append(bullet)
 		else:
 			for i in range(-2,3):
-				var bullet: TelegraphedBullet = BULLET.instantiate()
+				var bullet: TelegraphedBullet = Micro.new(&"micro:bullet_telegraphed")
 				bullet.shooter = self
 				bullet.angle_offset = i*PI/9
 				bullet.aim(get_angle_to(Micro.player.global_position))
@@ -108,7 +102,7 @@ func fire() -> void:
 				# lasers
 				shots = Micro.world.random.randi_range(1,3)
 				for i in range(-1, 2):
-					var laser = LASER.instantiate()
+					var laser = Micro.new(&"micro:bullet_laser")
 					laser.damage = 25
 					laser.lifetime = 1.
 					laser.rotation = get_angle_to(Micro.player.global_position) + i*PI/(8. if Micro.world.second_trader_miniboss else 6.)
@@ -136,9 +130,9 @@ func fire() -> void:
 				# surprises
 				shots = Micro.world.random.randi_range(4,6)
 				for i in range(3):
-					var bullet: Spawner = SPAWNER.instantiate()
+					var bullet: Spawner = Micro.new(&"micro:bullet_spawner")
 					bullet.position = global_position
-					bullet.spawn = preload("res://entities/enemies/Surprise.tscn")
+					bullet.spawn = &"micro:enemy_surprise"
 					bullet.target = global_position + Vector2(Micro.world.random.randf_range(-100, 100),Micro.world.random.randf_range(-100, 100))
 					bullet.time = 1.
 					Micro.world.get_node("Bullets").add_child(bullet)
@@ -148,7 +142,7 @@ func fire() -> void:
 				# homing
 				shots = Micro.world.random.randi_range(4,6)
 				for i in range(-2,3):
-					var bullet: TelegraphedBullet = HOMING_BULLET.instantiate()
+					var bullet: TelegraphedBullet = Micro.new(&"micro:bullet_homing")
 					bullet.shooter = self
 					bullet.angle_offset = i*PI/8
 					bullet.aim(get_angle_to(Micro.player.global_position))
@@ -173,7 +167,7 @@ func fire() -> void:
 				shots = Micro.world.random.randi_range(2,3)
 				for i in 4:
 					if check_line_of_sight(): return
-					var bomb: BombBullet = BOMB.instantiate()
+					var bomb: BombBullet = Micro.new(&"micro:bullet_bomb")
 					bomb.position = Micro.player.position
 					bomb.origin = global_position.move_toward(Micro.player.position, 35)
 					bomb.split_number = 6 if Micro.world.second_trader_miniboss else 4

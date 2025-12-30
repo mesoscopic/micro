@@ -2,7 +2,6 @@ extends Damageable
 
 class_name Player
 
-const BULLET = preload("res://bullets/PlayerBullet.tscn")
 var max_speed = 60
 var movement_disabled := false:
 	set(d):
@@ -185,7 +184,7 @@ func add_toll(toll: Toll) -> void:
 
 func prepare_bullet() -> void:
 	for i in range(-multishot,multishot+1):
-		var bullet: TelegraphedBullet = preload("res://bullets/PlayerBullet.tscn").instantiate()
+		var bullet: TelegraphedBullet = Micro.new(&"micro:player_bullet")
 		bullet.shooter = self
 		bullet.angle_offset = i*PI/12 + randf_range(-1,1)*bullet_spread
 		bullet.aim(aim_input().angle())

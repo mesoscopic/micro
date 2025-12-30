@@ -1,6 +1,6 @@
 class_name Spawner extends Node2D
 
-var spawn: PackedScene
+var spawn: StringName
 var target: Vector2
 var time: float
 
@@ -17,7 +17,7 @@ func _process(_delta: float) -> void:
 	$Bubbles.position = Vector2(spiral_radius*cos(spiral_angle), spiral_radius*sin(spiral_angle))
 
 func _on_expiry_timeout() -> void:
-	var enemy = spawn.instantiate()
+	var enemy = Micro.new(spawn)
 	enemy.position = position
 	Micro.world.get_node("Entities").add_child(enemy)
 	$Bubbles.emitting = false

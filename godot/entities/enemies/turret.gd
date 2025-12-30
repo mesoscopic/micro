@@ -1,6 +1,5 @@
 extends CirclerEnemy
 
-const LASER = preload("res://bullets/Laser.tscn")
 var aim := 0.
 var aiming := false
 
@@ -36,7 +35,7 @@ func _on_firing_cooldown_timeout() -> void:
 		$FiringCooldown.start(1.)
 		return
 	speed_multiplier = 0.
-	laser = LASER.instantiate()
+	laser = Micro.new(&"micro:bullet_laser")
 	laser.damage = 25
 	laser.lifetime = 1.
 	aim_laser()

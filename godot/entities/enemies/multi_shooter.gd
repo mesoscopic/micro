@@ -1,7 +1,5 @@
 extends ChaserEnemy
 
-const BULLET = preload("res://bullets/TelegraphedBullet.tscn")
-
 var prepared_bullets: Array[TelegraphedBullet] = []
 
 func _ready():
@@ -16,7 +14,7 @@ func _on_firing_cooldown_timeout() -> void:
 		bullet.fire()
 	prepared_bullets = []
 	for i in range(-1,2):
-		var bullet: TelegraphedBullet = BULLET.instantiate()
+		var bullet: TelegraphedBullet = Micro.new(&"micro:bullet_telegraphed")
 		bullet.shooter = self
 		bullet.angle_offset = i*PI/8
 		bullet.aim(get_angle_to(Micro.player.global_position))

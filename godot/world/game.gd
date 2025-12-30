@@ -33,20 +33,20 @@ func world_enemy(biome: Biome, distance: int) -> Enemy:
 	var enemies: RollWeights = RollWeights.new()
 	match biome:
 		Biome.LANDING:
-			enemies.add_item(preload("res://entities/enemies/TutorialEnemy.tscn"), 1)
+			enemies.add_item(&"micro:enemy_tutorial", 1)
 		Biome.DEFAULT:
-			enemies.add_item(preload("res://entities/enemies/SpreadShooter.tscn"), 4)
-			enemies.add_item(preload("res://entities/enemies/Turret.tscn"), 4)
+			enemies.add_item(&"micro:enemy_spread_shooter", 4)
+			enemies.add_item(&"micro:enemy_turret", 4)
 			if distance >= 80:
-				enemies.add_item(preload("res://entities/enemies/MultiShooter.tscn"), 2)
-				enemies.add_item(preload("res://entities/enemies/Teleporter.tscn"), 1)
-				enemies.add_item(preload("res://entities/enemies/Bomber.tscn"), 1)
+				enemies.add_item(&"micro:enemy_multi_shooter", 2)
+				enemies.add_item(&"micro:enemy_teleporter", 1)
+				enemies.add_item(&"micro:enemy_bomber", 1)
 			if distance >= 120 and get_tree().get_node_count_in_group("miniboss") == 0:
-				enemies.add_item(preload("res://entities/enemies/Surpriser.tscn"), 1)
+				enemies.add_item(&"micro:enemy_surpriser", 1)
 		Biome.MINEFIELD:
-			enemies.add_item(preload("res://entities/enemies/MultiShooter.tscn"), 3)
-			enemies.add_item(preload("res://entities/enemies/Bomber.tscn"), 3)
-	return Micro.roll(enemies).instantiate()
+			enemies.add_item(&"micro:enemy_multi_shooter", 3)
+			enemies.add_item(&"micro:enemy_bomber", 3)
+	return Micro.new(Micro.roll(enemies))
 
 func spawn_cap() -> int:
 	var distance := int(taxicab(tile_at(Micro.player.position)))
@@ -69,7 +69,7 @@ func spawn_attempt() -> void:
 	var enemy: Enemy
 	var biome = get_biome(tile)
 	if biome == Biome.EMPTINESS:
-		enemy = preload("res://entities/enemies/VoidEnemy.tscn").instantiate()
+		enemy = Micro.new(&"micro:enemy_void")
 	elif biome == Biome.PEACE or current_biome == Biome.EMPTINESS: return
 	else:
 		enemy = world_enemy(current_biome, distance)
@@ -185,7 +185,7 @@ func generate_world():
 			distance += 10
 		var location := biome_center_at(dir*distance)
 		place("trader_miniboss_arena", location, true)
-		var miniboss := preload("res://entities/enemies/TraderMiniboss.tscn").instantiate()
+		var miniboss := Micro.new(&"micro:enemy_trader_miniboss")
 		miniboss.position = location * 20.
 		$Entities.add_child(miniboss)
 		place("anchor_room", Vector2i(Vector2(location).move_toward(Vector2.ZERO, 20).round()), true)
@@ -195,7 +195,7 @@ func generate_world():
 			magnitude += random.randi_range(10,15)
 		var trader_location := Vector2i((Vector2(location).normalized()*30).round())
 		place("small_house", trader_location, true)
-		var trader := preload("res://entities/Trader.tscn").instantiate()
+		var trader := Micro.new(&"micro:trader")
 		trader.position = trader_location * 20.
 		trader.wander_range = 70.
 		trader.wander_distance = 60.
