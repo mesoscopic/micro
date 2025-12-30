@@ -3,7 +3,7 @@ extends EnemyDeath
 func _ready():
 	$Render.scale = Vector2(enemy_scale,enemy_scale)
 	while fund_drop > 0:
-		var coin := fund_coin.instantiate()
+		var coin = Micro.new(&"micro:fund_coin")
 		coin.position = position
 		coin.amount = ceil(fund_drop/8.)
 		coin.delay = randf_range(0., 0.25)

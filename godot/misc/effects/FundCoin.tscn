@@ -1,10 +1,40 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwsl01caneedv"]
+[gd_scene load_steps=10 format=3 uid="uid://bwsl01caneedv"]
 
 [ext_resource type="Script" uid="uid://cg1a2fqe2to7u" path="res://misc/effects/fund_coin.gd" id="1_cncoa"]
+[ext_resource type="Shader" uid="uid://bm0iowttrwa5h" path="res://misc/shaders/sparkle.gdshader" id="2_7fw8m"]
 
 [sub_resource type="Curve" id="Curve_w7jdu"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.99999, 1), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gq41f"]
+shader = ExtResource("2_7fw8m")
+
+[sub_resource type="Gradient" id="Gradient_dqrv8"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.470588)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7lms1"]
+gradient = SubResource("Gradient_dqrv8")
+
+[sub_resource type="Curve" id="Curve_pjfc7"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 2), 3.7242, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_oihyf"]
+curve = SubResource("Curve_pjfc7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wb7lb"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 90.0
+radial_velocity_min = -5.00002
+radial_velocity_max = 0.999978
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 15.0
+scale_curve = SubResource("CurveTexture_oihyf")
+color_initial_ramp = SubResource("GradientTexture1D_7lms1")
 
 [node name="FundCoin" type="Node2D"]
 script = ExtResource("1_cncoa")
@@ -16,3 +46,11 @@ width_curve = SubResource("Curve_w7jdu")
 joint_mode = 2
 end_cap_mode = 2
 antialiased = true
+
+[node name="FundsEffect" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_gq41f")
+emitting = false
+amount = 1
+lifetime = 0.1
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_wb7lb")

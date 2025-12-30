@@ -9,6 +9,8 @@ var movement_disabled := false:
 		if d:
 			end_dash()
 			velocity = velocity.limit_length(max_speed)
+		elif tolls.size() > 0:
+			trading = true
 		movement_disabled = d
 
 var acceleration = 300
@@ -31,10 +33,22 @@ var aim_direction := Vector2.RIGHT
 var regen_time := 0.
 
 @export var funds: int = 0
-var trading: bool = false
+var trading: bool = false:
+	set(t):
+		trading = t
+		if t:
+			$FundsDisplay/AnimationPlayer.stop()
+			$FundsDisplay/AnimationPlayer.play("show_funds")
+		else:
+			$FundsDisplay/AnimationPlayer.stop()
+			$FundsDisplay/AnimationPlayer.play("hide_funds")
+			Micro.hide_trading()
+			chosen_toll = null
 var tolls: Array[Toll] = []
 var chosen_toll: Toll
 var prepared_bullets: Array[TelegraphedBullet]
+var accumulated_pay_delta: float = 0.
+var pay_time: float = 0.05
 
 var upgrades: Dictionary[String, int] = {}
 
@@ -44,7 +58,7 @@ func _ready():
 	die.connect(_die)
 	Micro.player = self
 
-func _physics_process(delta):
+func _physics_process(delta: float):
 	tick()
 	var direction = motion_input()
 	for bullet in prepared_bullets:
@@ -95,12 +109,8 @@ func _physics_process(delta):
 		start_dash(aim_input())
 		
 	if trading:
-		if tolls.size() == 0:
+		if tolls.size() == 0 or movement_disabled:
 			trading = false
-			$FundsDisplay/AnimationPlayer.stop()
-			$FundsDisplay/AnimationPlayer.play("hide_funds")
-			Micro.hide_trading()
-			chosen_toll = null
 		else:
 			tolls.sort_custom(func(a, b): return a.global_position.distance_squared_to(position) < b.global_position.distance_squared_to(position))
 			for i in range(tolls.size()):
@@ -112,6 +122,24 @@ func _physics_process(delta):
 						Micro.show_trade_information(chosen_toll)
 				else:
 					tolls[i].set_chosen(false)
+	if !movement_disabled:
+		if Input.is_action_pressed("pay") and funds > 0:
+			accumulated_pay_delta += delta
+			while accumulated_pay_delta > pay_time and funds > 0:
+				accumulated_pay_delta -= pay_time
+				var coin = Micro.new(&"micro:fund_coin")
+				coin.position = position
+				if trading and chosen_toll.balance < chosen_toll.cost:
+					coin.amount = min(funds, ceil((chosen_toll.cost-chosen_toll.balance)/8.))
+					coin.toll = chosen_toll
+					chosen_toll.pay(coin.amount)
+				else:
+					coin.amount = ceil(funds/64.)
+				give_funds(-coin.amount)
+				Micro.world.get_node("Entities").add_child(coin)
+		elif !Input.is_action_pressed("pay") and trading and chosen_toll.balance > 0:
+			chosen_toll.return_funds()
+			Micro.show_trade_information(chosen_toll)
 
 func _hurt(amount: int, direction: float):
 	Micro.rumble(true, .2)
@@ -139,12 +167,9 @@ func _input(event: InputEvent) -> void:
 	if movement_disabled: return
 	if event is InputEventMouseMotion:
 		aim_direction = get_local_mouse_position().normalized()
-	if trading and event.is_action_pressed("ui_accept"):
-		Micro.attempt_payment(chosen_toll)
 
 func give_funds(amount: int) -> void:
 	funds += amount
-	if !Micro.get_setting("photosensitive_mode"): $FundsEffect.emit_particle(get_transform(), Vector2.ZERO, Color.WHITE, Color.WHITE, 0)
 	$FundsDisplay/HBoxContainer/Label.text = "%s" % funds
 	$FundsDisplay/AnimationPlayer.stop()
 	$FundsDisplay/AnimationPlayer.play(
@@ -157,8 +182,6 @@ func add_toll(toll: Toll) -> void:
 	tolls.append(toll)
 	if trading: return
 	trading = true
-	$FundsDisplay/AnimationPlayer.stop()
-	$FundsDisplay/AnimationPlayer.play("show_funds")
 
 func prepare_bullet() -> void:
 	for i in range(-multishot,multishot+1):

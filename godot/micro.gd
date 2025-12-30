@@ -71,7 +71,7 @@ func worldgen_status(status: String) -> void:
 func show_trade_information(toll: Toll):
 	var overlay = get_tree().current_scene.get_node("UI/TradeOverlay")
 	overlay.get_node("Panel/Margin/HBoxContainer/VBoxContainer/ItemDisplay").material = toll.render
-	overlay.get_node("Panel/Margin/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Cost").text = "%s" % toll.cost
+	overlay.get_node("Panel/Margin/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/Cost").text = "%s" % (toll.cost - toll.balance)
 	overlay.get_node("Panel/Margin/HBoxContainer/MarginContainer/VBoxContainer/Title").text = toll.title
 	overlay.get_node("Panel/Margin/HBoxContainer/MarginContainer/VBoxContainer/Description").text = toll.description
 	if !overlay.visible:
@@ -81,14 +81,6 @@ func show_trade_information(toll: Toll):
 
 func hide_trading():
 	get_tree().current_scene.get_node("UI/TradeOverlay/Animations").play("hide")
-
-func attempt_payment(toll: Toll):
-	var overlay = get_tree().current_scene.get_node("UI/TradeOverlay")
-	if Micro.player.funds < toll.cost:
-		overlay.get_node("Animations").play("cannot_afford")
-	else:
-		overlay.get_node("Animations").play("hide")
-		toll.pay()
 
 func roll(weights: RollWeights) -> Variant:
 	var random: RandomNumberGenerator
@@ -138,3 +130,11 @@ func rumble(important: bool, time: float) -> void:
 	if important: Input.start_joy_vibration(joy, 1.0, 0.0 if weak else 1.0, time)
 	elif get_setting("rumble") == 1: return
 	else: Input.start_joy_vibration(joy, 1.0, 0.0, time)
+
+var scenes: Dictionary[StringName, PackedScene] = {}
+
+func load_scenes() -> void:
+	scenes[&"micro:fund_coin"] = load("uid://bwsl01caneedv")
+
+func new(id: StringName) -> Node:
+	return scenes[id].instantiate()

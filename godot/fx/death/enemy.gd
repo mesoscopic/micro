@@ -5,13 +5,12 @@ class_name EnemyDeath extends Node2D
 @export var enemy_scale := 20.
 @export var extra_reward: Callable
 
-const fund_coin: PackedScene = preload("res://misc/effects/FundCoin.tscn")
 const heal_orb: PackedScene = preload("res://misc/effects/HealOrb.tscn")
 
 func _ready():
 	$Render.scale = Vector2(enemy_scale,enemy_scale)
 	while fund_drop > 0:
-		var coin := fund_coin.instantiate()
+		var coin = Micro.new(&"micro:fund_coin")
 		coin.position = position
 		coin.amount = ceil(fund_drop/8.)
 		coin.delay = randf_range(0., 0.25)

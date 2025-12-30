@@ -296,3 +296,8 @@ func biome_center_at(tile: Vector2i) -> Vector2i:
 
 func biome_edgeness_at(tile: Vector2i) -> float:
 	return biome_map.get_pixel(tile.x + 256, tile.y + 256).b
+
+func taxicab_random(distance: float) -> Vector2:
+	var x := random.randf_range(-1, 1)
+	var y: float = sign(random.randf_range(-1,1))*(1-abs(x))
+	return distance * Vector2(x, y)

@@ -26,6 +26,7 @@ func _on_splash_finished():
 func _on_start_run():
 	$UI.remove_child($UI.get_node("StartRun"))
 	var start_time = Time.get_ticks_usec()
+	Micro.load_scenes()
 	var world = load("res://world/World.tscn").instantiate()
 	Micro.world = world
 	world.random.seed = world.world_seed

@@ -1,10 +1,9 @@
-[gd_scene load_steps=69 format=3 uid="uid://b14dvx67drebc"]
+[gd_scene load_steps=62 format=3 uid="uid://b14dvx67drebc"]
 
 [ext_resource type="Script" uid="uid://de3rlx01ibq3d" path="res://entities/player/player.gd" id="1_1im8n"]
 [ext_resource type="PackedScene" uid="uid://wwjxod2at3t3" path="res://entities/player/Camera.tscn" id="2_nkqiv"]
 [ext_resource type="Shader" uid="uid://ja0tditl2iqa" path="res://entities/player/player.gdshader" id="4_0t1y4"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="4_oihyf"]
-[ext_resource type="Shader" uid="uid://bm0iowttrwa5h" path="res://misc/shaders/sparkle.gdshader" id="6_m6phi"]
 [ext_resource type="PackedScene" uid="uid://c7h6twa0ran3j" path="res://fx/PlayerHurt.tscn" id="6_q57vx"]
 [ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://misc/shaders/funds.gdshader" id="6_rpfb3"]
 [ext_resource type="Shader" uid="uid://cjhdxgx78hiya" path="res://misc/shaders/dash_ghost.gdshader" id="8_m6phi"]
@@ -14,7 +13,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7lms1"]
 shader = ExtResource("4_0t1y4")
 
-[sub_resource type="Image" id="Image_ak4un"]
+[sub_resource type="Image" id="Image_q57vx"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -24,40 +23,9 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_mqro2"]
-image = SubResource("Image_ak4un")
+image = SubResource("Image_q57vx")
 script = ExtResource("4_oihyf")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oihyf"]
-shader = ExtResource("6_m6phi")
-
-[sub_resource type="Gradient" id="Gradient_oihyf"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.470588)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7lms1"]
-gradient = SubResource("Gradient_oihyf")
-
-[sub_resource type="Curve" id="Curve_m6phi"]
-_limits = [0.0, 2.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 2), 3.7242, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_oihyf"]
-curve = SubResource("Curve_m6phi")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7lms1"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(10, 10, 10)
-angle_min = 1.07288e-05
-angle_max = 90.0
-radial_velocity_min = -5.00002
-radial_velocity_max = 0.999978
-gravity = Vector3(0, 0, 0)
-scale_min = 10.0
-scale_max = 15.0
-scale_curve = SubResource("CurveTexture_oihyf")
-color_initial_ramp = SubResource("GradientTexture1D_7lms1")
 
 [sub_resource type="Animation" id="Animation_m6phi"]
 length = 0.001
@@ -481,14 +449,6 @@ one_shot = true
 autostart = true
 
 [node name="HurtEffect" parent="." instance=ExtResource("6_q57vx")]
-
-[node name="FundsEffect" type="GPUParticles2D" parent="."]
-material = SubResource("ShaderMaterial_oihyf")
-emitting = false
-amount = 3
-lifetime = 0.1
-one_shot = true
-process_material = SubResource("ParticleProcessMaterial_7lms1")
 
 [node name="FundsDisplay" type="Node2D" parent="."]
 modulate = Color(1, 1, 1, 0)
