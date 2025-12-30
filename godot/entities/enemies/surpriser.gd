@@ -7,7 +7,7 @@ func _on_firing_cooldown_timeout() -> void:
 	var target = global_position+Vector2.from_angle(get_angle_to(Micro.player.position) + randf_range(-PI/2, PI/2))*100.
 	while !Micro.world.can_enemy_fit(target, 10):
 		target = global_position+Vector2.from_angle(get_angle_to(Micro.player.position) + randf_range(-PI/2, PI/2))*100.
-	var summon = Micro.new(&"micro:bullet_spwaner")
+	var summon = Micro.new(&"micro:bullet_spawner")
 	summon.position = position
 	summon.target = target
 	summon.time = 2.

@@ -144,6 +144,7 @@ func load_scenes() -> void:
 	scenes[&"micro:bullet_laser"] = load("uid://clpbwn742hbdn")
 	scenes[&"micro:bullet_homing"] = load("uid://by8vbrl6i7h4x")
 	scenes[&"micro:bullet_bomb"] = load("uid://bbs436j75kwf1")
+	scenes[&"micro:bullet_mine"] = load("uid://b3bagn8onbpyl")
 	scenes[&"micro:trader"] = load("uid://cjt7tm6d5ow8j")
 	scenes[&"micro:enemy_surprise"] = load("uid://5r4rapdj3ft")
 	scenes[&"micro:enemy_tutorial"] = load("uid://c6om7rrvf38gu")
