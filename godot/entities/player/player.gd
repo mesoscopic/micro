@@ -89,7 +89,7 @@ func _physics_process(delta: float):
 	$Render.set_instance_shader_parameter("velocity", (velocity / max(max_speed, velocity.length())))
 	$Render.set_instance_shader_parameter("can_dash", $DashCooldown.is_stopped())
 	
-	if !movement_disabled and (Input.is_action_pressed("shoot_key") or Input.is_action_pressed("shoot_joy")) and len(prepared_bullets) > 0:
+	if !movement_disabled and Micro.action("shoot", true, true) and len(prepared_bullets) > 0:
 		var ultra := false
 		if dash_direction != Vector2.ZERO:
 			Micro.rumble(true, .15)
@@ -104,7 +104,7 @@ func _physics_process(delta: float):
 		prepared_bullets = []
 		$ShootCooldown.start(shoot_cooldown)
 	
-	if !movement_disabled and (Input.is_action_just_pressed("dash_key") or Input.is_action_just_pressed("dash_joy")) and $DashCooldown.is_stopped():
+	if !movement_disabled and Micro.action("dash", false, true) and $DashCooldown.is_stopped():
 		start_dash(aim_input())
 		
 	if trading:
@@ -122,7 +122,7 @@ func _physics_process(delta: float):
 				else:
 					tolls[i].set_chosen(false)
 	if !movement_disabled:
-		if (Input.is_action_pressed("pay_key") or Input.is_action_pressed("pay_joy")) and funds > 0:
+		if Micro.action("pay", true, true) and funds > 0:
 			accumulated_pay_delta += delta
 			while accumulated_pay_delta > pay_time and funds > 0:
 				accumulated_pay_delta -= pay_time
@@ -136,7 +136,7 @@ func _physics_process(delta: float):
 					coin.amount = ceil(funds/64.)
 				give_funds(-coin.amount)
 				Micro.world.get_node("Entities").add_child(coin)
-		elif !(Input.is_action_pressed("pay_key") or Input.is_action_pressed("pay_joy")) and trading and chosen_toll.balance > 0:
+		elif !Micro.action("pay", true, true) and trading and chosen_toll.balance > 0:
 			chosen_toll.return_funds()
 			Micro.show_trade_information(chosen_toll)
 

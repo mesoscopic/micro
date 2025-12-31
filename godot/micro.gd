@@ -122,7 +122,6 @@ func set_setting(id: String, value: int) -> void:
 	set_config("settings", id, value)
 	get_tree().current_scene.setting_hook(id, value)
 
-
 func get_control(id: String) -> InputEvent:
 	var control: String = get_config("controls", id, "")
 	if control == "":
@@ -134,6 +133,13 @@ func set_control(id: String, event: InputEvent, initial: bool = false):
 	if !initial: set_config("controls", id, serialize_input(event))
 	InputMap.action_erase_events(id)
 	InputMap.action_add_event(id, event)
+
+func action(id: String, accept_continuous: bool = true, accept_instant: bool = false):
+	return (
+		accept_continuous and (
+			Input.is_action_pressed(id+"_key") or Input.is_action_pressed(id+"_joy"))
+		) or (accept_instant and (
+			Input.is_action_just_pressed(id+"_key") or Input.is_action_just_pressed(id+"_joy")))
 
 func serialize_input(event: InputEvent) -> String:
 	if event is InputEventKey:

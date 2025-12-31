@@ -33,7 +33,7 @@ func _on_home_zone_entered(_body: Node2D) -> void:
 		Micro.world.get_node("Entities").add_child(orb)
 
 func _input(event: InputEvent) -> void:
-	if purchased_upgrade and (event.is_action("shoot_key") or event.is_action("shoot_joy")):
+	if purchased_upgrade and Micro.action("shoot", true, true):
 		selected_slot.put_upgrade(purchased_upgrade)
 		purchased_upgrade = null
 		selected_slot = null

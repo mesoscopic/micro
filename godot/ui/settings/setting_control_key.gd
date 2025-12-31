@@ -51,5 +51,5 @@ func display_event(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		$Mouse.show()
 		$Key.hide()
-		$Mouse/Icon.text = char(0xf0010 + (event.button_index if event.button_index <= 3 else 0))
+		$Mouse/Icon.text = char(0xf0010 + (event.button_index if event.button_index <= 7 else 0))
 		$Mouse/Label.text = " Mouse %s" % event.button_index
