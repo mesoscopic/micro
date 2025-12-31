@@ -100,7 +100,7 @@ func closest_enemy(to: Vector2) -> Enemy:
 				closest = enemy
 	return closest
 
-func get_config(category: String, id: String, default) -> int:
+func get_config(category: String, id: String, default) -> Variant:
 	if !config:
 		config = ConfigFile.new()
 		config.load("user://micro.cfg")
@@ -121,6 +121,53 @@ func get_setting(id: String) -> int:
 func set_setting(id: String, value: int) -> void:
 	set_config("settings", id, value)
 	get_tree().current_scene.setting_hook(id, value)
+
+
+func get_control(id: String) -> InputEvent:
+	var control: String = get_config("controls", id, "")
+	if control == "":
+		return InputMap.action_get_events(id)[0]
+	else:
+		return deserialize_input(control)
+
+func set_control(id: String, event: InputEvent, initial: bool = false):
+	if !initial: set_config("controls", id, serialize_input(event))
+	InputMap.action_erase_events(id)
+	InputMap.action_add_event(id, event)
+
+func serialize_input(event: InputEvent) -> String:
+	if event is InputEventKey:
+		return "key:%s:%s" % [event.physical_keycode, event.unicode]
+	elif event is InputEventMouseButton:
+		return "mouse:%s" % event.button_index
+	elif event is InputEventJoypadButton:
+		return "button:%s" % event.button_index
+	elif event is InputEventJoypadMotion:
+		return "axis:%s:%s" % [event.axis, event.axis_value]
+	return ""
+
+func deserialize_input(input: String) -> InputEvent:
+	var split := input.split(":")
+	var type := split[0]
+	var code := int(split[1])
+	var extra := split[2] if split.size() > 2 else ""
+	var event: InputEvent
+	match type:
+		"key":
+			event = InputEventKey.new()
+			event.physical_keycode = code
+			event.unicode = int(extra)
+		"mouse":
+			event = InputEventMouseButton.new()
+			event.button_index = code
+		"button":
+			event = InputEventJoypadButton.new()
+			event.button_index = code
+		"axis":
+			event = InputEventJoypadMotion.new()
+			event.axis = code
+			event.axis_value = float(extra)
+	return event
 
 func rumble(important: bool, time: float) -> void:
 	if get_setting("rumble") == 0: return

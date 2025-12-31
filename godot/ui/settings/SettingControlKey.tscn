@@ -1,0 +1,116 @@
+[gd_scene load_steps=8 format=3 uid="uid://daua6pugqr1ln"]
+
+[ext_resource type="Script" uid="uid://dg0mxsidrj0va" path="res://ui/settings/setting_control_key.gd" id="1_d2ck4"]
+[ext_resource type="FontFile" uid="uid://cpf46vxfylsyx" path="res://assets/fonts/MicroIcons.otf" id="2_o8vwc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1eh4c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_23qt5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_svlxn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f2pun"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2ck4"]
+content_margin_left = 10.0
+content_margin_top = 3.0
+content_margin_right = 10.0
+content_margin_bottom = 3.0
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="SettingControlKey" type="Button"]
+modulate = Color(0.6, 0.6, 0.6, 1)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 33.3333
+grow_horizontal = 2
+size_flags_vertical = 0
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1eh4c")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_23qt5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_svlxn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_f2pun")
+action_mode = 0
+alignment = 0
+script = ExtResource("1_d2ck4")
+
+[node name="Key" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -10.5
+offset_bottom = 10.5
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_d2ck4")
+
+[node name="Name" type="Label" parent="Key"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Mouse" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Icon" type="Label" parent="Mouse"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("2_o8vwc")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Mouse"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Awaiting" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -30.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 16
+text = "(...)"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

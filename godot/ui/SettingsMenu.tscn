@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2txisf020wo6"]
+[gd_scene load_steps=7 format=3 uid="uid://d2txisf020wo6"]
 
 [ext_resource type="Script" uid="uid://jetecqpkhaqa" path="res://ui/settings_menu.gd" id="1_7nnky"]
 [ext_resource type="PackedScene" uid="uid://ctn2krbcs71xh" path="res://ui/settings/SettingButton.tscn" id="1_oqkcn"]
 [ext_resource type="PackedScene" uid="uid://dmgimpw0u3pvn" path="res://ui/settings/SettingSection.tscn" id="3_rd3qm"]
 [ext_resource type="PackedScene" uid="uid://o7x8yw1x0qgp" path="res://ui/settings/SettingRange.tscn" id="4_1j15u"]
+[ext_resource type="PackedScene" uid="uid://daua6pugqr1ln" path="res://ui/settings/SettingControlKey.tscn" id="5_7lsre"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4npji"]
 bg_color = Color(0, 0, 0, 1)
@@ -93,6 +94,58 @@ max_bound = 25
 unit = "%"
 description = "The opacity of area backgrounds.
 Higher opacity makes the backgrounds more visible but reduces contrast with foreground."
+
+[node name="Keyboard" parent="Panel/Margin/MainBox/Options" instance=ExtResource("3_rd3qm")]
+layout_mode = 2
+title = "KEYBOARD/MOUSE"
+
+[node name="MoveUpKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+layout_mode = 2
+setting_name = "Move Up"
+action = &"move_up_key"
+description = "move up key"
+
+[node name="MoveLeftKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+layout_mode = 2
+setting_name = "Move Left"
+action = &"move_left_key"
+description = "move up key"
+
+[node name="MoveDownKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+layout_mode = 2
+setting_name = "Move Down"
+action = &"move_down_key"
+description = "move up key"
+
+[node name="MoveRightKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+layout_mode = 2
+setting_name = "Move Right"
+action = &"move_right_key"
+description = "move up key"
+
+[node name="ShootKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+layout_mode = 2
+setting_name = "Shoot"
+action = &"shoot_key"
+description = "move up key"
+
+[node name="DashKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+layout_mode = 2
+setting_name = "Dash"
+action = &"dash_key"
+description = "move up key"
+
+[node name="PayKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+layout_mode = 2
+setting_name = "Pay"
+action = &"pay_key"
+description = "move up key"
+
+[node name="OpenMenuKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+layout_mode = 2
+setting_name = "Open Menu"
+action = &"open_menu_key"
+description = "move up key"
 
 [node name="Controller" parent="Panel/Margin/MainBox/Options" instance=ExtResource("3_rd3qm")]
 layout_mode = 2

@@ -11,6 +11,9 @@ const START_MENU = preload("res://ui/StartRun.tscn")
 func _ready():
 	for setting in ["fullscreen", "vsync", "speedrun"]:
 		setting_hook(setting, Micro.get_setting(setting))
+	# just set all non-ui and non-debug actions to respect bindings so i don't have to update this
+	for control in InputMap.get_actions().filter(func (a: StringName): return !a.begins_with("ui_") and !a.begins_with("debug_")):
+		Micro.set_control(control, Micro.get_control(control), true)
 
 func _process(_delta):
 	pass
