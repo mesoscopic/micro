@@ -103,49 +103,49 @@ title = "KEYBOARD/MOUSE"
 layout_mode = 2
 setting_name = "Move Up"
 action = &"move_up_key"
-description = "move up key"
+description = "Keyboard or mouse input that will move the player up."
 
 [node name="MoveLeftKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Move Left"
 action = &"move_left_key"
-description = "move up key"
+description = "Keyboard or mouse input that will move the player left."
 
 [node name="MoveDownKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Move Down"
 action = &"move_down_key"
-description = "move up key"
+description = "Keyboard or mouse input that will move the player down."
 
 [node name="MoveRightKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Move Right"
 action = &"move_right_key"
-description = "move up key"
+description = "Keyboard or mouse input that will move the player right."
 
 [node name="ShootKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Shoot"
 action = &"shoot_key"
-description = "move up key"
+description = "Keyboard or mouse input that will fire a bullet or select an upgrade slot toward the mouse."
 
 [node name="DashKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Dash"
 action = &"dash_key"
-description = "move up key"
+description = "Keyboard or mouse input that will cause the player to dash toward the mouse."
 
 [node name="PayKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Pay"
 action = &"pay_key"
-description = "move up key"
+description = "Keyboard or mouse input that will cause the player to throw out funds."
 
 [node name="OpenMenuKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Open Menu"
 action = &"open_menu_key"
-description = "move up key"
+description = "Keyboard or mouse input that will open the pause menu."
 
 [node name="Controller" parent="Panel/Margin/MainBox/Options" instance=ExtResource("3_rd3qm")]
 layout_mode = 2
