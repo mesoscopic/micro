@@ -100,13 +100,13 @@ func closest_enemy(to: Vector2) -> Enemy:
 				closest = enemy
 	return closest
 
-func get_config(category: String, id: String, default: int) -> int:
+func get_config(category: String, id: String, default) -> int:
 	if !config:
 		config = ConfigFile.new()
 		config.load("user://micro.cfg")
 	return config.get_value(category, id, default)
 
-func set_config(category: String, id: String, value: int) -> void:
+func set_config(category: String, id: String, value) -> void:
 	if !config:
 		config = ConfigFile.new()
 		config.load("user://micro.cfg")
@@ -130,8 +130,7 @@ func rumble(important: bool, time: float) -> void:
 	if important: Input.start_joy_vibration(joy, 1.0, 0.0 if weak else 1.0, time)
 	elif get_setting("rumble") == 1: return
 	else: Input.start_joy_vibration(joy, 1.0, 0.0, time)
-
-# 
+ 
 var scenes: Dictionary[StringName, PackedScene] = {}
 
 func load_scenes() -> void:

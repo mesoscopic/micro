@@ -51,7 +51,7 @@ func _on_death():
 	run_menu.play.connect(_on_start_run)
 
 func _input(_event):
-	if Input.is_action_just_pressed("open_menu") and in_game and not get_tree().paused:
+	if (Input.is_action_just_pressed("open_menu_key") or Input.is_action_just_pressed("open_menu_joy")) and in_game and not get_tree().paused:
 		var pause_menu = PAUSE_MENU.instantiate()
 		$UI.add_child(pause_menu)
 		get_tree().paused = true
