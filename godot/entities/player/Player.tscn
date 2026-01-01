@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://b14dvx67drebc"]
+[gd_scene load_steps=65 format=3 uid="uid://b14dvx67drebc"]
 
 [ext_resource type="Script" uid="uid://de3rlx01ibq3d" path="res://entities/player/player.gd" id="1_1im8n"]
 [ext_resource type="PackedScene" uid="uid://wwjxod2at3t3" path="res://entities/player/Camera.tscn" id="2_nkqiv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="4_oihyf"]
 [ext_resource type="PackedScene" uid="uid://c7h6twa0ran3j" path="res://fx/PlayerHurt.tscn" id="6_q57vx"]
 [ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://misc/shaders/funds.gdshader" id="6_rpfb3"]
+[ext_resource type="Shader" uid="uid://dby1fhvlh2gjy" path="res://misc/shaders/square_pulse.gdshader" id="8_ak4un"]
 [ext_resource type="Shader" uid="uid://cjhdxgx78hiya" path="res://misc/shaders/dash_ghost.gdshader" id="8_m6phi"]
 [ext_resource type="Shader" uid="uid://cvs7hsg1qidb4" path="res://misc/shaders/ray_sparkle.gdshader" id="9_q57vx"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="10_ak4un"]
@@ -427,6 +428,19 @@ scale_min = 4.0
 scale_max = 8.0
 alpha_curve = SubResource("CurveTexture_2a181")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mq27t"]
+shader = ExtResource("8_ak4un")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j531f"]
+particle_flag_disable_z = true
+angle_min = 45.00001
+angle_max = 45.00001
+gravity = Vector3(0, 0, 0)
+scale_min = 200.0
+scale_max = 200.0
+scale_curve = SubResource("CurveTexture_4fbvh")
+alpha_curve = SubResource("CurveTexture_j531f")
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 16
 collision_mask = 5
@@ -553,6 +567,27 @@ trail_enabled = true
 trail_lifetime = 0.1
 trail_sections = 4
 process_material = SubResource("ParticleProcessMaterial_aubru")
+
+[node name="SurgeEffect" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+trail_lifetime = 0.1
+trail_sections = 4
+process_material = SubResource("ParticleProcessMaterial_aubru")
+
+[node name="BigFlash" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_mq27t")
+emitting = false
+amount = 1
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_j531f")
 
 [node name="DashArea" type="Area2D" parent="."]
 collision_layer = 2

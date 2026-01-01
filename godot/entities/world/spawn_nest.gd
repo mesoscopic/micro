@@ -26,7 +26,16 @@ func prepare_upgrade(item: Upgrade):
 	selected_slot = $Slots.get_child(floor(aim_input()/(PI/4.)))
 	$SelectionParticles.emitting = true
 
-func _on_home_zone_entered(_body: Node2D) -> void:
+func _on_home_zone_entered(body: Node2D) -> void:
+	if body is Player:
+		full_heal()
+		body.any_damage.connect(full_heal)
+
+func _on_home_zone_body_exited(body: Node2D) -> void:
+	if body is Player:
+		body.any_damage.disconnect(full_heal)
+
+func full_heal() -> void:
 	for i in ceil((Micro.player.max_hp - Micro.player.hp)/5.*randf_range(1.,2.)):
 		var orb := Micro.new(&"micro:heal_orb")
 		orb.position = position

@@ -37,6 +37,8 @@ var dash_direction := Vector2.ZERO
 var aim_direction := Vector2.RIGHT
 var regen_time := 0.
 
+signal any_damage
+
 @export var funds: int = 0
 var trading: bool = false:
 	set(t):
@@ -112,6 +114,22 @@ func _physics_process(delta: float):
 	
 	if !movement_disabled and Micro.action("dash", false, true) and $DashCooldown.is_stopped():
 		start_dash(aim_input())
+	
+	if !movement_disabled and Micro.action("surge", false, true) and hp > 10:
+		var new_hp: int = max(10, hp - hp/4.)
+		for i in hp - new_hp:
+			$SurgeEffect.emit_particle(Transform2D.IDENTITY, Vector2.ZERO, Color.WHITE, Color.WHITE, 0)
+		Micro.rumble(true, .2)
+		if !Micro.get_setting("photosensitive_mode"):
+			$Camera.hurt(clamp(float(hp-new_hp)/float(new_hp), 0., 1.))
+			$BigFlash.restart()
+		var cloud := Micro.new(&"micro:player_damage_cloud")
+		cloud.position = position
+		cloud.lifetime = (hp-new_hp)/25.
+		cloud.damage = 15
+		add_sibling(cloud)
+		hp = new_hp
+		any_damage.emit()
 		
 	if trading:
 		if tolls.size() == 0 or movement_disabled:
@@ -147,6 +165,7 @@ func _physics_process(delta: float):
 			Micro.show_trade_information(chosen_toll)
 
 func _hurt(amount: int, direction: float):
+	any_damage.emit()
 	Micro.rumble(true, .2)
 	$HurtEffect.hurt(amount, direction)
 	if evasion_mult > 0: $Evasion.start()

@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://q68wlnumgicy"]
+
+[ext_resource type="Shader" uid="uid://c8a4b8b4jnkou" path="res://bullets/player_damage_cloud.gdshader" id="1_1a3bb"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="1_j1y18"]
+[ext_resource type="Script" uid="uid://dtr18777bdch4" path="res://bullets/player_damage_cloud.gd" id="1_v183n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfn7c"]
+size = Vector2(200, 200)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dy8u2"]
+shader = ExtResource("1_1a3bb")
+
+[sub_resource type="Image" id="Image_1a3bb"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_dy8u2"]
+image = SubResource("Image_1a3bb")
+script = ExtResource("1_j1y18")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[node name="PlayerDamageCloud" type="Area2D"]
+collision_layer = 2
+collision_mask = 8
+script = ExtResource("1_v183n")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+copy_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 0.7853982
+shape = SubResource("RectangleShape2D_mfn7c")
+
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_dy8u2")
+instance_shader_parameters/progress = 0.0
+scale = Vector2(300, 300)
+texture = SubResource("ImageTexture_dy8u2")

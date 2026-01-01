@@ -141,6 +141,12 @@ setting_name = "Pay"
 action = &"pay_key"
 description = "Keyboard or mouse input that will cause the player to throw out funds."
 
+[node name="SurgeKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+layout_mode = 2
+setting_name = "Surge"
+action = &"surge_key"
+description = "Keyboard or mouse input that will cause the player to surge."
+
 [node name="OpenMenuKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Open/Close Menu"
