@@ -130,9 +130,10 @@ func get_control(id: String) -> InputEvent:
 		return deserialize_input(control)
 
 func set_control(id: String, event: InputEvent, initial: bool = false):
-	if !initial: set_config("controls", id, serialize_input(event))
+	var serialized := serialize_input(event)
+	if !initial: set_config("controls", id, serialized)
 	InputMap.action_erase_events(id)
-	InputMap.action_add_event(id, event)
+	InputMap.action_add_event(id, deserialize_input(serialized))
 
 func action(id: String, accept_continuous: bool = true, accept_instant: bool = false):
 	return (
