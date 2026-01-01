@@ -21,8 +21,8 @@ func tick():
 	$Render.set_instance_shader_parameter("health", float(hp)/float(max_hp))
 	$Render.set_instance_shader_parameter("damaged", !itimer.is_stopped() or invincible)
 
-func damage(amount: int, bypass_itime := false, direction := randf_range(0,2*PI)):
-	if invincible or Micro.player.movement_disabled or (!itimer.is_stopped() and !bypass_itime): return
+func damage(amount: int, bypass_itime := false, direction := randf_range(0,2*PI)) -> bool:
+	if invincible or Micro.player.movement_disabled or (!itimer.is_stopped() and !bypass_itime): return false
 	if deplete_hp: hp -= amount
 	if invulnerability_time > .0 and !bypass_itime: itimer.start(invulnerability_time)
 	if hp <= 0:
@@ -30,6 +30,7 @@ func damage(amount: int, bypass_itime := false, direction := randf_range(0,2*PI)
 		die.emit()
 	else:
 		hurt.emit(amount, direction)
+	return true
 
 func heal(amount: int):
 	hp = min(max_hp, hp + amount)

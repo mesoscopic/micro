@@ -127,7 +127,7 @@ func _physics_process(delta: float):
 		cloud.position = position
 		cloud.lifetime = (hp-new_hp)/25.
 		cloud.damage = 15
-		add_sibling(cloud)
+		Micro.world.get_node("Bullets").add_child(cloud)
 		hp = new_hp
 		any_damage.emit()
 		
