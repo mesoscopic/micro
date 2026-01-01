@@ -207,6 +207,7 @@ func load_scenes() -> void:
 	scenes[&"micro:enemy_surpriser"] = load("uid://da4uam7bgmyfs")
 	scenes[&"micro:enemy_trader_miniboss"] = load("uid://degw88c3u4obt")
 	scenes[&"micro:enemy_void"] = load("uid://b8xv4bx33kxeg")
+	scenes[&"micro:enemy_placeholder_boss"] = load("uid://d3iaesh64nqxg")
 
 func new(id: StringName) -> Node:
 	return scenes[id].instantiate()

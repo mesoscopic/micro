@@ -22,5 +22,4 @@ func get_item(roll: int) -> Variant:
 		roll -= weights[i]
 		if roll <= 0:
 			return items[i]
-	# Failsafe to make the typechecker happy
-	return items[0]
+	return null

@@ -17,7 +17,6 @@ var can_set_start: bool = true
 @onready var despawn_distance_squared: float = despawn_distance**2
 @export var stagger_time: float = 0.1
 var stagger: float = 0.
-@export var is_boss: bool = false
 @export var is_void: bool = false
 var extra_reward: Callable
 
@@ -33,8 +32,6 @@ func _ready():
 	die.connect(_die)
 	ai_setup()
 	new_target()
-	if is_boss:
-		Micro.world.bosses_active += 1
 
 func ai_setup() -> void:
 	pass
@@ -50,8 +47,6 @@ func _die():
 	anim.position = position
 	anim.extra_reward = extra_reward
 	add_sibling(anim)
-	if is_boss:
-		Micro.world.bosses_active -= 1
 	queue_free()
 
 func _hurt(amount: int, direction: float):
@@ -114,8 +109,6 @@ func check(to: Vector2, avoid_starting_position: bool = false) -> bool:
 	return PhysicsServer2D.body_test_motion(get_rid(), query)
 
 func do_despawn():
-	if is_boss:
-		Micro.world.bosses_active -= 1
 	despawn.emit()
 	# 50% chance of doing another spawn attempt if this one despawns
 	# Since a lot of enemies that spawn will wander away from the player, this increases the likelihood of the player running into an enemy

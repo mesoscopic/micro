@@ -6,12 +6,15 @@ var random: RandomNumberGenerator = RandomNumberGenerator.new()
 var world_seed: int = randi()
 
 var second_trader_miniboss := false
+var dungeon_locations: Array[Vector2i] = []
+var bosses_down := 0
 
 enum Biome {
 	LANDING,
 	DEFAULT,
 	PEACE,
 	MINEFIELD,
+	DUNGEON,
 	EMPTINESS
 }
 
@@ -20,6 +23,7 @@ const biome_debug_colors: Dictionary[Biome, Color] = {
 	Biome.DEFAULT: Color(0.033, 0.22, 0.186, 1.0),
 	Biome.PEACE: Color(0.23, 0.034, 0.142, 1.0),
 	Biome.MINEFIELD: Color(0.21, 0.0, 0.0, 1.0),
+	Biome.DUNGEON: Color(0.37, 0.173, 0.0, 1.0),
 	Biome.EMPTINESS: Color.BLACK
 }
 
@@ -46,6 +50,8 @@ func world_enemy(biome: Biome, distance: int) -> Enemy:
 		Biome.MINEFIELD:
 			enemies.add_item(&"micro:enemy_multi_shooter", 3)
 			enemies.add_item(&"micro:enemy_bomber", 3)
+		Biome.DUNGEON:
+			enemies.add_item(&"micro:enemy_teleporter", 1)
 	return Micro.new(Micro.roll(enemies))
 
 func spawn_cap() -> int:
@@ -141,6 +147,9 @@ func get_biome(pos: Vector2i) -> Biome:
 	elif taxicab_distance >= 256:
 		return Biome.EMPTINESS
 	else:
+		for dungeon in dungeon_locations:
+			if int(taxicab(pos-dungeon)) < 30:
+				return Biome.DUNGEON
 		var center := biome_center_at(pos)
 		if biomes.has(center):
 			return biomes.get(center)
@@ -172,6 +181,22 @@ func generate_world():
 	var biome_texture: ViewportTexture = $BiomeMap.get_texture()
 	await RenderingServer.frame_post_draw
 	biome_map = biome_texture.get_image()
+	await Micro.worldgen_status("Constructing dungeons...")
+	var dungeons_to_place := 4
+	while dungeons_to_place > 0:
+		var tile: Vector2i = biome_center_at(taxicab_random(220))
+		var far_enough := true
+		for location in dungeon_locations:
+			if tile.distance_squared_to(location) < 10000:
+				far_enough = false
+				break
+		if far_enough and attempt_decide_biome_for_center_structure(tile, Biome.DUNGEON, 40):
+			dungeons_to_place -= 1
+			dungeon_locations.append(tile)
+			place("trader_miniboss_arena", tile, true)
+			var boss := Micro.new(&"micro:enemy_placeholder_boss")
+			boss.position = tile * 20.
+			$Entities.add_child(boss)
 	await Micro.worldgen_status("Placing traders...")
 	var starting_traders_to_place := 2
 	var opportunities := 4
