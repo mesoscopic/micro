@@ -143,9 +143,9 @@ description = "Keyboard or mouse input that will cause the player to throw out f
 
 [node name="OpenMenuKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
-setting_name = "Open Menu"
+setting_name = "Open/Close Menu"
 action = &"open_menu_key"
-description = "Keyboard or mouse input that will open the pause menu."
+description = "Keyboard or mouse input that will open the pause menu and close all menus."
 
 [node name="Controller" parent="Panel/Margin/MainBox/Options" instance=ExtResource("3_rd3qm")]
 layout_mode = 2
@@ -195,8 +195,3 @@ theme_override_constants/margin_left = 20
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 18
-
-[node name="Prompt" type="Label" parent="Panel/Margin/MainBox/Info"]
-layout_mode = 2
-text = "ESC to exit"
-horizontal_alignment = 2
