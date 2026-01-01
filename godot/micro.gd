@@ -143,26 +143,24 @@ func action(id: String, accept_continuous: bool = true, accept_instant: bool = f
 
 func serialize_input(event: InputEvent) -> String:
 	if event is InputEventKey:
-		return "key:%s:%s" % [event.physical_keycode, event.unicode]
+		return "key:%s" % event.physical_keycode
 	elif event is InputEventMouseButton:
 		return "mouse:%s" % event.button_index
 	elif event is InputEventJoypadButton:
 		return "button:%s" % event.button_index
 	elif event is InputEventJoypadMotion:
-		return "axis:%s:%s" % [event.axis, event.axis_value]
+		return "axis:%s" % (event.axis*int(event.axis_value))
 	return ""
 
 func deserialize_input(input: String) -> InputEvent:
 	var split := input.split(":")
 	var type := split[0]
 	var code := int(split[1])
-	var extra := split[2] if split.size() > 2 else ""
 	var event: InputEvent
 	match type:
 		"key":
 			event = InputEventKey.new()
 			event.physical_keycode = code
-			event.unicode = int(extra)
 		"mouse":
 			event = InputEventMouseButton.new()
 			event.button_index = code
@@ -171,8 +169,8 @@ func deserialize_input(input: String) -> InputEvent:
 			event.button_index = code
 		"axis":
 			event = InputEventJoypadMotion.new()
-			event.axis = code
-			event.axis_value = float(extra)
+			event.axis = abs(code)
+			event.axis_value = sign(code)
 	return event
 
 func rumble(important: bool, time: float) -> void:

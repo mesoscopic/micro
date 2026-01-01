@@ -44,10 +44,10 @@ func display_event(event: InputEvent) -> void:
 	if event is InputEventKey:
 		$Key.show()
 		$Mouse.hide()
-		$Key/Name.text = "%s" % char(event.unicode).capitalize() if (
-			event.unicode > 0 and !char(event.unicode).strip_edges().is_empty()) else (
-			OS.get_keycode_string(
-				DisplayServer.keyboard_get_keycode_from_physical(event.physical_keycode)))
+		var keycode := DisplayServer.keyboard_get_keycode_from_physical(event.physical_keycode)
+		$Key/Name.text = "%s" % char(keycode) if (
+			OS.is_keycode_unicode(keycode) and !char(keycode).strip_edges().is_empty()
+		) else OS.get_keycode_string(keycode)
 	if event is InputEventMouseButton:
 		$Mouse.show()
 		$Key.hide()
