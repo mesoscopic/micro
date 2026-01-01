@@ -8,8 +8,14 @@ var movement_disabled := false:
 		if d:
 			end_dash()
 			velocity = velocity.limit_length(max_speed)
-		elif tolls.size() > 0:
-			trading = true
+			$ShootCooldown.stop()
+			for bullet in prepared_bullets:
+				bullet._on_expire()
+				prepared_bullets = []
+		else:
+			$ShootCooldown.start(shoot_cooldown)
+			if tolls.size() > 0:
+				trading = true
 		movement_disabled = d
 
 var acceleration = 300
