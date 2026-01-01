@@ -1,4 +1,4 @@
-extends PanelContainer
+class_name SettingSection extends PanelContainer
 
 var description := "Section"
 
