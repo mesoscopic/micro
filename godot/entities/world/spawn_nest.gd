@@ -18,6 +18,7 @@ func _process(_delta) -> void:
 	if purchased_upgrade:
 		selected_slot = $Slots.get_child(floor(aim_input()/(PI/4.)))
 		$SelectionParticles.rotation = selected_slot.position.angle()
+	$Render.material.set("shader_parameter/progress", clamp(global_position.distance_squared_to(Micro.player.position)/400., 0., 1.))
 
 func prepare_upgrade(item: Upgrade):
 	await Micro.wait(0.5)
