@@ -177,6 +177,7 @@ title = "EXPERIMENTAL"
 
 [node name="RunTimer" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../Fullscreen")
 setting_name = "Run Timer"
 setting_id = "speedrun"
 choices = Array[String](["Off", "On"])
