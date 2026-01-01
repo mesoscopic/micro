@@ -17,6 +17,7 @@ func _on_toll_paid() -> void:
 	await tween.finished
 	Micro.player.get_node("Render").hide()
 	$Boom.restart()
+	$Trail.amount_ratio = float(Micro.player.hp)/Micro.player.max_hp
 	$Trail.restart()
 	await Micro.wait(1.)
 	await Micro.screen_wipe_out()

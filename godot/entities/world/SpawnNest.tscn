@@ -67,7 +67,7 @@ scale = Vector2(40, 40)
 texture = SubResource("ImageTexture_jf3st")
 
 [node name="SelectionParticles" type="GPUParticles2D" parent="."]
-visible = false
+emitting = false
 amount = 12
 process_material = SubResource("ParticleProcessMaterial_o0lq3")
 
