@@ -41,11 +41,13 @@ func _on_start_run():
 	await Micro.screen_wipe_in()
 	in_game = true
 
-func _on_death():
+func last_input():
 	$UI/RunTimer.end_time = Time.get_ticks_msec()
+	in_game = false
+
+func _on_death():
 	Micro.world.free()
 	Micro.world = null
-	in_game = false
 	get_tree().paused = false
 	await Micro.screen_wipe_in()
 	# death screen, stats, etc.
@@ -55,10 +57,8 @@ func _on_death():
 
 func _on_win():
 	Micro.worldgen_status("you win (placeholder)")
-	$UI/RunTimer.end_time = Time.get_ticks_msec()
 	Micro.world.free()
 	Micro.world = null
-	in_game = false
 	get_tree().paused = false
 	await Micro.wait(3.)
 	await Micro.screen_wipe_in()

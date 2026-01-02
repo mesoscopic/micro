@@ -336,6 +336,7 @@ func taxicab_random(distance: float) -> Vector2:
 # Ending animation
 
 func ending() -> void:
+	get_tree().current_scene.last_input()
 	$Player.movement_disabled = true
 	$Player.hp = $Player.max_hp
 	$Spores.emitting = false

@@ -179,6 +179,7 @@ func _die():
 	slow.tween_property(Engine, "time_scale", 0.1, .8)
 	prepared_bullets = []
 	await slow.finished
+	get_tree().current_scene.last_input()
 	process_mode = Node.PROCESS_MODE_DISABLED
 	Engine.time_scale = 1.
 	$DeathParticles.emitting = true
