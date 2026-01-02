@@ -15,5 +15,5 @@ func _physics_process(_delta: float):
 				var orb := Micro.new(&"micro:heal_orb")
 				orb.position = body.position
 				orb.distance = 10
-				orb.amount = 3
+				orb.amount = 5
 				Micro.world.get_node("Entities").add_child(orb)

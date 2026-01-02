@@ -29,11 +29,13 @@ func prepare_upgrade(item: Upgrade):
 func _on_home_zone_entered(body: Node2D) -> void:
 	if body is Player:
 		full_heal()
-		body.any_damage.connect(full_heal)
+		body.hurt.connect(full_heal)
+		body.surge.connect(on_surge)
 
 func _on_home_zone_body_exited(body: Node2D) -> void:
 	if body is Player:
-		body.any_damage.disconnect(full_heal)
+		body.hurt.disconnect(full_heal)
+		body.surge.disconnect(on_surge)
 
 func full_heal() -> void:
 	for i in ceil((Micro.player.max_hp - Micro.player.hp)/5.*randf_range(1.,2.)):
@@ -41,6 +43,20 @@ func full_heal() -> void:
 		orb.position = position
 		orb.distance = randf_range(40.,80.)
 		Micro.world.get_node("Entities").add_child(orb)
+
+func on_surge() -> void:
+	full_heal()
+	if tween: tween.kill()
+	tween = get_tree().create_tween()
+	$BlurAura.modulate = Color.WHITE
+	tween.tween_property($BlurAura, "scale", Vector2(2000., 2000.), 0.25)
+	tween.tween_property($BlurAura, "modulate", Color.TRANSPARENT, 0.5)
+	tween.tween_callback(func(): $BlurAura.scale = Vector2.ONE)
+	for dungeon in Micro.world.active_dungeons:
+		for i in 25:
+			$Trail.emit_particle(Transform2D.IDENTITY, 
+				Vector2(dungeon).normalized().rotated(randf_range(-.1,.1)) * randf_range(100, 2000),
+				Color.WHITE, Color.TRANSPARENT, GPUParticles2D.EMIT_FLAG_VELOCITY)
 
 func _input(event: InputEvent) -> void:
 	if purchased_upgrade and Micro.action("shoot", true, true):

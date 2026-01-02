@@ -7,6 +7,7 @@ var world_seed: int = randi()
 
 var second_trader_miniboss := false
 var dungeon_locations: Array[Vector2i] = []
+var active_dungeons: Array[Vector2i] = []
 var bosses_down := 0
 
 enum Biome {
@@ -193,9 +194,14 @@ func generate_world():
 		if far_enough and attempt_decide_biome_for_center_structure(tile, Biome.DUNGEON, 40):
 			dungeons_to_place -= 1
 			dungeon_locations.append(tile)
+			active_dungeons.append(tile)
 			place("trader_miniboss_arena", tile, true)
 			var boss := Micro.new(&"micro:enemy_placeholder_boss")
 			boss.position = tile * 20.
+			boss.die.connect(func(): 
+				bosses_down += 1
+				active_dungeons.erase(tile)
+			)
 			$Entities.add_child(boss)
 	await Micro.worldgen_status("Placing traders...")
 	var starting_traders_to_place := 2
