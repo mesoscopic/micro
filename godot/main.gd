@@ -53,6 +53,20 @@ func _on_death():
 	$UI.add_child(run_menu)
 	run_menu.play.connect(_on_start_run)
 
+func _on_win():
+	Micro.worldgen_status("you win (placeholder)")
+	$UI/RunTimer.end_time = Time.get_ticks_msec()
+	Micro.world.free()
+	Micro.world = null
+	in_game = false
+	get_tree().paused = false
+	await Micro.wait(3.)
+	await Micro.screen_wipe_in()
+	# metaprogression, stats, etc.
+	var run_menu = START_MENU.instantiate()
+	$UI.add_child(run_menu)
+	run_menu.play.connect(_on_start_run)
+
 func _input(_event):
 	if Micro.action("open_menu", false, true) and in_game and not get_tree().paused:
 		var pause_menu = PAUSE_MENU.instantiate()

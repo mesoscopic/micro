@@ -332,3 +332,26 @@ func taxicab_random(distance: float) -> Vector2:
 	var x := random.randf_range(-1, 1)
 	var y: float = sign(random.randf_range(-1,1))*(1-abs(x))
 	return distance * Vector2(x, y)
+
+# Ending animation
+
+func ending() -> void:
+	$Player.movement_disabled = true
+	$Player.hp = $Player.max_hp
+	$Spores.emitting = false
+	var ending_glow := preload("res://fx/BlurAura.tscn").instantiate()
+	add_child(ending_glow)
+	var ending_tween := get_tree().create_tween()
+	ending_tween.tween_property($Player, "position", Vector2.ZERO, 0.1)
+	ending_tween.tween_property($Spores, "speed_scale", 20., 2.)
+	ending_tween.tween_property(ending_glow, "scale", Vector2(1000,1000), 3.)
+	ending_tween.tween_callback(func():
+		$Player/DeathParticles.emitting = true
+		$Player/Render.hide()
+		$Player/Ring.emitting = true
+	)
+	ending_tween.tween_interval(1.5)
+	ending_tween.tween_callback(func():
+		await Micro.screen_wipe_out()
+		get_tree().current_scene._on_win()
+	)

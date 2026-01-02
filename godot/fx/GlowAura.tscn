@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://dv7b18gnykjm7"]
+
+[ext_resource type="Script" uid="uid://dgel0k73le3hh" path="res://fx/glow_aura.gd" id="1_0byvv"]
+[ext_resource type="Shader" uid="uid://c8a4b8b4jnkou" path="res://fx/glow_aura.gdshader" id="1_q3d4c"]
+[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_0byvv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mlcht"]
+shader = ExtResource("1_q3d4c")
+
+[sub_resource type="Image" id="Image_0byvv"]
+data = {
+"data": PackedByteArray(255, 255, 255, 255),
+"format": "RGBA8",
+"height": 1,
+"mipmaps": false,
+"width": 1
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_kgcx1"]
+image = SubResource("Image_0byvv")
+script = ExtResource("2_0byvv")
+metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[node name="GlowAura" type="Node2D"]
+script = ExtResource("1_0byvv")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+copy_mode = 2
+
+[node name="Render" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_mlcht")
+instance_shader_parameters/brightness = 0.0
+texture = SubResource("ImageTexture_kgcx1")

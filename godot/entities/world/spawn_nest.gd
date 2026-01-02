@@ -45,6 +45,9 @@ func full_heal() -> void:
 		Micro.world.get_node("Entities").add_child(orb)
 
 func on_surge() -> void:
+	if Micro.world.bosses_down >= 0:#4:
+		Micro.world.ending()
+		return
 	full_heal()
 	if tween: tween.kill()
 	tween = get_tree().create_tween()
