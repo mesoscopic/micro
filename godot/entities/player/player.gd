@@ -115,7 +115,7 @@ func _physics_process(delta: float):
 	if !movement_disabled and Micro.action("dash", false, true) and $DashCooldown.is_stopped():
 		start_dash(aim_input())
 	
-	if !movement_disabled and Micro.action("surge", false, true) and hp > 10:
+	if !movement_disabled and $SurgeCooldown.is_stopped() and Micro.action("surge", false, true) and hp > 10:
 		var new_hp: int = max(10, hp - hp/4.)
 		for i in hp - new_hp:
 			$SurgeEffect.emit_particle(Transform2D.IDENTITY, Vector2.ZERO, Color.WHITE, Color.WHITE, 0)
@@ -131,6 +131,7 @@ func _physics_process(delta: float):
 			Micro.world.get_node("Bullets").add_child(cloud)
 		hp = new_hp
 		surge.emit()
+		$SurgeCooldown.start()
 		
 	if trading:
 		if tolls.size() == 0 or movement_disabled:

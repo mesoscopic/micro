@@ -14,7 +14,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7lms1"]
 shader = ExtResource("4_0t1y4")
 
-[sub_resource type="Image" id="Image_q57vx"]
+[sub_resource type="Image" id="Image_ak4un"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -24,7 +24,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_mqro2"]
-image = SubResource("Image_q57vx")
+image = SubResource("Image_ak4un")
 script = ExtResource("4_oihyf")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -606,6 +606,9 @@ wait_time = 0.15
 one_shot = true
 
 [node name="DashCooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="SurgeCooldown" type="Timer" parent="."]
 one_shot = true
 
 [node name="Evasion" type="Timer" parent="."]
