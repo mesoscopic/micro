@@ -36,16 +36,16 @@ func _on_start_run():
 	$Game.add_child(world)
 	await world.generate_world()
 	print("Worldgen finished in %s microseconds" % (Time.get_ticks_usec()-start_time))
-	$UI/RunTimer.start_time = Time.get_ticks_msec()
-	$UI/RunTimer.end_time = -1
+	$UI/RunTimer.start()
 	await Micro.screen_wipe_in()
 	in_game = true
 
 func last_input():
-	$UI/RunTimer.end_time = Time.get_ticks_msec()
+	$UI/RunTimer.stop()
 	in_game = false
 
 func _on_death():
+	$UI/RunTimer.reset()
 	Micro.world.free()
 	Micro.world = null
 	get_tree().paused = false
@@ -57,6 +57,7 @@ func _on_death():
 
 func _on_win():
 	Micro.worldgen_status("you win (placeholder)")
+	$UI/RunTimer.reset()
 	Micro.world.free()
 	Micro.world = null
 	get_tree().paused = false

@@ -95,6 +95,13 @@ unit = "%"
 description = "The opacity of area backgrounds.
 Higher opacity makes the backgrounds more visible but reduces contrast with foreground."
 
+[node name="RunTimer" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
+layout_mode = 2
+setting_name = "Run Timer"
+setting_id = "speedrun"
+choices = Array[String](["Off", "On"])
+description = "If On, adds a run timer at the top of the screen."
+
 [node name="Keyboard" parent="Panel/Margin/MainBox/Options" instance=ExtResource("3_rd3qm")]
 layout_mode = 2
 title = "KEYBOARD/MOUSE"
@@ -176,18 +183,6 @@ If On, the controller will rumble when taking damage or recoil and rumble slight
 If Reduced, the controller will rumble slightly when taking damage or recoil.
 
 If Off, the controller will not rumble."
-
-[node name="Experimental" parent="Panel/Margin/MainBox/Options" instance=ExtResource("3_rd3qm")]
-layout_mode = 2
-title = "EXPERIMENTAL"
-
-[node name="RunTimer" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
-layout_mode = 2
-focus_neighbor_bottom = NodePath("../Fullscreen")
-setting_name = "Run Timer"
-setting_id = "speedrun"
-choices = Array[String](["Off", "On"])
-description = "(Experimental. Added at someone's request and not very good right now.) Adds a run timer at the top of the screen."
 
 [node name="Info" type="VBoxContainer" parent="Panel/Margin/MainBox"]
 layout_mode = 2
