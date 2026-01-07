@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=26 format=3 uid="uid://do1iun3hb3o4e"]
+[gd_resource type="Theme" load_steps=32 format=3 uid="uid://do1iun3hb3o4e"]
 
 [ext_resource type="FontFile" uid="uid://dspopkf3f3p5g" path="res://assets/fonts/Krypton.otf" id="1_tnp0o"]
 
@@ -142,6 +142,68 @@ content_margin_right = 10.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6rjs"]
 bg_color = Color(0, 0, 0, 0.392157)
 
+[sub_resource type="ImageTexture" id="ImageTexture_gwklh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32of5"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fpx5q"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_itt6l"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.75, 0.75, 0.75, 0.75)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_udahy"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uea25"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
 [resource]
 default_font = ExtResource("1_tnp0o")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_tnp0o")
@@ -172,3 +234,14 @@ TabContainer/styles/tab_hovered = SubResource("StyleBoxEmpty_fbllm")
 TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_iuhv6")
 TabContainer/styles/tab_unselected = SubResource("StyleBoxEmpty_ftbf7")
 TabContainer/styles/tabbar_background = SubResource("StyleBoxFlat_v6rjs")
+VScrollBar/icons/decrement = SubResource("ImageTexture_gwklh")
+VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_gwklh")
+VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_gwklh")
+VScrollBar/icons/increment = SubResource("ImageTexture_gwklh")
+VScrollBar/icons/increment_highlight = SubResource("ImageTexture_gwklh")
+VScrollBar/icons/increment_pressed = SubResource("ImageTexture_gwklh")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_32of5")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_fpx5q")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_itt6l")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_udahy")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_uea25")

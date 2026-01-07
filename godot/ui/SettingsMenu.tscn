@@ -49,15 +49,23 @@ theme_override_constants/margin_bottom = 20
 [node name="MainBox" type="HBoxContainer" parent="Panel/Margin"]
 layout_mode = 2
 
-[node name="Options" type="VBoxContainer" parent="Panel/Margin/MainBox"]
+[node name="Scroll" type="ScrollContainer" parent="Panel/Margin/MainBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="Options" type="VBoxContainer" parent="Panel/Margin/MainBox/Scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Visual" parent="Panel/Margin/MainBox/Options" instance=ExtResource("3_rd3qm")]
+[node name="Visual" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("3_rd3qm")]
 layout_mode = 2
 title = "VISUAL"
 
-[node name="Fullscreen" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
+[node name="Fullscreen" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("1_oqkcn")]
 layout_mode = 2
 setting_name = "Fullscreen"
 setting_id = "fullscreen"
@@ -66,7 +74,7 @@ description = "If Yes, the game window fills the entire screen.
 
 This setting does not update if you change the window mode through the operating system."
 
-[node name="VSync" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
+[node name="VSync" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("1_oqkcn")]
 layout_mode = 2
 setting_name = "VSync"
 setting_id = "vsync"
@@ -79,14 +87,14 @@ If Adaptive, VSync is disabled when your framerate drops below the monitor's ref
 
 If Mailbox, frames are rendered as fast as possible, but only displayed when your monitor refreshes (preventing screen tearing). This is inefficient but reduces latency."
 
-[node name="PhotosensitiveMode" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
+[node name="PhotosensitiveMode" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("1_oqkcn")]
 layout_mode = 2
 setting_name = "Reduce Flashing"
 setting_id = "photosensitive_mode"
 choices = Array[String](["No", "Yes"])
 description = "If Yes, certain visual effects are simplified or disabled to reduce flashing on screen."
 
-[node name="BGOpacity" parent="Panel/Margin/MainBox/Options" instance=ExtResource("4_1j15u")]
+[node name="BGOpacity" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("4_1j15u")]
 layout_mode = 2
 setting_name = "Background Opacity"
 setting_id = "bg_alpha_percent"
@@ -95,83 +103,83 @@ unit = "%"
 description = "The opacity of area backgrounds.
 Higher opacity makes the backgrounds more visible but reduces contrast with foreground."
 
-[node name="RunTimer" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
+[node name="RunTimer" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("1_oqkcn")]
 layout_mode = 2
 setting_name = "Run Timer"
 setting_id = "speedrun"
 choices = Array[String](["Off", "On"])
 description = "If On, adds a run timer at the top of the screen."
 
-[node name="Keyboard" parent="Panel/Margin/MainBox/Options" instance=ExtResource("3_rd3qm")]
+[node name="Keyboard" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("3_rd3qm")]
 layout_mode = 2
 title = "KEYBOARD/MOUSE"
 
-[node name="MoveUpKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+[node name="MoveUpKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Move Up"
 action = &"move_up_key"
 description = "Keyboard or mouse input that will move the player up."
 
-[node name="MoveLeftKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+[node name="MoveLeftKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Move Left"
 action = &"move_left_key"
 description = "Keyboard or mouse input that will move the player left."
 
-[node name="MoveDownKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+[node name="MoveDownKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Move Down"
 action = &"move_down_key"
 description = "Keyboard or mouse input that will move the player down."
 
-[node name="MoveRightKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+[node name="MoveRightKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Move Right"
 action = &"move_right_key"
 description = "Keyboard or mouse input that will move the player right."
 
-[node name="ShootKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+[node name="ShootKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Shoot"
 action = &"shoot_key"
 description = "Keyboard or mouse input that will fire a bullet or select an upgrade slot toward the mouse."
 
-[node name="DashKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+[node name="DashKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Dash"
 action = &"dash_key"
 description = "Keyboard or mouse input that will cause the player to dash toward the mouse."
 
-[node name="PayKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+[node name="PayKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Pay"
 action = &"pay_key"
 description = "Keyboard or mouse input that will cause the player to throw out funds."
 
-[node name="SurgeKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+[node name="SurgeKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Surge"
 action = &"surge_key"
 description = "Keyboard or mouse input that will cause the player to surge."
 
-[node name="OpenMenuKey" parent="Panel/Margin/MainBox/Options" instance=ExtResource("5_7lsre")]
+[node name="OpenMenuKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Open/Close Menu"
 action = &"open_menu_key"
 description = "Keyboard or mouse input that will open the pause menu and close all menus."
 
-[node name="Controller" parent="Panel/Margin/MainBox/Options" instance=ExtResource("3_rd3qm")]
+[node name="Controller" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("3_rd3qm")]
 layout_mode = 2
 title = "CONTROLLER"
 
-[node name="SwapJoysticks" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
+[node name="SwapJoysticks" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("1_oqkcn")]
 layout_mode = 2
 setting_name = "Movement Joystick"
 setting_id = "swap_joysticks"
 choices = Array[String](["Left", "Right"])
 description = "Controls which joystick to use for movement. The other joystick will be used for aiming."
 
-[node name="Rumble" parent="Panel/Margin/MainBox/Options" instance=ExtResource("1_oqkcn")]
+[node name="Rumble" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("1_oqkcn")]
 layout_mode = 2
 setting_name = "Gamepad Rumble"
 setting_id = "rumble"
