@@ -42,7 +42,21 @@ func display_event(event: InputEvent) -> void:
 	$Awaiting.hide()
 	if event is InputEventJoypadButton:
 		$Display.show()
-		$Display/Label.text = "Button %s" % event.button_index
+		$Display/Icon.text = char(0xf0030 + ((event.button_index + 1) if event.button_index <= 14 else 0))
+		$Display/Label.text = " Button %s" % event.button_index
 	if event is InputEventJoypadMotion:
 		$Display.show()
-		$Display/Label.text = "Axis %s %s" % [event.axis, sign(event.axis_value)]
+		var c := 0
+		match (event.axis+1) * int(sign(event.axis_value)):
+			1: c = 1
+			-1: c = 2
+			2: c = 3
+			-2: c = 4
+			3: c = 5
+			-3: c = 6
+			4: c = 7
+			-4: c = 8
+			5: c = 9
+			6: c = 10
+		$Display/Icon.text = char(0xf0020 + c)
+		$Display/Label.text = " Axis %s: %s" % [event.axis, int(sign(event.axis_value))]
