@@ -167,7 +167,11 @@ description = "Keyboard or mouse input that will cause the player to surge."
 layout_mode = 2
 setting_name = "Open/Close Menu"
 action = &"open_menu_key"
-description = "Keyboard or mouse input that will open the pause menu and close all menus."
+description = "Keyboard or mouse input that will open the pause menu and close all menus.
+
+If bound to a button used to confirm a menu option (Enter or Space), it will only open the pause menu to prevent being unable to use menus properly.
+
+Regardless of this setting, the default button to close menus (Escape) can still be used."
 
 [node name="Controller" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("3_rd3qm")]
 layout_mode = 2
@@ -262,7 +266,11 @@ description = "Controller input that will cause the player to surge."
 layout_mode = 2
 setting_name = "Open/Close Menu"
 action = &"open_menu_joy"
-description = "Controller input that will open the pause menu and close all menus."
+description = "Controller input that will open the pause menu and close all menus.
+
+If bound to a button used to confirm a menu option (Button 0, the bottom action), it will only open the pause menu to prevent being unable to use menus properly.
+
+Regardless of this setting, the default button to close menus (Button 6, the back/select/- button) can still be used."
 
 [node name="Info" type="VBoxContainer" parent="Panel/Margin/MainBox"]
 layout_mode = 2

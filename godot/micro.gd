@@ -135,12 +135,17 @@ func set_control(id: String, event: InputEvent, initial: bool = false):
 	InputMap.action_erase_events(id)
 	InputMap.action_add_event(id, deserialize_input(serialized))
 
-func action(id: String, accept_continuous: bool = true, accept_instant: bool = false):
+func action(id: String, accept_continuous: bool = true, accept_instant: bool = false) -> bool:
 	return (
 		accept_continuous and (
 			Input.is_action_pressed(id+"_key") or Input.is_action_pressed(id+"_joy"))
 		) or (accept_instant and (
 			Input.is_action_just_pressed(id+"_key") or Input.is_action_just_pressed(id+"_joy")))
+
+func closes_menu(event: InputEvent) -> bool:
+	return !event.is_action_pressed("ui_accept") and (
+		event.is_action_pressed("open_menu_key") or event.is_action_pressed("open_menu_joy")\
+		or event.is_action_pressed("ui_cancel"))
 
 func serialize_input(event: InputEvent) -> String:
 	if event is InputEventKey:

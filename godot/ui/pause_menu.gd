@@ -5,7 +5,7 @@ var disable_menu: bool = false
 signal finished
 
 func _input(event: InputEvent):
-	if event.is_action_pressed("open_menu_key") or event.is_action_pressed("open_menu_joy") or event.is_action_pressed("ui_cancel"):
+	if Micro.closes_menu(event):
 		exit()
 
 func _ready() -> void:

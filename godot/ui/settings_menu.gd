@@ -23,7 +23,7 @@ func _ready() -> void:
 	
 
 func _input(event) -> void:
-	if event.is_action_pressed("open_menu_key") or event.is_action_pressed("open_menu_joy") or event.is_action_pressed("ui_cancel"):
+	if Micro.closes_menu(event):
 		get_viewport().set_input_as_handled()
 		done.emit()
 	if event.is_action_pressed("ui_next_section", true):
