@@ -190,66 +190,79 @@ If Off, the controller will not rumble."
 layout_mode = 2
 setting_name = "Move Up"
 action = &"move_up_joy"
+description = "Controller input that will move the player up."
 
 [node name="MoveLeftJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Move Left"
 action = &"move_left_joy"
+description = "Controller input that will move the player left."
 
 [node name="MoveDownJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Move Down"
 action = &"move_down_joy"
+description = "Controller input that will move the player down."
 
 [node name="MoveRightJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Move Right"
 action = &"move_right_joy"
+description = "Controller input that will move the player right."
 
 [node name="AimUpJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Aim Up"
 action = &"aim_up"
+description = "Controller input that will cause the player to aim up."
 
 [node name="AimLeftJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Aim Left"
 action = &"aim_left"
+description = "Controller input that will cause the player to aim left."
 
 [node name="AimDownJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Aim Down"
 action = &"aim_down"
+description = "Controller input that will cause the player to aim down."
 
 [node name="AimRightJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Aim Right"
 action = &"aim_right"
+description = "Controller input that will cause the player to aim right."
 
 [node name="ShootJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Shoot"
 action = &"shoot_joy"
+description = "Controller input that will fire a bullet or select an upgrade slot toward the mouse."
 
 [node name="DashJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Dash"
 action = &"dash_joy"
+description = "Controller input that will cause the player to dash toward the mouse."
 
 [node name="PayJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Pay"
 action = &"pay_joy"
+description = "Controller input that will cause the player to throw out funds."
 
 [node name="SurgeJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Surge"
 action = &"surge_joy"
+description = "Controller input that will cause the player to surge."
 
 [node name="OpenMenuJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
 layout_mode = 2
-setting_name = "Open Menu"
+setting_name = "Open/Close Menu"
 action = &"open_menu_joy"
+description = "Controller input that will open the pause menu and close all menus."
 
 [node name="Info" type="VBoxContainer" parent="Panel/Margin/MainBox"]
 layout_mode = 2
