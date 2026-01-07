@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2txisf020wo6"]
+[gd_scene load_steps=8 format=3 uid="uid://d2txisf020wo6"]
 
 [ext_resource type="Script" uid="uid://jetecqpkhaqa" path="res://ui/settings_menu.gd" id="1_7nnky"]
 [ext_resource type="PackedScene" uid="uid://ctn2krbcs71xh" path="res://ui/settings/SettingButton.tscn" id="1_oqkcn"]
 [ext_resource type="PackedScene" uid="uid://dmgimpw0u3pvn" path="res://ui/settings/SettingSection.tscn" id="3_rd3qm"]
 [ext_resource type="PackedScene" uid="uid://o7x8yw1x0qgp" path="res://ui/settings/SettingRange.tscn" id="4_1j15u"]
 [ext_resource type="PackedScene" uid="uid://daua6pugqr1ln" path="res://ui/settings/SettingControlKey.tscn" id="5_7lsre"]
+[ext_resource type="PackedScene" uid="uid://c3j8bphespqg8" path="res://ui/settings/SettingControlJoy.tscn" id="6_6xtrn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4npji"]
 bg_color = Color(0, 0, 0, 1)
@@ -172,13 +173,6 @@ description = "Keyboard or mouse input that will open the pause menu and close a
 layout_mode = 2
 title = "CONTROLLER"
 
-[node name="SwapJoysticks" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("1_oqkcn")]
-layout_mode = 2
-setting_name = "Movement Joystick"
-setting_id = "swap_joysticks"
-choices = Array[String](["Left", "Right"])
-description = "Controls which joystick to use for movement. The other joystick will be used for aiming."
-
 [node name="Rumble" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("1_oqkcn")]
 layout_mode = 2
 setting_name = "Gamepad Rumble"
@@ -191,6 +185,71 @@ If On, the controller will rumble when taking damage or recoil and rumble slight
 If Reduced, the controller will rumble slightly when taking damage or recoil.
 
 If Off, the controller will not rumble."
+
+[node name="MoveUpJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+layout_mode = 2
+setting_name = "Move Up"
+action = &"move_up_joy"
+
+[node name="MoveLeftJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+layout_mode = 2
+setting_name = "Move Left"
+action = &"move_left_joy"
+
+[node name="MoveDownJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+layout_mode = 2
+setting_name = "Move Down"
+action = &"move_down_joy"
+
+[node name="MoveRightJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+layout_mode = 2
+setting_name = "Move Right"
+action = &"move_right_joy"
+
+[node name="AimUpJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+layout_mode = 2
+setting_name = "Aim Up"
+action = &"aim_up"
+
+[node name="AimLeftJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+layout_mode = 2
+setting_name = "Aim Left"
+action = &"aim_left"
+
+[node name="AimDownJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+layout_mode = 2
+setting_name = "Aim Down"
+action = &"aim_down"
+
+[node name="AimRightJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+layout_mode = 2
+setting_name = "Aim Right"
+action = &"aim_right"
+
+[node name="ShootJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+layout_mode = 2
+setting_name = "Shoot"
+action = &"shoot_joy"
+
+[node name="DashJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+layout_mode = 2
+setting_name = "Dash"
+action = &"dash_joy"
+
+[node name="PayJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+layout_mode = 2
+setting_name = "Pay"
+action = &"pay_joy"
+
+[node name="SurgeJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+layout_mode = 2
+setting_name = "Surge"
+action = &"surge_joy"
+
+[node name="OpenMenuJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+layout_mode = 2
+setting_name = "Open Menu"
+action = &"open_menu_joy"
 
 [node name="Info" type="VBoxContainer" parent="Panel/Margin/MainBox"]
 layout_mode = 2

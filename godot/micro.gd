@@ -150,7 +150,7 @@ func serialize_input(event: InputEvent) -> String:
 	elif event is InputEventJoypadButton:
 		return "button:%s" % event.button_index
 	elif event is InputEventJoypadMotion:
-		return "axis:%s" % ((event.axis + 1)*int(event.axis_value))
+		return "axis:%s" % ((event.axis + 1)*int(sign(event.axis_value)))
 	return ""
 
 func deserialize_input(input: String) -> InputEvent:
