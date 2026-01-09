@@ -178,9 +178,9 @@ func _ready() -> void:
 
 func generate_world():
 	if experimental:
-		generate_world_experimental()
+		await generate_world_experimental()
 	else:
-		generate_world_legacy()
+		await generate_world_legacy()
 	if Micro.get_config("debug", "save_debug_map", false):
 		await Micro.worldgen_status("Saving debug map...")
 		var map := Image.create_empty(512, 512, false, Image.FORMAT_RGB8)
