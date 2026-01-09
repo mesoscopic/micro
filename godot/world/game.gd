@@ -4,6 +4,7 @@ class_name World
 
 var random: RandomNumberGenerator = RandomNumberGenerator.new()
 var world_seed: int = randi()
+var experimental := false
 
 var second_trader_miniboss := false
 var dungeon_locations: Array[Vector2i] = []
@@ -176,6 +177,23 @@ func _ready() -> void:
 # --------------
 
 func generate_world():
+	if experimental:
+		generate_world_experimental()
+	else:
+		generate_world_legacy()
+	if Micro.get_config("debug", "save_debug_map", false):
+		await Micro.worldgen_status("Saving debug map...")
+		var map := Image.create_empty(512, 512, false, Image.FORMAT_RGB8)
+		for x in 512:
+			for y in 512:
+				if $Structures/NewTiles.get_cell_source_id(Vector2i(x-256, y-256)) > -1:
+					map.set_pixel(x, y, Color.WHITE)
+				else:
+					map.set_pixel(x, y, biome_debug_colors.get(get_biome(Vector2i(x-256, y-256))));
+		ResourceSaver.save(ImageTexture.create_from_image(map), "user://debug_map.png")
+		print("Saved debug map to user folder.")
+
+func generate_world_legacy():
 	await Micro.worldgen_status("Shaping biomes...")
 	$BiomeMap/ColorRect.material.set("shader_parameter/seed", world_seed)
 	$BiomeMap.render_target_update_mode = SubViewport.UPDATE_ONCE
@@ -276,17 +294,9 @@ func generate_world():
 				features.add_item("mine", 5)
 				features.add_item("mine_caches", 3)
 				place("%s" % Micro.roll(features), tile)
-	if Micro.get_config("debug", "save_debug_map", false):
-		await Micro.worldgen_status("Saving debug map...")
-		var map := Image.create_empty(512, 512, false, Image.FORMAT_RGB8)
-		for x in 512:
-			for y in 512:
-				if $Structures/NewTiles.get_cell_source_id(Vector2i(x-256, y-256)) > -1:
-					map.set_pixel(x, y, Color.WHITE)
-				else:
-					map.set_pixel(x, y, biome_debug_colors.get(get_biome(Vector2i(x-256, y-256))));
-		ResourceSaver.save(ImageTexture.create_from_image(map), "user://debug_map.png")
-		print("Saved debug map to user folder.")
+
+func generate_world_experimental():
+	pass
 
 func place(id: String, pos: Vector2i, force := false):
 	var pattern: TileMapPattern = load("res://world/patterns/%s.tres" % id)
@@ -321,11 +331,13 @@ func attempt_decide_biome(tile: Vector2i, biome: Biome) -> bool:
 	return true
 
 func biome_center_at(tile: Vector2i) -> Vector2i:
+	if experimental: return Vector2i.ZERO
 	var color := biome_map.get_pixel(tile.x + 256, tile.y + 256)
 	var uv: Vector2i = Vector2(color.r, color.g) * 512
 	return uv - Vector2i(256,256)
 
 func biome_edgeness_at(tile: Vector2i) -> float:
+	if experimental: return 0.
 	return biome_map.get_pixel(tile.x + 256, tile.y + 256).b
 
 func taxicab_random(distance: float) -> Vector2:

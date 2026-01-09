@@ -7,6 +7,8 @@ var player: Player
 var world: World
 var frozen := false
 
+var debug_experimental_worldgen := false
+
 var config: ConfigFile
 var settings_defaults: Dictionary[String, int] = {
 	"photosensitive_mode": 0,
@@ -44,6 +46,8 @@ func _input(event):
 		print("\n== BREAK ==")
 	elif event.is_action_pressed("debug_tp"):
 		Micro.player.global_position = Micro.world.biomes.find_key(Micro.world.Biome.MINEFIELD) * 20. #get_tree().get_first_node_in_group("boss").global_position
+	elif event.is_action_pressed("debug_experimental_worldgen"):
+		debug_experimental_worldgen = !debug_experimental_worldgen
 
 func settings():
 	var settings_menu := preload("res://ui/SettingsMenu.tscn").instantiate()
