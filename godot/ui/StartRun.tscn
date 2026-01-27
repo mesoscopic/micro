@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b1if5acbehiib"]
+[gd_scene format=3 uid="uid://b1if5acbehiib"]
 
 [ext_resource type="Script" uid="uid://cy22rysuoir7f" path="res://ui/startrunmenu.gd" id="1_bwlxp"]
 [ext_resource type="Shader" uid="uid://dlcxlpj0fo823" path="res://ui/menu_diamond.gdshader" id="2_y3qeo"]
@@ -101,27 +101,27 @@ gradient = SubResource("Gradient_jer21")
 width = 1
 height = 1
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ubjcs"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_arrat"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jd2c5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_duupb"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jd2c5"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_arrat"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jhjnr"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4fiux"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ubjcs"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2buer"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v1pwt"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4fiux"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yfo8u"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jhjnr"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cdw87"]
 
-[node name="StartRun" type="Control"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yfo8u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v1pwt"]
+
+[node name="StartRun" type="Control" unique_id=169167928]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -132,18 +132,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bwlxp")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_h0mgd")
-}
-autoplay = "menu_show"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1714787974]
+libraries/ = SubResource("AnimationLibrary_h0mgd")
+autoplay = &"menu_show"
 
-[node name="Diamond" type="Sprite2D" parent="."]
+[node name="Diamond" type="Sprite2D" parent="." unique_id=381804189]
 material = SubResource("ShaderMaterial_udk04")
 scale = Vector2(1200, 1200)
 texture = SubResource("GradientTexture2D_pq16b")
 
-[node name="Menu" type="Control" parent="."]
+[node name="Menu" type="Control" parent="." unique_id=696473194]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -152,7 +150,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu" unique_id=1256452725]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -160,57 +158,57 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Menu/VBoxContainer" unique_id=720861635]
 layout_mode = 2
 theme_override_constants/margin_left = 60
 theme_override_constants/margin_top = 60
 theme_override_constants/margin_right = 60
 theme_override_constants/margin_bottom = 60
 
-[node name="Label" type="Label" parent="Menu/VBoxContainer/MarginContainer"]
+[node name="Label" type="Label" parent="Menu/VBoxContainer/MarginContainer" unique_id=216240624]
 layout_mode = 2
 theme_override_font_sizes/font_size = 80
 text = "Micro"
 
-[node name="Play" type="Button" parent="Menu/VBoxContainer"]
+[node name="Play" type="Button" parent="Menu/VBoxContainer" unique_id=612392307]
 layout_mode = 2
 mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 2
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 35
-theme_override_styles/focus = SubResource("StyleBoxEmpty_ubjcs")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_arrat")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_duupb")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jd2c5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_duupb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_arrat")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ubjcs")
 action_mode = 0
 text = "Start Run"
 
-[node name="Options" type="Button" parent="Menu/VBoxContainer"]
+[node name="Options" type="Button" parent="Menu/VBoxContainer" unique_id=619009828]
 layout_mode = 2
 mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 2
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 35
-theme_override_styles/focus = SubResource("StyleBoxEmpty_jhjnr")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_4fiux")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_2buer")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jd2c5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2buer")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4fiux")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jhjnr")
 action_mode = 0
 text = "Options"
 
-[node name="Quit" type="Button" parent="Menu/VBoxContainer"]
+[node name="Quit" type="Button" parent="Menu/VBoxContainer" unique_id=446468922]
 layout_mode = 2
 mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 2
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 35
-theme_override_styles/focus = SubResource("StyleBoxEmpty_v1pwt")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_yfo8u")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_cdw87")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jd2c5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_cdw87")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_yfo8u")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v1pwt")
 action_mode = 0
 text = "Quit"
 

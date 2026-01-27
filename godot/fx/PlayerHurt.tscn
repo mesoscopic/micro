@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7h6twa0ran3j"]
+[gd_scene format=3 uid="uid://c7h6twa0ran3j"]
 
 [ext_resource type="Script" uid="uid://b53oppffentmv" path="res://fx/hurt_particles.gd" id="2_0nce4"]
 
@@ -31,7 +31,7 @@ scale_max = 4.0
 scale_curve = SubResource("CurveTexture_0msei")
 alpha_curve = SubResource("CurveTexture_xx4sn")
 
-[node name="PlayerHurt" type="GPUParticles2D"]
+[node name="PlayerHurt" type="GPUParticles2D" unique_id=1845865684]
 process_mode = 1
 emitting = false
 amount = 100

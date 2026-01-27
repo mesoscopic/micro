@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cjt7tm6d5ow8j"]
+[gd_scene format=3 uid="uid://cjt7tm6d5ow8j"]
 
 [ext_resource type="Shader" uid="uid://cs7iamvps60cm" path="res://entities/trader.gdshader" id="1_2l6qv"]
 [ext_resource type="Script" uid="uid://bgi51q1qpnvci" path="res://entities/trader.gd" id="1_qhhoa"]
@@ -9,7 +9,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6saqy"]
 shader = ExtResource("1_2l6qv")
 
-[sub_resource type="Image" id="Image_6saqy"]
+[sub_resource type="Image" id="Image_8tu8e"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -19,7 +19,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_kem3a"]
-image = SubResource("Image_6saqy")
+image = SubResource("Image_8tu8e")
 script = ExtResource("2_qhhoa")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -112,47 +112,47 @@ scale_min = 1.5
 scale_max = 2.5
 alpha_curve = SubResource("CurveTexture_yvvdr")
 
-[node name="Trader" type="CharacterBody2D"]
+[node name="Trader" type="CharacterBody2D" unique_id=540778684]
 collision_layer = 256
 collision_mask = 257
 motion_mode = 1
 script = ExtResource("1_qhhoa")
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=1771641789]
 material = SubResource("ShaderMaterial_6saqy")
 scale = Vector2(16, 16)
 texture = SubResource("ImageTexture_kem3a")
 
-[node name="Toll" parent="." instance=ExtResource("4_6saqy")]
+[node name="Toll" parent="." unique_id=486802325 instance=ExtResource("4_6saqy")]
 enabled = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1943639954]
 shape = SubResource("RectangleShape2D_bki2m")
 
-[node name="OnScreenDetector" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="OnScreenDetector" type="VisibleOnScreenNotifier2D" parent="." unique_id=911056703]
 rect = Rect2(-100, -100, 200, 200)
 
-[node name="CollectArea" type="Area2D" parent="."]
+[node name="CollectArea" type="Area2D" parent="." unique_id=994509571]
 collision_layer = 0
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea" unique_id=1166217059]
 shape = SubResource("RectangleShape2D_vhato")
 
-[node name="CollectParticles" type="GPUParticles2D" parent="."]
+[node name="CollectParticles" type="GPUParticles2D" parent="." unique_id=770426851]
 emitting = false
 amount = 40
 one_shot = true
 explosiveness = 0.5
 process_material = SubResource("ParticleProcessMaterial_jvihi")
 
-[node name="SpeedParticles" type="GPUParticles2D" parent="."]
+[node name="SpeedParticles" type="GPUParticles2D" parent="." unique_id=554005570]
 emitting = false
 amount = 80
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_qhhoa")
 
-[node name="CollectFlash" type="GPUParticles2D" parent="."]
+[node name="CollectFlash" type="GPUParticles2D" parent="." unique_id=580452305]
 material = SubResource("ShaderMaterial_kem3a")
 emitting = false
 amount = 1
@@ -160,13 +160,13 @@ lifetime = 0.25
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_d3s2c")
 
-[node name="HappyParticles" type="GPUParticles2D" parent="."]
+[node name="HappyParticles" type="GPUParticles2D" parent="." unique_id=810994595]
 emitting = false
 amount = 16
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_6saqy")
 
-[node name="Pause" type="Timer" parent="."]
+[node name="Pause" type="Timer" parent="." unique_id=329881581]
 one_shot = true
 
 [connection signal="chosen" from="Toll" to="." method="_on_toll_chosen"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3j8bphespqg8"]
+[gd_scene format=3 uid="uid://c3j8bphespqg8"]
 
 [ext_resource type="Script" uid="uid://cohntj8hrf31r" path="res://ui/settings/setting_control_joy.gd" id="1_o5baf"]
 [ext_resource type="FontFile" uid="uid://cpf46vxfylsyx" path="res://assets/fonts/MicroIcons.otf" id="2_kp177"]
@@ -11,7 +11,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f2pun"]
 
-[node name="SettingControlJoy" type="Button"]
+[node name="SettingControlJoy" type="Button" unique_id=552634276]
 modulate = Color(0.6, 0.6, 0.6, 1)
 anchors_preset = 10
 anchor_right = 1.0
@@ -31,7 +31,7 @@ action_mode = 0
 alignment = 0
 script = ExtResource("1_o5baf")
 
-[node name="Display" type="HBoxContainer" parent="."]
+[node name="Display" type="HBoxContainer" parent="." unique_id=725733406]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -41,7 +41,7 @@ offset_left = -20.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Icon" type="Label" parent="Display"]
+[node name="Icon" type="Label" parent="Display" unique_id=187745395]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("2_kp177")
@@ -49,14 +49,14 @@ theme_override_font_sizes/font_size = 20
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="Display"]
+[node name="Label" type="Label" parent="Display" unique_id=13015549]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 16
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Awaiting" type="Label" parent="."]
+[node name="Awaiting" type="Label" parent="." unique_id=737205390]
 visible = false
 layout_mode = 1
 anchors_preset = 11

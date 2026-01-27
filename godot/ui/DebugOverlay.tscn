@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3eu3aqi46l3u"]
+[gd_scene format=3 uid="uid://b3eu3aqi46l3u"]
 
 [ext_resource type="Script" uid="uid://c3rt787asmy7a" path="res://ui/debug.gd" id="1_v6tkm"]
 
-[node name="DebugOverlay" type="Control"]
+[node name="DebugOverlay" type="Control" unique_id=1803973503]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +12,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_v6tkm")
 
-[node name="BottomLeft" type="VBoxContainer" parent="."]
+[node name="BottomLeft" type="VBoxContainer" parent="." unique_id=571691312]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -22,19 +22,19 @@ offset_right = 77.0
 grow_vertical = 0
 alignment = 2
 
-[node name="Pos" type="Label" parent="BottomLeft"]
+[node name="Pos" type="Label" parent="BottomLeft" unique_id=1547483316]
 layout_mode = 2
 text = "<Pos>"
 
-[node name="Tile" type="Label" parent="BottomLeft"]
+[node name="Tile" type="Label" parent="BottomLeft" unique_id=507739936]
 layout_mode = 2
 text = "<Tile>"
 
-[node name="Biome" type="Label" parent="BottomLeft"]
+[node name="Biome" type="Label" parent="BottomLeft" unique_id=1269314224]
 layout_mode = 2
 text = "<Biome>"
 
-[node name="BottomRight" type="VBoxContainer" parent="."]
+[node name="BottomRight" type="VBoxContainer" parent="." unique_id=960055869]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -47,25 +47,25 @@ grow_horizontal = 0
 grow_vertical = 0
 alignment = 2
 
-[node name="FPS" type="Label" parent="BottomRight"]
+[node name="FPS" type="Label" parent="BottomRight" unique_id=1588396910]
 layout_mode = 2
 text = "<FPS>"
 
-[node name="TopLeft" type="VBoxContainer" parent="."]
+[node name="TopLeft" type="VBoxContainer" parent="." unique_id=246217637]
 layout_mode = 1
 offset_right = 77.0
 offset_bottom = 23.0
 alignment = 2
 
-[node name="Seed" type="Label" parent="TopLeft"]
+[node name="Seed" type="Label" parent="TopLeft" unique_id=163037720]
 layout_mode = 2
 text = "<Seed>"
 
-[node name="Worldgen" type="Label" parent="TopLeft"]
+[node name="Worldgen" type="Label" parent="TopLeft" unique_id=1718387238]
 layout_mode = 2
 text = "<Worldgen>"
 
-[node name="TopRight" type="VBoxContainer" parent="."]
+[node name="TopRight" type="VBoxContainer" parent="." unique_id=216590705]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -75,7 +75,7 @@ offset_bottom = 23.0
 grow_horizontal = 0
 alignment = 2
 
-[node name="WorldEnemies" type="Label" parent="TopRight"]
+[node name="WorldEnemies" type="Label" parent="TopRight" unique_id=618913596]
 layout_mode = 2
 text = "<WorldEnemies>"
 

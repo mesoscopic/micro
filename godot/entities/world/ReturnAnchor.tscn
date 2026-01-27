@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://crgc4i8l7fixw"]
+[gd_scene format=3 uid="uid://crgc4i8l7fixw"]
 
 [ext_resource type="Script" uid="uid://71gemlmplsmg" path="res://entities/world/return_anchor.gd" id="1_3rb1k"]
 [ext_resource type="Shader" uid="uid://cl4tmvo4r3y2u" path="res://entities/world/portal.gdshader" id="1_tvuwn"]
@@ -104,21 +104,21 @@ scale_min = 5.0
 scale_max = 10.0
 alpha_curve = SubResource("CurveTexture_ofswg")
 
-[node name="ReturnAnchor" type="Node2D"]
+[node name="ReturnAnchor" type="Node2D" unique_id=562733806]
 script = ExtResource("1_3rb1k")
 
-[node name="Toll" parent="." instance=ExtResource("2_31usi")]
+[node name="Toll" parent="." unique_id=566211238 instance=ExtResource("2_31usi")]
 cost = 20
 title = "Anchor"
 description = "Return to the start"
 render = SubResource("ShaderMaterial_ssdt4")
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=582481312]
 material = SubResource("ShaderMaterial_3rb1k")
 scale = Vector2(30, 30)
 texture = SubResource("ImageTexture_ssdt4")
 
-[node name="Guide" type="GPUParticles2D" parent="."]
+[node name="Guide" type="GPUParticles2D" parent="." unique_id=1624349712]
 material = SubResource("ShaderMaterial_31usi")
 emitting = false
 amount = 10
@@ -126,7 +126,7 @@ lifetime = 2.0
 visibility_rect = Rect2(-500, -500, 1000, 1000)
 process_material = SubResource("ParticleProcessMaterial_jqxmy")
 
-[node name="Boom" type="GPUParticles2D" parent="."]
+[node name="Boom" type="GPUParticles2D" parent="." unique_id=314651086]
 material = SubResource("ShaderMaterial_hmd6r")
 emitting = false
 amount = 4
@@ -135,7 +135,7 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_ws2q8")
 
-[node name="Trail" type="GPUParticles2D" parent="."]
+[node name="Trail" type="GPUParticles2D" parent="." unique_id=677965197]
 emitting = false
 amount = 100
 one_shot = true

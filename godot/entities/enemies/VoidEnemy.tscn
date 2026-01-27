@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8xv4bx33kxeg"]
+[gd_scene format=3 uid="uid://b8xv4bx33kxeg"]
 
 [ext_resource type="Script" uid="uid://g6d1a3v6oswd" path="res://entities/enemies/void_enemy.gd" id="1_je7qo"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="2_3bveo"]
@@ -10,7 +10,7 @@
 resource_local_to_scene = true
 shader = ExtResource("2_3bveo")
 
-[sub_resource type="Image" id="Image_je7qo"]
+[sub_resource type="Image" id="Image_3bveo"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -20,14 +20,14 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_khwn6"]
-image = SubResource("Image_je7qo")
+image = SubResource("Image_3bveo")
 script = ExtResource("3_gjic1")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_txrs1"]
 radius = 16.0
 
-[node name="VoidEnemy" type="CharacterBody2D"]
+[node name="VoidEnemy" type="CharacterBody2D" unique_id=2030078131]
 collision_layer = 264
 collision_mask = 259
 script = ExtResource("1_je7qo")
@@ -39,17 +39,17 @@ is_void = true
 DEATH_ANIMATION = ExtResource("2_gjic1")
 metadata/_custom_type_script = "uid://dqvwuq4r2ul6q"
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=319852268]
 material = SubResource("ShaderMaterial_acjqs")
 scale = Vector2(32, 32)
 texture = SubResource("ImageTexture_khwn6")
 
-[node name="HurtEffect" parent="." instance=ExtResource("4_ugiha")]
+[node name="HurtEffect" parent="." unique_id=69565096 instance=ExtResource("4_ugiha")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=597656803]
 shape = SubResource("CircleShape2D_txrs1")
 
-[node name="FiringCooldown" type="Timer" parent="."]
+[node name="FiringCooldown" type="Timer" parent="." unique_id=1732104272]
 autostart = true
 
 [connection signal="timeout" from="FiringCooldown" to="." method="_on_firing_cooldown_timeout"]

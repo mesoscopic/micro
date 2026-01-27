@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d3iaesh64nqxg"]
+[gd_scene format=3 uid="uid://d3iaesh64nqxg"]
 
 [ext_resource type="Script" uid="uid://b0vvvhqln5j42" path="res://entities/enemies/placeholder_boss.gd" id="1_hg3i4"]
 [ext_resource type="PackedScene" uid="uid://gcdt0wv5ke0r" path="res://fx/death/Miniboss.tscn" id="2_5smkf"]
@@ -27,7 +27,7 @@ metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 [sub_resource type="CircleShape2D" id="CircleShape2D_wt047"]
 radius = 37.5
 
-[node name="PlaceholderBoss" type="CharacterBody2D" groups=["boss", "enemy"]]
+[node name="PlaceholderBoss" type="CharacterBody2D" unique_id=90256586 groups=["boss", "enemy"]]
 collision_layer = 270
 collision_mask = 2
 script = ExtResource("1_hg3i4")
@@ -40,13 +40,13 @@ orb_drop = 30
 despawn_distance = 0
 DEATH_ANIMATION = ExtResource("2_5smkf")
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=1796006679]
 material = SubResource("ShaderMaterial_3crh1")
 scale = Vector2(75, 75)
 texture = SubResource("ImageTexture_uur07")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=927373273]
 shape = SubResource("CircleShape2D_wt047")
 
-[node name="HurtEffect" parent="." instance=ExtResource("6_xi0bi")]
+[node name="HurtEffect" parent="." unique_id=478080263 instance=ExtResource("6_xi0bi")]
 scale = Vector2(1.5, 1.5)

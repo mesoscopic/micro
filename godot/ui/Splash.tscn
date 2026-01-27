@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ba8r52rcgnydu"]
+[gd_scene format=3 uid="uid://ba8r52rcgnydu"]
 
 [ext_resource type="Script" uid="uid://8i8felc8ads7" path="res://ui/splash.gd" id="1_2b6ft"]
 [ext_resource type="Texture2D" uid="uid://cbi67e7tu5s8i" path="res://assets/icons/mesoscopic.svg" id="2_7brp2"]
@@ -42,7 +42,7 @@ _data = {
 &"fade_in": SubResource("Animation_2xvoc")
 }
 
-[node name="Splash" type="Control"]
+[node name="Splash" type="Control" unique_id=615205816]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 15
@@ -52,13 +52,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2b6ft")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_2oe5b")
-}
-autoplay = "fade_in"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1387691864]
+libraries/ = SubResource("AnimationLibrary_2oe5b")
+autoplay = &"fade_in"
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1179828410]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -70,7 +68,7 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 50
 
-[node name="VersionInformation" type="RichTextLabel" parent="MarginContainer"]
+[node name="VersionInformation" type="RichTextLabel" parent="MarginContainer" unique_id=1279834122]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/normal_font_size = 50
@@ -79,19 +77,19 @@ text = "[center]Micro <version>
 [font_size=40]<version_description>[/font_size][/center]"
 fit_content = true
 
-[node name="BuildInfo" type="Label" parent="MarginContainer"]
+[node name="BuildInfo" type="Label" parent="MarginContainer" unique_id=1364108564]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 20
 text = "<status> - <os>"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=15120090]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer" unique_id=113885866]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/margin_left = 20
@@ -99,22 +97,22 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer" unique_id=875639619]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/MarginContainer/HBoxContainer" unique_id=758961235]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 texture = ExtResource("2_7brp2")
 expand_mode = 4
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/MarginContainer/HBoxContainer" unique_id=1391291738]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "mesoscopic
 gamedev"
 
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/HBoxContainer" unique_id=450239186]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/margin_left = 20
@@ -122,10 +120,10 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer2" unique_id=1852127046]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/MarginContainer2/HBoxContainer" unique_id=1349661545]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 texture = ExtResource("4_g6ldx")

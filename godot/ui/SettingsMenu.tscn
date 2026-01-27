@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2txisf020wo6"]
+[gd_scene format=3 uid="uid://d2txisf020wo6"]
 
 [ext_resource type="Script" uid="uid://jetecqpkhaqa" path="res://ui/settings_menu.gd" id="1_7nnky"]
 [ext_resource type="PackedScene" uid="uid://ctn2krbcs71xh" path="res://ui/settings/SettingButton.tscn" id="1_oqkcn"]
@@ -19,7 +19,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="SettingsMenu" type="MarginContainer"]
+[node name="SettingsMenu" type="MarginContainer" unique_id=883840304]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,11 +31,11 @@ theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 40
 script = ExtResource("1_7nnky")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=2048426315]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4npji")
 
-[node name="Margin" type="MarginContainer" parent="Panel"]
+[node name="Margin" type="MarginContainer" parent="Panel" unique_id=1745445679]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,10 +47,10 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="MainBox" type="HBoxContainer" parent="Panel/Margin"]
+[node name="MainBox" type="HBoxContainer" parent="Panel/Margin" unique_id=1671725237]
 layout_mode = 2
 
-[node name="Scroll" type="ScrollContainer" parent="Panel/Margin/MainBox"]
+[node name="Scroll" type="ScrollContainer" parent="Panel/Margin/MainBox" unique_id=1488369783]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
@@ -58,15 +58,15 @@ follow_focus = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="Options" type="VBoxContainer" parent="Panel/Margin/MainBox/Scroll"]
+[node name="Options" type="VBoxContainer" parent="Panel/Margin/MainBox/Scroll" unique_id=954337293]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Visual" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("3_rd3qm")]
+[node name="Visual" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=71690965 instance=ExtResource("3_rd3qm")]
 layout_mode = 2
 title = "VISUAL"
 
-[node name="Fullscreen" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("1_oqkcn")]
+[node name="Fullscreen" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=1105280540 instance=ExtResource("1_oqkcn")]
 layout_mode = 2
 setting_name = "Fullscreen"
 setting_id = "fullscreen"
@@ -75,7 +75,7 @@ description = "If Yes, the game window fills the entire screen.
 
 This setting does not update if you change the window mode through the operating system."
 
-[node name="VSync" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("1_oqkcn")]
+[node name="VSync" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=354835175 instance=ExtResource("1_oqkcn")]
 layout_mode = 2
 setting_name = "VSync"
 setting_id = "vsync"
@@ -88,14 +88,14 @@ If Adaptive, VSync is disabled when your framerate drops below the monitor's ref
 
 If Mailbox, frames are rendered as fast as possible, but only displayed when your monitor refreshes (preventing screen tearing). This is inefficient but reduces latency."
 
-[node name="PhotosensitiveMode" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("1_oqkcn")]
+[node name="PhotosensitiveMode" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=1326640245 instance=ExtResource("1_oqkcn")]
 layout_mode = 2
 setting_name = "Reduce Flashing"
 setting_id = "photosensitive_mode"
 choices = Array[String](["No", "Yes"])
 description = "If Yes, certain visual effects are simplified or disabled to reduce flashing on screen."
 
-[node name="BGOpacity" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("4_1j15u")]
+[node name="BGOpacity" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=1180990997 instance=ExtResource("4_1j15u")]
 layout_mode = 2
 setting_name = "Background Opacity"
 setting_id = "bg_alpha_percent"
@@ -104,66 +104,66 @@ unit = "%"
 description = "The opacity of area backgrounds.
 Higher opacity makes the backgrounds more visible but reduces contrast with foreground."
 
-[node name="RunTimer" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("1_oqkcn")]
+[node name="RunTimer" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=406246807 instance=ExtResource("1_oqkcn")]
 layout_mode = 2
 setting_name = "Run Timer"
 setting_id = "speedrun"
 choices = Array[String](["Off", "On"])
 description = "If On, adds a run timer at the top of the screen."
 
-[node name="Keyboard" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("3_rd3qm")]
+[node name="Keyboard" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=844966308 instance=ExtResource("3_rd3qm")]
 layout_mode = 2
 title = "KEYBOARD/MOUSE"
 
-[node name="MoveUpKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
+[node name="MoveUpKey" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=897959354 instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Move Up"
 action = &"move_up_key"
 description = "Keyboard or mouse input that will move the player up."
 
-[node name="MoveLeftKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
+[node name="MoveLeftKey" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=2014512186 instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Move Left"
 action = &"move_left_key"
 description = "Keyboard or mouse input that will move the player left."
 
-[node name="MoveDownKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
+[node name="MoveDownKey" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=1926779834 instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Move Down"
 action = &"move_down_key"
 description = "Keyboard or mouse input that will move the player down."
 
-[node name="MoveRightKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
+[node name="MoveRightKey" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=2086445272 instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Move Right"
 action = &"move_right_key"
 description = "Keyboard or mouse input that will move the player right."
 
-[node name="ShootKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
+[node name="ShootKey" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=1095970107 instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Shoot"
 action = &"shoot_key"
 description = "Keyboard or mouse input that will fire a bullet or select an upgrade slot toward the mouse."
 
-[node name="DashKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
+[node name="DashKey" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=2130915051 instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Dash"
 action = &"dash_key"
 description = "Keyboard or mouse input that will cause the player to dash toward the mouse."
 
-[node name="PayKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
+[node name="PayKey" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=1666124134 instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Pay"
 action = &"pay_key"
 description = "Keyboard or mouse input that will cause the player to throw out funds."
 
-[node name="SurgeKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
+[node name="SurgeKey" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=924556343 instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Surge"
 action = &"surge_key"
 description = "Keyboard or mouse input that will cause the player to surge."
 
-[node name="OpenMenuKey" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("5_7lsre")]
+[node name="OpenMenuKey" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=1629616739 instance=ExtResource("5_7lsre")]
 layout_mode = 2
 setting_name = "Open/Close Menu"
 action = &"open_menu_key"
@@ -173,11 +173,11 @@ If bound to a button used to confirm a menu option (Enter or Space), it will onl
 
 Regardless of this setting, the default button to close menus (Escape) can still be used."
 
-[node name="Controller" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("3_rd3qm")]
+[node name="Controller" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=947764830 instance=ExtResource("3_rd3qm")]
 layout_mode = 2
 title = "CONTROLLER"
 
-[node name="Rumble" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("1_oqkcn")]
+[node name="Rumble" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=758885182 instance=ExtResource("1_oqkcn")]
 layout_mode = 2
 setting_name = "Gamepad Rumble"
 setting_id = "rumble"
@@ -190,79 +190,79 @@ If Reduced, the controller will rumble slightly when taking damage or recoil.
 
 If Off, the controller will not rumble."
 
-[node name="MoveUpJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+[node name="MoveUpJoy" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=433339375 instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Move Up"
 action = &"move_up_joy"
 description = "Controller input that will move the player up."
 
-[node name="MoveLeftJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+[node name="MoveLeftJoy" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=890353736 instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Move Left"
 action = &"move_left_joy"
 description = "Controller input that will move the player left."
 
-[node name="MoveDownJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+[node name="MoveDownJoy" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=1919786285 instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Move Down"
 action = &"move_down_joy"
 description = "Controller input that will move the player down."
 
-[node name="MoveRightJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+[node name="MoveRightJoy" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=1468929157 instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Move Right"
 action = &"move_right_joy"
 description = "Controller input that will move the player right."
 
-[node name="AimUpJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+[node name="AimUpJoy" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=845992287 instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Aim Up"
 action = &"aim_up"
 description = "Controller input that will cause the player to aim up."
 
-[node name="AimLeftJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+[node name="AimLeftJoy" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=656775457 instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Aim Left"
 action = &"aim_left"
 description = "Controller input that will cause the player to aim left."
 
-[node name="AimDownJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+[node name="AimDownJoy" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=853452313 instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Aim Down"
 action = &"aim_down"
 description = "Controller input that will cause the player to aim down."
 
-[node name="AimRightJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+[node name="AimRightJoy" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=237911702 instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Aim Right"
 action = &"aim_right"
 description = "Controller input that will cause the player to aim right."
 
-[node name="ShootJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+[node name="ShootJoy" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=1298490444 instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Shoot"
 action = &"shoot_joy"
 description = "Controller input that will fire a bullet or select an upgrade slot toward the mouse."
 
-[node name="DashJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+[node name="DashJoy" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=1544847425 instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Dash"
 action = &"dash_joy"
 description = "Controller input that will cause the player to dash toward the mouse."
 
-[node name="PayJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+[node name="PayJoy" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=1639401917 instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Pay"
 action = &"pay_joy"
 description = "Controller input that will cause the player to throw out funds."
 
-[node name="SurgeJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+[node name="SurgeJoy" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=135743611 instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Surge"
 action = &"surge_joy"
 description = "Controller input that will cause the player to surge."
 
-[node name="OpenMenuJoy" parent="Panel/Margin/MainBox/Scroll/Options" instance=ExtResource("6_6xtrn")]
+[node name="OpenMenuJoy" parent="Panel/Margin/MainBox/Scroll/Options" unique_id=623912660 instance=ExtResource("6_6xtrn")]
 layout_mode = 2
 setting_name = "Open/Close Menu"
 action = &"open_menu_joy"
@@ -272,16 +272,16 @@ If bound to a button used to confirm a menu option (Button 0, the bottom action)
 
 Regardless of this setting, the default button to close menus (Button 6, the back/select/- button) can still be used."
 
-[node name="Info" type="VBoxContainer" parent="Panel/Margin/MainBox"]
+[node name="Info" type="VBoxContainer" parent="Panel/Margin/MainBox" unique_id=1885303148]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Margin" type="MarginContainer" parent="Panel/Margin/MainBox/Info"]
+[node name="Margin" type="MarginContainer" parent="Panel/Margin/MainBox/Info" unique_id=1764307801]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 20
 
-[node name="Description" type="RichTextLabel" parent="Panel/Margin/MainBox/Info/Margin"]
+[node name="Description" type="RichTextLabel" parent="Panel/Margin/MainBox/Info/Margin" unique_id=94180885]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 18

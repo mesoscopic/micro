@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://degva33wjvowa"]
+[gd_scene format=3 uid="uid://degva33wjvowa"]
 
 [ext_resource type="Shader" uid="uid://cjsixrrxcu8rt" path="res://misc/effects/heal_orb.gdshader" id="1_b02qu"]
 [ext_resource type="Script" uid="uid://be6diwae80dak" path="res://misc/effects/heal_orb.gd" id="1_xjikr"]
@@ -57,36 +57,36 @@ damping_max = 200.0
 scale_max = 3.0
 alpha_curve = SubResource("CurveTexture_xm2bj")
 
-[node name="HealOrb" type="Node2D"]
+[node name="HealOrb" type="Node2D" unique_id=1357228136]
 script = ExtResource("1_xjikr")
 
-[node name="TravelParticles" type="GPUParticles2D" parent="."]
+[node name="TravelParticles" type="GPUParticles2D" parent="." unique_id=705214146]
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_xm2bj")
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=845767951]
 material = SubResource("ShaderMaterial_3461w")
 instance_shader_parameters/offset = 0.0
 scale = Vector2(8, 8)
 texture = SubResource("ImageTexture_muy47")
 
-[node name="HealParticles" type="GPUParticles2D" parent="."]
+[node name="HealParticles" type="GPUParticles2D" parent="." unique_id=1273714885]
 emitting = false
 lifetime = 0.25
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_muy47")
 
-[node name="Lifetime" type="Timer" parent="."]
+[node name="Lifetime" type="Timer" parent="." unique_id=289395380]
 wait_time = 17.0
 one_shot = true
 autostart = true
 
-[node name="Warning" type="Timer" parent="."]
+[node name="Warning" type="Timer" parent="." unique_id=1923186735]
 wait_time = 3.0
 one_shot = true
 
-[node name="WarningParticles" type="GPUParticles2D" parent="."]
+[node name="WarningParticles" type="GPUParticles2D" parent="." unique_id=1067759235]
 emitting = false
 amount = 4
 lifetime = 0.25

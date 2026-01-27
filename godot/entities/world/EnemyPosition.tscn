@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cc1xa4akv25v0"]
+[gd_scene format=3 uid="uid://cc1xa4akv25v0"]
 
 [ext_resource type="Script" uid="uid://dhi7edrbv0ga6" path="res://entities/world/enemy_position.gd" id="1_hb8yp"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="2_1tsol"]
@@ -7,11 +7,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vydju"]
 shader = ExtResource("2_1tsol")
-shader_parameter/health = 1.0
-shader_parameter/velocity = Vector2(0, 0)
-shader_parameter/damaged = false
 
-[sub_resource type="Image" id="Image_1tsol"]
+[sub_resource type="Image" id="Image_2mokw"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -21,7 +18,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_vydju"]
-image = SubResource("Image_1tsol")
+image = SubResource("Image_2mokw")
 script = ExtResource("2_rxnby")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -93,33 +90,33 @@ scale_max = 10.0
 scale_curve = SubResource("CurveTexture_oxxt1")
 alpha_curve = SubResource("CurveTexture_sbg4y")
 
-[node name="EnemyPosition" type="Area2D" groups=["boss"]]
+[node name="EnemyPosition" type="Area2D" unique_id=740102246 groups=["boss"]]
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_hb8yp")
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=1191700721]
 material = SubResource("ShaderMaterial_vydju")
 texture = SubResource("ImageTexture_vydju")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=740451265]
 shape = SubResource("CircleShape2D_sbg4y")
 
-[node name="SpawnParticles" type="GPUParticles2D" parent="."]
+[node name="SpawnParticles" type="GPUParticles2D" parent="." unique_id=2018136798]
 material = SubResource("ShaderMaterial_ioqel")
 emitting = false
 amount = 18
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_4jypl")
 
-[node name="SpawnRange" type="Area2D" parent="."]
+[node name="SpawnRange" type="Area2D" parent="." unique_id=1317855860]
 collision_layer = 0
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnRange"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnRange" unique_id=1982648841]
 shape = SubResource("CircleShape2D_oxxt1")
 
-[node name="ExplosionParticles" type="GPUParticles2D" parent="."]
+[node name="ExplosionParticles" type="GPUParticles2D" parent="." unique_id=1806898207]
 material = SubResource("ShaderMaterial_oxxt1")
 emitting = false
 amount = 140

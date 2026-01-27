@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b6smc1rpaeugb"]
+[gd_scene format=3 uid="uid://b6smc1rpaeugb"]
 
 [ext_resource type="Shader" uid="uid://ci5ovcam7o22p" path="res://entities/world/light.gdshader" id="1_0fpnf"]
 [ext_resource type="Script" uid="uid://bw5172ki2lflb" path="res://entities/world/light.gd" id="1_0sgbh"]
@@ -126,17 +126,17 @@ image = SubResource("Image_7vrrx")
 script = ExtResource("2_yopc8")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
-[node name="Light" type="Node2D"]
+[node name="Light" type="Node2D" unique_id=888960605]
 script = ExtResource("1_0sgbh")
 
-[node name="Detection" type="Area2D" parent="."]
+[node name="Detection" type="Area2D" parent="." unique_id=1248657645]
 collision_layer = 0
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection" unique_id=628891745]
 shape = SubResource("CircleShape2D_xut0m")
 
-[node name="Clouds" type="Sprite2D" parent="."]
+[node name="Clouds" type="Sprite2D" parent="." unique_id=1714479780]
 modulate = Color(1, 1, 1, 0)
 z_index = 1
 material = SubResource("ShaderMaterial_xut0m")
@@ -144,32 +144,32 @@ instance_shader_parameters/angle = Vector2(0, 0)
 scale = Vector2(200, 200)
 texture = SubResource("ImageTexture_dhktf")
 
-[node name="Activate" type="GPUParticles2D" parent="."]
+[node name="Activate" type="GPUParticles2D" parent="." unique_id=1571880766]
 emitting = false
 amount = 50
 one_shot = true
 explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_15mwo")
 
-[node name="Guide" type="GPUParticles2D" parent="."]
+[node name="Guide" type="GPUParticles2D" parent="." unique_id=31931197]
 emitting = false
 amount = 32
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_7vrrx")
 
-[node name="Illumination" type="GPUParticles2D" parent="."]
+[node name="Illumination" type="GPUParticles2D" parent="." unique_id=259459683]
 material = SubResource("ShaderMaterial_yopc8")
 emitting = false
 lifetime = 3.0
 process_material = SubResource("ParticleProcessMaterial_o215r")
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=244513319]
 modulate = Color(1, 1, 1, 0.5)
 material = SubResource("ShaderMaterial_0sgbh")
 scale = Vector2(20, 20)
 texture = SubResource("ImageTexture_15mwo")
 
-[node name="BlurAura" parent="." instance=ExtResource("5_by7lc")]
+[node name="BlurAura" parent="." unique_id=1967144313 instance=ExtResource("5_by7lc")]
 scale = Vector2(200, 200)
 
 [connection signal="body_entered" from="Detection" to="." method="activate"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://o7x8yw1x0qgp"]
+[gd_scene format=3 uid="uid://o7x8yw1x0qgp"]
 
 [ext_resource type="Script" uid="uid://dfinva0yego5i" path="res://ui/settings/setting_range.gd" id="1_68xqx"]
 
@@ -10,7 +10,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f2pun"]
 
-[node name="SettingRange" type="Button"]
+[node name="SettingRange" type="Button" unique_id=1478920383]
 modulate = Color(0.6, 0.6, 0.6, 1)
 anchors_preset = 10
 anchor_right = 1.0
@@ -34,7 +34,7 @@ setting_id = "dummy"
 max_bound = 100
 description = "(Description)"
 
-[node name="Choice" type="Label" parent="."]
+[node name="Choice" type="Label" parent="." unique_id=712530217]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0

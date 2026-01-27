@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c04qdfehiu2m5"]
+[gd_scene format=3 uid="uid://c04qdfehiu2m5"]
 
 [ext_resource type="Script" uid="uid://cx3peo4tlvbg2" path="res://entities/world/cache.gd" id="1_xgfmd"]
 [ext_resource type="Shader" uid="uid://ds33o6ingsxg6" path="res://entities/world/cache.gdshader" id="2_xgfmd"]
@@ -47,19 +47,19 @@ alpha_curve = SubResource("CurveTexture_urixb")
 [sub_resource type="CircleShape2D" id="CircleShape2D_40rxh"]
 radius = 7.0
 
-[node name="Cache" type="CharacterBody2D"]
+[node name="Cache" type="CharacterBody2D" unique_id=2015800482]
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_xgfmd")
 deplete_hp = false
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=1333252542]
 self_modulate = Color(1, 1, 1, 0)
 material = SubResource("ShaderMaterial_qwbhg")
 scale = Vector2(20, 20)
 texture = SubResource("ImageTexture_pky5l")
 
-[node name="OpenParticles" type="GPUParticles2D" parent="."]
+[node name="OpenParticles" type="GPUParticles2D" parent="." unique_id=285340226]
 material = SubResource("ShaderMaterial_rtkwq")
 emitting = false
 amount = 40
@@ -67,7 +67,7 @@ one_shot = true
 explosiveness = 0.75
 process_material = SubResource("ParticleProcessMaterial_7i383")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1415152166]
 shape = SubResource("CircleShape2D_40rxh")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1282767976]

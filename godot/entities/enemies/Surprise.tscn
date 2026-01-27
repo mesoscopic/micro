@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://5r4rapdj3ft"]
+[gd_scene format=3 uid="uid://5r4rapdj3ft"]
 
 [ext_resource type="Script" uid="uid://cjmfb60xs2e7x" path="res://entities/enemies/surprise.gd" id="1_3elcu"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_bahcx"]
@@ -55,7 +55,7 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_oeqg6"]
 radius = 5.0
 
-[node name="Surprise" type="CharacterBody2D" groups=["enemy"]]
+[node name="Surprise" type="CharacterBody2D" unique_id=210040973 groups=["enemy"]]
 collision_layer = 264
 collision_mask = 259
 script = ExtResource("1_3elcu")
@@ -67,28 +67,28 @@ stagger_time = 0.25
 max_hp = 20
 hp = 20
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=567716981]
 material = SubResource("ShaderMaterial_ml7jd")
 scale = Vector2(14, 14)
 texture = SubResource("ImageTexture_5bo5h")
 
-[node name="Afterimage" type="GPUParticles2D" parent="."]
+[node name="Afterimage" type="GPUParticles2D" parent="." unique_id=122594116]
 material = SubResource("ShaderMaterial_oeqg6")
 amount = 10
 lifetime = 0.25
 process_material = SubResource("ParticleProcessMaterial_5bo5h")
 
-[node name="HurtEffect" parent="." instance=ExtResource("6_hb3al")]
+[node name="HurtEffect" parent="." unique_id=1854537144 instance=ExtResource("6_hb3al")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=749015690]
 shape = SubResource("CircleShape2D_kb0u7")
 
-[node name="Attack" type="Area2D" parent="."]
+[node name="Attack" type="Area2D" parent="." unique_id=169818087]
 collision_layer = 4
 collision_mask = 16
 input_pickable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack" unique_id=1097518992]
 shape = SubResource("CircleShape2D_oeqg6")
 
 [connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]

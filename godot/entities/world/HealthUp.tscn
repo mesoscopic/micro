@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dg680stjdtlbv"]
+[gd_scene format=3 uid="uid://dg680stjdtlbv"]
 
 [ext_resource type="Shader" uid="uid://dby1fhvlh2gjy" path="res://misc/shaders/square_pulse.gdshader" id="1_5fnnh"]
 [ext_resource type="Script" uid="uid://cbtae3s8r3f63" path="res://entities/world/health_up.gd" id="1_m4qs3"]
@@ -140,25 +140,25 @@ image = SubResource("Image_yq7ae")
 script = ExtResource("3_xngy6")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
-[node name="HealthUp" type="Node2D"]
+[node name="HealthUp" type="Node2D" unique_id=1309488738]
 script = ExtResource("1_m4qs3")
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=1045617355]
 material = SubResource("ShaderMaterial_m4qs3")
 scale = Vector2(30, 30)
 texture = SubResource("ImageTexture_wsuqa")
 
-[node name="Health" type="GPUParticles2D" parent="."]
+[node name="Health" type="GPUParticles2D" parent="." unique_id=1306481846]
 process_material = SubResource("ParticleProcessMaterial_5fnnh")
 
-[node name="Pulse" type="GPUParticles2D" parent="."]
+[node name="Pulse" type="GPUParticles2D" parent="." unique_id=14717734]
 z_index = 1
 material = SubResource("ShaderMaterial_nflxv")
 amount = 2
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_v2j6r")
 
-[node name="Absorb" type="GPUParticles2D" parent="."]
+[node name="Absorb" type="GPUParticles2D" parent="." unique_id=422975169]
 z_index = 1
 emitting = false
 amount = 40
@@ -166,16 +166,16 @@ lifetime = 0.25
 trail_lifetime = 1.0
 process_material = SubResource("ParticleProcessMaterial_pag18")
 
-[node name="Pickup" type="Area2D" parent="."]
+[node name="Pickup" type="Area2D" parent="." unique_id=1819265544]
 collision_layer = 0
 collision_mask = 16
 input_pickable = false
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup" unique_id=2111788813]
 shape = SubResource("RectangleShape2D_xngy6")
 
-[node name="Burst" type="GPUParticles2D" parent="."]
+[node name="Burst" type="GPUParticles2D" parent="." unique_id=325803489]
 emitting = false
 amount = 200
 lifetime = 3.0
@@ -184,7 +184,7 @@ explosiveness = 1.0
 visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 process_material = SubResource("ParticleProcessMaterial_u01kl")
 
-[node name="FinalPulse" type="Sprite2D" parent="."]
+[node name="FinalPulse" type="Sprite2D" parent="." unique_id=184304918]
 z_index = 1
 material = SubResource("ShaderMaterial_yq7ae")
 rotation = 0.7853982

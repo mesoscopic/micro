@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dbm44iqln8ku"]
+[gd_scene format=3 uid="uid://dbm44iqln8ku"]
 
 [ext_resource type="Script" uid="uid://by7l5djd4ppw8" path="res://entities/enemies/bomber.gd" id="1_enisn"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="2_j4vdi"]
@@ -26,7 +26,7 @@ metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 [sub_resource type="CircleShape2D" id="CircleShape2D_u77d8"]
 radius = 11.0
 
-[node name="Bomber" type="CharacterBody2D" groups=["enemy"]]
+[node name="Bomber" type="CharacterBody2D" unique_id=1042716189 groups=["enemy"]]
 collision_layer = 264
 collision_mask = 259
 script = ExtResource("1_enisn")
@@ -37,17 +37,17 @@ fund_drop = 15
 max_hp = 60
 hp = 60
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=502302662]
 material = SubResource("ShaderMaterial_cduuy")
 scale = Vector2(22, 22)
 texture = SubResource("ImageTexture_vd4d6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1764960163]
 shape = SubResource("CircleShape2D_u77d8")
 
-[node name="HurtEffect" parent="." instance=ExtResource("4_omnjx")]
+[node name="HurtEffect" parent="." unique_id=237604088 instance=ExtResource("4_omnjx")]
 
-[node name="FiringCooldown" type="Timer" parent="."]
+[node name="FiringCooldown" type="Timer" parent="." unique_id=1574744667]
 one_shot = true
 autostart = true
 

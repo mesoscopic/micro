@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://qujhsvriffxk"]
+[gd_scene format=4 uid="uid://qujhsvriffxk"]
 
 [ext_resource type="Shader" uid="uid://0vacnrh74wjb" path="res://world/bg.gdshader" id="1_gia2e"]
 [ext_resource type="PackedScene" uid="uid://cas1ebkgs1kfw" path="res://entities/world/SpawnNest.tscn" id="1_kopsk"]
@@ -110,13 +110,13 @@ b = Vector2(0, -5120)
 a = Vector2(0, -5120)
 b = Vector2(5120, 0)
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" unique_id=2132158543]
 script = ExtResource("1_ndgmm")
 
-[node name="BiomeMap" type="SubViewport" parent="."]
+[node name="BiomeMap" type="SubViewport" parent="." unique_id=817795662]
 render_target_update_mode = 0
 
-[node name="ColorRect" type="ColorRect" parent="BiomeMap"]
+[node name="ColorRect" type="ColorRect" parent="BiomeMap" unique_id=2042039169]
 material = SubResource("ShaderMaterial_7c4bj")
 anchors_preset = 15
 anchor_right = 1.0
@@ -124,45 +124,45 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Spores" type="GPUParticles2D" parent="."]
+[node name="Spores" type="GPUParticles2D" parent="." unique_id=758983170]
 amount = 100
 lifetime = 15.0
 preprocess = 20.0
 visibility_rect = Rect2(-1500, -1500, 3000, 3000)
 process_material = SubResource("ParticleProcessMaterial_2nmfm")
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="." unique_id=1059265448]
 material = SubResource("ShaderMaterial_i4b1j")
 scale = Vector2(10225, 10225)
 texture = SubResource("ImageTexture_o1tcx")
 
-[node name="WorldEnemySpawnAttempt" type="Timer" parent="."]
+[node name="WorldEnemySpawnAttempt" type="Timer" parent="." unique_id=1009911282]
 wait_time = 3.0
 autostart = true
 
-[node name="EmptinessDamage" type="Timer" parent="."]
+[node name="EmptinessDamage" type="Timer" parent="." unique_id=362995759]
 wait_time = 0.1
 
-[node name="Structures" type="Node2D" parent="."]
+[node name="Structures" type="Node2D" parent="." unique_id=342274075]
 
-[node name="NewTiles" type="TileMapLayer" parent="Structures"]
+[node name="NewTiles" type="TileMapLayer" parent="Structures" unique_id=1667847207]
 position = Vector2(-10, -10)
 tile_map_data = PackedByteArray("AAD4/wAAAAAAAAAAAAD5////AAAAAAAAAAD5/wAAAAACAAAAAAD5/wEAAAAAAAAAAAD6//7/AAAAAAAAAAD6////AAACAAAAAAD6/wAAAAAAAAAAAAD6/wEAAAACAAAAAAD6/wIAAAAAAAAAAAD7//7/AAACAAAAAAD7////AAAAAAAAAAD7/wAAAAAAAAAAAAD7/wEAAAAAAAAAAAD7/wIAAAACAAAAAAD7/wMAAAAAAAAAAAD8//z/AAABAAAAAAD8//3/AAABAAAAAAD8////AAAAAAAAAAD8/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wMAAAABAAAAAAD8/wQAAAABAAAAAAD9//z/AAABAAAAAAD9//3/AAAAAAAAAAD9//7/AAAAAAAAAAD9/wAAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wIAAAAAAAAAAAD9/wMAAAAAAAAAAAD9/wQAAAABAAAAAAD+//z/AAAAAAAAAAD+//3/AAAAAAAAAAD+//7/AAAAAAAAAAD+/wAAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wIAAAAAAAAAAAD+/wMAAAAAAAAAAAD+/wQAAAAAAAAAAAD/////AAAAAAAAAAD//wEAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAEAAAAAAAAAAAABAP7/AAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAABAAIAAAAAAAAAAAACAP3/AAAAAAAAAAACAP7/AAAAAAAAAAACAP//AAAAAAAAAAACAAAAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAADAPz/AAABAAAAAAADAP3/AAAAAAAAAAADAP7/AAAAAAAAAAADAP//AAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAABAAAAAAAEAP3/AAABAAAAAAAEAP7/AAAAAAAAAAAEAP//AAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAMAAAABAAAAAAAEAAQAAAABAAAAAAAFAP7/AAACAAAAAAAFAP//AAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAACAAAAAAAGAP//AAACAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAACAAAAAAAGAAIAAAAAAAAAAAAHAAAAAAACAAAAAAAHAAEAAAAAAAAAAAAIAAAAAAAAAAAAAAD9//v/AAAAAAAAAAD9/wUAAAAAAAAAAAD+//r/AAAAAAAAAAD+//v/AAACAAAAAAD+/wUAAAACAAAAAAD+/wYAAAAAAAAAAAD///n/AAAAAAAAAAD///r/AAACAAAAAAD///v/AAAAAAAAAAD///z/AAAAAAAAAAD///3/AAAAAAAAAAD///7/AAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD//wYAAAACAAAAAAD//wcAAAAAAAAAAAAAAPn/AAACAAAAAAAAAPr/AAAAAAAAAAAAAPv/AAAAAAAAAAAAAPz/AAAAAAAAAAAAAP3/AAAAAAAAAAAAAP7/AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAACAAAAAAAAAAgAAAAAAAAAAAABAPr/AAACAAAAAAABAPv/AAAAAAAAAAABAPz/AAAAAAAAAAABAP3/AAAAAAAAAAABAAMAAAAAAAAAAAABAAQAAAAAAAAAAAABAAUAAAAAAAAAAAABAAYAAAACAAAAAAABAAcAAAAAAAAAAAACAPv/AAACAAAAAAACAPz/AAAAAAAAAAACAAQAAAAAAAAAAAACAAUAAAACAAAAAAACAAYAAAAAAAAAAAADAAUAAAAAAAAAAAD7//3/AAAAAAAAAAD8//7/AAAAAAAAAAD9////AAAAAAAAAAD+////AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAHAP//AAAAAAAAAAAGAP7/AAAAAAAAAAAFAP3/AAAAAAAAAAAEAPz/AAABAAAAAAADAPv/AAAAAAAAAAACAPr/AAAAAAAAAAABAPn/AAAAAAAAAAAAAPj/AAAAAAAAAAD7//z/AAAAAAAAAAD7//v/AAAAAAAAAAD8//v/AAAAAAAAAAAEAPv/AAAAAAAAAAAFAPv/AAAAAAAAAAAFAPz/AAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAD7/wQAAAAAAAAAAAD7/wUAAAAAAAAAAAD8/wUAAAAAAAAAAAD6/wMAAAAAAAAAAAD5/wIAAAAAAAAAAAD4/wEAAAAAAAAAAAD4////AAAAAAAAAAD5//7/AAAAAAAAAAD6//3/AAAAAAAAAAD9//r/AAAAAAAAAAD+//n/AAAAAAAAAAD///j/AAAAAAAAAAABAPj/AAAAAAAAAAACAPn/AAAAAAAAAAADAPr/AAAAAAAAAAAGAP3/AAAAAAAAAAAHAP7/AAAAAAAAAAAIAP//AAAAAAAAAAAIAAEAAAAAAAAAAAAHAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAADAAYAAAAAAAAAAAACAAcAAAAAAAAAAAABAAgAAAAAAAAAAAD//wgAAAAAAAAAAAD+/wcAAAAAAAAAAAD9/wYAAAAAAAAAAAA=")
 tile_set = ExtResource("7_8mymi")
 
-[node name="SpawnNest" parent="Structures" instance=ExtResource("1_kopsk")]
+[node name="SpawnNest" parent="Structures" unique_id=1451365350 instance=ExtResource("1_kopsk")]
 
-[node name="Bullets" type="Node2D" parent="."]
+[node name="Bullets" type="Node2D" parent="." unique_id=2080997394]
 
-[node name="Entities" type="Node2D" parent="."]
+[node name="Entities" type="Node2D" parent="." unique_id=1707112680]
 
-[node name="Player" parent="." instance=ExtResource("1_yrunw")]
+[node name="Player" parent="." unique_id=1930609550 instance=ExtResource("1_yrunw")]
 
-[node name="EmptinessBorder" type="StaticBody2D" parent="."]
+[node name="EmptinessBorder" type="StaticBody2D" parent="." unique_id=990729449]
 collision_layer = 26
 collision_mask = 0
 
-[node name="Render" type="Line2D" parent="EmptinessBorder"]
+[node name="Render" type="Line2D" parent="EmptinessBorder" unique_id=422141875]
 material = SubResource("ShaderMaterial_nrtoj")
 points = PackedVector2Array(5120, 0, 0, 5120, -5120, 0, 0, -5120)
 closed = true
@@ -171,16 +171,16 @@ texture = SubResource("GradientTexture2D_nrtoj")
 texture_mode = 2
 antialiased = true
 
-[node name="Line1" type="CollisionShape2D" parent="EmptinessBorder"]
+[node name="Line1" type="CollisionShape2D" parent="EmptinessBorder" unique_id=1331757415]
 shape = SubResource("SegmentShape2D_crsqw")
 
-[node name="Line2" type="CollisionShape2D" parent="EmptinessBorder"]
+[node name="Line2" type="CollisionShape2D" parent="EmptinessBorder" unique_id=1349253182]
 shape = SubResource("SegmentShape2D_8mymi")
 
-[node name="Line3" type="CollisionShape2D" parent="EmptinessBorder"]
+[node name="Line3" type="CollisionShape2D" parent="EmptinessBorder" unique_id=791572403]
 shape = SubResource("SegmentShape2D_0n6y5")
 
-[node name="Line4" type="CollisionShape2D" parent="EmptinessBorder"]
+[node name="Line4" type="CollisionShape2D" parent="EmptinessBorder" unique_id=51707042]
 shape = SubResource("SegmentShape2D_gqh78")
 
 [connection signal="timeout" from="WorldEnemySpawnAttempt" to="." method="spawn_attempt"]

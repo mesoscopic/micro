@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://degw88c3u4obt"]
+[gd_scene format=3 uid="uid://degw88c3u4obt"]
 
 [ext_resource type="Script" uid="uid://bd1nvuajonror" path="res://entities/enemies/trader_miniboss.gd" id="1_oj4li"]
 [ext_resource type="PackedScene" uid="uid://gcdt0wv5ke0r" path="res://fx/death/Miniboss.tscn" id="2_e0lej"]
@@ -97,7 +97,7 @@ scale_over_velocity_max = 1.0
 scale_over_velocity_curve = SubResource("CurveTexture_fd84u")
 alpha_curve = SubResource("CurveTexture_pbfcv")
 
-[node name="TraderMiniboss" type="CharacterBody2D" groups=["enemy"]]
+[node name="TraderMiniboss" type="CharacterBody2D" unique_id=1410673864 groups=["enemy"]]
 collision_layer = 270
 collision_mask = 2
 script = ExtResource("1_oj4li")
@@ -115,28 +115,28 @@ DEATH_ANIMATION = ExtResource("2_e0lej")
 max_hp = 300
 hp = 300
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=463878745]
 material = SubResource("ShaderMaterial_3crh1")
 scale = Vector2(50, 50)
 texture = SubResource("ImageTexture_uur07")
 
-[node name="AuraEffect" type="GPUParticles2D" parent="Render"]
+[node name="AuraEffect" type="GPUParticles2D" parent="Render" unique_id=1735088487]
 material = SubResource("ShaderMaterial_hn53a")
 scale = Vector2(0.02, 0.02)
 amount = 16
 lifetime = 0.25
 process_material = SubResource("ParticleProcessMaterial_mqcjo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1923430334]
 shape = SubResource("CircleShape2D_wt047")
 
-[node name="Attack" type="Timer" parent="."]
+[node name="Attack" type="Timer" parent="." unique_id=924849531]
 one_shot = true
 
-[node name="HurtEffect" parent="." instance=ExtResource("4_6dwnx")]
+[node name="HurtEffect" parent="." unique_id=780314374 instance=ExtResource("4_6dwnx")]
 scale = Vector2(1.5, 1.5)
 
-[node name="ActivateParticles" type="GPUParticles2D" parent="."]
+[node name="ActivateParticles" type="GPUParticles2D" parent="." unique_id=245548579]
 material = SubResource("ShaderMaterial_mqcjo")
 emitting = false
 amount = 200

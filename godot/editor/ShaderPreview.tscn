@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://by05sm0h6q6d0"]
+[gd_scene format=3 uid="uid://by05sm0h6q6d0"]
 
 [ext_resource type="Shader" uid="uid://qtjqkvonsm88" path="res://entities/player/upgrades/recklessness.gdshader" id="1_40mjc"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_mulxe"]
@@ -20,7 +20,7 @@ image = SubResource("Image_40mjc")
 script = ExtResource("2_mulxe")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
-[node name="ShaderPreview" type="Sprite2D"]
+[node name="ShaderPreview" type="Sprite2D" unique_id=211888608]
 material = SubResource("ShaderMaterial_bn4b0")
 scale = Vector2(50, 50)
 texture = SubResource("ImageTexture_s6ovp")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bbs436j75kwf1"]
+[gd_scene format=3 uid="uid://bbs436j75kwf1"]
 
 [ext_resource type="Script" uid="uid://ciq5glgt0dw1b" path="res://bullets/bomb.gd" id="1_fupv5"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_g4o4w"]
@@ -140,16 +140,16 @@ scale_min = 2.0
 scale_max = 4.0
 alpha_curve = SubResource("CurveTexture_1r46a")
 
-[node name="Bomb" type="Node2D"]
+[node name="Bomb" type="Node2D" unique_id=1586520519]
 script = ExtResource("1_fupv5")
 
-[node name="Rays" type="Sprite2D" parent="."]
+[node name="Rays" type="Sprite2D" parent="." unique_id=1127085432]
 material = SubResource("ShaderMaterial_1r46a")
 instance_shader_parameters/rays = 8
 scale = Vector2(60, 60)
 texture = SubResource("ImageTexture_dwxqm")
 
-[node name="Telegraph" type="Sprite2D" parent="."]
+[node name="Telegraph" type="Sprite2D" parent="." unique_id=337006013]
 modulate = Color(0.409777, 0.409777, 0.409777, 1)
 material = SubResource("ShaderMaterial_5t6lw")
 instance_shader_parameters/form_anim = 1.0
@@ -157,7 +157,7 @@ rotation = -1.5708
 scale = Vector2(20, 20)
 texture = SubResource("ImageTexture_d5h8y")
 
-[node name="Bomb" type="Sprite2D" parent="."]
+[node name="Bomb" type="Sprite2D" parent="." unique_id=788852838]
 modulate = Color(0.527052, 0.527052, 0.527052, 1)
 material = SubResource("ShaderMaterial_g4o4w")
 instance_shader_parameters/form_anim = 0.0
@@ -165,7 +165,7 @@ rotation = -1.5708
 scale = Vector2(20, 20)
 texture = SubResource("ImageTexture_5t6lw")
 
-[node name="Form" type="GPUParticles2D" parent="Bomb"]
+[node name="Form" type="GPUParticles2D" parent="Bomb" unique_id=207866148]
 material = SubResource("ShaderMaterial_d5h8y")
 rotation = 1.5708
 scale = Vector2(0.1, 0.1)
@@ -177,7 +177,7 @@ explosiveness = 0.5
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_18hej")
 
-[node name="Flash" type="GPUParticles2D" parent="."]
+[node name="Flash" type="GPUParticles2D" parent="." unique_id=74952529]
 material = SubResource("ShaderMaterial_dwxqm")
 instance_shader_parameters/rays = 8
 emitting = false
@@ -187,7 +187,7 @@ one_shot = true
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_b2thq")
 
-[node name="Explosion" type="GPUParticles2D" parent="."]
+[node name="Explosion" type="GPUParticles2D" parent="." unique_id=332775554]
 material = SubResource("ShaderMaterial_jhuci")
 emitting = false
 amount = 100

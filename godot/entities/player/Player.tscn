@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://b14dvx67drebc"]
+[gd_scene format=3 uid="uid://b14dvx67drebc"]
 
 [ext_resource type="Script" uid="uid://de3rlx01ibq3d" path="res://entities/player/player.gd" id="1_1im8n"]
 [ext_resource type="PackedScene" uid="uid://wwjxod2at3t3" path="res://entities/player/Camera.tscn" id="2_nkqiv"]
@@ -441,39 +441,37 @@ scale_max = 200.0
 scale_curve = SubResource("CurveTexture_4fbvh")
 alpha_curve = SubResource("CurveTexture_j531f")
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=1003165829]
 collision_layer = 16
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_1im8n")
 invulnerability_time = 1.0
 
-[node name="Camera" parent="." instance=ExtResource("2_nkqiv")]
+[node name="Camera" parent="." unique_id=2078768073 instance=ExtResource("2_nkqiv")]
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=1233594605]
 material = SubResource("ShaderMaterial_7lms1")
 scale = Vector2(20, 20)
 texture = SubResource("ImageTexture_mqro2")
 
-[node name="Hitbox" type="CollisionPolygon2D" parent="."]
+[node name="Hitbox" type="CollisionPolygon2D" parent="." unique_id=1050578866]
 polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)
 
-[node name="ShootCooldown" type="Timer" parent="."]
+[node name="ShootCooldown" type="Timer" parent="." unique_id=561330118]
 one_shot = true
 autostart = true
 
-[node name="HurtEffect" parent="." instance=ExtResource("6_q57vx")]
+[node name="HurtEffect" parent="." unique_id=706174452 instance=ExtResource("6_q57vx")]
 
-[node name="FundsDisplay" type="Node2D" parent="."]
+[node name="FundsDisplay" type="Node2D" parent="." unique_id=1885807921]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(0, 30)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="FundsDisplay"]
-libraries = {
-&"": SubResource("AnimationLibrary_oihyf")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FundsDisplay" unique_id=1878479488]
+libraries/ = SubResource("AnimationLibrary_oihyf")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="FundsDisplay"]
+[node name="HBoxContainer" type="HBoxContainer" parent="FundsDisplay" unique_id=93735232]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -487,13 +485,13 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="FundsDisplay/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="FundsDisplay/HBoxContainer" unique_id=964466417]
 material = SubResource("ShaderMaterial_miirx")
 layout_mode = 2
 texture = SubResource("GradientTexture2D_oihyf")
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="FundsDisplay/HBoxContainer"]
+[node name="Label" type="Label" parent="FundsDisplay/HBoxContainer" unique_id=552378368]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -501,7 +499,7 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 9
 text = "0"
 
-[node name="Ring" type="GPUParticles2D" parent="."]
+[node name="Ring" type="GPUParticles2D" parent="." unique_id=699958429]
 process_mode = 3
 material = SubResource("ShaderMaterial_ufbvs")
 emitting = false
@@ -510,25 +508,25 @@ lifetime = 4.0
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_bb7xv")
 
-[node name="DeathParticles" type="GPUParticles2D" parent="."]
+[node name="DeathParticles" type="GPUParticles2D" parent="." unique_id=1413579471]
 process_mode = 3
 emitting = false
 amount = 256
 process_material = SubResource("ParticleProcessMaterial_ufbvs")
 
-[node name="Afterimage" type="GPUParticles2D" parent="."]
+[node name="Afterimage" type="GPUParticles2D" parent="." unique_id=30019570]
 material = SubResource("ShaderMaterial_q57vx")
 emitting = false
 amount = 30
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_2rv2u")
 
-[node name="Dashline" type="GPUParticles2D" parent="."]
+[node name="Dashline" type="GPUParticles2D" parent="." unique_id=1770594795]
 emitting = false
 amount = 80
 process_material = SubResource("ParticleProcessMaterial_kwk8g")
 
-[node name="DashRestore" type="GPUParticles2D" parent="."]
+[node name="DashRestore" type="GPUParticles2D" parent="." unique_id=1370960753]
 emitting = false
 amount = 32
 lifetime = 0.5
@@ -537,7 +535,7 @@ explosiveness = 1.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_ax5yc")
 
-[node name="DashRecharge" type="GPUParticles2D" parent="."]
+[node name="DashRecharge" type="GPUParticles2D" parent="." unique_id=583727337]
 material = SubResource("ShaderMaterial_2rv2u")
 emitting = false
 amount = 1
@@ -547,7 +545,7 @@ explosiveness = 1.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_d168t")
 
-[node name="RedirectFlash" type="GPUParticles2D" parent="."]
+[node name="RedirectFlash" type="GPUParticles2D" parent="." unique_id=353003495]
 material = SubResource("ShaderMaterial_ak4un")
 instance_shader_parameters/rays = 4
 emitting = false
@@ -556,7 +554,7 @@ lifetime = 0.25
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_2a181")
 
-[node name="RedirectBurst" type="GPUParticles2D" parent="."]
+[node name="RedirectBurst" type="GPUParticles2D" parent="." unique_id=1517105932]
 material = SubResource("ShaderMaterial_1ms0h")
 emitting = false
 amount = 100
@@ -568,7 +566,7 @@ trail_lifetime = 0.1
 trail_sections = 4
 process_material = SubResource("ParticleProcessMaterial_aubru")
 
-[node name="SurgeEffect" type="GPUParticles2D" parent="."]
+[node name="SurgeEffect" type="GPUParticles2D" parent="." unique_id=1598147374]
 emitting = false
 amount = 100
 lifetime = 0.5
@@ -578,7 +576,7 @@ trail_lifetime = 0.1
 trail_sections = 4
 process_material = SubResource("ParticleProcessMaterial_aubru")
 
-[node name="BigFlash" type="GPUParticles2D" parent="."]
+[node name="BigFlash" type="GPUParticles2D" parent="." unique_id=318991417]
 material = SubResource("ShaderMaterial_mq27t")
 emitting = false
 amount = 1
@@ -589,29 +587,29 @@ fixed_fps = 60
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_j531f")
 
-[node name="DashArea" type="Area2D" parent="."]
+[node name="DashArea" type="Area2D" parent="." unique_id=586860702]
 collision_layer = 2
 collision_mask = 8
 input_pickable = false
 monitoring = false
 monitorable = false
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DashArea"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DashArea" unique_id=451427585]
 position = Vector2(9.53674e-07, 9.53674e-07)
 scale = Vector2(1.25, 1.25)
 polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)
 
-[node name="DashDuration" type="Timer" parent="."]
+[node name="DashDuration" type="Timer" parent="." unique_id=1132698867]
 wait_time = 0.15
 one_shot = true
 
-[node name="DashCooldown" type="Timer" parent="."]
+[node name="DashCooldown" type="Timer" parent="." unique_id=577362893]
 one_shot = true
 
-[node name="SurgeCooldown" type="Timer" parent="."]
+[node name="SurgeCooldown" type="Timer" parent="." unique_id=534013762]
 one_shot = true
 
-[node name="Evasion" type="Timer" parent="."]
+[node name="Evasion" type="Timer" parent="." unique_id=1446867932]
 wait_time = 2.5
 one_shot = true
 

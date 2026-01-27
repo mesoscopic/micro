@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0qyylco7xgk4"]
+[gd_scene format=3 uid="uid://c0qyylco7xgk4"]
 
 [ext_resource type="Script" uid="uid://c57nhmckfrbx8" path="res://entities/enemies/turret.gd" id="1_n7j26"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="3_cduuy"]
@@ -26,7 +26,7 @@ metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 [sub_resource type="CircleShape2D" id="CircleShape2D_u77d8"]
 radius = 11.0
 
-[node name="Turret" type="CharacterBody2D" groups=["enemy"]]
+[node name="Turret" type="CharacterBody2D" unique_id=281620760 groups=["enemy"]]
 collision_layer = 264
 collision_mask = 259
 script = ExtResource("1_n7j26")
@@ -39,17 +39,17 @@ stagger_time = 0.0
 max_hp = 50
 hp = 50
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=1151795698]
 material = SubResource("ShaderMaterial_cduuy")
 scale = Vector2(22, 22)
 texture = SubResource("ImageTexture_vd4d6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1986780415]
 shape = SubResource("CircleShape2D_u77d8")
 
-[node name="HurtEffect" parent="." instance=ExtResource("6_myqr2")]
+[node name="HurtEffect" parent="." unique_id=1656310595 instance=ExtResource("6_myqr2")]
 
-[node name="FiringCooldown" type="Timer" parent="."]
+[node name="FiringCooldown" type="Timer" parent="." unique_id=1323523649]
 wait_time = 2.0
 one_shot = true
 autostart = true

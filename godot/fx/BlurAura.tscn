@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://by0txtbwl43n8"]
+[gd_scene format=3 uid="uid://by0txtbwl43n8"]
 
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="1_e0qx5"]
 [ext_resource type="Shader" uid="uid://dp8obg3538jw8" path="res://fx/blur_aura.gdshader" id="1_w8v4l"]
@@ -20,9 +20,9 @@ image = SubResource("Image_w8v4l")
 script = ExtResource("1_e0qx5")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
-[node name="BlurAura" type="BackBufferCopy"]
+[node name="BlurAura" type="BackBufferCopy" unique_id=1947845646]
 copy_mode = 2
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=1660629802]
 material = SubResource("ShaderMaterial_w8v4l")
 texture = SubResource("ImageTexture_eipgk")

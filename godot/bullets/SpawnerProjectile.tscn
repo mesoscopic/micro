@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://tv3xkxmljps6"]
+[gd_scene format=3 uid="uid://tv3xkxmljps6"]
 
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="1_25q7e"]
 [ext_resource type="Script" uid="uid://dgntbp3ccqege" path="res://bullets/spawner_projectile.gd" id="1_gk21p"]
@@ -60,16 +60,16 @@ scale_max = 10.0
 scale_curve = SubResource("CurveTexture_ioqel")
 alpha_curve = SubResource("CurveTexture_oxxt1")
 
-[node name="SpawnerProjectile" type="Node2D"]
+[node name="SpawnerProjectile" type="Node2D" unique_id=1407619753]
 script = ExtResource("1_gk21p")
 
-[node name="Bubbles" type="GPUParticles2D" parent="."]
+[node name="Bubbles" type="GPUParticles2D" parent="." unique_id=1039986701]
 material = SubResource("ShaderMaterial_gk21p")
 amount = 20
 lifetime = 0.75
 process_material = SubResource("ParticleProcessMaterial_ob4xr")
 
-[node name="ExplosionParticles" type="GPUParticles2D" parent="."]
+[node name="ExplosionParticles" type="GPUParticles2D" parent="." unique_id=1152088553]
 z_index = 1
 material = SubResource("ShaderMaterial_s52qs")
 emitting = false
@@ -79,7 +79,7 @@ one_shot = true
 explosiveness = 0.5
 process_material = SubResource("ParticleProcessMaterial_rkbpc")
 
-[node name="Expiry" type="Timer" parent="."]
+[node name="Expiry" type="Timer" parent="." unique_id=1031724755]
 one_shot = true
 
 [connection signal="timeout" from="Expiry" to="." method="_on_expiry_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://q68wlnumgicy"]
+[gd_scene format=3 uid="uid://q68wlnumgicy"]
 
 [ext_resource type="Script" uid="uid://dtr18777bdch4" path="res://bullets/player_damage_cloud.gd" id="1_v183n"]
 [ext_resource type="PackedScene" uid="uid://dv7b18gnykjm7" path="res://fx/GlowAura.tscn" id="2_1a3bb"]
@@ -6,16 +6,16 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mfn7c"]
 size = Vector2(200, 200)
 
-[node name="PlayerDamageCloud" type="Area2D"]
+[node name="PlayerDamageCloud" type="Area2D" unique_id=225724422]
 z_index = 2
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("1_v183n")
 
-[node name="GlowAura" parent="." instance=ExtResource("2_1a3bb")]
+[node name="GlowAura" parent="." unique_id=822637763 instance=ExtResource("2_1a3bb")]
 scale = Vector2(300, 300)
 brightness = 1.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1716119001]
 rotation = 0.7853982
 shape = SubResource("RectangleShape2D_mfn7c")

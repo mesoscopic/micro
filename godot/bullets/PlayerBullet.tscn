@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dnrcdtyawedjb"]
+[gd_scene format=3 uid="uid://dnrcdtyawedjb"]
 
 [ext_resource type="Script" uid="uid://dhdyju55p570r" path="res://bullets/telegraphed_bullet.gd" id="1_gex5j"]
 [ext_resource type="Shader" uid="uid://csnb2kx6uvrj6" path="res://bullets/player_bullet.gdshader" id="1_slg20"]
@@ -83,7 +83,7 @@ scale_max = 50.0
 scale_curve = SubResource("CurveTexture_ljchb")
 alpha_curve = SubResource("CurveTexture_foti4")
 
-[node name="Area2D" type="Area2D"]
+[node name="Area2D" type="Area2D" unique_id=2091970878]
 process_physics_priority = 1
 collision_layer = 2
 collision_mask = 9
@@ -93,20 +93,20 @@ monitorable = false
 script = ExtResource("1_gex5j")
 is_player = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=356709937]
 material = SubResource("ShaderMaterial_epu1g")
 instance_shader_parameters/dissolve_anim = 0.0
 instance_shader_parameters/form_anim = 0.0
 scale = Vector2(10, 10)
 texture = SubResource("ImageTexture_7jx42")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=185014168]
 polygon = PackedVector2Array(0, -4, -2, 0, 0, 4, 2, 0)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=134442469]
 one_shot = true
 
-[node name="Form" type="GPUParticles2D" parent="."]
+[node name="Form" type="GPUParticles2D" parent="." unique_id=1498775001]
 emitting = false
 amount = 10
 lifetime = 0.25
@@ -115,7 +115,7 @@ explosiveness = 0.5
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_lyp1f")
 
-[node name="Impact" type="GPUParticles2D" parent="."]
+[node name="Impact" type="GPUParticles2D" parent="." unique_id=1662294134]
 material = SubResource("ShaderMaterial_yt3jv")
 position = Vector2(0, 4)
 emitting = false

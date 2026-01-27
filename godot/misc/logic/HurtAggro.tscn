@@ -1,11 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://diissjbt0i6uj"]
+[gd_scene format=3 uid="uid://diissjbt0i6uj"]
 
 [ext_resource type="Script" uid="uid://c8s45bd77dlay" path="res://misc/logic/hurt_aggro.gd" id="1_oitru"]
 
-[node name="HurtAggro" type="Node2D"]
+[node name="HurtAggro" type="Node2D" unique_id=662292762]
 script = ExtResource("1_oitru")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=477159676]
 one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

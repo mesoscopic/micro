@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b3bagn8onbpyl"]
+[gd_scene format=3 uid="uid://b3bagn8onbpyl"]
 
 [ext_resource type="Shader" uid="uid://bgq6jdp5yiqxd" path="res://bullets/mine_bullet.gdshader" id="1_mv8n6"]
 [ext_resource type="Script" uid="uid://h2fy8caf4nf2" path="res://bullets/mine_bullet.gd" id="1_yenuu"]
@@ -105,35 +105,33 @@ scale_min = 4.0
 scale_max = 6.0
 alpha_curve = SubResource("CurveTexture_8us7s")
 
-[node name="MineBullet" type="Area2D"]
+[node name="MineBullet" type="Area2D" unique_id=1218222481]
 collision_layer = 6
 collision_mask = 25
 input_pickable = false
 script = ExtResource("1_yenuu")
 
-[node name="Trail" type="GPUParticles2D" parent="."]
+[node name="Trail" type="GPUParticles2D" parent="." unique_id=1395799546]
 material = SubResource("ShaderMaterial_53iy1")
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_rjg2h")
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=510754644]
 material = SubResource("ShaderMaterial_aedmc")
 scale = Vector2(16, 16)
 texture = SubResource("ImageTexture_emdy5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=38449893]
 shape = SubResource("CircleShape2D_6k7aj")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=171652383]
 one_shot = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_7ldk5")
-}
-autoplay = "RESET"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1998371385]
+libraries/ = SubResource("AnimationLibrary_7ldk5")
+autoplay = &"RESET"
 
-[node name="Particles" type="GPUParticles2D" parent="."]
+[node name="Particles" type="GPUParticles2D" parent="." unique_id=1737185193]
 material = SubResource("ShaderMaterial_emdy5")
 emitting = false
 amount = 10

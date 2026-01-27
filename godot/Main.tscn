@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b3ruxmindyv4y"]
+[gd_scene format=3 uid="uid://b3ruxmindyv4y"]
 
 [ext_resource type="PackedScene" uid="uid://ba8r52rcgnydu" path="res://ui/Splash.tscn" id="1_ijsoa"]
 [ext_resource type="Script" uid="uid://d1jr2f50q66j1" path="res://main.gd" id="1_j1yuf"]
@@ -138,7 +138,7 @@ _data = {
 &"wipe_out": SubResource("Animation_lpyua")
 }
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" unique_id=1594491231]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -149,24 +149,24 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_j1yuf")
 
-[node name="Splash" parent="." instance=ExtResource("1_ijsoa")]
+[node name="Splash" parent="." unique_id=26332072 instance=ExtResource("1_ijsoa")]
 layout_mode = 1
 size_flags_stretch_ratio = 0.0
 
-[node name="Game" type="Node2D" parent="."]
+[node name="Game" type="Node2D" parent="." unique_id=713481312]
 process_mode = 1
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=784875657]
 
-[node name="TradeOverlay" parent="UI" instance=ExtResource("3_fos0i")]
+[node name="TradeOverlay" parent="UI" unique_id=1248998001 instance=ExtResource("3_fos0i")]
 
-[node name="DebugOverlay" parent="UI" instance=ExtResource("6_hkwgg")]
+[node name="DebugOverlay" parent="UI" unique_id=1585700374 instance=ExtResource("6_hkwgg")]
 visible = false
 
-[node name="RunTimer" parent="UI" instance=ExtResource("5_3dxm6")]
+[node name="RunTimer" parent="UI" unique_id=1534677852 instance=ExtResource("5_3dxm6")]
 visible = false
 
-[node name="MouseInputEater" type="Control" parent="UI"]
+[node name="MouseInputEater" type="Control" parent="UI" unique_id=181250630]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -174,9 +174,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScreenWipe" type="CanvasLayer" parent="."]
+[node name="ScreenWipe" type="CanvasLayer" parent="." unique_id=1005794770]
 
-[node name="Wipe" type="ColorRect" parent="ScreenWipe"]
+[node name="Wipe" type="ColorRect" parent="ScreenWipe" unique_id=527449510]
 material = SubResource("ShaderMaterial_fos0i")
 anchors_preset = 15
 anchor_right = 1.0
@@ -186,7 +186,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="StatusMessage" type="Label" parent="ScreenWipe"]
+[node name="StatusMessage" type="Label" parent="ScreenWipe" unique_id=2111178906]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -202,9 +202,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 
-[node name="ScreenWipeAnimation" type="AnimationPlayer" parent="ScreenWipe"]
-libraries = {
-&"": SubResource("AnimationLibrary_2awcr")
-}
+[node name="ScreenWipeAnimation" type="AnimationPlayer" parent="ScreenWipe" unique_id=211779417]
+libraries/ = SubResource("AnimationLibrary_2awcr")
 
 [connection signal="finished" from="Splash" to="." method="_on_splash_finished"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://wwjxod2at3t3"]
+[gd_scene format=3 uid="uid://wwjxod2at3t3"]
 
 [ext_resource type="Script" uid="uid://chy20mxivcjvj" path="res://misc/logic/global_particles.gd" id="1_14tc0"]
 [ext_resource type="Script" uid="uid://dy4qevtbawxhk" path="res://entities/player/camera.gd" id="1_u8pla"]
@@ -88,41 +88,41 @@ shader_parameter/cracks = ExtResource("4_c0i7a")
 shader_parameter/center = Vector2(0.5, 0.5)
 shader_parameter/progress = 0.0
 
-[node name="Camera" type="Camera2D"]
+[node name="Camera" type="Camera2D" unique_id=782164313]
 zoom = Vector2(2, 2)
 position_smoothing_speed = 10.0
 script = ExtResource("1_u8pla")
 
-[node name="GlobalParticles" type="Node2D" parent="."]
+[node name="GlobalParticles" type="Node2D" parent="." unique_id=1836002379]
 script = ExtResource("1_14tc0")
 
-[node name="UpdateAmounts" type="Timer" parent="GlobalParticles"]
+[node name="UpdateAmounts" type="Timer" parent="GlobalParticles" unique_id=298840705]
 wait_time = 1.5
 autostart = true
 
-[node name="Spores" type="GPUParticles2D" parent="GlobalParticles"]
+[node name="Spores" type="GPUParticles2D" parent="GlobalParticles" unique_id=1452823661]
 rotation = -2.48884
 emitting = false
 amount = 100
 lifetime = 15.0
 process_material = SubResource("ParticleProcessMaterial_gbpsr")
 
-[node name="Emptiness" type="GPUParticles2D" parent="GlobalParticles"]
+[node name="Emptiness" type="GPUParticles2D" parent="GlobalParticles" unique_id=1540989691]
 material = SubResource("ShaderMaterial_ebv5w")
 emitting = false
 amount = 50
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_7j4ev")
 
-[node name="Peace" type="GPUParticles2D" parent="GlobalParticles"]
+[node name="Peace" type="GPUParticles2D" parent="GlobalParticles" unique_id=586063773]
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_diili")
 
-[node name="Overlays" type="CanvasLayer" parent="."]
+[node name="Overlays" type="CanvasLayer" parent="." unique_id=24665789]
 layer = 0
 
-[node name="HurtEffect" type="ColorRect" parent="Overlays"]
+[node name="HurtEffect" type="ColorRect" parent="Overlays" unique_id=1152541722]
 visible = false
 material = SubResource("ShaderMaterial_u8pla")
 anchors_preset = 15

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://diqdkbr3crus3"]
+[gd_scene format=3 uid="uid://diqdkbr3crus3"]
 
 [ext_resource type="Script" uid="uid://bgocxycd6xam0" path="res://fx/death/enemy.gd" id="1_xb5g8"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="2_gkxl4"]
@@ -77,25 +77,25 @@ image = SubResource("Image_xbttu")
 script = ExtResource("3_xbttu")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
-[node name="EnemyDeathAnimation" type="Node2D"]
+[node name="EnemyDeathAnimation" type="Node2D" unique_id=1863750762]
 script = ExtResource("1_xb5g8")
 
-[node name="FundParticles" type="GPUParticles2D" parent="."]
+[node name="FundParticles" type="GPUParticles2D" parent="." unique_id=335460181]
 material = SubResource("ShaderMaterial_yor8o")
 amount = 25
 process_material = SubResource("ParticleProcessMaterial_i72it")
 
-[node name="ExplosionParticles" type="GPUParticles2D" parent="."]
+[node name="ExplosionParticles" type="GPUParticles2D" parent="." unique_id=121641181]
 material = SubResource("ShaderMaterial_sxsfr")
 amount = 50
 lifetime = 0.75
 process_material = SubResource("ParticleProcessMaterial_j114o")
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=1563428192]
 material = SubResource("ShaderMaterial_2nhur")
 texture = SubResource("ImageTexture_yor8o")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=712503113]
 wait_time = 2.0
 autostart = true
 

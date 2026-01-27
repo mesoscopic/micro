@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cshcf4y2ntrp5"]
+[gd_scene format=3 uid="uid://cshcf4y2ntrp5"]
 
 [ext_resource type="Script" uid="uid://rv0jyu11oox2" path="res://entities/world/nest_slot.gd" id="1_3cvli"]
 [ext_resource type="Shader" uid="uid://dxgq0lr1hup54" path="res://entities/world/nest_slot.gdshader" id="2_q7nok"]
@@ -69,22 +69,22 @@ gradient = SubResource("Gradient_imhq2")
 width = 25
 height = 25
 
-[node name="NestSlot" type="Node2D"]
+[node name="NestSlot" type="Node2D" unique_id=59545984]
 script = ExtResource("1_3cvli")
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=164073827]
 material = SubResource("ShaderMaterial_4ngyy")
 scale = Vector2(20, 20)
 texture = SubResource("ImageTexture_mmf4l")
 
-[node name="PutParticles" type="GPUParticles2D" parent="."]
+[node name="PutParticles" type="GPUParticles2D" parent="." unique_id=1682389590]
 emitting = false
 amount = 50
 one_shot = true
 explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_x43o2")
 
-[node name="Selection" type="Sprite2D" parent="."]
+[node name="Selection" type="Sprite2D" parent="." unique_id=27380859]
 visible = false
 material = SubResource("ShaderMaterial_x43o2")
 texture = SubResource("GradientTexture2D_6gk50")

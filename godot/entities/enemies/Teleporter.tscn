@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cr70dq40ddv00"]
+[gd_scene format=3 uid="uid://cr70dq40ddv00"]
 
 [ext_resource type="Script" uid="uid://5gvph6vdmik8" path="res://entities/enemies/teleporter.gd" id="1_0c61a"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_okfon"]
@@ -54,7 +54,7 @@ scale_max = 18.0
 scale_curve = SubResource("CurveTexture_df432")
 alpha_curve = SubResource("CurveTexture_meybd")
 
-[node name="Teleporter" type="CharacterBody2D" groups=["enemy"]]
+[node name="Teleporter" type="CharacterBody2D" unique_id=1758711859 groups=["enemy"]]
 collision_layer = 264
 collision_mask = 259
 script = ExtResource("1_0c61a")
@@ -65,17 +65,17 @@ max_hp = 50
 hp = 50
 metadata/_custom_type_script = "uid://oy7qpe47ti6v"
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=165170964]
 material = SubResource("ShaderMaterial_up14l")
 scale = Vector2(18, 18)
 texture = SubResource("ImageTexture_ltnij")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1282732042]
 shape = SubResource("CircleShape2D_x6fk6")
 
-[node name="HurtEffect" parent="." instance=ExtResource("6_df432")]
+[node name="HurtEffect" parent="." unique_id=365741789 instance=ExtResource("6_df432")]
 
-[node name="EnemyTeleport" type="GPUParticles2D" parent="."]
+[node name="EnemyTeleport" type="GPUParticles2D" parent="." unique_id=1590744784]
 material = SubResource("ShaderMaterial_umkog")
 emitting = false
 amount = 30
@@ -84,7 +84,7 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_0qes3")
 
-[node name="FiringCooldown" type="Timer" parent="."]
+[node name="FiringCooldown" type="Timer" parent="." unique_id=383600951]
 wait_time = 1.2
 one_shot = true
 autostart = true

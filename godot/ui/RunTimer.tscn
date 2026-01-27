@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cktmmodlmlnm3"]
+[gd_scene format=3 uid="uid://cktmmodlmlnm3"]
 
 [ext_resource type="Script" uid="uid://duftrg5478yk6" path="res://ui/run_timer.gd" id="1_yqcma"]
 
@@ -7,7 +7,7 @@ font_size = 30
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[node name="RunTimer" type="Control"]
+[node name="RunTimer" type="Control" unique_id=497131227]
 process_mode = 1
 z_index = 99
 layout_mode = 3
@@ -17,7 +17,7 @@ anchor_right = 0.5
 grow_horizontal = 2
 script = ExtResource("1_yqcma")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=253543651]
 visible = false
 layout_mode = 1
 anchors_preset = 5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://v7mv45nprvqq"]
+[gd_scene format=3 uid="uid://v7mv45nprvqq"]
 
 [ext_resource type="Script" uid="uid://3pdmhg11c70e" path="res://bullets/bullet.gd" id="1_n8fy3"]
 [ext_resource type="Shader" uid="uid://dnld05ugc5ccp" path="res://bullets/enemy_bullet.gdshader" id="2_wo8ob"]
@@ -80,31 +80,29 @@ damping_max = 100.0
 scale_min = 0.5
 alpha_curve = SubResource("CurveTexture_7vn56")
 
-[node name="Area2D" type="Area2D"]
+[node name="Area2D" type="Area2D" unique_id=1319679655]
 collision_layer = 4
 collision_mask = 17
 input_pickable = false
 script = ExtResource("1_n8fy3")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=529854431]
 material = SubResource("ShaderMaterial_iim64")
 instance_shader_parameters/dissolve_anim = 0.0
 instance_shader_parameters/form_anim = 1.0
 scale = Vector2(10, 10)
 texture = SubResource("ImageTexture_rjho7")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=783628947]
 polygon = PackedVector2Array(0, -4, -2, 0, 0, 4, 2, 0)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=911914016]
 one_shot = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_7vn56")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=526001673]
+libraries/ = SubResource("AnimationLibrary_7vn56")
 
-[node name="Particles" type="GPUParticles2D" parent="."]
+[node name="Particles" type="GPUParticles2D" parent="." unique_id=159144791]
 emitting = false
 amount = 10
 lifetime = 0.25

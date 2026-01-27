@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b8pmrbiipjcw"]
+[gd_scene format=3 uid="uid://b8pmrbiipjcw"]
 
 [ext_resource type="Script" uid="uid://uwuf3jgxovlg" path="res://entities/world/mine.gd" id="1_3o7ls"]
 [ext_resource type="Shader" uid="uid://pt43kt15p8bg" path="res://entities/world/mine.gdshader" id="1_tdar8"]
@@ -101,26 +101,26 @@ scale_max = 80.0
 scale_curve = SubResource("CurveTexture_k1wgr")
 alpha_curve = SubResource("CurveTexture_5t6lw")
 
-[node name="Mine" type="CharacterBody2D"]
+[node name="Mine" type="CharacterBody2D" unique_id=923440312]
 collision_layer = 24
 collision_mask = 6
 script = ExtResource("1_3o7ls")
 invulnerability_time = 0.0
 deplete_hp = false
 
-[node name="Render" type="Sprite2D" parent="."]
+[node name="Render" type="Sprite2D" parent="." unique_id=641671956]
 material = SubResource("ShaderMaterial_4rrc6")
 scale = Vector2(24, 24)
 texture = SubResource("ImageTexture_euatk")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=52074846]
 polygon = PackedVector2Array(0, -11, 9.5, -5.5, 9.5, 5.5, 0, 11, -9.5, 5.5, -9.5, -5.5)
 
-[node name="Recharge" type="Timer" parent="."]
+[node name="Recharge" type="Timer" parent="." unique_id=1477295377]
 wait_time = 2.0
 one_shot = true
 
-[node name="Flash" type="GPUParticles2D" parent="."]
+[node name="Flash" type="GPUParticles2D" parent="." unique_id=1498842430]
 material = SubResource("ShaderMaterial_5efec")
 instance_shader_parameters/rays = 6
 emitting = false
@@ -130,14 +130,14 @@ one_shot = true
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_i2vsw")
 
-[node name="Charging" type="GPUParticles2D" parent="."]
+[node name="Charging" type="GPUParticles2D" parent="." unique_id=1398337423]
 material = SubResource("ShaderMaterial_euatk")
 emitting = false
 amount = 12
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_4rrc6")
 
-[node name="Charged" type="GPUParticles2D" parent="."]
+[node name="Charged" type="GPUParticles2D" parent="." unique_id=627529717]
 material = SubResource("ShaderMaterial_8ov3f")
 emitting = false
 amount = 1

@@ -300,6 +300,7 @@ func generate_world_experimental():
 
 func place(id: String, pos: Vector2i, force := false):
 	var pattern: TileMapPattern = load("res://world/patterns/%s.tres" % id)
+	@warning_ignore("integer_division")
 	var origin := pos-pattern.get_size()/2
 	if !force:
 		for cell in pattern.get_used_cells():
