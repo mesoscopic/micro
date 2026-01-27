@@ -44,8 +44,6 @@ func _input(event):
 		get_tree().paused = frozen
 	elif event.is_action_pressed("debug_print"):
 		print("\n== BREAK ==")
-	elif event.is_action_pressed("debug_tp"):
-		Micro.player.global_position = Micro.world.biomes.find_key(Micro.world.Biome.MINEFIELD) * 20. #get_tree().get_first_node_in_group("boss").global_position
 	elif event.is_action_pressed("debug_experimental_worldgen"):
 		debug_experimental_worldgen = !debug_experimental_worldgen
 
