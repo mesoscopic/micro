@@ -15,6 +15,7 @@ shader = ExtResource("2_h1bdy")
 shader_parameter/seed = 0
 shader_parameter/FREQUENCY = 10.0
 shader_parameter/JITTER = 1.0
+shader_parameter/EUCLIDEAN_DISTANCE = false
 
 [sub_resource type="Curve" id="Curve_1imk8"]
 _data = [Vector2(0, 0), 0.0, 6.42857, 0, 0, Vector2(0.486667, 1), 0.0, -3.64992, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

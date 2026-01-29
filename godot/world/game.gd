@@ -296,7 +296,14 @@ func generate_world_legacy():
 				place("%s" % Micro.roll(features), tile)
 
 func generate_world_experimental():
-	pass
+	await Micro.worldgen_status("Fracturing...")
+	$BiomeMap/ColorRect.material.set("shader_parameter/seed", world_seed)
+	$BiomeMap/ColorRect.material.set("shader_parameter/FREQUENCY", 16.)
+	$BiomeMap/ColorRect.material.set("shader_parameter/EUCLIDEAN_DISTANCE", true)
+	$BiomeMap.render_target_update_mode = SubViewport.UPDATE_ONCE
+	var biome_texture: ViewportTexture = $BiomeMap.get_texture()
+	await RenderingServer.frame_post_draw
+	biome_map = biome_texture.get_image()
 
 func place(id: String, pos: Vector2i, force := false):
 	var pattern: TileMapPattern = load("res://world/patterns/%s.tres" % id)

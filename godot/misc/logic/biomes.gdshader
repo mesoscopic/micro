@@ -5,6 +5,7 @@ uniform int seed;
 // noise parameters
 uniform float FREQUENCY = 8.;
 uniform float JITTER = 1.;
+uniform bool EUCLIDEAN_DISTANCE = false;
 
 const int PRIME_X = 501125321;
 const int PRIME_Y = 1136930381;
@@ -56,6 +57,7 @@ int hash(int s, int xPrimed, int yPrimed){
 }
 
 void fragment() {
+	if (abs(UV.x-.5)+abs(UV.y-.5)>.5) discard;
 	vec2 uv = UV * FREQUENCY;
 
 	int xr = int(round(uv.x));
@@ -74,7 +76,7 @@ void fragment() {
 			int idx = h & (255 << 1);
 			float vecX = float(xi) - uv.x + RAND_VECS_2D[idx] * cellularJitter;
 			float vecY = float(yi) - uv.y + RAND_VECS_2D[idx | 1] * cellularJitter;
-			float newDistance = abs(vecX) + abs(vecY);
+			float newDistance = EUCLIDEAN_DISTANCE?length(vec2(vecX, vecY)):(abs(vecX) + abs(vecY));
 
 			distance1 = max(min(distance1, newDistance), distance0);
 			if(newDistance < distance0){
