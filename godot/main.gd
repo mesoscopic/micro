@@ -33,7 +33,6 @@ func _on_start_run():
 	var world = load("res://world/World.tscn").instantiate()
 	Micro.world = world
 	world.random.seed = world.world_seed
-	world.experimental = Micro.debug_experimental_worldgen
 	$Game.add_child(world)
 	await world.generate_world()
 	print("Worldgen finished in %s microseconds" % (Time.get_ticks_usec()-start_time))

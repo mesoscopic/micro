@@ -4,7 +4,6 @@ class_name World
 
 var random: RandomNumberGenerator = RandomNumberGenerator.new()
 var world_seed: int = randi()
-var experimental := false
 
 var second_trader_miniboss := false
 var dungeon_locations: Array[Vector2i] = []
@@ -177,10 +176,14 @@ func _ready() -> void:
 # --------------
 
 func generate_world():
-	if experimental:
-		await generate_world_experimental()
-	else:
-		await generate_world_legacy()
+	await Micro.worldgen_status("Fracturing...")
+	$BiomeMap/ColorRect.material.set("shader_parameter/seed", world_seed)
+	$BiomeMap/ColorRect.material.set("shader_parameter/FREQUENCY", 16.)
+	$BiomeMap/ColorRect.material.set("shader_parameter/EUCLIDEAN_DISTANCE", true)
+	$BiomeMap.render_target_update_mode = SubViewport.UPDATE_ONCE
+	var biome_texture: ViewportTexture = $BiomeMap.get_texture()
+	await RenderingServer.frame_post_draw
+	biome_map = biome_texture.get_image()
 	if Micro.get_config("debug", "save_debug_map", false):
 		await Micro.worldgen_status("Saving debug map...")
 		var map := Image.create_empty(512, 512, false, Image.FORMAT_RGB8)
@@ -295,16 +298,6 @@ func generate_world_legacy():
 				features.add_item("mine_caches", 3)
 				place("%s" % Micro.roll(features), tile)
 
-func generate_world_experimental():
-	await Micro.worldgen_status("Fracturing...")
-	$BiomeMap/ColorRect.material.set("shader_parameter/seed", world_seed)
-	$BiomeMap/ColorRect.material.set("shader_parameter/FREQUENCY", 16.)
-	$BiomeMap/ColorRect.material.set("shader_parameter/EUCLIDEAN_DISTANCE", true)
-	$BiomeMap.render_target_update_mode = SubViewport.UPDATE_ONCE
-	var biome_texture: ViewportTexture = $BiomeMap.get_texture()
-	await RenderingServer.frame_post_draw
-	biome_map = biome_texture.get_image()
-
 func place(id: String, pos: Vector2i, force := false):
 	var pattern: TileMapPattern = load("res://world/patterns/%s.tres" % id)
 	@warning_ignore("integer_division")
@@ -339,13 +332,11 @@ func attempt_decide_biome(tile: Vector2i, biome: Biome) -> bool:
 	return true
 
 func biome_center_at(tile: Vector2i) -> Vector2i:
-	if experimental: return Vector2i.ZERO
 	var color := biome_map.get_pixel(tile.x + 256, tile.y + 256)
 	var uv: Vector2i = Vector2(color.r, color.g) * 512
 	return uv - Vector2i(256,256)
 
 func biome_edgeness_at(tile: Vector2i) -> float:
-	if experimental: return 0.
 	return biome_map.get_pixel(tile.x + 256, tile.y + 256).b
 
 func taxicab_random(distance: float) -> Vector2:

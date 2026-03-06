@@ -7,8 +7,6 @@ var player: Player
 var world: World
 var frozen := false
 
-var debug_experimental_worldgen := false
-
 var config: ConfigFile
 var settings_defaults: Dictionary[String, int] = {
 	"photosensitive_mode": 0,
@@ -44,8 +42,6 @@ func _input(event):
 		get_tree().paused = frozen
 	elif event.is_action_pressed("debug_print"):
 		print("\n== BREAK ==")
-	elif event.is_action_pressed("debug_experimental_worldgen"):
-		debug_experimental_worldgen = !debug_experimental_worldgen
 
 func settings():
 	var settings_menu := preload("res://ui/SettingsMenu.tscn").instantiate()
