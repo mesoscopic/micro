@@ -28,6 +28,14 @@ func _on_quit():
 	if disable_menu: return
 	get_tree().quit()
 
+func _on_abandon() -> void:
+	if disable_menu: return
+	disable_menu = true
+	await Micro.screen_wipe_out()
+	finished.emit()
+	get_tree().current_scene._on_death()
+	queue_free()
+
 func exit():
 	if disable_menu: return
 	finished.emit()

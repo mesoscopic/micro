@@ -85,5 +85,6 @@ func setting_hook(id: String, value: int) -> void:
 			DisplayServer.window_set_vsync_mode(value)
 		"bg_alpha_percent":
 			if Micro.world: Micro.world.set_bg_opacity(value/100.);
+			if $UI.has_node("StartRun"): $UI.get_node("StartRun").set_bg_opacity(value/100.);
 		"speedrun":
 			$UI/RunTimer.visible = value

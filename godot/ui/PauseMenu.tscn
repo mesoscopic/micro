@@ -97,6 +97,20 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_verg1")
 action_mode = 0
 text = "Options"
 
+[node name="AbandonRun" type="Button" parent="Menu/VBoxContainer" unique_id=1144195005]
+layout_mode = 2
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yp34u")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_25ii4")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8helu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ev1h7")
+action_mode = 0
+text = "Abandon Run"
+
 [node name="Quit" type="Button" parent="Menu/VBoxContainer" unique_id=808926094]
 layout_mode = 2
 mouse_force_pass_scroll_events = false
@@ -115,5 +129,7 @@ text = "Quit"
 [connection signal="mouse_entered" from="Menu/VBoxContainer/Resume" to="." method="_on_button_hover" binds= [&"Resume"]]
 [connection signal="button_down" from="Menu/VBoxContainer/Options" to="." method="_on_options"]
 [connection signal="mouse_entered" from="Menu/VBoxContainer/Options" to="." method="_on_button_hover" binds= [&"Options"]]
+[connection signal="button_down" from="Menu/VBoxContainer/AbandonRun" to="." method="_on_abandon"]
+[connection signal="mouse_entered" from="Menu/VBoxContainer/AbandonRun" to="." method="_on_button_hover" binds= [&"AbandonRun"]]
 [connection signal="button_down" from="Menu/VBoxContainer/Quit" to="." method="_on_quit"]
 [connection signal="mouse_entered" from="Menu/VBoxContainer/Quit" to="." method="_on_button_hover" binds= [&"Quit"]]

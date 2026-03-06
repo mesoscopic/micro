@@ -5,8 +5,12 @@ signal play
 
 var disable_menu: bool = false
 
+func set_bg_opacity(alpha: float):
+	$Background.material.set("shader_parameter/bg_alpha", alpha)
+
 func _ready() -> void:
 	$Menu/VBoxContainer/Play.grab_focus()
+	set_bg_opacity(Micro.get_setting("bg_alpha_percent")/100.)
 
 func _on_button_hover(node: StringName) -> void:
 	$Menu/VBoxContainer.find_child(node).grab_focus()
