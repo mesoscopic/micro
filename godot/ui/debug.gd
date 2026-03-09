@@ -11,4 +11,3 @@ func _process(delta):
 func _first_shown() -> void:
 	if Micro.world:
 		$TopLeft/Seed.text = "World seed: %s" % Micro.world.world_seed
-		$TopLeft/Worldgen.text = "Worldgen: %s" % ("EXPERIMENTAL" if Micro.world.experimental else "LEGACY")

@@ -189,7 +189,7 @@ func rumble(important: bool, time: float) -> void:
 var scenes: Dictionary[StringName, PackedScene] = {}
 
 func load_scenes() -> void:
-	scenes[&"micro:fund_coin"] = load("uid://bwsl01caneedv")
+	scenes[&"micro:coin"] = load("uid://bwsl01caneedv")
 	scenes[&"micro:heal_orb"] = load("uid://degva33wjvowa")
 	scenes[&"micro:bullet"] = load("uid://v7mv45nprvqq")
 	scenes[&"micro:bullet_telegraphed"] = load("uid://bdgbhm7jvt6n2")

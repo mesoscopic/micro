@@ -35,8 +35,7 @@ speed = 0
 acceleration = 0
 deceleration = 0
 turn_length = 0
-fund_drop = 200
-orb_drop = 30
+reward = 200
 despawn_distance = 0
 DEATH_ANIMATION = ExtResource("2_5smkf")
 

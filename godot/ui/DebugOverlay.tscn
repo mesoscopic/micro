@@ -61,10 +61,6 @@ alignment = 2
 layout_mode = 2
 text = "<Seed>"
 
-[node name="Worldgen" type="Label" parent="TopLeft" unique_id=1718387238]
-layout_mode = 2
-text = "<Worldgen>"
-
 [node name="TopRight" type="VBoxContainer" parent="." unique_id=216590705]
 layout_mode = 1
 anchors_preset = 1

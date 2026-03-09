@@ -30,7 +30,7 @@ func fire() -> void:
 		$Flash.restart()
 		$Explosion.restart()
 		if global_position.distance_squared_to(Micro.player.position) < 400.:
-			Micro.player.damage(explosion_damage, false, Micro.player.get_angle_to(global_position))
+			Micro.player.damage(explosion_damage, false, PI+Micro.player.get_angle_to(global_position))
 		# never would i have come up with making Vector3 the float equivalent of range. like, what?
 		for angle in Vector3(PI/float(split_number), 2.*PI, 2.*PI/float(split_number)):
 			var bullet: Bullet = Micro.new(&"micro:bullet")

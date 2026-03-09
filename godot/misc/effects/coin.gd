@@ -28,10 +28,10 @@ func _physics_process(delta: float) -> void:
 			var distance2 := point.distance_squared_to(target_pos);
 			if distance2 < 80.0 and distance1 > distance2:
 				moving = false
-				$FundsEffect.global_position = point
-				$FundsEffect.emitting = true
+				$Absorb.global_position = point
+				$Absorb.emitting = true
 				if !toll:
-					Micro.player.give_funds(amount)
+					Micro.player.absorb_coin(amount)
 		$Trail.remove_point(0)
 		if $Trail.get_point_count() == 0:
 			queue_free()

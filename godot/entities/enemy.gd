@@ -10,9 +10,7 @@ var speed_multiplier := 1.
 var path_target: Vector2
 var starting_position: Vector2
 var can_set_start: bool = true
-@export var fund_drop: int = 0
-@export var fund_drop_randomization: float = 0.1
-@export var orb_drop: int = 0
+@export var reward: int = 0
 @export var despawn_distance := 500
 @onready var despawn_distance_squared: float = despawn_distance**2
 @export var stagger_time: float = 0.1
@@ -41,8 +39,7 @@ func new_target() -> void:
 
 func _die():
 	var anim = DEATH_ANIMATION.instantiate()
-	anim.fund_drop = fund_drop + fund_drop*fund_drop_randomization*Micro.world.random.randf_range(-1.,1.)
-	anim.orb_drop = orb_drop + orb_drop*Micro.world.random.randf()
+	anim.reward = reward
 	anim.enemy_scale = $Render.scale.x
 	anim.position = position
 	anim.extra_reward = extra_reward

@@ -50,10 +50,5 @@ func set_chosen(to: bool) -> void:
 	is_chosen = to
 
 func return_funds() -> void:
-	while balance > 0:
-		var coin = Micro.new(&"micro:fund_coin")
-		coin.position = position
-		var coin_amount: int = ceil(balance/8.)
-		coin.amount = coin_amount
-		balance -= coin_amount
-		add_sibling(coin)
+	Micro.player.give_funds(balance)
+	balance = 0

@@ -1,10 +1,12 @@
 shader_type canvas_item;
 
 #include "res://lib/shader/sdfutil.gdshaderinc"
+#include "res://lib/shader/smoothmin.gdshaderinc"
 
 void fragment() {
 	vec2 xy = (UV - vec2(0.5)) * 2.0;
-	float d = length(xy);
-	COLOR.rgb *= clamp(stroke(d, 0.9, 0.2) + stroke(d, 0.5, 0.2), 0., 1.);
-	COLOR.a *= stroke(d, 0.7, 0.6);
+	float d1 = length(xy-vec2(.4));
+	float d2 = length(xy+vec2(.4));
+	COLOR.rgb = vec3(fill(smin(d1, d2, .1), 0.5));
+	COLOR.a *= fill(smin(d1, d2, .05), 0.6);
 }

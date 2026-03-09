@@ -33,7 +33,7 @@ func _ready() -> void:
 		await Micro.wait(1.)
 	shots = (3 if Micro.world.second_trader_miniboss else 6)
 	if Micro.world.second_trader_miniboss:
-		fund_drop += 100
+		reward += 100
 		max_hp += 200
 		hp += 200
 

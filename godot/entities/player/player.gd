@@ -152,7 +152,7 @@ func _physics_process(delta: float):
 			accumulated_pay_delta += delta
 			while accumulated_pay_delta > pay_time and funds > 0:
 				accumulated_pay_delta -= pay_time
-				var coin = Micro.new(&"micro:fund_coin")
+				var coin = Micro.new(&"micro:coin")
 				coin.position = position
 				if trading and chosen_toll.balance < chosen_toll.cost:
 					coin.amount = min(funds, ceil((chosen_toll.cost-chosen_toll.balance)/8.))
@@ -193,6 +193,12 @@ func _input(event: InputEvent) -> void:
 	if movement_disabled: return
 	if event is InputEventMouseMotion:
 		aim_direction = get_local_mouse_position().normalized()
+
+func absorb_coin(amount: int) -> void:
+	var heal_amount: int = min(amount, max_hp-hp)
+	amount -= heal_amount
+	Micro.player.heal(heal_amount)
+	if amount > 0: give_funds(amount)
 
 func give_funds(amount: int) -> void:
 	funds += amount

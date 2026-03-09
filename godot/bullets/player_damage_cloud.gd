@@ -12,8 +12,7 @@ func _physics_process(_delta: float):
 	for body in get_overlapping_bodies():
 		if body is Damageable:
 			if body.damage(damage, false, get_angle_to(body.global_position)) and body is Enemy:
-				var orb := Micro.new(&"micro:heal_orb")
+				var orb := Micro.new(&"micro:coin")
 				orb.position = body.position
-				orb.distance = 10
 				orb.amount = 5
 				Micro.world.get_node("Entities").add_child(orb)

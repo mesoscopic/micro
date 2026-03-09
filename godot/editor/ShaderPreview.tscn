@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://by05sm0h6q6d0"]
 
-[ext_resource type="Shader" uid="uid://qtjqkvonsm88" path="res://entities/player/upgrades/recklessness.gdshader" id="1_40mjc"]
+[ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://misc/shaders/funds.gdshader" id="1_40mjc"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_mulxe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bn4b0"]
