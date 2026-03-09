@@ -4,6 +4,7 @@
 [ext_resource type="Shader" uid="uid://csnb2kx6uvrj6" path="res://bullets/player_bullet.gdshader" id="1_slg20"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_g2t78"]
 [ext_resource type="Shader" uid="uid://bm0iowttrwa5h" path="res://misc/shaders/sparkle.gdshader" id="4_0ghsx"]
+[ext_resource type="Shader" uid="uid://cjhdxgx78hiya" path="res://misc/shaders/dash_ghost.gdshader" id="5_yt3jv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_epu1g"]
 shader = ExtResource("1_slg20")
@@ -30,7 +31,7 @@ point_count = 2
 curve = SubResource("Curve_7qh73")
 
 [sub_resource type="Curve" id="Curve_gex5j"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.48727185), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_yt3jv"]
@@ -47,12 +48,11 @@ emission_ring_inner_radius = 6.0
 emission_ring_cone_angle = 90.0
 angle_min = 45.0
 angle_max = 45.0
-orbit_velocity_min = 0.25
-orbit_velocity_max = 1.0
 radial_velocity_min = -40.0
 radial_velocity_max = -20.0
 gravity = Vector3(0, 0, 0)
-scale_max = 2.0
+scale_min = 1.5
+scale_max = 3.0
 scale_curve = SubResource("CurveTexture_yt3jv")
 alpha_curve = SubResource("CurveTexture_0ghsx")
 
@@ -83,6 +83,25 @@ scale_max = 50.0
 scale_curve = SubResource("CurveTexture_ljchb")
 alpha_curve = SubResource("CurveTexture_foti4")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_foti4"]
+shader = ExtResource("5_yt3jv")
+
+[sub_resource type="Curve" id="Curve_foti4"]
+_data = [Vector2(0, 1), 0.0, -2.0204713, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_k3o8w"]
+curve = SubResource("Curve_foti4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wbghd"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 6.0
+alpha_curve = SubResource("CurveTexture_k3o8w")
+
 [node name="Area2D" type="Area2D" unique_id=2091970878]
 process_physics_priority = 1
 collision_layer = 2
@@ -108,7 +127,6 @@ one_shot = true
 
 [node name="Form" type="GPUParticles2D" parent="." unique_id=1498775001]
 emitting = false
-amount = 10
 lifetime = 0.25
 one_shot = true
 explosiveness = 0.5
@@ -123,6 +141,13 @@ amount = 1
 lifetime = 0.25
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_foti4")
+
+[node name="Trail" type="GPUParticles2D" parent="." unique_id=1054457641]
+material = SubResource("ShaderMaterial_foti4")
+emitting = false
+amount = 16
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_wbghd")
 
 [connection signal="body_entered" from="." to="." method="_on_collide"]
 [connection signal="timeout" from="Timer" to="." method="_on_expire"]

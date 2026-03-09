@@ -105,8 +105,8 @@ func _physics_process(delta: float):
 			end_dash()
 			ultra = true
 		for bullet in prepared_bullets:
-			bullet.speed = 120.*(4.0*dash_power if ultra else 1.0) * bullet_velocity_mult
-			bullet.lifetime = (.25 if ultra else 1.5) * bullet_lifetime_mult
+			bullet.speed = 240.*(4.0*dash_power if ultra else 1.0) * bullet_velocity_mult
+			bullet.lifetime = (.25 if ultra else 1.) * bullet_lifetime_mult
 			bullet.damage = ceil(10*bullet_damage_mult) if dash_direction == Vector2.ZERO else ceil(10*(dash_power+.5)*bullet_damage_mult)
 			bullet.fire()
 		prepared_bullets = []

@@ -15,9 +15,11 @@ var damage: int
 @export var is_player: bool = false
 
 var shot: bool = false
+var form_anim: Tween
 
 func _ready():
-	get_tree().create_tween().tween_property($Sprite2D, "instance_shader_parameters/form_anim", 1.0, 0.25)
+	form_anim = get_tree().create_tween()
+	form_anim.tween_property($Sprite2D, "instance_shader_parameters/form_anim", 1.0, 0.3)
 	rotation = aim_angle - PI/2
 	global_position = get_aim_position()
 	$Form.emitting = true
@@ -57,6 +59,11 @@ func fire():
 	monitoring = true
 	monitorable = true
 	shot = true
+	if form_anim.is_running():
+		form_anim.kill()
+		$Sprite2D.set("instance_shader_parameters/form_anim", 1.0)
+		$Form.speed_scale = 2.
+	$Trail.emitting = true
 	$Timer.wait_time = lifetime
 	$Timer.start()
 	if shooter.die.is_connected(_on_expire):
@@ -64,6 +71,7 @@ func fire():
 
 func _on_expire():
 	set_physics_process(false)
+	$Trail.emitting = false
 	set_deferred("monitoring", false)
 	set_deferred("monitorable", false)
 	var tween := get_tree().create_tween()

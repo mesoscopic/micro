@@ -8,7 +8,6 @@
 [ext_resource type="Shader" uid="uid://m2ujlgdhoe3n" path="res://world/emptiness_border.gdshader" id="4_7c4bj"]
 [ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="4_i4b1j"]
 [ext_resource type="Script" uid="uid://by5pvpniu1o1d" path="res://editor/bakeable_noise.gd" id="5_nrtoj"]
-[ext_resource type="PackedScene" uid="uid://cjt7tm6d5ow8j" path="res://entities/Trader.tscn" id="7_0n6y5"]
 [ext_resource type="TileSet" uid="uid://cr8mn87yb0vyh" path="res://world/Tiles.tres" id="7_8mymi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7c4bj"]
@@ -157,8 +156,6 @@ tile_set = ExtResource("7_8mymi")
 [node name="Bullets" type="Node2D" parent="." unique_id=2080997394]
 
 [node name="Entities" type="Node2D" parent="." unique_id=1707112680]
-
-[node name="Trader" parent="Entities" unique_id=540778684 instance=ExtResource("7_0n6y5")]
 
 [node name="Player" parent="." unique_id=1930609550 instance=ExtResource("1_yrunw")]
 
