@@ -147,22 +147,19 @@ func _physics_process(delta: float):
 						Micro.show_trade_information(chosen_toll)
 				else:
 					tolls[i].set_chosen(false)
-	if !movement_disabled:
-		if Micro.action("pay", true, true) and funds > 0:
+	if !movement_disabled and trading:
+		if Micro.action("pay", true, true) and funds > 0 and chosen_toll.balance < chosen_toll.cost:
 			accumulated_pay_delta += delta
 			while accumulated_pay_delta > pay_time and funds > 0:
 				accumulated_pay_delta -= pay_time
 				var coin = Micro.new(&"micro:coin")
 				coin.position = position
-				if trading and chosen_toll.balance < chosen_toll.cost:
-					coin.amount = min(funds, ceil((chosen_toll.cost-chosen_toll.balance)/8.))
-					coin.toll = chosen_toll
-					chosen_toll.pay(coin.amount)
-				else:
-					coin.amount = ceil(funds/64.)
+				coin.amount = min(funds, ceil((chosen_toll.cost-chosen_toll.balance)/8.))
+				coin.toll = chosen_toll
+				chosen_toll.pay(coin.amount)
 				give_funds(-coin.amount)
 				Micro.world.get_node("Entities").add_child(coin)
-		elif !Micro.action("pay", true, true) and trading and chosen_toll.balance > 0:
+		elif !Micro.action("pay", true, true) and chosen_toll.balance > 0:
 			chosen_toll.return_funds()
 			Micro.show_trade_information(chosen_toll)
 
