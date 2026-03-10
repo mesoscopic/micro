@@ -38,6 +38,9 @@ func fire() -> void:
 		if body is Damageable: body.damage(damage, false, PI-body.get_angle_to(global_position)))
 	$Form.emitting = false
 	$Form.speed_scale = 4.
+	for i in 128:
+		var x: float = randf()**2*$Line.points[1].x
+		$Trail.emit_particle(Transform2D(0., Vector2(x, 0.)), Vector2.ZERO, Color.WHITE, Color.WHITE, GPUParticles2D.EMIT_FLAG_POSITION)
 	if form_anim.is_running():
 		form_anim.kill()
 		$Render.scale = Vector2.ONE
@@ -46,14 +49,14 @@ func fire() -> void:
 	$Render/Front.hide()
 	var tween := get_tree().create_tween()
 	tween.tween_property($Line, "default_color", Color.TRANSPARENT, 0.1)
-	tween.parallel().tween_property($Render/Back, "modulate", Color.TRANSPARENT, 0.1)
-	tween.parallel().tween_property($Render/Back, "position", Vector2(-8., 0.), 0.1)
+	tween.parallel().tween_property($Render/Back, "modulate", Color.TRANSPARENT, 0.5)
+	tween.parallel().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO).tween_property($Render/Back, "position", Vector2(-12., 0.), 0.5)
 	tween.parallel().tween_property($Shine, "scale", Vector2(60., 60.), 0.1)
 	tween.parallel().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC).tween_property($Shine, "modulate", Color.TRANSPARENT, 0.1)
 	#$Trail.emitting = true
 	if shooter.die.is_connected(_on_expire):
 		shooter.die.disconnect(_on_expire)
-	await Micro.wait(0.2)
+	await Micro.wait(1.)
 	queue_free()
 
 func _on_expire():

@@ -13,7 +13,7 @@ b = Vector2(100, 0)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_03qj3"]
 shader = ExtResource("2_4h40y")
 
-[sub_resource type="Image" id="Image_aj1w2"]
+[sub_resource type="Image" id="Image_4h40y"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -23,14 +23,34 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_w1hgj"]
-image = SubResource("Image_aj1w2")
+image = SubResource("Image_4h40y")
 script = ExtResource("1_5in2o")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+
+[sub_resource type="Curve" id="Curve_4h40y"]
+_data = [Vector2(0, 1), 0.0, -1.7910889, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_03qj3"]
+curve = SubResource("Curve_4h40y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4h40y"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+angle_min = 45.00001
+angle_max = 45.00001
+spread = 180.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+damping_min = 10.0
+damping_max = 10.0
+scale_max = 3.0
+alpha_curve = SubResource("CurveTexture_03qj3")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bmku3"]
 shader = ExtResource("1_itk3d")
 
-[sub_resource type="Image" id="Image_itk3d"]
+[sub_resource type="Image" id="Image_03qj3"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -40,7 +60,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_bmku3"]
-image = SubResource("Image_itk3d")
+image = SubResource("Image_03qj3")
 script = ExtResource("1_5in2o")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -68,7 +88,7 @@ alpha_curve = SubResource("CurveTexture_4h40y")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1g0wq"]
 shader = ExtResource("1_bmku3")
 
-[sub_resource type="Image" id="Image_bmku3"]
+[sub_resource type="Image" id="Image_aj1w2"]
 data = {
 "data": PackedByteArray(255, 255, 255, 255),
 "format": "RGBA8",
@@ -78,7 +98,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_1g0wq"]
-image = SubResource("Image_bmku3")
+image = SubResource("Image_aj1w2")
 script = ExtResource("1_5in2o")
 metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
@@ -96,8 +116,16 @@ material = SubResource("ShaderMaterial_03qj3")
 scale = Vector2(1e-05, 1e-05)
 texture = SubResource("ImageTexture_w1hgj")
 
+[node name="Trail" type="GPUParticles2D" parent="." unique_id=1946356307]
+emitting = false
+amount = 128
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_4h40y")
+
 [node name="Line" type="Line2D" parent="." unique_id=502659173]
 material = SubResource("ShaderMaterial_bmku3")
+instance_shader_parameters/telegraph = true
 points = PackedVector2Array(0, 0, 100, 0)
 default_color = Color(1, 1, 1, 0)
 texture = SubResource("ImageTexture_bmku3")
