@@ -1,28 +1,15 @@
 [gd_scene format=3 uid="uid://by0txtbwl43n8"]
 
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="1_e0qx5"]
 [ext_resource type="Shader" uid="uid://dp8obg3538jw8" path="res://fx/blur_aura.gdshader" id="1_w8v4l"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="2_w8v4l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w8v4l"]
 shader = ExtResource("1_w8v4l")
 
-[sub_resource type="Image" id="Image_w8v4l"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_eipgk"]
-image = SubResource("Image_w8v4l")
-script = ExtResource("1_e0qx5")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
-
 [node name="BlurAura" type="BackBufferCopy" unique_id=1947845646]
 copy_mode = 2
 
-[node name="Render" type="Sprite2D" parent="." unique_id=1660629802]
+[node name="Render" type="Node2D" parent="." unique_id=550118231]
 material = SubResource("ShaderMaterial_w8v4l")
-texture = SubResource("ImageTexture_eipgk")
+script = ExtResource("2_w8v4l")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"

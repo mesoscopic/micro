@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bgocxycd6xam0" path="res://fx/death/enemy.gd" id="1_xb5g8"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="2_gkxl4"]
 [ext_resource type="Shader" uid="uid://ds1rxv51ltkrj" path="res://misc/shaders/enemy_ghost.gdshader" id="3_xb5g8"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_xbttu"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="4_2nhur"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sxsfr"]
 shader = ExtResource("2_gkxl4")
@@ -35,20 +35,6 @@ alpha_curve = SubResource("CurveTexture_yolx1")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2nhur"]
 shader = ExtResource("3_xb5g8")
 
-[sub_resource type="Image" id="Image_2nhur"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_yor8o"]
-image = SubResource("Image_2nhur")
-script = ExtResource("3_xbttu")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
-
 [node name="EnemyDeathAnimation" type="Node2D" unique_id=1863750762]
 script = ExtResource("1_xb5g8")
 
@@ -58,9 +44,10 @@ amount = 50
 lifetime = 0.75
 process_material = SubResource("ParticleProcessMaterial_j114o")
 
-[node name="Render" type="Sprite2D" parent="." unique_id=1563428192]
+[node name="Render" type="Node2D" parent="." unique_id=985773259]
 material = SubResource("ShaderMaterial_2nhur")
-texture = SubResource("ImageTexture_yor8o")
+script = ExtResource("4_2nhur")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="Timer" type="Timer" parent="." unique_id=712503113]
 wait_time = 2.0

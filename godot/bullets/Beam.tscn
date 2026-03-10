@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://cjga5r42rtiuw"]
 
 [ext_resource type="Script" uid="uid://dueh8t7l61frk" path="res://bullets/beam.gd" id="1_1g0wq"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="1_5in2o"]
 [ext_resource type="Shader" uid="uid://dy3mm3bt5o3g" path="res://bullets/triangle.gdshader" id="1_bmku3"]
 [ext_resource type="Shader" uid="uid://dsr63ntko0slj" path="res://bullets/beam.gdshader" id="1_itk3d"]
 [ext_resource type="Shader" uid="uid://bm0iowttrwa5h" path="res://misc/shaders/sparkle.gdshader" id="2_4h40y"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_03qj3"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_3hbg0"]
 resource_local_to_scene = true
@@ -12,20 +12,6 @@ b = Vector2(100, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_03qj3"]
 shader = ExtResource("2_4h40y")
-
-[sub_resource type="Image" id="Image_4h40y"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_w1hgj"]
-image = SubResource("Image_4h40y")
-script = ExtResource("1_5in2o")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="Curve" id="Curve_4h40y"]
 _data = [Vector2(0, 1), 0.0, -1.7910889, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -50,19 +36,12 @@ alpha_curve = SubResource("CurveTexture_03qj3")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bmku3"]
 shader = ExtResource("1_itk3d")
 
-[sub_resource type="Image" id="Image_03qj3"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
+[sub_resource type="Gradient" id="Gradient_4h40y"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
-[sub_resource type="ImageTexture" id="ImageTexture_bmku3"]
-image = SubResource("Image_03qj3")
-script = ExtResource("1_5in2o")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_03qj3"]
+gradient = SubResource("Gradient_4h40y")
+width = 1
 
 [sub_resource type="Curve" id="Curve_1g0wq"]
 _data = [Vector2(0, 0), 0.0, 2.4562325, 0, 0, Vector2(1, 1), -0.048851963, 0.0, 0, 0]
@@ -88,20 +67,6 @@ alpha_curve = SubResource("CurveTexture_4h40y")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1g0wq"]
 shader = ExtResource("1_bmku3")
 
-[sub_resource type="Image" id="Image_aj1w2"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_1g0wq"]
-image = SubResource("Image_aj1w2")
-script = ExtResource("1_5in2o")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
-
 [node name="Beam" type="Area2D" unique_id=153494606]
 collision_layer = 0
 collision_mask = 16
@@ -111,10 +76,11 @@ script = ExtResource("1_1g0wq")
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1547278980]
 shape = SubResource("SegmentShape2D_3hbg0")
 
-[node name="Shine" type="Sprite2D" parent="." unique_id=279670652]
+[node name="Shine" type="Node2D" parent="." unique_id=1443521800]
 material = SubResource("ShaderMaterial_03qj3")
 scale = Vector2(1e-05, 1e-05)
-texture = SubResource("ImageTexture_w1hgj")
+script = ExtResource("3_03qj3")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="Trail" type="GPUParticles2D" parent="." unique_id=1946356307]
 emitting = false
@@ -128,7 +94,7 @@ material = SubResource("ShaderMaterial_bmku3")
 instance_shader_parameters/telegraph = true
 points = PackedVector2Array(0, 0, 100, 0)
 default_color = Color(1, 1, 1, 0)
-texture = SubResource("ImageTexture_bmku3")
+texture = SubResource("GradientTexture1D_03qj3")
 texture_mode = 2
 antialiased = true
 
@@ -142,16 +108,18 @@ process_material = SubResource("ParticleProcessMaterial_03qj3")
 [node name="Render" type="Node2D" parent="." unique_id=1916220137]
 scale = Vector2(1e-05, 1e-05)
 
-[node name="Back" type="Sprite2D" parent="Render" unique_id=880611730]
+[node name="Back" type="Node2D" parent="Render" unique_id=1877479860]
 material = SubResource("ShaderMaterial_1g0wq")
 position = Vector2(-4, 0)
 rotation = -1.5707964
 scale = Vector2(8, 8)
-texture = SubResource("ImageTexture_1g0wq")
+script = ExtResource("3_03qj3")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
-[node name="Front" type="Sprite2D" parent="Render" unique_id=621098285]
+[node name="Front" type="Node2D" parent="Render" unique_id=1280351646]
 material = SubResource("ShaderMaterial_1g0wq")
 position = Vector2(16, 0)
 rotation = 1.5707964
 scale = Vector2(8, 32)
-texture = SubResource("ImageTexture_1g0wq")
+script = ExtResource("3_03qj3")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"

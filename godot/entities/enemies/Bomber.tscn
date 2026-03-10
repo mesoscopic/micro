@@ -2,26 +2,12 @@
 
 [ext_resource type="Script" uid="uid://by7l5djd4ppw8" path="res://entities/enemies/bomber.gd" id="1_enisn"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="2_j4vdi"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_j4inx"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_enisn"]
 [ext_resource type="PackedScene" uid="uid://bmrdsgmlwoebu" path="res://fx/EnemyHurt.tscn" id="4_omnjx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cduuy"]
 resource_local_to_scene = true
 shader = ExtResource("2_j4vdi")
-
-[sub_resource type="Image" id="Image_enisn"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_vd4d6"]
-image = SubResource("Image_enisn")
-script = ExtResource("3_j4inx")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u77d8"]
 radius = 11.0
@@ -37,10 +23,11 @@ reward = 20
 max_hp = 60
 hp = 60
 
-[node name="Render" type="Sprite2D" parent="." unique_id=502302662]
+[node name="Render" type="Node2D" parent="." unique_id=2067283735]
 material = SubResource("ShaderMaterial_cduuy")
 scale = Vector2(22, 22)
-texture = SubResource("ImageTexture_vd4d6")
+script = ExtResource("3_enisn")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1764960163]
 shape = SubResource("CircleShape2D_u77d8")

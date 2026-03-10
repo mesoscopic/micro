@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://de3rlx01ibq3d" path="res://entities/player/player.gd" id="1_1im8n"]
 [ext_resource type="PackedScene" uid="uid://wwjxod2at3t3" path="res://entities/player/Camera.tscn" id="2_nkqiv"]
 [ext_resource type="Shader" uid="uid://ja0tditl2iqa" path="res://entities/player/player.gdshader" id="4_0t1y4"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="4_oihyf"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="4_ak4un"]
 [ext_resource type="PackedScene" uid="uid://c7h6twa0ran3j" path="res://fx/PlayerHurt.tscn" id="6_q57vx"]
 [ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://misc/shaders/funds.gdshader" id="6_rpfb3"]
 [ext_resource type="Shader" uid="uid://dby1fhvlh2gjy" path="res://misc/shaders/square_pulse.gdshader" id="8_ak4un"]
@@ -13,20 +13,6 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7lms1"]
 shader = ExtResource("4_0t1y4")
-
-[sub_resource type="Image" id="Image_ak4un"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_mqro2"]
-image = SubResource("Image_ak4un")
-script = ExtResource("4_oihyf")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="Animation" id="Animation_m6phi"]
 length = 0.001
@@ -450,10 +436,11 @@ invulnerability_time = 1.0
 
 [node name="Camera" parent="." unique_id=2078768073 instance=ExtResource("2_nkqiv")]
 
-[node name="Render" type="Sprite2D" parent="." unique_id=1233594605]
+[node name="Render" type="Node2D" parent="." unique_id=1498986112]
 material = SubResource("ShaderMaterial_7lms1")
 scale = Vector2(20, 20)
-texture = SubResource("ImageTexture_mqro2")
+script = ExtResource("4_ak4un")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="Hitbox" type="CollisionPolygon2D" parent="." unique_id=1050578866]
 polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b14dvx67drebc" path="res://entities/player/Player.tscn" id="1_yrunw"]
 [ext_resource type="Shader" uid="uid://cxjhjvndfeyuk" path="res://misc/logic/biomes.gdshader" id="2_h1bdy"]
 [ext_resource type="Shader" uid="uid://m2ujlgdhoe3n" path="res://world/emptiness_border.gdshader" id="4_7c4bj"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="4_i4b1j"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="4_crsqw"]
 [ext_resource type="Script" uid="uid://by5pvpniu1o1d" path="res://editor/bakeable_noise.gd" id="5_nrtoj"]
 [ext_resource type="TileSet" uid="uid://cr8mn87yb0vyh" path="res://world/Tiles.tres" id="7_8mymi"]
 
@@ -54,20 +54,6 @@ shader_parameter/placeholder_effect = 0.0
 shader_parameter/peace_effect = 0.0
 shader_parameter/default_effect = 0.0
 shader_parameter/minefield_effect = 0.0
-
-[sub_resource type="Image" id="Image_gqh78"]
-data = {
-"data": PackedByteArray("/////w=="),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_o1tcx"]
-image = SubResource("Image_gqh78")
-script = ExtResource("4_i4b1j")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_i4b1j"]
 noise_type = 0
@@ -132,10 +118,11 @@ preprocess = 20.0
 visibility_rect = Rect2(-1500, -1500, 3000, 3000)
 process_material = SubResource("ParticleProcessMaterial_2nmfm")
 
-[node name="Background" type="Sprite2D" parent="." unique_id=1059265448]
+[node name="Background" type="Node2D" parent="." unique_id=937743303]
 material = SubResource("ShaderMaterial_i4b1j")
 scale = Vector2(10225, 10225)
-texture = SubResource("ImageTexture_o1tcx")
+script = ExtResource("4_crsqw")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="WorldEnemySpawnAttempt" type="Timer" parent="." unique_id=1009911282]
 wait_time = 3.0

@@ -2,26 +2,12 @@
 
 [ext_resource type="Script" uid="uid://dhdyju55p570r" path="res://bullets/telegraphed_bullet.gd" id="1_wtf3i"]
 [ext_resource type="Shader" uid="uid://dnld05ugc5ccp" path="res://bullets/enemy_bullet.gdshader" id="2_wtf3i"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_ytu0n"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_wtf3i"]
 [ext_resource type="Shader" uid="uid://bm0iowttrwa5h" path="res://misc/shaders/sparkle.gdshader" id="4_ytu0n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iim64"]
 resource_local_to_scene = true
 shader = ExtResource("2_wtf3i")
-
-[sub_resource type="Image" id="Image_wtf3i"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_rjho7"]
-image = SubResource("Image_wtf3i")
-script = ExtResource("3_ytu0n")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="Curve" id="Curve_wtf3i"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.44656, 0.0, 0, 0]
@@ -108,12 +94,13 @@ monitoring = false
 monitorable = false
 script = ExtResource("1_wtf3i")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1512294809]
+[node name="Render" type="Node2D" parent="." unique_id=568243375]
 material = SubResource("ShaderMaterial_iim64")
 instance_shader_parameters/dissolve_anim = 0.0
 instance_shader_parameters/form_anim = 0.0
 scale = Vector2(10, 10)
-texture = SubResource("ImageTexture_rjho7")
+script = ExtResource("3_wtf3i")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1966830785]
 polygon = PackedVector2Array(0, -4, -2, 0, 0, 4, 2, 0)

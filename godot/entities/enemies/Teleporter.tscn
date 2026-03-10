@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cr70dq40ddv00"]
 
 [ext_resource type="Script" uid="uid://5gvph6vdmik8" path="res://entities/enemies/teleporter.gd" id="1_0c61a"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_okfon"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_meybd"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="3_up14l"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="5_meybd"]
 [ext_resource type="PackedScene" uid="uid://bmrdsgmlwoebu" path="res://fx/EnemyHurt.tscn" id="6_df432"]
@@ -9,20 +9,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_up14l"]
 resource_local_to_scene = true
 shader = ExtResource("3_up14l")
-
-[sub_resource type="Image" id="Image_meybd"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_ltnij"]
-image = SubResource("Image_meybd")
-script = ExtResource("3_okfon")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x6fk6"]
 radius = 9.0
@@ -65,10 +51,11 @@ max_hp = 50
 hp = 50
 metadata/_custom_type_script = "uid://oy7qpe47ti6v"
 
-[node name="Render" type="Sprite2D" parent="." unique_id=165170964]
+[node name="Render" type="Node2D" parent="." unique_id=138250519]
 material = SubResource("ShaderMaterial_up14l")
 scale = Vector2(18, 18)
-texture = SubResource("ImageTexture_ltnij")
+script = ExtResource("3_meybd")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1282732042]
 shape = SubResource("CircleShape2D_x6fk6")

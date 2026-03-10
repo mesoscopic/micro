@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://ccwy1we44q081" path="res://fx/death/miniboss.gd" id="1_edv21"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="3_88njf"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="4_jbovx"]
 [ext_resource type="Shader" uid="uid://ds1rxv51ltkrj" path="res://misc/shaders/enemy_ghost.gdshader" id="4_pcl4h"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="5_d8t0r"]
 [ext_resource type="Shader" uid="uid://vrqo8s1gcu2" path="res://misc/shaders/circle_pulse.gdshader" id="6_jbovx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sxsfr"]
@@ -36,20 +36,6 @@ alpha_curve = SubResource("CurveTexture_rrxlq")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2nhur"]
 shader = ExtResource("4_pcl4h")
 
-[sub_resource type="Image" id="Image_edv21"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_yor8o"]
-image = SubResource("Image_edv21")
-script = ExtResource("5_d8t0r")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_edv21"]
 shader = ExtResource("4_pcl4h")
 
@@ -78,20 +64,6 @@ alpha_curve = SubResource("CurveTexture_88njf")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_88njf"]
 shader = ExtResource("6_jbovx")
 
-[sub_resource type="Image" id="Image_jbovx"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_d8t0r"]
-image = SubResource("Image_jbovx")
-script = ExtResource("5_d8t0r")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
-
 [node name="MinibossDeathAnimation" type="Node2D" unique_id=1960600042]
 script = ExtResource("1_edv21")
 
@@ -101,9 +73,10 @@ amount = 75
 lifetime = 0.75
 process_material = SubResource("ParticleProcessMaterial_tswoh")
 
-[node name="Render" type="Sprite2D" parent="." unique_id=141091752]
+[node name="Render" type="Node2D" parent="." unique_id=473994089]
 material = SubResource("ShaderMaterial_2nhur")
-texture = SubResource("ImageTexture_yor8o")
+script = ExtResource("4_jbovx")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="Boom" type="GPUParticles2D" parent="." unique_id=2107170329]
 material = SubResource("ShaderMaterial_edv21")
@@ -118,9 +91,10 @@ process_material = SubResource("ParticleProcessMaterial_nsxga")
 wait_time = 2.0
 autostart = true
 
-[node name="FinalPulse" type="Sprite2D" parent="." unique_id=1424558608]
+[node name="FinalPulse" type="Node2D" parent="." unique_id=49079796]
 z_index = 1
 material = SubResource("ShaderMaterial_88njf")
-texture = SubResource("ImageTexture_d8t0r")
+script = ExtResource("4_jbovx")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

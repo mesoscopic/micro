@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bd1nvuajonror" path="res://entities/enemies/trader_miniboss.gd" id="1_oj4li"]
 [ext_resource type="PackedScene" uid="uid://gcdt0wv5ke0r" path="res://fx/death/Miniboss.tscn" id="2_e0lej"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="3_3crh1"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_b1f70"]
 [ext_resource type="PackedScene" uid="uid://bmrdsgmlwoebu" path="res://fx/EnemyHurt.tscn" id="4_6dwnx"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="4_e0lej"]
 [ext_resource type="Shader" uid="uid://ds1rxv51ltkrj" path="res://misc/shaders/enemy_ghost.gdshader" id="5_6dwnx"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="7_e0lej"]
 
@@ -15,20 +15,6 @@ frequency = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3crh1"]
 resource_local_to_scene = true
 shader = ExtResource("3_3crh1")
-
-[sub_resource type="Image" id="Image_e0lej"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_uur07"]
-image = SubResource("Image_e0lej")
-script = ExtResource("3_b1f70")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hn53a"]
 shader = ExtResource("5_6dwnx")
@@ -113,10 +99,11 @@ DEATH_ANIMATION = ExtResource("2_e0lej")
 max_hp = 300
 hp = 300
 
-[node name="Render" type="Sprite2D" parent="." unique_id=463878745]
+[node name="Render" type="Node2D" parent="." unique_id=1620104837]
 material = SubResource("ShaderMaterial_3crh1")
 scale = Vector2(50, 50)
-texture = SubResource("ImageTexture_uur07")
+script = ExtResource("4_e0lej")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="AuraEffect" type="GPUParticles2D" parent="Render" unique_id=1735088487]
 material = SubResource("ShaderMaterial_hn53a")

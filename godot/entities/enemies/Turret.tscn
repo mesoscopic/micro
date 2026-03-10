@@ -2,26 +2,12 @@
 
 [ext_resource type="Script" uid="uid://c57nhmckfrbx8" path="res://entities/enemies/turret.gd" id="1_n7j26"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="3_cduuy"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="4_dkfhv"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_e7smu"]
 [ext_resource type="PackedScene" uid="uid://bmrdsgmlwoebu" path="res://fx/EnemyHurt.tscn" id="6_myqr2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cduuy"]
 resource_local_to_scene = true
 shader = ExtResource("3_cduuy")
-
-[sub_resource type="Image" id="Image_e7smu"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_vd4d6"]
-image = SubResource("Image_e7smu")
-script = ExtResource("4_dkfhv")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u77d8"]
 radius = 11.0
@@ -38,10 +24,11 @@ stagger_time = 0.0
 max_hp = 50
 hp = 50
 
-[node name="Render" type="Sprite2D" parent="." unique_id=1151795698]
+[node name="Render" type="Node2D" parent="." unique_id=996872563]
 material = SubResource("ShaderMaterial_cduuy")
 scale = Vector2(22, 22)
-texture = SubResource("ImageTexture_vd4d6")
+script = ExtResource("3_e7smu")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1986780415]
 shape = SubResource("CircleShape2D_u77d8")

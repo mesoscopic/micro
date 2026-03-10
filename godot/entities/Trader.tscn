@@ -2,26 +2,12 @@
 
 [ext_resource type="Shader" uid="uid://cs7iamvps60cm" path="res://entities/trader.gdshader" id="1_2l6qv"]
 [ext_resource type="Script" uid="uid://bgi51q1qpnvci" path="res://entities/trader.gd" id="1_qhhoa"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_qhhoa"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_8tu8e"]
 [ext_resource type="PackedScene" uid="uid://ceq78x2nlo2eh" path="res://entities/Toll.tscn" id="4_6saqy"]
 [ext_resource type="Shader" uid="uid://dby1fhvlh2gjy" path="res://misc/shaders/square_pulse.gdshader" id="5_8tu8e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6saqy"]
 shader = ExtResource("1_2l6qv")
-
-[sub_resource type="Image" id="Image_8tu8e"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_kem3a"]
-image = SubResource("Image_8tu8e")
-script = ExtResource("2_qhhoa")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bki2m"]
 size = Vector2(16, 16)
@@ -118,10 +104,11 @@ collision_mask = 257
 motion_mode = 1
 script = ExtResource("1_qhhoa")
 
-[node name="Render" type="Sprite2D" parent="." unique_id=1771641789]
+[node name="Render" type="Node2D" parent="." unique_id=1458196295]
 material = SubResource("ShaderMaterial_6saqy")
 scale = Vector2(16, 16)
-texture = SubResource("ImageTexture_kem3a")
+script = ExtResource("3_8tu8e")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="Toll" parent="." unique_id=486802325 instance=ExtResource("4_6saqy")]
 enabled = false

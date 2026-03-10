@@ -2,26 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cx3peo4tlvbg2" path="res://entities/world/cache.gd" id="1_xgfmd"]
 [ext_resource type="Shader" uid="uid://ds33o6ingsxg6" path="res://entities/world/cache.gdshader" id="2_xgfmd"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_7011x"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_eelff"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="5_qwbhg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qwbhg"]
 resource_local_to_scene = true
 shader = ExtResource("2_xgfmd")
-
-[sub_resource type="Image" id="Image_eelff"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_pky5l"]
-image = SubResource("Image_eelff")
-script = ExtResource("3_7011x")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rtkwq"]
 shader = ExtResource("5_qwbhg")
@@ -53,11 +39,12 @@ collision_mask = 2
 script = ExtResource("1_xgfmd")
 deplete_hp = false
 
-[node name="Render" type="Sprite2D" parent="." unique_id=1333252542]
+[node name="Render" type="Node2D" parent="." unique_id=973722741]
 self_modulate = Color(1, 1, 1, 0)
 material = SubResource("ShaderMaterial_qwbhg")
 scale = Vector2(20, 20)
-texture = SubResource("ImageTexture_pky5l")
+script = ExtResource("3_eelff")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="OpenParticles" type="GPUParticles2D" parent="." unique_id=285340226]
 material = SubResource("ShaderMaterial_rtkwq")

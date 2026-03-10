@@ -2,27 +2,13 @@
 
 [ext_resource type="Script" uid="uid://b801y4bf62me" path="res://bullets/homing_bullet.gd" id="1_jb8fp"]
 [ext_resource type="Shader" uid="uid://biq78focw5lr" path="res://bullets/special_enemy_bullet.gdshader" id="2_jb8fp"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_np6rv"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_jb8fp"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="4_nxspw"]
 [ext_resource type="Shader" uid="uid://bm0iowttrwa5h" path="res://misc/shaders/sparkle.gdshader" id="5_6geka"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iim64"]
 resource_local_to_scene = true
 shader = ExtResource("2_jb8fp")
-
-[sub_resource type="Image" id="Image_jb8fp"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_rjho7"]
-image = SubResource("Image_jb8fp")
-script = ExtResource("3_np6rv")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pepvr"]
 shader = ExtResource("4_nxspw")
@@ -96,12 +82,13 @@ monitoring = false
 monitorable = false
 script = ExtResource("1_jb8fp")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=429252512]
+[node name="Render" type="Node2D" parent="." unique_id=2001916550]
 material = SubResource("ShaderMaterial_iim64")
 instance_shader_parameters/dissolve_anim = 0.0
 instance_shader_parameters/form_anim = 0.0
 scale = Vector2(10, 10)
-texture = SubResource("ImageTexture_rjho7")
+script = ExtResource("3_jb8fp")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1137994666]
 polygon = PackedVector2Array(0, -4, -2, 0, 0, 4, 2, 0)

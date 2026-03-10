@@ -3,25 +3,11 @@
 [ext_resource type="Script" uid="uid://8mysmbmddama" path="res://entities/world/spawn_nest.gd" id="1_g6lmg"]
 [ext_resource type="PackedScene" uid="uid://cshcf4y2ntrp5" path="res://entities/world/NestSlot.tscn" id="2_baksq"]
 [ext_resource type="Shader" uid="uid://bc0eonhp05r7m" path="res://entities/world/spawn_nest.gdshader" id="2_h5tti"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="4_dnu8s"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_h5tti"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vpgj0"]
 shader = ExtResource("2_h5tti")
 shader_parameter/progress = 1.0
-
-[sub_resource type="Image" id="Image_h5tti"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_jf3st"]
-image = SubResource("Image_h5tti")
-script = ExtResource("4_dnu8s")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="Curve" id="Curve_kxo58"]
 _data = [Vector2(0, 0), 0.0, 10.6867, 0, 0, Vector2(0.251746, 1), 0.0, -2.29871, 0, 0, Vector2(1, 0), 0.110526, 0.0, 0, 0]
@@ -50,10 +36,11 @@ script = ExtResource("1_g6lmg")
 metadata/_edit_horizontal_guides_ = [-50.0, -30.0, -10.0, 10.0, 30.0, 50.0, -70.0, 70.0]
 metadata/_edit_vertical_guides_ = [50.0, 30.0, 10.0, -10.0, -30.0, -50.0, -70.0, 70.0]
 
-[node name="Render" type="Sprite2D" parent="." unique_id=1862804208]
+[node name="Render" type="Node2D" parent="." unique_id=1176991944]
 material = SubResource("ShaderMaterial_vpgj0")
 scale = Vector2(40, 40)
-texture = SubResource("ImageTexture_jf3st")
+script = ExtResource("3_h5tti")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="SelectionParticles" type="GPUParticles2D" parent="." unique_id=1923590408]
 emitting = false

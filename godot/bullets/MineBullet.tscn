@@ -3,7 +3,7 @@
 [ext_resource type="Shader" uid="uid://bgq6jdp5yiqxd" path="res://bullets/mine_bullet.gdshader" id="1_mv8n6"]
 [ext_resource type="Script" uid="uid://h2fy8caf4nf2" path="res://bullets/mine_bullet.gd" id="1_yenuu"]
 [ext_resource type="Shader" uid="uid://4aa430585dfx" path="res://misc/shaders/hex_outline.gdshader" id="2_aedmc"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_yenuu"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="4_53iy1"]
 [ext_resource type="Shader" uid="uid://dovasowx0gp6e" path="res://misc/shaders/hex_particle.gdshader" id="5_53iy1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_53iy1"]
@@ -27,20 +27,6 @@ alpha_curve = SubResource("CurveTexture_j2ug2")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aedmc"]
 shader = ExtResource("1_mv8n6")
-
-[sub_resource type="Image" id="Image_53iy1"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_emdy5"]
-image = SubResource("Image_53iy1")
-script = ExtResource("2_yenuu")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6k7aj"]
 radius = 6.0
@@ -116,10 +102,11 @@ material = SubResource("ShaderMaterial_53iy1")
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_rjg2h")
 
-[node name="Render" type="Sprite2D" parent="." unique_id=510754644]
+[node name="Render" type="Node2D" parent="." unique_id=1376969939]
 material = SubResource("ShaderMaterial_aedmc")
 scale = Vector2(16, 16)
-texture = SubResource("ImageTexture_emdy5")
+script = ExtResource("4_53iy1")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=38449893]
 shape = SubResource("CircleShape2D_6k7aj")

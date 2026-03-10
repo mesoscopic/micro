@@ -3,24 +3,10 @@
 [ext_resource type="Shader" uid="uid://dby1fhvlh2gjy" path="res://misc/shaders/square_pulse.gdshader" id="1_5fnnh"]
 [ext_resource type="Script" uid="uid://cbtae3s8r3f63" path="res://entities/world/health_up.gd" id="1_m4qs3"]
 [ext_resource type="Shader" uid="uid://cjsixrrxcu8rt" path="res://misc/effects/heal_orb.gdshader" id="2_nflxv"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_xngy6"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_yq7ae"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m4qs3"]
 shader = ExtResource("2_nflxv")
-
-[sub_resource type="Image" id="Image_m4qs3"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_wsuqa"]
-image = SubResource("Image_m4qs3")
-script = ExtResource("3_xngy6")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="Curve" id="Curve_5fnnh"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -126,27 +112,14 @@ alpha_curve = SubResource("CurveTexture_pag18")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yq7ae"]
 shader = ExtResource("1_5fnnh")
 
-[sub_resource type="Image" id="Image_yq7ae"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_v2j6r"]
-image = SubResource("Image_yq7ae")
-script = ExtResource("3_xngy6")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
-
 [node name="HealthUp" type="Node2D" unique_id=1309488738]
 script = ExtResource("1_m4qs3")
 
-[node name="Render" type="Sprite2D" parent="." unique_id=1045617355]
+[node name="Render" type="Node2D" parent="." unique_id=114840728]
 material = SubResource("ShaderMaterial_m4qs3")
 scale = Vector2(30, 30)
-texture = SubResource("ImageTexture_wsuqa")
+script = ExtResource("3_yq7ae")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="Health" type="GPUParticles2D" parent="." unique_id=1306481846]
 process_material = SubResource("ParticleProcessMaterial_5fnnh")
@@ -184,10 +157,11 @@ explosiveness = 1.0
 visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 process_material = SubResource("ParticleProcessMaterial_u01kl")
 
-[node name="FinalPulse" type="Sprite2D" parent="." unique_id=184304918]
+[node name="FinalPulse" type="Node2D" parent="." unique_id=1472712840]
 z_index = 1
 material = SubResource("ShaderMaterial_yq7ae")
 rotation = 0.7853982
-texture = SubResource("ImageTexture_v2j6r")
+script = ExtResource("3_yq7ae")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [connection signal="body_entered" from="Pickup" to="." method="_on_pickup_body_entered"]

@@ -2,32 +2,18 @@
 
 [ext_resource type="Script" uid="uid://3pdmhg11c70e" path="res://bullets/bullet.gd" id="1_n8fy3"]
 [ext_resource type="Shader" uid="uid://dnld05ugc5ccp" path="res://bullets/enemy_bullet.gdshader" id="2_wo8ob"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_wo8ob"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_086tk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iim64"]
 resource_local_to_scene = true
 shader = ExtResource("2_wo8ob")
-
-[sub_resource type="Image" id="Image_086tk"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_rjho7"]
-image = SubResource("Image_086tk")
-script = ExtResource("3_wo8ob")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="Animation" id="Animation_7vn56"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:instance_shader_parameters/dissolve_anim")
+tracks/0/path = NodePath("Render:instance_shader_parameters/dissolve_anim")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -43,7 +29,7 @@ length = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:instance_shader_parameters/dissolve_anim")
+tracks/0/path = NodePath("Render:instance_shader_parameters/dissolve_anim")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -103,12 +89,13 @@ collision_mask = 17
 input_pickable = false
 script = ExtResource("1_n8fy3")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=529854431]
+[node name="Render" type="Node2D" parent="." unique_id=1988019079]
 material = SubResource("ShaderMaterial_iim64")
 instance_shader_parameters/dissolve_anim = 0.0
 instance_shader_parameters/form_anim = 1.0
 scale = Vector2(10, 10)
-texture = SubResource("ImageTexture_rjho7")
+script = ExtResource("3_086tk")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=783628947]
 polygon = PackedVector2Array(0, -4, -2, 0, 0, 4, 2, 0)

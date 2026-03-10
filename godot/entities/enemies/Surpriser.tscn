@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8pjwwvpu033l" path="res://entities/enemies/surpriser.gd" id="1_8s0w8"]
 [ext_resource type="PackedScene" uid="uid://gcdt0wv5ke0r" path="res://fx/death/Miniboss.tscn" id="2_ambfd"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_8s0w8"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="4_ambfd"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="4_dbf1b"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="5_3mr7w"]
 [ext_resource type="PackedScene" uid="uid://bmrdsgmlwoebu" path="res://fx/EnemyHurt.tscn" id="6_ambfd"]
@@ -10,20 +10,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r3cxs"]
 resource_local_to_scene = true
 shader = ExtResource("4_dbf1b")
-
-[sub_resource type="Image" id="Image_ambfd"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_rsuf2"]
-image = SubResource("Image_ambfd")
-script = ExtResource("3_8s0w8")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u77d8"]
 radius = 14.0
@@ -64,10 +50,11 @@ DEATH_ANIMATION = ExtResource("2_ambfd")
 max_hp = 140
 hp = 140
 
-[node name="Render" type="Sprite2D" parent="." unique_id=973786934]
+[node name="Render" type="Node2D" parent="." unique_id=147736586]
 material = SubResource("ShaderMaterial_r3cxs")
 scale = Vector2(28, 28)
-texture = SubResource("ImageTexture_rsuf2")
+script = ExtResource("4_ambfd")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=13025601]
 shape = SubResource("CircleShape2D_u77d8")

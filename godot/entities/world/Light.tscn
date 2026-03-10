@@ -3,7 +3,7 @@
 [ext_resource type="Shader" uid="uid://ci5ovcam7o22p" path="res://entities/world/light.gdshader" id="1_0fpnf"]
 [ext_resource type="Script" uid="uid://bw5172ki2lflb" path="res://entities/world/light.gd" id="1_0sgbh"]
 [ext_resource type="Shader" uid="uid://cs7vq0v8l44qx" path="res://entities/world/light_clouds.gdshader" id="1_yopc8"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_yopc8"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_by7lc"]
 [ext_resource type="PackedScene" uid="uid://by0txtbwl43n8" path="res://fx/BlurAura.tscn" id="5_by7lc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xut0m"]
@@ -11,20 +11,6 @@ radius = 80.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xut0m"]
 shader = ExtResource("1_yopc8")
-
-[sub_resource type="Image" id="Image_by7lc"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_dhktf"]
-image = SubResource("Image_by7lc")
-script = ExtResource("2_yopc8")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="Curve" id="Curve_yopc8"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -112,20 +98,6 @@ alpha_curve = SubResource("CurveTexture_dhktf")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0sgbh"]
 shader = ExtResource("1_0fpnf")
 
-[sub_resource type="Image" id="Image_7vrrx"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_15mwo"]
-image = SubResource("Image_7vrrx")
-script = ExtResource("2_yopc8")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
-
 [node name="Light" type="Node2D" unique_id=888960605]
 script = ExtResource("1_0sgbh")
 
@@ -136,13 +108,14 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection" unique_id=628891745]
 shape = SubResource("CircleShape2D_xut0m")
 
-[node name="Clouds" type="Sprite2D" parent="." unique_id=1714479780]
+[node name="Clouds" type="Node2D" parent="." unique_id=1514541916]
 modulate = Color(1, 1, 1, 0)
 z_index = 1
 material = SubResource("ShaderMaterial_xut0m")
 instance_shader_parameters/angle = Vector2(0, 0)
 scale = Vector2(200, 200)
-texture = SubResource("ImageTexture_dhktf")
+script = ExtResource("3_by7lc")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="Activate" type="GPUParticles2D" parent="." unique_id=1571880766]
 emitting = false
@@ -163,11 +136,12 @@ emitting = false
 lifetime = 3.0
 process_material = SubResource("ParticleProcessMaterial_o215r")
 
-[node name="Render" type="Sprite2D" parent="." unique_id=244513319]
+[node name="Render" type="Node2D" parent="." unique_id=51331249]
 modulate = Color(1, 1, 1, 0.5)
 material = SubResource("ShaderMaterial_0sgbh")
 scale = Vector2(20, 20)
-texture = SubResource("ImageTexture_15mwo")
+script = ExtResource("3_by7lc")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="BlurAura" parent="." unique_id=1967144313 instance=ExtResource("5_by7lc")]
 scale = Vector2(200, 200)

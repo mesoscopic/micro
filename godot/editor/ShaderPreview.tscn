@@ -1,26 +1,13 @@
 [gd_scene format=3 uid="uid://by05sm0h6q6d0"]
 
 [ext_resource type="Shader" uid="uid://r67815wpvbai" path="res://misc/shaders/funds.gdshader" id="1_40mjc"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_mulxe"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_mulxe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bn4b0"]
 shader = ExtResource("1_40mjc")
 
-[sub_resource type="Image" id="Image_40mjc"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_s6ovp"]
-image = SubResource("Image_40mjc")
-script = ExtResource("2_mulxe")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
-
-[node name="ShaderPreview" type="Sprite2D" unique_id=211888608]
+[node name="ShaderPreview" type="Node2D" unique_id=716383704]
 material = SubResource("ShaderMaterial_bn4b0")
 scale = Vector2(50, 50)
-texture = SubResource("ImageTexture_s6ovp")
+script = ExtResource("3_mulxe")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"

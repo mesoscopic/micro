@@ -2,25 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dhi7edrbv0ga6" path="res://entities/world/enemy_position.gd" id="1_hb8yp"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="2_1tsol"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_rxnby"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="2_v31pk"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_2mokw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vydju"]
 shader = ExtResource("2_1tsol")
-
-[sub_resource type="Image" id="Image_2mokw"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_vydju"]
-image = SubResource("Image_2mokw")
-script = ExtResource("2_rxnby")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sbg4y"]
 
@@ -95,9 +81,10 @@ collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_hb8yp")
 
-[node name="Render" type="Sprite2D" parent="." unique_id=1191700721]
+[node name="Render" type="Node2D" parent="." unique_id=991152238]
 material = SubResource("ShaderMaterial_vydju")
-texture = SubResource("ImageTexture_vydju")
+script = ExtResource("3_2mokw")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=740451265]
 shape = SubResource("CircleShape2D_sbg4y")

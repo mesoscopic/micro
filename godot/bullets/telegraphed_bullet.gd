@@ -19,7 +19,7 @@ var form_anim: Tween
 
 func _ready():
 	form_anim = get_tree().create_tween()
-	form_anim.tween_property($Sprite2D, "instance_shader_parameters/form_anim", 1.0, 0.3)
+	form_anim.tween_property($Render, "instance_shader_parameters/form_anim", 1.0, 0.3)
 	rotation = aim_angle - PI/2
 	global_position = get_aim_position()
 	$Form.emitting = true
@@ -49,7 +49,7 @@ func _physics_process(delta):
 	else:
 		global_position = get_aim_position()
 		if is_player:
-			$Sprite2D.modulate.a = clamp(((global_position - shooter.global_position)/20.).length_squared(), 0., 1.)
+			$Render.modulate.a = clamp(((global_position - shooter.global_position)/20.).length_squared(), 0., 1.)
 
 func aim(angle: float):
 	aim_vec = Vector2.from_angle(angle + angle_offset)
@@ -61,7 +61,7 @@ func fire():
 	shot = true
 	if form_anim.is_running():
 		form_anim.kill()
-		$Sprite2D.set("instance_shader_parameters/form_anim", 1.0)
+		$Render.set("instance_shader_parameters/form_anim", 1.0)
 		$Form.speed_scale = 2.
 	$Trail.emitting = true
 	$Timer.wait_time = lifetime
@@ -75,7 +75,7 @@ func _on_expire():
 	set_deferred("monitoring", false)
 	set_deferred("monitorable", false)
 	var tween := get_tree().create_tween()
-	tween.tween_property($Sprite2D, "instance_shader_parameters/dissolve_anim", 1.0, 0.25)
+	tween.tween_property($Render, "instance_shader_parameters/dissolve_anim", 1.0, 0.25)
 	tween.tween_callback(queue_free)
 
 func _on_collide(body) -> void:

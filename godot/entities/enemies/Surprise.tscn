@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://5r4rapdj3ft"]
 
 [ext_resource type="Script" uid="uid://cjmfb60xs2e7x" path="res://entities/enemies/surprise.gd" id="1_3elcu"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_bahcx"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_cdy31"]
 [ext_resource type="Shader" uid="uid://bwseyl1xcp2qo" path="res://entities/enemy.gdshader" id="3_oeqg6"]
 [ext_resource type="Shader" uid="uid://ds1rxv51ltkrj" path="res://misc/shaders/enemy_ghost.gdshader" id="4_ml7jd"]
 [ext_resource type="PackedScene" uid="uid://bmrdsgmlwoebu" path="res://fx/EnemyHurt.tscn" id="6_hb3al"]
@@ -9,20 +9,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ml7jd"]
 resource_local_to_scene = true
 shader = ExtResource("3_oeqg6")
-
-[sub_resource type="Image" id="Image_cdy31"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_5bo5h"]
-image = SubResource("Image_cdy31")
-script = ExtResource("3_bahcx")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oeqg6"]
 shader = ExtResource("4_ml7jd")
@@ -66,10 +52,11 @@ stagger_time = 0.25
 max_hp = 20
 hp = 20
 
-[node name="Render" type="Sprite2D" parent="." unique_id=567716981]
+[node name="Render" type="Node2D" parent="." unique_id=1879189473]
 material = SubResource("ShaderMaterial_ml7jd")
 scale = Vector2(14, 14)
-texture = SubResource("ImageTexture_5bo5h")
+script = ExtResource("3_cdy31")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="Afterimage" type="GPUParticles2D" parent="." unique_id=122594116]
 material = SubResource("ShaderMaterial_oeqg6")

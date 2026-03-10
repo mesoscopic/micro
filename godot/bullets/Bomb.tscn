@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bbs436j75kwf1"]
 
 [ext_resource type="Script" uid="uid://ciq5glgt0dw1b" path="res://bullets/bomb.gd" id="1_fupv5"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="3_g4o4w"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_jhuci"]
 [ext_resource type="Shader" uid="uid://biq78focw5lr" path="res://bullets/special_enemy_bullet.gdshader" id="5_fupv5"]
 [ext_resource type="Shader" uid="uid://csess5xqvneiu" path="res://misc/shaders/sphere_particle.gdshader" id="6_5t6lw"]
 [ext_resource type="Shader" uid="uid://csnb2kx6uvrj6" path="res://bullets/player_bullet.gdshader" id="6_g4o4w"]
@@ -11,53 +11,11 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1r46a"]
 shader = ExtResource("6_jhuci")
 
-[sub_resource type="Image" id="Image_jhuci"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_dwxqm"]
-image = SubResource("Image_jhuci")
-script = ExtResource("3_g4o4w")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5t6lw"]
 shader = ExtResource("6_g4o4w")
 
-[sub_resource type="Image" id="Image_5t6lw"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_d5h8y"]
-image = SubResource("Image_5t6lw")
-script = ExtResource("3_g4o4w")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g4o4w"]
 shader = ExtResource("5_fupv5")
-
-[sub_resource type="Image" id="Image_1r46a"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_5t6lw"]
-image = SubResource("Image_1r46a")
-script = ExtResource("3_g4o4w")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d5h8y"]
 shader = ExtResource("6_5t6lw")
@@ -143,27 +101,30 @@ alpha_curve = SubResource("CurveTexture_1r46a")
 [node name="Bomb" type="Node2D" unique_id=1586520519]
 script = ExtResource("1_fupv5")
 
-[node name="Rays" type="Sprite2D" parent="." unique_id=1127085432]
+[node name="Rays" type="Node2D" parent="." unique_id=666996617]
 material = SubResource("ShaderMaterial_1r46a")
 instance_shader_parameters/rays = 8
 scale = Vector2(60, 60)
-texture = SubResource("ImageTexture_dwxqm")
+script = ExtResource("3_jhuci")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
-[node name="Telegraph" type="Sprite2D" parent="." unique_id=337006013]
+[node name="Telegraph" type="Node2D" parent="." unique_id=891667340]
 modulate = Color(0.409777, 0.409777, 0.409777, 1)
 material = SubResource("ShaderMaterial_5t6lw")
 instance_shader_parameters/form_anim = 1.0
 rotation = -1.5708
 scale = Vector2(20, 20)
-texture = SubResource("ImageTexture_d5h8y")
+script = ExtResource("3_jhuci")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
-[node name="Bomb" type="Sprite2D" parent="." unique_id=788852838]
+[node name="Bomb" type="Node2D" parent="." unique_id=1177923864]
 modulate = Color(0.527052, 0.527052, 0.527052, 1)
 material = SubResource("ShaderMaterial_g4o4w")
 instance_shader_parameters/form_anim = 0.0
 rotation = -1.5708
 scale = Vector2(20, 20)
-texture = SubResource("ImageTexture_5t6lw")
+script = ExtResource("3_jhuci")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="Form" type="GPUParticles2D" parent="Bomb" unique_id=207866148]
 material = SubResource("ShaderMaterial_d5h8y")

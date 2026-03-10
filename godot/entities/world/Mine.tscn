@@ -2,27 +2,13 @@
 
 [ext_resource type="Script" uid="uid://uwuf3jgxovlg" path="res://entities/world/mine.gd" id="1_3o7ls"]
 [ext_resource type="Shader" uid="uid://pt43kt15p8bg" path="res://entities/world/mine.gdshader" id="1_tdar8"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_3o7ls"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_a1d2u"]
 [ext_resource type="Shader" uid="uid://cvs7hsg1qidb4" path="res://misc/shaders/ray_sparkle.gdshader" id="4_4rrc6"]
 [ext_resource type="Shader" uid="uid://dovasowx0gp6e" path="res://misc/shaders/hex_particle.gdshader" id="5_euatk"]
 [ext_resource type="Shader" uid="uid://4aa430585dfx" path="res://misc/shaders/hex_outline.gdshader" id="6_euatk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4rrc6"]
 shader = ExtResource("1_tdar8")
-
-[sub_resource type="Image" id="Image_a1d2u"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_euatk"]
-image = SubResource("Image_a1d2u")
-script = ExtResource("2_3o7ls")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5efec"]
 shader = ExtResource("4_4rrc6")
@@ -108,10 +94,11 @@ script = ExtResource("1_3o7ls")
 invulnerability_time = 0.0
 deplete_hp = false
 
-[node name="Render" type="Sprite2D" parent="." unique_id=641671956]
+[node name="Render" type="Node2D" parent="." unique_id=2058210152]
 material = SubResource("ShaderMaterial_4rrc6")
 scale = Vector2(24, 24)
-texture = SubResource("ImageTexture_euatk")
+script = ExtResource("3_a1d2u")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=52074846]
 polygon = PackedVector2Array(0, -11, 9.5, -5.5, 9.5, 5.5, 0, 11, -9.5, 5.5, -9.5, -5.5)

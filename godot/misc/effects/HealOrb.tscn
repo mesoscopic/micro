@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://cjsixrrxcu8rt" path="res://misc/effects/heal_orb.gdshader" id="1_b02qu"]
 [ext_resource type="Script" uid="uid://be6diwae80dak" path="res://misc/effects/heal_orb.gd" id="1_xjikr"]
-[ext_resource type="Script" uid="uid://dgegklgqwvpxa" path="res://lib/script/char_texture.gd" id="2_xjikr"]
+[ext_resource type="Script" uid="uid://dkksx81cvmpge" path="res://fx/render.gd" id="3_xjikr"]
 
 [sub_resource type="Curve" id="Curve_xjikr"]
 _data = [Vector2(0, 0.503029), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -22,20 +22,6 @@ alpha_curve = SubResource("CurveTexture_3461w")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3461w"]
 shader = ExtResource("1_b02qu")
-
-[sub_resource type="Image" id="Image_xjikr"]
-data = {
-"data": PackedByteArray(255, 255, 255, 255),
-"format": "RGBA8",
-"height": 1,
-"mipmaps": false,
-"width": 1
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_muy47"]
-image = SubResource("Image_xjikr")
-script = ExtResource("2_xjikr")
-metadata/_custom_type_script = "uid://dgegklgqwvpxa"
 
 [sub_resource type="Curve" id="Curve_3461w"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.01769, 0.0, 0, 0]
@@ -64,11 +50,12 @@ script = ExtResource("1_xjikr")
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_xm2bj")
 
-[node name="Render" type="Sprite2D" parent="." unique_id=845767951]
+[node name="Render" type="Node2D" parent="." unique_id=26993588]
 material = SubResource("ShaderMaterial_3461w")
 instance_shader_parameters/offset = 0.0
 scale = Vector2(8, 8)
-texture = SubResource("ImageTexture_muy47")
+script = ExtResource("3_xjikr")
+metadata/_custom_type_script = "uid://dkksx81cvmpge"
 
 [node name="HealParticles" type="GPUParticles2D" parent="." unique_id=1273714885]
 emitting = false
